@@ -280,8 +280,10 @@ def register():
     bpy.utils.register_class(OBJECT_OT_add_quick_cloth_tool)
     bpy.utils.register_class(QUICKCLOTH_OT_quick_cloth_apply)
     bpy.utils.register_class(QUICKCLOTH_OT_quick_cloth_stitch_edgeloops)
+    bpy.utils.register_class(QUICKCLOTH_OT_quick_cloth_add_collision)
 
 def unregister():
+    bpy.utils.unregister_class(QUICKCLOTH_OT_quick_cloth_add_collision)
     bpy.utils.unregister_class(QUICKCLOTH_OT_quick_cloth_stitch_edgeloops)
     bpy.utils.unregister_class(QUICKCLOTH_OT_quick_cloth_apply)
     bpy.utils.unregister_class(OBJECT_OT_add_quick_cloth_tool)
