@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blender Extensions Repository</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            background-color: #f4f4f4;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: #fff;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            color: #007bff;
+            font-size: 2.5em;
+            margin-bottom: 5px;
+        }
+
+        header p {
+            color: #777;
+            font-size: 1.1em;
+        }
+
+        .extension-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .extension-item {
+            background-color: #e9ecef;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 6px;
+            border-left: 5px solid #007bff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .extension-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .extension-info {
+            flex-grow: 1;
+        }
+
+        .extension-info h3 {
+            color: #333;
+            margin-top: 0;
+            margin-bottom: 5px;
+            font-size: 1.5em;
+        }
+
+        .extension-info p {
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        .extension-actions a {
+            display: inline-block;
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .extension-actions a:hover {
+            background-color: #0056b3;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px 0;
+            background-color: #343a40;
+            color: #fff;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Blender Extensions Hub</h1>
+            <p>A curated collection of useful Blender add-ons.</p>
+        </header>
+
+        <ul class="extension-list">
+            <li class="extension-item">
+                <div class="extension-info">
+                    <h3>Create Empty Vertex Child</h3>
+                    <p>A Blender extension to easily create an empty object parented to a selected vertex.</p>
+                </div>
+                <div class="extension-actions">
+                    <a href="#">Download</a>
+                </div>
+            </li>
+            <li class="extension-item">
+                <div class="extension-info">
+                    <h3>Quick Cloth Tool</h3>
+                    <p>A Blender extension that simplifies adding cloth simulation with quick pinning options.</p>
+                </div>
+                <div class="extension-actions">
+                    <a href="#">Download</a>
+                </div>
+            </li>
+        </ul>
+
+        <footer>
+            <p>&copy; 2025 Blender Extensions Repository</p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,14 @@
+schema_version = "1.0.0"
+
+# Example of manifest file for a Blender extension
+# Change the values according to your extension
+id = "qmquickclothtool"
+version = "1.0.0"
+name = "Quick Cloth Tool"
+tagline = "Some Tools For Quick Cloth Simulation"
+maintainer = "Johnny Matthews <johnny.matthews+blender@gmail.com>"
+type = "add-on"
+blender_version_min = "4.4.0"
+license = [
+  "SPDX:GPL-3.0-or-later",
+]
