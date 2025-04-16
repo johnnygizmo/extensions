@@ -2,6 +2,26 @@
   "version": "v1",
   "blocklist": [],
   "data": [
+
+ {
+      "schema_version": "1.0.0",
+      "id": "qmquickclothtool",
+      "name": "Quick Cloth Tool",
+      "tagline": "Some Tools For Quick Cloth Simulation",
+      "version": "1.0.0",
+      "type": "add-on",
+      "maintainer": "Johnny Matthews <johnny.matthews+blender@gmail.com>",
+      "license": [
+        "SPDX:GPL-3.0-or-later"
+      ],
+      "blender_version_min": "4.4.0",
+      "archive_url": "./qmquickclothtool-1.0.0.zip",
+      "archive_size": 3173,
+      "archive_hash": "sha256:fac86be28d4a62c3b1af257e0552d1a3de87423ad698121d667d0506bfc141ba"
+    },
+
+
+    
     {
       "schema_version": "1.0.0",
       "id": "create_empty_vertex_child",
