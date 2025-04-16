@@ -1,7 +1,7 @@
 # __init__.py
 
 bl_info = {
-    "name": "Quick Cloth Sim",
+    "name": "Quick Cloth Tool",
     "author": "Johnny Matthews",
     "version": (1, 0, 3),
     "blender": (4, 4, 0),

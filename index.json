@@ -26,6 +26,22 @@
     },
     {
       "schema_version": "1.0.0",
+      "id": "johnnygizmoQuickClothTool",
+      "name": "Quick Cloth Tool",
+      "tagline": "Some Tools For Quick Cloth Simulation",
+      "version": "1.0.1",
+      "type": "add-on",
+      "maintainer": "Johnny Matthews <johnny.matthews+blender@gmail.com>",
+      "license": [
+        "SPDX:GPL-3.0-or-later"
+      ],
+      "blender_version_min": "4.4.0",
+      "archive_url": "./johnnygizmoQuickClothTool-1.0.1.zip",
+      "archive_size": 3638,
+      "archive_hash": "sha256:2d54f57d79b5c960a2806d94a9034098d633bea77e6a56213c02daca71c08aba"
+    },
+    {
+      "schema_version": "1.0.0",
       "id": "qmquickclothtool",
       "name": "Quick Cloth Tool",
       "tagline": "Some Tools For Quick Cloth Simulation",
@@ -37,8 +53,8 @@
       ],
       "blender_version_min": "4.4.0",
       "archive_url": "./qmquickclothtool-1.0.0.zip",
-      "archive_size": 3621,
-      "archive_hash": "sha256:fd048032fb46626951722c6314d43e71cbcfcb68da3dba66fb809235c32653b2"
+      "archive_size": 3634,
+      "archive_hash": "sha256:2b5a0efbc7bf0797f18aa512804f1bf9649e3871a2b8aa0a4e28d935d574f77b"
     }
   ]
 }
