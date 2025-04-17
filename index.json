@@ -14,15 +14,15 @@
         "SPDX:GPL-2.0-or-later"
       ],
       "blender_version_min": "4.3.2",
-      "website": "https://github.com/johnnygizmo/vertex_child_empty/",
+      "website": "https://github.com/johnnygizmo/extensions",
       "tags": [
         "3D View",
         "Object",
         "Rigging"
       ],
       "archive_url": "./johnnygizmo_create_empty_vertex_child-1.0.0.zip",
-      "archive_size": 2738,
-      "archive_hash": "sha256:98884df4a2101f1aa1a92262490935447eab7a04c8b0b9a6bbaf5cbcab5accdc"
+      "archive_size": 2734,
+      "archive_hash": "sha256:2a6ebdb178e7667fdd087fa946922539255f573aec23781ab2c135239d9aa479"
     },
     {
       "schema_version": "1.0.0",
@@ -36,9 +36,10 @@
         "SPDX:GPL-3.0-or-later"
       ],
       "blender_version_min": "4.4.0",
+      "website": "https://github.com/johnnygizmo/extensions",
       "archive_url": "./johnnygizmo_quick_cloth_tool-1.0.4.zip",
-      "archive_size": 5142,
-      "archive_hash": "sha256:fd911f8af4d41137af82cb404ec61babccb81386c2099fb618d1949ad256a90b"
+      "archive_size": 5169,
+      "archive_hash": "sha256:bd0d0779ce24935407db791c9b2d39e5ca2b12169b7db353f49f88b468fe7561"
     }
   ]
 }
