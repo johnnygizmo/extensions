@@ -160,6 +160,7 @@ class OBJECT_OT_add_quick_cloth_tool(bpy.types.Operator):
             return {'CANCELLED'}
 
         if cloth_mod:   
+            bpy.ops.object.modifier_move_to_index(modifier="QuickCloth",index=0)
             update_cloth_settings(self, cloth_mod)
         
         bpy.ops.object.mode_set(mode='EDIT')
@@ -238,6 +239,31 @@ class QUICKCLOTH_OT_quick_cloth_apply(bpy.types.Operator):
             self.report({'ERROR'}, "No object selected.")
             return {'CANCELLED'}
         
+class QUICKCLOTH_OT_quick_cloth_remove(bpy.types.Operator):
+    """Removes a modifier named 'QuickCloth'."""
+    bl_idname = "object.quick_cloth_remove"
+    bl_label = "Remove QuickCloth Modifier"
+    bl_options = {'REGISTER', 'UNDO'}
+
+
+    def execute(self, context):
+        obj = context.active_object
+        if obj:
+            bpy.ops.object.mode_set(mode='OBJECT')   
+
+            bpy.ops.object.modifier_remove(modifier="QuickCloth")
+            bpy.ops.object.modifier_remove(modifier="QuickClothWeld")             
+
+            vg = obj.vertex_groups.get("QuickClothToolPinning")
+            if vg:
+                obj.vertex_groups.remove(vg)
+            self.report({'INFO'}, "Applied 'QuickCloth' modifier.")
+            return {'FINISHED'}
+        else:
+            self.report({'ERROR'}, "No object selected.")
+            return {'CANCELLED'}
+
+
 class QUICKCLOTH_OT_quick_cloth_stitch_edgeloops(bpy.types.Operator):
     """Applies a modifier named 'QuickCloth'."""
     bl_idname = "object.quick_cloth_stitch_edgeloops"
@@ -270,6 +296,7 @@ class QUICKCLOTH_OT_quick_cloth_add_collision(bpy.types.Operator):
             existing = [m for m in obj.modifiers if m.type == "COLLISION"]
             if len(existing) == 0:   
                 obj.modifiers.new(name="QuickClothCollision", type='COLLISION')
+                bpy.ops.object.modifier_move_to_index(modifier="QuickClothCollision",index=0)
             return {'FINISHED'}
         else:
             self.report({'ERROR'}, "No object selected.")
@@ -279,12 +306,14 @@ class QUICKCLOTH_OT_quick_cloth_add_collision(bpy.types.Operator):
 def register():
     bpy.utils.register_class(OBJECT_OT_add_quick_cloth_tool)
     bpy.utils.register_class(QUICKCLOTH_OT_quick_cloth_apply)
+    bpy.utils.register_class(QUICKCLOTH_OT_quick_cloth_remove)
     bpy.utils.register_class(QUICKCLOTH_OT_quick_cloth_stitch_edgeloops)
     bpy.utils.register_class(QUICKCLOTH_OT_quick_cloth_add_collision)
 
 def unregister():
     bpy.utils.unregister_class(QUICKCLOTH_OT_quick_cloth_add_collision)
     bpy.utils.unregister_class(QUICKCLOTH_OT_quick_cloth_stitch_edgeloops)
+    bpy.utils.unregister_class(QUICKCLOTH_OT_quick_cloth_remove)
     bpy.utils.unregister_class(QUICKCLOTH_OT_quick_cloth_apply)
     bpy.utils.unregister_class(OBJECT_OT_add_quick_cloth_tool)
     

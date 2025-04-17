@@ -1,132 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blender Extensions Repository</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            background-color: #f4f4f4;
-            color: #333;
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 960px;
-            margin: 50px auto;
-            padding: 30px;
-            background-color: #fff;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-        }
-
-        header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        header h1 {
-            color: #007bff;
-            font-size: 2.5em;
-            margin-bottom: 5px;
-        }
-
-        header p {
-            color: #777;
-            font-size: 1.1em;
-        }
-
-        .extension-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .extension-item {
-            background-color: #e9ecef;
-            padding: 20px;
-            margin-bottom: 20px;
-            border-radius: 6px;
-            border-left: 5px solid #007bff;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .extension-item:last-child {
-            margin-bottom: 0;
-        }
-
-        .extension-info {
-            flex-grow: 1;
-        }
-
-        .extension-info h3 {
-            color: #333;
-            margin-top: 0;
-            margin-bottom: 5px;
-            font-size: 1.5em;
-        }
-
-        .extension-info p {
-            color: #555;
-            margin-bottom: 10px;
-        }
-
-        .extension-actions a {
-            display: inline-block;
-            background-color: #007bff;
-            color: #fff;
-            padding: 10px 15px;
-            text-decoration: none;
-            border-radius: 4px;
-            transition: background-color 0.3s ease;
-        }
-
-        .extension-actions a:hover {
-            background-color: #0056b3;
-        }
-
-        footer {
-            text-align: center;
-            margin-top: 40px;
-            padding: 20px 0;
-            background-color: #343a40;
-            color: #fff;
-            border-radius: 8px;
-        }
-    </style>
+  <meta charset="utf-8">
+  <title>Blender Extensions</title>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Blender Extensions Hub</h1>
-            <p>A collection of useful Blender add-ons by Johnny Matthews.</p>
-        </header>
+<p>Blender Extension Listing:</p>
+<p>Add-on</p>
+<hr>
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Website</th>
+    <th>Blender Versions</th>
+    <th>Python Versions</th>
+    <th>Platforms</th>
+    <th>Size</th>
+  </tr>
+  <tr>
+    <td><tt><a href="./johnnygizmo_create_empty_vertex_child-1.0.0.zip?repository=.%2Findex.json&blender_version_min=4.3.2">johnnygizmo_create_empty_vertex_child-1.0.0</a></tt></td>
+    <td>Create Empty Vertex Child</td>
+    <td>New child empties at the locations of the selected vertices</td>
+    <td><a href="https://github.com/johnnygizmo/vertex_child_empty/">link</a></td>
+    <td>4.3.2 - ~</td>
+    <td>all</td>
+    <td>all</td>
+    <td>2.7KB</td>
+  </tr>
+  <tr>
+    <td><tt><a href="./johnnygizmo_quick_cloth_tool-1.0.4.zip?repository=.%2Findex.json&blender_version_min=4.4.0">johnnygizmo_quick_cloth_tool-1.0.4</a></tt></td>
+    <td>Quick Cloth Tool</td>
+    <td>Some Tools For Quick Cloth Simulation</td>
+    <td>~</td>
+    <td>4.4.0 - ~</td>
+    <td>all</td>
+    <td>all</td>
+    <td>5.0KB</td>
+  </tr>
+</table>
 
-        <p>Add the following URL as a remote Repository to add these add-ons. <code>https://johnnygizmo.github.io/extensions/</code></p>
-
-        <ul class="extension-list">
-            <li class="extension-item">
-                <div class="extension-info">
-                    <h3>Create Empty Vertex Child</h3>
-                    <p>A Blender extension to create Empties at all of the selected vertices.</p>
-                </div>
-
-            </li>
-            <li class="extension-item">
-                <div class="extension-info">
-                    <h3>Quick Cloth Tool</h3>
-                    <p>A Blender extension that simplifies adding cloth simulation with quick pinning options to use as a tool.</p>
-                </div>
-              
-            </li>
-        </ul>
-
-        <footer>
-            <p>&copy; 2025 Johnny Matthews</p>
-        </footer>
-    </div>
+<center><p>Built 2025-04-17, 15:30</p></center>
 </body>
 </html>

@@ -11,10 +11,17 @@ class QUICK_SIM_PT_panel(bpy.types.Panel):
 
     def draw(self, context):
         layout = self.layout
-        layout.operator("object.add_quick_cloth_tool")
-        layout.operator("object.quick_cloth_apply")
-        layout.operator("object.quick_cloth_stitch_edgeloops")
+        layout.label(text="Quick Cloth")
+        layout.operator("object.add_quick_cloth_tool", text="Add")
+        layout.operator("object.quick_cloth_apply", text="Apply")
+        layout.operator("object.quick_cloth_remove", text="Remove")
+        layout.separator() 
+        layout.operator("object.quick_cloth_stitch_edgeloops", text="Edge Loops to Stitch")
+        layout.separator()
         layout.operator("object.quick_cloth_add_collision")
+        layout.label(text="Quick Pillow")
+        layout.operator("object.add_quick_pillow", text="Add")
+        layout.operator("object.apply_quick_pillow", text="Apply")
 
 
 def register():

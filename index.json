@@ -4,7 +4,7 @@
   "data": [
     {
       "schema_version": "1.0.0",
-      "id": "create_empty_vertex_child",
+      "id": "johnnygizmo_create_empty_vertex_child",
       "name": "Create Empty Vertex Child",
       "tagline": "New child empties at the locations of the selected vertices",
       "version": "1.0.0",
@@ -20,25 +20,25 @@
         "Object",
         "Rigging"
       ],
-      "archive_url": "./create_empty_vertex_child-1.0.0.zip",
-      "archive_size": 2735,
-      "archive_hash": "sha256:c246f19466cf8365baeca62009c2416ae165460b23a2295546c99e2e31e4144b"
+      "archive_url": "./johnnygizmo_create_empty_vertex_child-1.0.0.zip",
+      "archive_size": 2738,
+      "archive_hash": "sha256:98884df4a2101f1aa1a92262490935447eab7a04c8b0b9a6bbaf5cbcab5accdc"
     },
     {
       "schema_version": "1.0.0",
-      "id": "qmquickclothtool",
+      "id": "johnnygizmo_quick_cloth_tool",
       "name": "Quick Cloth Tool",
       "tagline": "Some Tools For Quick Cloth Simulation",
-      "version": "1.0.0",
+      "version": "1.0.4",
       "type": "add-on",
       "maintainer": "Johnny Matthews <johnny.matthews+blender@gmail.com>",
       "license": [
         "SPDX:GPL-3.0-or-later"
       ],
       "blender_version_min": "4.4.0",
-      "archive_url": "./qmquickclothtool-1.0.0.zip",
-      "archive_size": 3621,
-      "archive_hash": "sha256:fd048032fb46626951722c6314d43e71cbcfcb68da3dba66fb809235c32653b2"
+      "archive_url": "./johnnygizmo_quick_cloth_tool-1.0.4.zip",
+      "archive_size": 5142,
+      "archive_hash": "sha256:fd911f8af4d41137af82cb404ec61babccb81386c2099fb618d1949ad256a90b"
     }
   ]
 }

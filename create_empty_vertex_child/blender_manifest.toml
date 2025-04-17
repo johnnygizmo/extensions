@@ -2,7 +2,7 @@ schema_version = "1.0.0"
 
 # Example of manifest file for a Blender extension
 # Change the values according to your extension
-id = "create_empty_vertex_child"
+id = "johnnygizmo_create_empty_vertex_child"
 version = "1.0.0"
 name = "Create Empty Vertex Child"
 tagline = "New child empties at the locations of the selected vertices"
