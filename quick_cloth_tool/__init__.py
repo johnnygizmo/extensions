@@ -3,7 +3,7 @@
 bl_info = {
     "name": "Quick Cloth Tool",
     "author": "Johnny Matthews",
-    "version": (1, 0, 4),
+    "version": (1, 0, 5),
     "blender": (4, 4, 0),
     "description": "Adds a cloth modifier and creates a Pinning group from selected vertices.",
     "category": "Object",

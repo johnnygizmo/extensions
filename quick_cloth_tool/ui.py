@@ -17,6 +17,7 @@ class QUICK_SIM_PT_panel(bpy.types.Panel):
         layout.operator("object.quick_cloth_remove", text="Remove")
         layout.separator() 
         layout.operator("object.quick_cloth_stitch_edgeloops", text="Edge Loops to Stitch")
+        layout.operator("object.quick_cloth_stitch_vertring", text="Vertring to Alternating Cinch Stitch")
         layout.separator()
         layout.operator("object.quick_cloth_add_collision")
         layout.label(text="Quick Pillow")
