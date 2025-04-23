@@ -132,13 +132,20 @@ class OBJECT_OT_add_quick_pillow(bpy.types.Operator):
         return {'FINISHED'}
 
 
-
+    @classmethod
+    def poll(cls, context):
+        return len(context.selected_objects) != 0 and context.active_object.type == 'MESH'
+    
 class OBJECT_OT_apply_quick_pillow(bpy.types.Operator):
     """Applies a modifier named 'QuickCloth'."""
     bl_idname = "object.apply_quick_pillow"
     bl_label = "Apply QuickPillow Modifier"
     bl_options = {'REGISTER', 'UNDO'}
 
+    @classmethod
+    def poll(cls, context):
+        return len(context.selected_objects) != 0 and context.active_object.type == 'MESH'
+    
     def execute(self, context):
         obj = context.active_object
         if obj:
