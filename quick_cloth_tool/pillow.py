@@ -19,6 +19,7 @@ def update_cloth_settings(self,context):
     
     bpy.ops.object.mode_set(mode='EDIT')
     bpy.ops.mesh.select_mode(type='VERT')
+    bpy.ops.mesh.select_all(action='INVERT')
     bpy.ops.object.mode_set(mode='OBJECT')
     selected_verts = [v for v in ob.data.vertices if v.select]
 
