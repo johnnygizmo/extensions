@@ -6,21 +6,122 @@ class OBJECT_OT_add_quick_cloth_tool(bpy.types.Operator):
     bl_description = "Add cloth modifier with pinning group from selected vertices"
     bl_options = {'REGISTER', 'UNDO'}
 
-    use_sewing: bpy.props.BoolProperty(
-        name="Enable Sewing",
-        description="Enable sewing between cloth vertices",
-        default=False
+    def set_label(self, value):
+        return None
+
+    cloth_quality: bpy.props.IntProperty(
+        name="Quality Steps",
+        description="Accuracy of the collision simulation",
+        default=5,
+        min=1,
+        max=10
     )
 
-    sewing_force: bpy.props.FloatProperty(
-        name="Sewing Force",
-        description="Force applied to sewing springs",
-        default=5,
+
+    speed_multiplier: bpy.props.FloatProperty(
+        name="Speed Multiplier",
+        description="Multiplier for the speed of the cloth simulation",
+        default=1,
         min=0.0,
         precision=4
     )
 
+    cloth_mass: bpy.props.FloatProperty(
+        name="Vertex Mass",
+        description="Mass of the cloth vertices",
+        default=3.0,
+        min=0.01,
+        soft_max=10.0
+    )
+    air_viscosity: bpy.props.FloatProperty(
+        name="Air Viscosity",
+        description="Air Viscosity",
+        default=1.0,
+        min=0.00,
+        soft_max=10.0
+    )
 
+    stiffness: bpy.props.StringProperty(
+        name="",
+        description="",
+        default="Stiffness",
+        set=set_label
+    ) 
+
+
+
+    stension: bpy.props.FloatProperty(
+        name="Tension",
+        description="Tension",
+        default=15.0,
+        min=0.00
+    )
+    scompression: bpy.props.FloatProperty(
+        name="Compression",
+        description="Comspression",
+        default=15.0,
+        min=0.00
+    )
+    sshear: bpy.props.FloatProperty(
+        name="Shear",
+        description="Shear",
+        default=5.0,
+        min=0.00
+    )
+
+    sbending: bpy.props.FloatProperty(
+        name="Bending",
+        description="Bending",
+        default=1.0,
+        min=0.00
+    )
+    damping: bpy.props.StringProperty(
+        name="",
+        description="",
+        default="Damping",
+        set=set_label
+    ) 
+    dtension: bpy.props.FloatProperty(
+        name="Tension",
+        description="Tension",
+        default=15.0,
+        min=0.00
+    )
+    dcompression: bpy.props.FloatProperty(
+        name="Compression",
+        description="Comspression",
+        default=15.0,
+        min=0.00
+    )
+    dshear: bpy.props.FloatProperty(
+        name="Shear",
+        description="Shear",
+        default=5.0,
+        min=0.00
+    )
+    dbending: bpy.props.FloatProperty(
+        name="Bending",
+        description="Bending",
+        default=1.0,
+        min=0.00
+    )
+    springs_label: bpy.props.StringProperty(
+        name="",
+        description="",
+        default="Internal Springs",
+        set=set_label
+    ) 
+    use_springs: bpy.props.BoolProperty(
+        name="Enable Springs",
+        description="Enable internal volume structure",
+        default=False
+    )
+    pressure_label: bpy.props.StringProperty(
+        name="",
+        description="",
+        default="Pressure",
+        set=set_label
+    )     
     use_pressure: bpy.props.BoolProperty(
         name="Enable Pressure",
         description="",
@@ -34,12 +135,29 @@ class OBJECT_OT_add_quick_cloth_tool(bpy.types.Operator):
         min=0.0,
         precision=4
     )
-
-
-    speed_multiplier: bpy.props.FloatProperty(
-        name="Speed Multiplier",
-        description="Multiplier for the speed of the cloth simulation",
+    shape_label: bpy.props.StringProperty(
+        name="",
+        description="",
+        default="Shape",
+        set=set_label
+    ) 
+    pinning_stiffness: bpy.props.FloatProperty(
+        name="Pinning Stiffness",
+        description="Pin Spring Stiffness",
         default=1,
+        min=0.0,
+        precision=4,
+        max=50
+    )        
+    use_sewing: bpy.props.BoolProperty(
+        name="Enable Sewing",
+        description="Enable sewing between cloth vertices",
+        default=False
+    )
+    sewing_force: bpy.props.FloatProperty(
+        name="Sewing Force",
+        description="Force applied to sewing springs",
+        default=5,
         min=0.0,
         precision=4
     )
@@ -52,35 +170,35 @@ class OBJECT_OT_add_quick_cloth_tool(bpy.types.Operator):
         max=1.0,
         precision=4
     )
+    collisions_label: bpy.props.StringProperty(
+        name="",
+        description="",
+        default="Collisions",
+        set=set_label
+    ) 
 
-
-    cloth_mass: bpy.props.FloatProperty(
-        name="Vertex Mass",
-        description="Mass of the cloth vertices",
-        default=3.0,
-        min=0.01,
-        soft_max=10.0
-    )
     collision_quality: bpy.props.IntProperty(
-        name="Cloth Quality",
+        name="Collision Quality",
         description="Accuracy of the simulation",
         default=4,
         min=1,
         max=20
     )
-    cloth_quality: bpy.props.IntProperty(
-        name="Collision Quality",
-        description="Accuracy of the collision simulation",
-        default=5,
-        min=1,
-        max=10
-    )
 
     collision_distance: bpy.props.FloatProperty(
-        name="Collision Distance",
+        name="Obj Distance",
         description="Distance at which cloth interacts with other objects",
         default=0.001,
         min=0.0,
+        precision=4
+    )
+
+    object_impulse_clamping: bpy.props.FloatProperty(
+        name="Obj Imp Clamp",
+        description="Clamp Collision Impulses",
+        default=0.00,
+        min=0.0,
+        max=100.0,
         precision=4
     )
 
@@ -90,14 +208,38 @@ class OBJECT_OT_add_quick_cloth_tool(bpy.types.Operator):
         default=True
     )
 
+    self_collision_friction: bpy.props.FloatProperty(
+        name="Friction",
+        description="Distance at which cloth collides with itself",
+        default=5,
+        min=0.0,
+        max=80.0,
+        precision=4
+    )
+
     self_collision_distance: bpy.props.FloatProperty(
-        name="Self Collision Distance",
+        name="Distance",
         description="Distance at which cloth collides with itself",
         default=0.001,
         min=0.0,
         precision=4
     )
 
+    self_impulse_clamping: bpy.props.FloatProperty(
+        name="Impulse Clamping",
+        description="Clamp Collision Impulses",
+        default=0.00,
+        min=0.0,
+        max=100.0,
+        precision=4
+    ) 
+
+    field_label: bpy.props.StringProperty(
+        name="",
+        description="",
+        default="Field Weights",
+        set=set_label
+    ) 
     gravity: bpy.props.FloatProperty(
         name="Gravity",
         description="Strength of the gravity effect on the cloth",
@@ -173,22 +315,40 @@ class OBJECT_OT_add_quick_cloth_tool(bpy.types.Operator):
 
 
 def update_cloth_settings(self, cloth):
-    cloth.settings.vertex_group_mass = "QuickClothToolPinning"
-    cloth.settings.mass = self.cloth_mass
     cloth.settings.quality = self.cloth_quality
     cloth.settings.time_scale = self.speed_multiplier
+    cloth.settings.mass = self.cloth_mass
+    cloth.settings.air_damping = self.air_viscosity
 
-    cloth.settings.shrink_min = self.shrink
+    
+    cloth.settings.tension_stiffness = self.stension
+    cloth.settings.compression_stiffness = self.scompression
+    cloth.settings.shear_stiffness = self.sshear
+    cloth.settings.bending_stiffness = self.sbending
 
-    cloth.settings.use_sewing_springs = self.use_sewing
-    cloth.settings.sewing_force_max = self.sewing_force
+    cloth.settings.tension_damping = self.dtension
+    cloth.settings.compression_damping = self.dcompression
+    cloth.settings.shear_damping = self.dshear
+    cloth.settings.bending_damping = self.dbending
+
+    cloth.settings.use_internal_springs = self.use_springs
+
     cloth.settings.use_pressure = self.use_pressure
     cloth.settings.uniform_pressure_force = self.pressure_force
    
+    cloth.settings.vertex_group_mass = "QuickClothToolPinning"   
+    cloth.settings.pin_stiffness = self.pinning_stiffness
+    cloth.settings.use_sewing_springs = self.use_sewing
+    cloth.settings.sewing_force_max = self.sewing_force
+    cloth.settings.shrink_min = self.shrink
+
     cloth.collision_settings.collision_quality = self.collision_quality
     cloth.collision_settings.distance_min = self.collision_distance
+    
     cloth.collision_settings.use_self_collision = self.use_self_collision
+    cloth.collision_settings.self_friction = self.self_collision_friction
     cloth.collision_settings.self_distance_min = self.self_collision_distance
+    cloth.collision_settings.self_impulse_clamp = self.self_impulse_clamping
 
     cloth.settings.effector_weights.gravity = self.gravity  
     return cloth.settings
@@ -365,9 +525,17 @@ class QUICKCLOTH_OT_quick_cloth_add_collision(bpy.types.Operator):
             bpy.ops.object.mode_set(mode='OBJECT')   
 
             existing = [m for m in obj.modifiers if m.type == "COLLISION"]
-            if len(existing) == 0:   
-                obj.modifiers.new(name="QuickClothCollision", type='COLLISION')
-                bpy.ops.object.modifier_move_to_index(modifier="QuickClothCollision",index=0)
+            if len(existing) == 1:
+                bpy.ops.object.modifier_remove(modifier=existing[0].name)
+        
+            coll = obj.modifiers.new(name="QuickClothCollision", type='COLLISION')
+            coll.settings.damping = self.damping
+            coll.settings.thickness_outer = self.thickness_outer
+            coll.settings.cloth_friction = self.friction
+            coll.settings.use_culling = self.single
+            coll.settings.use_normal = self.override
+
+            bpy.ops.object.modifier_move_to_index(modifier="QuickClothCollision",index=0)
             return {'FINISHED'}
         else:
             self.report({'ERROR'}, "No object selected.")
