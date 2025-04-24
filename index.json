@@ -29,7 +29,7 @@
       "id": "johnnygizmo_quick_cloth_tool",
       "name": "Quick Cloth Tool",
       "tagline": "Some Tools For Quick Cloth Simulation",
-      "version": "1.0.7",
+      "version": "1.0.9",
       "type": "add-on",
       "maintainer": "Johnny Matthews <johnny.matthews+blender@gmail.com>",
       "license": [
@@ -37,9 +37,9 @@
       ],
       "blender_version_min": "4.4.0",
       "website": "https://github.com/johnnygizmo/extensions",
-      "archive_url": "./johnnygizmo_quick_cloth_tool-1.0.7.zip",
-      "archive_size": 6414,
-      "archive_hash": "sha256:3ec941771175d2f8449cb4b479548fe16239635c15ac84969197815f28f0ba31"
+      "archive_url": "./johnnygizmo_quick_cloth_tool-1.0.9.zip",
+      "archive_size": 9855,
+      "archive_hash": "sha256:3b19fde275aaef59c5ad4068d977d2bac6b87f13dfe529268b6f757168f462de"
     }
   ]
 }
