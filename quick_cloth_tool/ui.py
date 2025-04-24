@@ -13,7 +13,7 @@ class QUICK_SIM_PT_panel(bpy.types.Panel):
 
     def draw(self, context):
         layout = self.layout
-        layout.label(text="Quick Cloth")        
+        layout.label(text="Cloth Simulation")        
         row = layout.row()
         col1 = row.column()
         col1.operator("object.add_quick_cloth_tool", text="Add")
@@ -22,7 +22,7 @@ class QUICK_SIM_PT_panel(bpy.types.Panel):
         col3 = row.column()
         col3.operator("object.quick_cloth_remove", text="Remove")
 
-        layout.label(text="Quick Pillow")
+        layout.label(text="Pillow Simulation")
         row = layout.row()
         col1 = row.column()
         col1.operator("object.add_quick_pillow", text="Add")
@@ -37,14 +37,14 @@ class QUICK_SIM_PT_panel(bpy.types.Panel):
         col2 = row.column()
         col2.operator("object.quickcloth_clothdrag_apply", text="Apply") 
 
-        layout.label(text="Collision")
+        layout.label(text="Collision Modifier")
         row = layout.row()
         col1 = row.column()
         col1.operator("object.quick_cloth_add_collision",text="Add")
         col2 = row.column()
         col2.operator("object.quick_cloth_rem_collision",text="Remove")
 
-        layout.label(text="Stitching")
+        layout.label(text="Stitching Tools")
 
         layout.operator("object.quick_cloth_stitch_edgeloops", text="Edge Loops to Stitch")
         layout.operator("object.quick_cloth_stitch_vertring", text="Vertring to Alternating Cinch Stitch")
@@ -72,10 +72,6 @@ class QUICK_SIM_PT_panel(bpy.types.Panel):
             col2.label(text="Current: Other")
         
         row = layout.row()
-        col1 = row.column()
-        col1.operator("object.set_gravity", text="Up").direction = "Up"
-        col1.operator("object.set_gravity", text="Down").direction = "Down"
-
         col2 = row.column()
         col2.operator("object.set_gravity", text="Left").direction = "Left"
         col2.operator("object.set_gravity", text="Right").direction = "Right"
@@ -83,6 +79,15 @@ class QUICK_SIM_PT_panel(bpy.types.Panel):
         col3 = row.column()
         col3.operator("object.set_gravity", text="Push").direction = "Push"
         col3.operator("object.set_gravity", text="Pull").direction = "Pull"
+
+        col1 = row.column()
+        col1.operator("object.set_gravity", text="Up").direction = "Up"
+        col1.operator("object.set_gravity", text="Down").direction = "Down"
+
+
+        layout.prop(context.scene, "gravity")
+
+
 
         
 def register():
