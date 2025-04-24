@@ -1,6 +1,14 @@
+@ECHO OFF
+IF NOT EXIST "folder.txt" (
+    ECHO Error: folder.txt not found.
+    EXIT /B 1
+)
+
 del *.zip
 del *.json
 del *.html
+
+SET /P MyVar=<folder.txt
 
 
 cd create_empty_vertex_child
@@ -12,5 +20,5 @@ cd ..
 
 
 
-"c:\blender\blender-4.5.0-alpha+main.5a2a6da0a27f-windows.amd64-release\blender.exe" --command extension server-generate --repo-dir=./
-"c:\blender\blender-4.5.0-alpha+main.5a2a6da0a27f-windows.amd64-release\blender.exe" --command extension server-generate --repo-dir=./ --html
+"c:\blender\%MyVar%\blender.exe" --command extension server-generate --repo-dir=./
+"c:\blender\%MyVar%\blender.exe" --command extension server-generate --repo-dir=./ --html
