@@ -519,6 +519,39 @@ class QUICKCLOTH_OT_quick_cloth_add_collision(bpy.types.Operator):
     def poll(cls, context):
         return len(context.selected_objects) != 0 and context.active_object.type == 'MESH' 
     
+
+    damping: bpy.props.FloatProperty(
+        name="Damping",
+        description="Damping",
+        default=.1,
+        min=0.0,
+        max= 1,
+    ) 
+    friction: bpy.props.FloatProperty(
+        name="Friction",
+        description="Friction",
+        default=5,
+        min=0.0,
+        max= 80.0,
+    ) 
+    thickness_outer: bpy.props.FloatProperty(
+        name="Thickness Outer",
+        description="Thickness Outer",
+        default=0.2,
+        min=0.001,
+        max= 1.0,
+    ) 
+    single: bpy.props.BoolProperty(
+        name="Single Sided",
+        description="Single Sided",
+        default=True
+    ) 
+    override:bpy.props.BoolProperty(
+        name="Override Normals",
+        description="Override Normals",
+        default=False
+    ) 
+
     def execute(self, context):
         obj = context.active_object
         if obj:
