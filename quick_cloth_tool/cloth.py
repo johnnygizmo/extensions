@@ -152,7 +152,7 @@ class OBJECT_OT_add_quick_cloth_tool(bpy.types.Operator):
     use_sewing: bpy.props.BoolProperty(
         name="Enable Sewing",
         description="Enable sewing between cloth vertices",
-        default=False
+        default=True
     )
     sewing_force: bpy.props.FloatProperty(
         name="Sewing Force",
@@ -189,7 +189,7 @@ class OBJECT_OT_add_quick_cloth_tool(bpy.types.Operator):
         name="Obj Distance",
         description="Distance at which cloth interacts with other objects",
         default=0.001,
-        min=0.0,
+        min=0.001,
         precision=4
     )
 

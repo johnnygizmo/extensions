@@ -28,9 +28,9 @@ class QUICKCLOTH_OT_quick_cloth_add_collision(bpy.types.Operator):
     thickness_outer: bpy.props.FloatProperty(
         name="Thickness Outer",
         description="Thickness Outer",
-        default=0.2,
+        default=0.02,
         min=0.001,
-        max= 1.0,
+        max= 1.0,  
     ) 
     single: bpy.props.BoolProperty(
         name="Single Sided",
