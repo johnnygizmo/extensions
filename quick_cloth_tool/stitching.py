@@ -1,4 +1,4 @@
-import bpy
+import bpy # type: ignore
 
 class QUICKCLOTH_OT_quick_cloth_stitch_edgeloops(bpy.types.Operator):
     """Applies a modifier named 'QuickCloth'."""

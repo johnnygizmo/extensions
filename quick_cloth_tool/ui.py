@@ -1,6 +1,6 @@
 # ui.py
-import bpy
-import mathutils
+import bpy # type: ignore
+import mathutils # type: ignore
 
 
 class QUICK_SIM_PT_panel(bpy.types.Panel):

@@ -1,4 +1,4 @@
-import bpy
+import bpy # type: ignore
 
 class QUICKCLOTH_OT_quick_cloth_add_shrink(bpy.types.Operator):
     """Add Shrink Modifier"""

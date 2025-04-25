@@ -1,7 +1,7 @@
 
-import bpy
-from bpy.types import Operator, AddonPreferences
-from bpy.props import FloatProperty, IntProperty, BoolProperty
+import bpy # type: ignore
+from bpy.types import Operator, AddonPreferences # type: ignore
+from bpy.props import FloatProperty, IntProperty, BoolProperty # type: ignore
 #from bpy import context
 
 
