@@ -16,6 +16,7 @@ from . import collision
 from . import stitching
 from . import gravity
 from . import ui
+from . import shrink
 
 def register():
     cloth.register()
@@ -25,6 +26,7 @@ def register():
     stitching.register()
     gravity.register()
     ui.register()
+    shrink.register()
 
 def unregister():
     ui.unregister()
@@ -33,7 +35,8 @@ def unregister():
     collision.unregister()
     drag.unregister()
     pillow.unregister()
-    cloth.unregister()
+    cloth.unregister() 
+    shrink.unregister()
 
 if __name__ == "__main__":
     register()
