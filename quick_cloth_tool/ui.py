@@ -44,6 +44,16 @@ class QUICK_SIM_PT_panel(bpy.types.Panel):
         col2 = row.column()
         col2.operator("object.quick_cloth_rem_collision",text="Remove")
 
+
+        layout.label(text="Shrink Modifier")
+        row = layout.row()
+        col1 = row.column()
+        col1.operator("object.quick_cloth_add_shrink", text="Add")
+        col2 = row.column()
+        col2.operator("object.quick_cloth_apply_shrink", text="Apply")
+        col3 = row.column()
+        col3.operator("object.quick_cloth_rem_shrink", text="Remove")
+
         layout.label(text="Stitching Tools")
 
         layout.operator("object.quick_cloth_stitch_edgeloops", text="Edge Loops to Stitch")

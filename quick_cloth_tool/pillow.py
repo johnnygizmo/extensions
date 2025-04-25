@@ -71,46 +71,46 @@ class OBJECT_OT_add_quick_pillow(bpy.types.Operator):
     pressure: FloatProperty(
         name="Pressure",
         default=1.0
-    )
+    ) # type: ignore
     quality: IntProperty(
         name="Quality",
         default=5
-    )
+    ) # type: ignore
     gravity: FloatProperty(
         name="Gravity",
         default=0.0
-    )
+    ) # type: ignore
     col: BoolProperty(
         name="Collisions",
         default=True
-    )    
+    )     # type: ignore
     cquality: IntProperty(
         name="Coll. Quality",
         default=2
-    )    
+    )     # type: ignore
     coldist: FloatProperty(
         name="Coll Dist",
         default=.01
-    )    
+    )     # type: ignore
     selfcol: BoolProperty(
         name="Self Collisions",
         default=False
-    )
+    ) # type: ignore
     selfdist: FloatProperty(
         name="Self Coll Dist",
         default=.01
-    )
+    ) # type: ignore
 
     sublevels: IntProperty(
         name="Subdiv Levels",
         default=2
-    )
+    ) # type: ignore
     
     use_sewing: bpy.props.BoolProperty(
         name="Enable Sewing",
         description="Enable sewing between cloth vertices",
         default=False
-    )
+    ) # type: ignore
 
     sewing_force: bpy.props.FloatProperty(
         name="Sewing Force",
@@ -118,7 +118,7 @@ class OBJECT_OT_add_quick_pillow(bpy.types.Operator):
         default=5,
         min=0.0,
         precision=4
-    )
+    ) # type: ignore
     pin_stiff: bpy.props.FloatProperty(
         name="Pinning Stiffness",
         description="Stiffness of the pinning group",
@@ -126,7 +126,7 @@ class OBJECT_OT_add_quick_pillow(bpy.types.Operator):
         min=0.0,
         max=100.0,
         precision=4
-    )
+    ) # type: ignore
 
     def execute(self, context):
         update_cloth_settings(self,context)

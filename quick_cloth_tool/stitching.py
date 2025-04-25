@@ -56,26 +56,26 @@ class QUICKCLOTH_OT_quick_cloth_stitch_vertring(bpy.types.Operator):
         description="Amount of vertices to skip when stitching",
         min=1,
         default=3
-    )
+    ) # type: ignore
 
     offset: bpy.props.IntProperty(
         name="Vertex Offset",
         description="Offset for the stitching",
         min=0,
         default=0
-    )
+    ) # type: ignore
 
     extrudeControl: bpy.props.BoolProperty(
         name="Extrude Control Ring",
         description="Extrude the control ring",
         default=True
-    )
+    ) # type: ignore
 
     extrudeControlDistance: bpy.props.FloatProperty(
         name="Extrude Control Ring Distance",
         description="Distance to extrude the control ring",
         default=.2
-    )
+    ) # type: ignore
 
     @classmethod
     def poll(cls, context):

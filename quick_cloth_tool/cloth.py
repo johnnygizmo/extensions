@@ -1,4 +1,4 @@
-import bpy
+import bpy # type: ignore
 
 class OBJECT_OT_add_quick_cloth_tool(bpy.types.Operator):
     bl_idname = "object.add_quick_cloth_tool"
@@ -15,7 +15,7 @@ class OBJECT_OT_add_quick_cloth_tool(bpy.types.Operator):
         default=5,
         min=1,
         max=10
-    )
+    ) # type: ignore
 
 
     speed_multiplier: bpy.props.FloatProperty(
@@ -24,7 +24,7 @@ class OBJECT_OT_add_quick_cloth_tool(bpy.types.Operator):
         default=1,
         min=0.0,
         precision=4
-    )
+    ) # type: ignore # type: ignore
 
     cloth_mass: bpy.props.FloatProperty(
         name="Vertex Mass",
@@ -32,21 +32,21 @@ class OBJECT_OT_add_quick_cloth_tool(bpy.types.Operator):
         default=3.0,
         min=0.01,
         soft_max=10.0
-    )
+    ) # type: ignore
     air_viscosity: bpy.props.FloatProperty(
         name="Air Viscosity",
         description="Air Viscosity",
         default=1.0,
         min=0.00,
         soft_max=10.0
-    )
+    ) # type: ignore
 
     stiffness: bpy.props.StringProperty(
         name="",
         description="",
         default="Stiffness",
         set=set_label
-    ) 
+    )  # type: ignore
 
 
 
@@ -55,78 +55,78 @@ class OBJECT_OT_add_quick_cloth_tool(bpy.types.Operator):
         description="Tension",
         default=15.0,
         min=0.00
-    )
+    ) # type: ignore
     scompression: bpy.props.FloatProperty(
         name="Compression",
         description="Comspression",
         default=15.0,
         min=0.00
-    )
+    ) # type: ignore
     sshear: bpy.props.FloatProperty(
         name="Shear",
         description="Shear",
         default=5.0,
         min=0.00
-    )
+    ) # type: ignore
 
     sbending: bpy.props.FloatProperty(
         name="Bending",
         description="Bending",
         default=1.0,
         min=0.00
-    )
+    ) # type: ignore
     damping: bpy.props.StringProperty(
         name="",
         description="",
         default="Damping",
         set=set_label
-    ) 
+    )  # type: ignore
     dtension: bpy.props.FloatProperty(
         name="Tension",
         description="Tension",
         default=15.0,
         min=0.00
-    )
+    ) # type: ignore
     dcompression: bpy.props.FloatProperty(
         name="Compression",
         description="Comspression",
         default=15.0,
         min=0.00
-    )
+    ) # type: ignore
     dshear: bpy.props.FloatProperty(
         name="Shear",
         description="Shear",
         default=5.0,
         min=0.00
-    )
+    ) # type: ignore
     dbending: bpy.props.FloatProperty(
         name="Bending",
         description="Bending",
         default=1.0,
         min=0.00
-    )
+    ) # type: ignore
     springs_label: bpy.props.StringProperty(
         name="",
         description="",
         default="Internal Springs",
         set=set_label
-    ) 
+    )  # type: ignore
     use_springs: bpy.props.BoolProperty(
         name="Enable Springs",
         description="Enable internal volume structure",
         default=False
-    )
+    ) # type: ignore
     pressure_label: bpy.props.StringProperty(
         name="",
         description="",
         default="Pressure",
         set=set_label
-    )     
+    )      # type: ignore
     use_pressure: bpy.props.BoolProperty(
         name="Enable Pressure",
         description="",
         default=False
-    )
+    ) # type: ignore
 
     pressure_force: bpy.props.FloatProperty(
         name="Pressure Force",
@@ -134,13 +134,13 @@ class OBJECT_OT_add_quick_cloth_tool(bpy.types.Operator):
         default=5,
         min=0.0,
         precision=4
-    )
+    ) # type: ignore
     shape_label: bpy.props.StringProperty(
         name="",
         description="",
         default="Shape",
         set=set_label
-    ) 
+    )  # type: ignore
     pinning_stiffness: bpy.props.FloatProperty(
         name="Pinning Stiffness",
         description="Pin Spring Stiffness",
@@ -148,19 +148,19 @@ class OBJECT_OT_add_quick_cloth_tool(bpy.types.Operator):
         min=0.0,
         precision=4,
         max=50
-    )        
+    )         # type: ignore
     use_sewing: bpy.props.BoolProperty(
         name="Enable Sewing",
         description="Enable sewing between cloth vertices",
         default=True
-    )
+    ) # type: ignore
     sewing_force: bpy.props.FloatProperty(
         name="Sewing Force",
         description="Force applied to sewing springs",
         default=5,
         min=0.0,
         precision=4
-    )
+    ) # type: ignore
 
     shrink: bpy.props.FloatProperty(
         name="Shrinking Factor",
@@ -169,13 +169,13 @@ class OBJECT_OT_add_quick_cloth_tool(bpy.types.Operator):
         min=-1.0,
         max=1.0,
         precision=4
-    )
+    ) # type: ignore
     collisions_label: bpy.props.StringProperty(
         name="",
         description="",
         default="Collisions",
         set=set_label
-    ) 
+    )  # type: ignore
 
     collision_quality: bpy.props.IntProperty(
         name="Collision Quality",
@@ -183,7 +183,7 @@ class OBJECT_OT_add_quick_cloth_tool(bpy.types.Operator):
         default=4,
         min=1,
         max=20
-    )
+    ) # type: ignore
 
     collision_distance: bpy.props.FloatProperty(
         name="Obj Distance",
@@ -191,7 +191,7 @@ class OBJECT_OT_add_quick_cloth_tool(bpy.types.Operator):
         default=0.001,
         min=0.001,
         precision=4
-    )
+    ) # type: ignore
 
     object_impulse_clamping: bpy.props.FloatProperty(
         name="Obj Imp Clamp",
@@ -200,13 +200,13 @@ class OBJECT_OT_add_quick_cloth_tool(bpy.types.Operator):
         min=0.0,
         max=100.0,
         precision=4
-    )
+    ) # type: ignore
 
     use_self_collision: bpy.props.BoolProperty(
         name="Enable Self Collision",
         description="Enable collisions between parts of the cloth itself",
         default=True
-    )
+    ) # type: ignore
 
     self_collision_friction: bpy.props.FloatProperty(
         name="Friction",
@@ -215,7 +215,7 @@ class OBJECT_OT_add_quick_cloth_tool(bpy.types.Operator):
         min=0.0,
         max=80.0,
         precision=4
-    )
+    ) # type: ignore
 
     self_collision_distance: bpy.props.FloatProperty(
         name="Distance",
@@ -223,7 +223,7 @@ class OBJECT_OT_add_quick_cloth_tool(bpy.types.Operator):
         default=0.001,
         min=0.0,
         precision=4
-    )
+    ) # type: ignore
 
     self_impulse_clamping: bpy.props.FloatProperty(
         name="Impulse Clamping",
@@ -232,14 +232,14 @@ class OBJECT_OT_add_quick_cloth_tool(bpy.types.Operator):
         min=0.0,
         max=100.0,
         precision=4
-    ) 
+    )  # type: ignore
 
     field_label: bpy.props.StringProperty(
         name="",
         description="",
         default="Field Weights",
         set=set_label
-    ) 
+    )  # type: ignore
     gravity: bpy.props.FloatProperty(
         name="Gravity",
         description="Strength of the gravity effect on the cloth",
@@ -247,7 +247,7 @@ class OBJECT_OT_add_quick_cloth_tool(bpy.types.Operator):
         min=0.0,
         max=1.0,
         precision=4
-    )
+    ) # type: ignore
 
     @classmethod
     def poll(cls, context):
@@ -260,7 +260,22 @@ class OBJECT_OT_add_quick_cloth_tool(bpy.types.Operator):
             self.report({'ERROR'}, "Please select a mesh object.")
             return {'CANCELLED'}
 
+        
+
+
         bpy.ops.object.mode_set(mode='OBJECT')
+
+   
+        
+        bpy.ops.object.mode_set(mode='EDIT')
+        bpy.ops.mesh.select_mode(type='VERT')
+        bpy.ops.mesh.select_all(action='INVERT')
+        bpy.ops.object.mode_set(mode='OBJECT')
+        selected_verts = [v for v in obj.data.vertices if v.select]
+
+        if len(selected_verts) == 0:
+            self.report({'ERROR'}, "No vertices selected for cloth sim.")
+            return {'CANCELLED'}    
 
         vg = obj.vertex_groups.get("QuickClothToolPinning")
        
@@ -268,13 +283,8 @@ class OBJECT_OT_add_quick_cloth_tool(bpy.types.Operator):
             obj.vertex_groups.remove(vg)
             vg = None
 
-        vg = obj.vertex_groups.new(name="QuickClothToolPinning")        
-        
-        bpy.ops.object.mode_set(mode='EDIT')
-        bpy.ops.mesh.select_mode(type='VERT')
-        bpy.ops.mesh.select_all(action='INVERT')
-        bpy.ops.object.mode_set(mode='OBJECT')
-        selected_verts = [v for v in obj.data.vertices if v.select]
+        vg = obj.vertex_groups.new(name="QuickClothToolPinning")     
+
 
         if not selected_verts:
             for v in obj.data.vertices:
@@ -365,7 +375,7 @@ class QUICKCLOTH_OT_quick_cloth_apply(bpy.types.Operator):
         name="Weld Loose Edges",
         description="Weld loose edges after applying the cloth modifier",
         default=True
-    )
+    ) # type: ignore
 
     distance: bpy.props.FloatProperty(
         name="Weld Distance",
@@ -374,11 +384,14 @@ class QUICKCLOTH_OT_quick_cloth_apply(bpy.types.Operator):
         min=0.0,
         max=1.0,
         precision=4
-    )
+    ) # type: ignore
 
     @classmethod
     def poll(cls, context):
-        return len(context.selected_objects) != 0 and context.active_object.type == 'MESH'
+        obj = context.active_object
+        existing = [m for m in obj.modifiers if m.type == "CLOTH" and m.name == "QuickCloth"]
+        return len(context.selected_objects) != 0 and context.active_object.type == 'MESH' and len(existing) == 1
+
 
     def execute(self, context):
         obj = context.active_object
@@ -412,7 +425,9 @@ class QUICKCLOTH_OT_quick_cloth_remove(bpy.types.Operator):
 
     @classmethod
     def poll(cls, context):
-        return len(context.selected_objects) != 0 and context.active_object.type == 'MESH'
+        obj = context.active_object
+        existing = [m for m in obj.modifiers if m.type == "CLOTH" and m.name == "QuickCloth"]
+        return len(context.selected_objects) != 0 and context.active_object.type == 'MESH' and len(existing) == 1
 
     def execute(self, context):
         obj = context.active_object

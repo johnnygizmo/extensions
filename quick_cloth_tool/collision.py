@@ -17,31 +17,31 @@ class QUICKCLOTH_OT_quick_cloth_add_collision(bpy.types.Operator):
         default=.1,
         min=0.0,
         max= 1,
-    ) 
+    )  # type: ignore
     friction: bpy.props.FloatProperty(
         name="Friction",
         description="Friction",
         default=5,
         min=0.0,
         max= 80.0,
-    ) 
+    )  # type: ignore
     thickness_outer: bpy.props.FloatProperty(
         name="Thickness Outer",
         description="Thickness Outer",
         default=0.02,
         min=0.001,
         max= 1.0,  
-    ) 
+    )  # type: ignore
     single: bpy.props.BoolProperty(
         name="Single Sided",
         description="Single Sided",
         default=True
-    ) 
+    )  # type: ignore
     override:bpy.props.BoolProperty(
         name="Override Normals",
         description="Override Normals",
         default=False
-    ) 
+    )  # type: ignore
 
     def execute(self, context):
         obj = context.active_object
