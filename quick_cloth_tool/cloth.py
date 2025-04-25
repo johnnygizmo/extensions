@@ -260,22 +260,20 @@ class OBJECT_OT_add_quick_cloth_tool(bpy.types.Operator):
             self.report({'ERROR'}, "Please select a mesh object.")
             return {'CANCELLED'}
 
-        
-
-
         bpy.ops.object.mode_set(mode='OBJECT')
-
-   
-        
         bpy.ops.object.mode_set(mode='EDIT')
         bpy.ops.mesh.select_mode(type='VERT')
+
+        check_verts = [v for v in obj.data.vertices if v.select]
+
+        if len(check_verts) == 0:
+            self.report({'ERROR'}, "No vertices selected for cloth sim.")
+            return {'CANCELLED'}  
+
+
         bpy.ops.mesh.select_all(action='INVERT')
         bpy.ops.object.mode_set(mode='OBJECT')
         selected_verts = [v for v in obj.data.vertices if v.select]
-
-        if len(selected_verts) == 0:
-            self.report({'ERROR'}, "No vertices selected for cloth sim.")
-            return {'CANCELLED'}    
 
         vg = obj.vertex_groups.get("QuickClothToolPinning")
        
