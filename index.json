@@ -21,15 +21,15 @@
         "Rigging"
       ],
       "archive_url": "./johnnygizmo_create_empty_vertex_child-1.0.0.zip",
-      "archive_size": 2721,
-      "archive_hash": "sha256:ef24fdaaef947d73db8a9dccc654762b81594bad532da9eb6ef9bea746b94d4e"
+      "archive_size": 2746,
+      "archive_hash": "sha256:32286a5f1091a796396c0792df9eb209243f901c75c77dc7c3f2faa80cbf9ba5"
     },
     {
       "schema_version": "1.0.0",
       "id": "johnnygizmo_quick_cloth_tool",
       "name": "Quick Cloth Tool",
       "tagline": "Some Tools For Quick Cloth Simulation",
-      "version": "1.0.10",
+      "version": "1.0.11",
       "type": "add-on",
       "maintainer": "Johnny Matthews <johnny.matthews+blender@gmail.com>",
       "license": [
@@ -37,9 +37,9 @@
       ],
       "blender_version_min": "4.4.0",
       "website": "https://github.com/johnnygizmo/extensions",
-      "archive_url": "./johnnygizmo_quick_cloth_tool-1.0.10.zip",
-      "archive_size": 9885,
-      "archive_hash": "sha256:e69db95254c0276bfeb65718ae8400be935ec29921e5ffe670eb56e9349231bc"
+      "archive_url": "./johnnygizmo_quick_cloth_tool-1.0.11.zip",
+      "archive_size": 4652870,
+      "archive_hash": "sha256:a8ff8a0167e4b95307c2d14a4ba4c924fa5184a9581a1a627ea5d0f617f428a3"
     }
   ]
 }
