@@ -368,12 +368,35 @@ class QUICKCLOTH_OT_quick_cloth_apply(bpy.types.Operator):
     bl_label = "Apply QuickCloth Modifier"
     bl_options = {'REGISTER', 'UNDO'}
 
+    @classmethod
+    def poll(cls, context):
+        obj = context.active_object
+        existing = [m for m in obj.modifiers if m.type == "CLOTH" and m.name == "QuickCloth"]
+        return len(context.selected_objects) != 0 and context.active_object.type == 'MESH' and len(existing) == 1
 
-    weld: bpy.props.BoolProperty(
-        name="Weld Loose Edges",
-        description="Weld loose edges after applying the cloth modifier",
-        default=True
-    ) # type: ignore
+
+    def execute(self, context):
+        obj = context.active_object
+        if obj:
+            bpy.ops.object.mode_set(mode='OBJECT')   
+            bpy.ops.object.modifier_apply(modifier="QuickCloth")        
+
+            vg = obj.vertex_groups.get("QuickClothToolPinning")
+            if vg:
+                obj.vertex_groups.remove(vg)
+            self.report({'INFO'}, "Applied 'QuickCloth' modifier.")
+            return {'FINISHED'}
+        else:
+            self.report({'ERROR'}, "No object selected.")
+            return {'CANCELLED'}
+        
+
+class QUICKCLOTH_OT_quick_cloth_weld(bpy.types.Operator):
+    """Welds loose edges """
+    bl_idname = "object.quick_cloth_weld"
+    bl_label = "Weld Loose Edges"
+    bl_options = {'REGISTER', 'UNDO'}
+
 
     distance: bpy.props.FloatProperty(
         name="Weld Distance",
@@ -386,35 +409,22 @@ class QUICKCLOTH_OT_quick_cloth_apply(bpy.types.Operator):
 
     @classmethod
     def poll(cls, context):
-        obj = context.active_object
-        existing = [m for m in obj.modifiers if m.type == "CLOTH" and m.name == "QuickCloth"]
-        return len(context.selected_objects) != 0 and context.active_object.type == 'MESH' and len(existing) == 1
-
+        return len(context.selected_objects) != 0 and context.active_object.type == 'MESH'
 
     def execute(self, context):
         obj = context.active_object
         if obj:
             bpy.ops.object.mode_set(mode='OBJECT')   
-
-            bpy.ops.object.modifier_apply(modifier="QuickCloth")
-            
-            if self.weld:
-                weld = obj.modifiers.new(name="QuickClothWeld", type='WELD')
-                weld.mode = 'CONNECTED'
-                weld.loose_edges = True
-                weld.merge_threshold = self.distance
-                bpy.ops.object.modifier_apply(modifier="QuickClothWeld")    
+            weld = obj.modifiers.new(name="QuickClothWeld", type='WELD')
+            weld.mode = 'CONNECTED'
+            weld.loose_edges = True
+            weld.merge_threshold = self.distance
+            bpy.ops.object.modifier_apply(modifier="QuickClothWeld")    
            
+        return {'FINISHED'}
 
-            vg = obj.vertex_groups.get("QuickClothToolPinning")
-            if vg:
-                obj.vertex_groups.remove(vg)
-            self.report({'INFO'}, "Applied 'QuickCloth' modifier.")
-            return {'FINISHED'}
-        else:
-            self.report({'ERROR'}, "No object selected.")
-            return {'CANCELLED'}
-        
+
+
 class QUICKCLOTH_OT_quick_cloth_remove(bpy.types.Operator):
     """Removes a modifier named 'QuickCloth'."""
     bl_idname = "object.quick_cloth_remove"
@@ -445,14 +455,14 @@ class QUICKCLOTH_OT_quick_cloth_remove(bpy.types.Operator):
             return {'CANCELLED'}
 
 
-
-
 def register():
     bpy.utils.register_class(OBJECT_OT_add_quick_cloth_tool)
     bpy.utils.register_class(QUICKCLOTH_OT_quick_cloth_apply)
     bpy.utils.register_class(QUICKCLOTH_OT_quick_cloth_remove)
+    bpy.utils.register_class(QUICKCLOTH_OT_quick_cloth_weld)
 
 def unregister():
+    bpy.utils.unregister_class(QUICKCLOTH_OT_quick_cloth_weld)
     bpy.utils.unregister_class(QUICKCLOTH_OT_quick_cloth_remove)
     bpy.utils.unregister_class(QUICKCLOTH_OT_quick_cloth_apply)
     bpy.utils.unregister_class(OBJECT_OT_add_quick_cloth_tool)

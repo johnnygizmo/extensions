@@ -30,12 +30,12 @@ class QUICK_SIM_PT_panel(bpy.types.Panel):
         col2    .operator("object.apply_quick_pillow", text="Apply")
 
 
-        layout.label(text="Cloth Drag")
-        row = layout.row()
-        col1 = row.column()
-        col1.operator("object.quickcloth_clothdrag", text="Add")
-        col2 = row.column()
-        col2.operator("object.quickcloth_clothdrag_apply", text="Apply") 
+        # layout.label(text="Cloth Drag")
+        # row = layout.row()
+        # col1 = row.column()
+        # col1.operator("object.quickcloth_clothdrag", text="Add")
+        # col2 = row.column()
+        # col2.operator("object.quickcloth_clothdrag_apply", text="Apply") 
 
         layout.label(text="Collision Modifier")
         row = layout.row()
@@ -59,6 +59,7 @@ class QUICK_SIM_PT_panel(bpy.types.Panel):
         layout.operator("object.quick_cloth_stitch_edgeloops", text="Edge Loops to Stitch")
         layout.operator("object.quick_cloth_stitch_vertring", text="Vertring to Alternating Cinch Stitch")
         layout.operator("object.quick_cloth_delete_loose_edges", text="Delete Loose Edges")
+        layout.operator("object.quick_cloth_weld", text="Weld Loose Edges")
 
         layout.label(text="Gravity")
 

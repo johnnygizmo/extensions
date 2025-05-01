@@ -1,4 +1,4 @@
-@ECHO OFF
+REM @ECHO OFF
 IF NOT EXIST "folder.txt" (
     ECHO Error: folder.txt not found.
     EXIT /B 1
@@ -20,5 +20,5 @@ cd ..
 
 
 
-"c:\blender\%MyVar%\blender.exe" --command extension server-generate --repo-dir=./
-"c:\blender\%MyVar%\blender.exe" --command extension server-generate --repo-dir=./ --html
+"%MyVar%\blender.exe" --command extension server-generate --repo-dir=./
+"%MyVar%\blender.exe" --command extension server-generate --repo-dir=./ --html
