@@ -110,6 +110,8 @@ class QUICKCLOTH_OT_quick_cloth_apply_shrink(bpy.types.Operator):
     @classmethod
     def poll(cls, context):
         obj = context.active_object
+        if obj == None or obj.type != 'MESH':
+            return False
         existing = [m for m in obj.modifiers if m.type == "SHRINKWRAP" and m.name == "QuickClothShrink"]
         return len(context.selected_objects) != 0 and context.active_object.type == 'MESH' and len(existing) == 1
     
@@ -140,6 +142,8 @@ class QUICKCLOTH_OT_quick_cloth_rem_shrink(bpy.types.Operator):
     @classmethod
     def poll(cls, context):
         obj = context.active_object
+        if obj == None or obj.type != 'MESH':
+            return False
         existing = [m for m in obj.modifiers if m.type == "SHRINKWRAP" and m.name == "QuickClothShrink"]
         return len(context.selected_objects) != 0 and context.active_object.type == 'MESH' and len(existing) == 1
     

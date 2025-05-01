@@ -11,7 +11,7 @@ class QUICKCLOTH_OT_quick_cloth_stitch_edgeloops(bpy.types.Operator):
 
     def execute(self, context):
         obj = context.active_object
-        if obj:
+        if obj and obj.type == 'MESH':
             bpy.ops.object.mode_set(mode='EDIT')   
 
             bpy.ops.mesh.bridge_edge_loops()

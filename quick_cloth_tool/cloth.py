@@ -371,6 +371,8 @@ class QUICKCLOTH_OT_quick_cloth_apply(bpy.types.Operator):
     @classmethod
     def poll(cls, context):
         obj = context.active_object
+        if obj == None or obj.type != 'MESH':
+            return False
         existing = [m for m in obj.modifiers if m.type == "CLOTH" and m.name == "QuickCloth"]
         return len(context.selected_objects) != 0 and context.active_object.type == 'MESH' and len(existing) == 1
 
@@ -434,6 +436,8 @@ class QUICKCLOTH_OT_quick_cloth_remove(bpy.types.Operator):
     @classmethod
     def poll(cls, context):
         obj = context.active_object
+        if obj == None or obj.type != 'MESH':
+            return False
         existing = [m for m in obj.modifiers if m.type == "CLOTH" and m.name == "QuickCloth"]
         return len(context.selected_objects) != 0 and context.active_object.type == 'MESH' and len(existing) == 1
 
