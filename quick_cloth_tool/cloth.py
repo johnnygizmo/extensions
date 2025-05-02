@@ -251,7 +251,7 @@ class OBJECT_OT_add_quick_cloth_tool(bpy.types.Operator):
 
     @classmethod
     def poll(cls, context):
-        return len(context.selected_objects) != 0 and context.active_object.type == 'MESH'
+        return len(context.selected_objects) != 0 and context.active_object != None and context.active_object.type == 'MESH'
     
     def execute(self, context):
         obj = context.active_object
@@ -411,7 +411,7 @@ class QUICKCLOTH_OT_quick_cloth_weld(bpy.types.Operator):
 
     @classmethod
     def poll(cls, context):
-        return len(context.selected_objects) != 0 and context.active_object.type == 'MESH'
+        return len(context.selected_objects) != 0  and context.active_object != None and context.active_object.type == 'MESH'
 
     def execute(self, context):
         obj = context.active_object

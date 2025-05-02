@@ -7,7 +7,7 @@ class QUICKCLOTH_OT_quick_cloth_stitch_edgeloops(bpy.types.Operator):
 
     @classmethod
     def poll(cls, context):
-        return len(context.selected_objects) != 0 and context.active_object.type == 'MESH'
+        return len(context.selected_objects) != 0 and context.active_object != None and context.active_object.type == 'MESH'
 
     def execute(self, context):
         obj = context.active_object
@@ -28,7 +28,7 @@ class QUICKCLOTH_OT_quick_cloth_delete_loose_edges(bpy.types.Operator):
 
     @classmethod
     def poll(cls, context):
-        return len(context.selected_objects) != 0 and context.active_object.type == 'MESH'
+        return len(context.selected_objects) != 0 and context.active_object != None and context.active_object.type == 'MESH'
 
     def execute(self, context):
         obj = context.active_object
@@ -79,7 +79,7 @@ class QUICKCLOTH_OT_quick_cloth_stitch_vertring(bpy.types.Operator):
 
     @classmethod
     def poll(cls, context):
-        return len(context.selected_objects) != 0 and context.active_object.type == 'MESH'
+        return len(context.selected_objects) != 0 and context.active_object != None and context.active_object.type == 'MESH'
 
     def execute(self, context):
         obj = context.active_object

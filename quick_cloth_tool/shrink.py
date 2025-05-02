@@ -8,7 +8,7 @@ class QUICKCLOTH_OT_quick_cloth_add_shrink(bpy.types.Operator):
     
     @classmethod
     def poll(cls, context):
-        return len(context.selected_objects) != 0 and context.active_object.type == 'MESH' 
+        return len(context.selected_objects) != 0 and context.active_object != None and context.active_object.type == 'MESH' 
     
 
     # damping: bpy.props.FloatProperty(
@@ -113,7 +113,7 @@ class QUICKCLOTH_OT_quick_cloth_apply_shrink(bpy.types.Operator):
         if obj == None or obj.type != 'MESH':
             return False
         existing = [m for m in obj.modifiers if m.type == "SHRINKWRAP" and m.name == "QuickClothShrink"]
-        return len(context.selected_objects) != 0 and context.active_object.type == 'MESH' and len(existing) == 1
+        return len(existing) == 1
     
     def execute(self, context):
         obj = context.active_object
@@ -145,7 +145,7 @@ class QUICKCLOTH_OT_quick_cloth_rem_shrink(bpy.types.Operator):
         if obj == None or obj.type != 'MESH':
             return False
         existing = [m for m in obj.modifiers if m.type == "SHRINKWRAP" and m.name == "QuickClothShrink"]
-        return len(context.selected_objects) != 0 and context.active_object.type == 'MESH' and len(existing) == 1
+        return len(existing) == 1
     
     def execute(self, context):
         obj = context.active_object

@@ -8,7 +8,7 @@ class QUICKCLOTH_OT_quick_cloth_add_collision(bpy.types.Operator):
     
     @classmethod
     def poll(cls, context):
-        return len(context.selected_objects) != 0 and context.active_object.type == 'MESH' 
+        return len(context.selected_objects) != 0 and context.active_object != None and context.active_object.type == 'MESH' 
     
 
     damping: bpy.props.FloatProperty(
@@ -73,7 +73,7 @@ class QUICKCLOTH_OT_quick_cloth_rem_collision(bpy.types.Operator):
     
     @classmethod
     def poll(cls, context):
-        return len(context.selected_objects) != 0 and context.active_object.type == 'MESH'
+        return len(context.selected_objects) != 0 and context.active_object != None and context.active_object.type == 'MESH'
     
     def execute(self, context):
         obj = context.active_object
