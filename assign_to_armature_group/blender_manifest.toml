@@ -1,0 +1,21 @@
+schema_version = "1.0.0"
+
+# Example of manifest file for a Blender extension
+# Change the values according to your extension
+id = "johnnygizmo_assigntoarmaturegroup"
+version = "1.0.0"
+name = "Assign To Armature Group"
+tagline = "Assign the selected vertices to an armature group in the 3D Viewport"
+maintainer = "Johnny Matthews"
+type = "add-on"
+
+# Optional link to documentation, support, source files, etc
+# website = "https://extensions.blender.org/add-ons/my-example-package/"
+
+tags = ["Rigging","3D View","Mesh",]
+
+blender_version_min = "4.4.3"
+
+license = [
+  "SPDX:GPL-2.0-or-later",
+]
