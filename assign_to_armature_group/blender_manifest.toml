@@ -2,10 +2,10 @@ schema_version = "1.0.0"
 
 # Example of manifest file for a Blender extension
 # Change the values according to your extension
-id = "johnnygizmo_assigntoarmaturegroup"
+id = "johnnygizmo_assign_to_armature_group"
 version = "1.0.0"
 name = "Assign To Armature Group"
-tagline = "Assign the selected vertices to an armature group in the 3D Viewport"
+tagline = "Assign the selected vertices to an armature group"
 maintainer = "Johnny Matthews"
 type = "add-on"
 

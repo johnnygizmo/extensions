@@ -4,6 +4,27 @@
   "data": [
     {
       "schema_version": "1.0.0",
+      "id": "johnnygizmo_assign_to_armature_group",
+      "name": "Assign To Armature Group",
+      "tagline": "Assign the selected vertices to an armature group",
+      "version": "1.0.0",
+      "type": "add-on",
+      "maintainer": "Johnny Matthews",
+      "license": [
+        "SPDX:GPL-2.0-or-later"
+      ],
+      "blender_version_min": "4.4.3",
+      "tags": [
+        "Rigging",
+        "3D View",
+        "Mesh"
+      ],
+      "archive_url": "./johnnygizmo_assign_to_armature_group-1.0.0.zip",
+      "archive_size": 2306,
+      "archive_hash": "sha256:9249f07e4a9a51e19e847910e4c27e8b4a7855954bf7202cb27e054cc63e2e71"
+    },
+    {
+      "schema_version": "1.0.0",
       "id": "johnnygizmo_create_empty_vertex_child",
       "name": "Create Empty Vertex Child",
       "tagline": "New child empties at the locations of the selected vertices",
