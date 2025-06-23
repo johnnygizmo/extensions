@@ -85,10 +85,16 @@ class MESH_OT_vertex_bone_picker(bpy.types.Operator):
             obj.parent.data.show_names = self._original_show_names
 
 
+def menu_func(self, context):
+    self.layout.operator(MESH_OT_vertex_bone_picker.bl_idname, icon='BONE_DATA')
+
 def register():
     bpy.utils.register_class(MESH_OT_vertex_bone_picker)
+    bpy.types.VIEW3D_MT_edit_mesh_vertices.append(menu_func)
+    
 
 def unregister():
+    bpy.types.VIEW3D_MT_edit_mesh_vertices.remove(menu_func)
     bpy.utils.unregister_class(MESH_OT_vertex_bone_picker)
 
 if __name__ == "__main__":
