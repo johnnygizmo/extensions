@@ -4,27 +4,6 @@
   "data": [
     {
       "schema_version": "1.0.0",
-      "id": "johnnygizmo_assign_to_armature_group",
-      "name": "Assign To Armature Group",
-      "tagline": "Assign the selected vertices to an armature group",
-      "version": "1.0.0",
-      "type": "add-on",
-      "maintainer": "Johnny Matthews",
-      "license": [
-        "SPDX:GPL-2.0-or-later"
-      ],
-      "blender_version_min": "4.4.3",
-      "tags": [
-        "Rigging",
-        "3D View",
-        "Mesh"
-      ],
-      "archive_url": "./johnnygizmo_assign_to_armature_group-1.0.0.zip",
-      "archive_size": 2306,
-      "archive_hash": "sha256:9249f07e4a9a51e19e847910e4c27e8b4a7855954bf7202cb27e054cc63e2e71"
-    },
-    {
-      "schema_version": "1.0.0",
       "id": "johnnygizmo_create_empty_vertex_child",
       "name": "Create Empty Vertex Child",
       "tagline": "New child empties at the locations of the selected vertices",
@@ -61,6 +40,28 @@
       "archive_url": "./johnnygizmo_quick_cloth_tool-1.0.12.zip",
       "archive_size": 4652980,
       "archive_hash": "sha256:88255109a33471cda8c2c07176bc5c7c7274793194f713007fc3aa3e9ffe8617"
+    },
+    {
+      "schema_version": "1.0.0",
+      "id": "johnnygizmo_vertex_bone_picker",
+      "name": "Vertex Bone Picker",
+      "tagline": "Assign the selected vertices to a bone",
+      "version": "1.0.0",
+      "type": "add-on",
+      "maintainer": "Johnny Matthews",
+      "license": [
+        "SPDX:GPL-2.0-or-later"
+      ],
+      "blender_version_min": "4.4.3",
+      "website": "https://github.com/johnnygizmo/extensions/tree/main/vertex_bone_picker",
+      "tags": [
+        "Rigging",
+        "3D View",
+        "Mesh"
+      ],
+      "archive_url": "./johnnygizmo_vertex_bone_picker-1.0.0.zip",
+      "archive_size": 2345,
+      "archive_hash": "sha256:11c0ccc32965970a58ba2753d65ecf960c045f52836285a5c342a433fe9e2b5d"
     }
   ]
 }

@@ -17,7 +17,7 @@ cd ..
 cd quick_cloth_tool
 call build.bat
 cd ..
-cd assign_to_armature_group
+cd vertex_bone_picker
 call build.bat
 cd ..
 
