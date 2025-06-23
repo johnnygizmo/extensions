@@ -6,7 +6,7 @@ IF NOT EXIST "folder.txt" (
 
 del *.zip
 del *.json
-del *.html
+
 
 SET /P MyVar=<folder.txt
 
@@ -24,4 +24,4 @@ cd ..
 
 
 "%MyVar%\blender.exe" --command extension server-generate --repo-dir=./
-"%MyVar%\blender.exe" --command extension server-generate --repo-dir=./ --html
+REM "%MyVar%\blender.exe" --command extension server-generate --repo-dir=./ --html

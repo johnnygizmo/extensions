@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Blender Extensions</title>
+</head>
+<body>
+<p>Blender Extension Listing:</p>
+<p>Add-on</p>
+<hr>
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Website</th>
+    <th>Blender Versions</th>
+    <th>Python Versions</th>
+    <th>Platforms</th>
+    <th>Size</th>
+  </tr>
+  <tr>
+    <td><tt><a href="./johnnygizmo_create_empty_vertex_child-1.0.0.zip?repository=.%2Findex.json&blender_version_min=4.3.2">johnnygizmo_create_empty_vertex_child-1.0.0</a></tt></td>
+    <td>Create Empty Vertex Child</td>
+    <td>New child empties at the locations of the selected vertices</td>
+    <td><a href="https://github.com/johnnygizmo/extensions">link</a></td>
+    <td>4.3.2 - ~</td>
+    <td>all</td>
+    <td>all</td>
+    <td>2.7KB</td>
+  </tr>
+  <tr>
+    <td><tt><a href="./johnnygizmo_quick_cloth_tool-1.0.12.zip?repository=.%2Findex.json&blender_version_min=4.4.0">johnnygizmo_quick_cloth_tool-1.0.12</a></tt></td>
+    <td>Quick Cloth Tool</td>
+    <td>Some Tools For Quick Cloth Simulation</td>
+    <td><a href="https://github.com/johnnygizmo/extensions">link</a></td>
+    <td>4.4.0 - ~</td>
+    <td>all</td>
+    <td>all</td>
+    <td>4.4MB</td>
+  </tr>
+  <tr>
+    <td><tt><a href="./johnnygizmo_vertex_bone_picker-1.2.0.zip?repository=.%2Findex.json&blender_version_min=4.4.0">johnnygizmo_vertex_bone_picker-1.2.0</a></tt></td>
+    <td>Vertex Bone Picker</td>
+    <td>Assign the selected vertices to a bone</td>
+    <td><a href="https://github.com/johnnygizmo/extensions/tree/main/vertex_bone_picker">link</a></td>
+    <td>4.4.0 - ~</td>
+    <td>all</td>
+    <td>all</td>
+    <td>2.9KB</td>
+  </tr>
+</table>
+
+<center><p>Built 2025-06-23, 21:05</p></center>
+</body>
+</html>

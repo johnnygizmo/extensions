@@ -1,56 +1,131 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>Blender Extensions</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>JohnnyGizmo Blender Extension Library</title>
+  <style>
+    :root {
+      --primary: #4a6cf7;
+      --bg: #f4f7fa;
+      --card-bg: #fff;
+      --text: #222;
+      --shadow: rgba(0, 0, 0, 0.1);
+    }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem;
+      min-height: 100vh;
+    }
+    h1 {
+      margin-bottom: 1rem;
+      font-size: 2rem;
+      color: var(--primary);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+      width: 100%;
+      max-width: 1200px;
+    }
+    .card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      box-shadow: 0 4px 20px var(--shadow);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      transition: transform 0.2s ease;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+    }
+    .card h2 {
+      font-size: 1.2rem;
+      margin: 0;
+      color: var(--primary);
+    }
+    .card p {
+      margin: 0.25rem 0;
+      font-size: 0.95rem;
+    }
+    .tags {
+      margin-top: auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .tag {
+      background: var(--primary);
+      color: white;
+      border-radius: 999px;
+      padding: 0.25rem 0.75rem;
+      font-size: 0.75rem;
+    }
+    a.download {
+      margin-top: 0.75rem;
+      text-decoration: none;
+      color: var(--primary);
+      font-weight: bold;
+      font-size: 0.9rem;
+    }
+    @media (max-width: 600px) {
+      body {
+        padding: 1rem;
+      }
+    }
+  </style>
 </head>
 <body>
-<p>Blender Extension Listing:</p>
-<p>Add-on</p>
-<hr>
-<table>
-  <tr>
-    <th>ID</th>
-    <th>Name</th>
-    <th>Description</th>
-    <th>Website</th>
-    <th>Blender Versions</th>
-    <th>Python Versions</th>
-    <th>Platforms</th>
-    <th>Size</th>
-  </tr>
-  <tr>
-    <td><tt><a href="./johnnygizmo_create_empty_vertex_child-1.0.0.zip?repository=.%2Findex.json&blender_version_min=4.3.2">johnnygizmo_create_empty_vertex_child-1.0.0</a></tt></td>
-    <td>Create Empty Vertex Child</td>
-    <td>New child empties at the locations of the selected vertices</td>
-    <td><a href="https://github.com/johnnygizmo/extensions">link</a></td>
-    <td>4.3.2 - ~</td>
-    <td>all</td>
-    <td>all</td>
-    <td>2.7KB</td>
-  </tr>
-  <tr>
-    <td><tt><a href="./johnnygizmo_quick_cloth_tool-1.0.12.zip?repository=.%2Findex.json&blender_version_min=4.4.0">johnnygizmo_quick_cloth_tool-1.0.12</a></tt></td>
-    <td>Quick Cloth Tool</td>
-    <td>Some Tools For Quick Cloth Simulation</td>
-    <td><a href="https://github.com/johnnygizmo/extensions">link</a></td>
-    <td>4.4.0 - ~</td>
-    <td>all</td>
-    <td>all</td>
-    <td>4.4MB</td>
-  </tr>
-  <tr>
-    <td><tt><a href="./johnnygizmo_vertex_bone_picker-1.2.0.zip?repository=.%2Findex.json&blender_version_min=4.4.0">johnnygizmo_vertex_bone_picker-1.2.0</a></tt></td>
-    <td>Vertex Bone Picker</td>
-    <td>Assign the selected vertices to a bone</td>
-    <td><a href="https://github.com/johnnygizmo/extensions/tree/main/vertex_bone_picker">link</a></td>
-    <td>4.4.0 - ~</td>
-    <td>all</td>
-    <td>all</td>
-    <td>2.9KB</td>
-  </tr>
-</table>
 
-<center><p>Built 2025-06-23, 21:05</p></center>
+  <h1>JohnnyGizmo's Blender Extension Library</h1>
+  <h3><a href="https://youtube.com/@johnnymatthews">https://youtube.com/@johnnymatthews</a></h3>
+  Add <b>https://johnnygizmo.github.io/extensions/index.json</b> to your Blender add-on repository list to access these extensions through Blender's add-on manager..
+  <p></p>
+  <div class="grid" id="extensionGrid">
+    <!-- Projects will be injected here -->
+  </div>
+
+  <script>
+    async function loadExtensions() {
+      try {
+        const response = await fetch('index.json');
+        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+        const json = await response.json();
+        const container = document.getElementById('extensionGrid');
+        json.data.forEach(entry => {
+          const card = document.createElement('div');
+          card.className = 'card';
+          card.innerHTML = `
+            <h2>${entry.name}</h2>
+            <p><em>${entry.tagline}</em></p>
+            <p><strong>Version:</strong> ${entry.version}</p>
+            <p><strong>Maintainer:</strong> ${entry.maintainer}</p>
+            <p><strong>Blender:</strong> ${entry.blender_version_min}+</p>
+            <a class="download" href="${entry.archive_url}" download>⬇ Download</a>
+            <div class="tags">
+              ${(entry.tags || []).map(tag => `<span class="tag">${tag}</span>`).join('')}
+            </div>
+          `;
+          container.appendChild(card);
+        });
+      } catch (err) {
+        console.error('Failed to load extension data:', err);
+        const container = document.getElementById('extensionGrid');
+        container.innerHTML = '<p style="color: red;">Failed to load extensions. Please try again later.</p>';
+      }
+    }
+
+    loadExtensions();
+  </script>
+
 </body>
 </html>
