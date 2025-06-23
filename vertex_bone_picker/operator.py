@@ -1,5 +1,6 @@
 import bpy  # type: ignore
 import bmesh  # type: ignore
+from mathutils import Vector # type: ignore
 
 def get_bone_items(self, context):
     obj = context.object
@@ -19,7 +20,7 @@ class MESH_OT_vertex_bone_picker(bpy.types.Operator):
     bl_options = {'REGISTER', 'UNDO'}
 
     bone_name: bpy.props.EnumProperty(
-        name="Assign to Bone",
+        name="Pick Bone",
         description="Choose a bone to assign selected vertices to",
         items=get_bone_items
     )  # type: ignore
@@ -31,7 +32,7 @@ class MESH_OT_vertex_bone_picker(bpy.types.Operator):
     )  # type: ignore
 
     limit_to_deform_bones: bpy.props.BoolProperty(
-        name="Only List Deform Bones",
+        name="Only Show Deform Bones",
         description="Limit bone list to deforming bones only",
         default=True
     )  # type: ignore
@@ -47,7 +48,8 @@ class MESH_OT_vertex_bone_picker(bpy.types.Operator):
             return {'CANCELLED'}
 
         bm = bmesh.from_edit_mesh(obj.data)
-        if not any(v.select for v in bm.verts):
+        selected_verts = [v for v in bm.verts if v.select]
+        if not selected_verts:
             self.report({'ERROR'}, "No vertices selected.")
             return {'CANCELLED'}
 
@@ -64,7 +66,35 @@ class MESH_OT_vertex_bone_picker(bpy.types.Operator):
         if not self._original_in_front:
             armature_obj.show_in_front = True
 
+        # Try to auto-assign closest bone
+        self._auto_select_closest_bone(obj, selected_verts)
+
         return context.window_manager.invoke_props_dialog(self)
+
+    def _auto_select_closest_bone(self, mesh_obj, selected_verts):
+        armature_obj = mesh_obj.parent
+        deform_only = self.limit_to_deform_bones
+
+        world_matrix = mesh_obj.matrix_world
+        avg_world_pos = sum((world_matrix @ v.co for v in selected_verts), Vector()) / len(selected_verts)
+
+        min_dist = float('inf')
+        closest_bone_name = None
+
+        for bone in armature_obj.data.bones:
+            if deform_only and not bone.use_deform:
+                continue
+            head_world = armature_obj.matrix_world @ bone.head_local
+            tail_world = armature_obj.matrix_world @ bone.tail_local
+            mid_point = (head_world + tail_world) / 2
+            dist = (avg_world_pos - mid_point).length
+            if dist < min_dist:
+                min_dist = dist
+                closest_bone_name = bone.name
+
+        if closest_bone_name:
+            self.bone_name = closest_bone_name
+
 
     def draw(self, context):
         layout = self.layout
