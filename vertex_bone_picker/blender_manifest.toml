@@ -9,6 +9,8 @@ tagline = "Assign the selected vertices to a bone"
 maintainer = "Johnny Matthews"
 type = "add-on"
 
+website = "https://github.com/johnnygizmo/extensions/tree/main/vertex_bone_picker"
+
 tags = ["Rigging","3D View","Mesh",]
 
 blender_version_min = "4.4.3"
