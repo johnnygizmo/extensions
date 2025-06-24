@@ -1,10 +1,16 @@
-import bpy # type: ignore
-import bmesh # type: ignore
+import bpy  # type: ignore
+import bmesh  # type: ignore
+from mathutils import Vector # type: ignore
 
 def get_bone_items(self, context):
     obj = context.object
     if obj and obj.parent and obj.parent.type == 'ARMATURE':
-        return [(bone.name, bone.name, "") for bone in obj.parent.data.bones]
+        armature = obj.parent.data
+        return [
+            (bone.name, bone.name, "")
+            for bone in armature.bones
+            if not self.limit_to_deform_bones or bone.use_deform
+        ]
     return []
 
 class MESH_OT_vertex_bone_picker(bpy.types.Operator):
@@ -17,15 +23,22 @@ class MESH_OT_vertex_bone_picker(bpy.types.Operator):
         name="Pick Bone",
         description="Choose a bone to assign selected vertices to",
         items=get_bone_items
-    ) # type: ignore 
-    
+    )  # type: ignore
+
     replace_all: bpy.props.BoolProperty(
         name="Replace All Assignments",
         description="Clear all existing vertex group assignments for selected vertices before assigning to this bone",
         default=True
-    ) # type: ignore
+    )  # type: ignore
+
+    limit_to_deform_bones: bpy.props.BoolProperty(
+        name="Only Show Deform Bones",
+        description="Limit bone list to deforming bones only",
+        default=True
+    )  # type: ignore
 
     _original_show_names = None
+    _original_in_front = None
 
     def invoke(self, context, event):
         obj = context.object
@@ -35,7 +48,8 @@ class MESH_OT_vertex_bone_picker(bpy.types.Operator):
             return {'CANCELLED'}
 
         bm = bmesh.from_edit_mesh(obj.data)
-        if not any(v.select for v in bm.verts):
+        selected_verts = [v for v in bm.verts if v.select]
+        if not selected_verts:
             self.report({'ERROR'}, "No vertices selected.")
             return {'CANCELLED'}
 
@@ -43,17 +57,50 @@ class MESH_OT_vertex_bone_picker(bpy.types.Operator):
             self.report({'ERROR'}, "Object must have an armature as a parent.")
             return {'CANCELLED'}
 
-        armature_data = obj.parent.data
-        self._original_show_names = armature_data.show_names
+        armature_obj = obj.parent
+        self._original_show_names = armature_obj.data.show_names
+        self._original_in_front = armature_obj.show_in_front
+
         if not self._original_show_names:
-            armature_data.show_names = True
+            armature_obj.data.show_names = True
+        if not self._original_in_front:
+            armature_obj.show_in_front = True
+
+        # Try to auto-assign closest bone
+        self._auto_select_closest_bone(obj, selected_verts)
 
         return context.window_manager.invoke_props_dialog(self)
+
+    def _auto_select_closest_bone(self, mesh_obj, selected_verts):
+        armature_obj = mesh_obj.parent
+        deform_only = self.limit_to_deform_bones
+
+        world_matrix = mesh_obj.matrix_world
+        avg_world_pos = sum((world_matrix @ v.co for v in selected_verts), Vector()) / len(selected_verts)
+
+        min_dist = float('inf')
+        closest_bone_name = None
+
+        for bone in armature_obj.data.bones:
+            if deform_only and not bone.use_deform:
+                continue
+            head_world = armature_obj.matrix_world @ bone.head_local
+            tail_world = armature_obj.matrix_world @ bone.tail_local
+            mid_point = (head_world + tail_world) / 2
+            dist = (avg_world_pos - mid_point).length
+            if dist < min_dist:
+                min_dist = dist
+                closest_bone_name = bone.name
+
+        if closest_bone_name:
+            self.bone_name = closest_bone_name
+
 
     def draw(self, context):
         layout = self.layout
         layout.prop(self, "bone_name")
         layout.prop(self, "replace_all")
+        layout.prop(self, "limit_to_deform_bones")
 
     def execute(self, context):
         obj = context.object
@@ -72,12 +119,10 @@ class MESH_OT_vertex_bone_picker(bpy.types.Operator):
             bpy.ops.object.mode_set(mode='EDIT')
             return {'CANCELLED'}
 
-        # Clear from all groups if replace is checked
         if self.replace_all:
             for vg in obj.vertex_groups:
                 vg.remove([v.index for v in selected_verts])
 
-        # Get or create group for this bone
         vg = obj.vertex_groups.get(bone_name)
         if vg is None:
             vg = obj.vertex_groups.new(name=bone_name)
@@ -89,6 +134,8 @@ class MESH_OT_vertex_bone_picker(bpy.types.Operator):
 
         if self._original_show_names is not None:
             obj.parent.data.show_names = self._original_show_names
+        if self._original_in_front is not None:
+            obj.parent.show_in_front = self._original_in_front
 
         msg = f"Assigned {len(selected_verts)} vertices to '{bone_name}'"
         if self.replace_all:
@@ -98,8 +145,11 @@ class MESH_OT_vertex_bone_picker(bpy.types.Operator):
 
     def cancel(self, context):
         obj = context.object
-        if obj and obj.parent and self._original_show_names is not None:
-            obj.parent.data.show_names = self._original_show_names
+        if obj and obj.parent:
+            if self._original_show_names is not None:
+                obj.parent.data.show_names = self._original_show_names
+            if self._original_in_front is not None:
+                obj.parent.show_in_front = self._original_in_front
 
 # Add to Vertex menu
 def menu_func(self, context):

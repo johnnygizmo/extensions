@@ -3,7 +3,7 @@ schema_version = "1.0.0"
 # Example of manifest file for a Blender extension
 # Change the values according to your extension
 id = "johnnygizmo_vertex_bone_picker"
-version = "1.0.0"
+version = "1.2.0"
 name = "Vertex Bone Picker"
 tagline = "Assign the selected vertices to a bone"
 maintainer = "Johnny Matthews"
@@ -13,7 +13,7 @@ website = "https://github.com/johnnygizmo/extensions/tree/main/vertex_bone_picke
 
 tags = ["Rigging","3D View","Mesh",]
 
-blender_version_min = "4.4.3"
+blender_version_min = "4.4.0"
 
 license = [
   "SPDX:GPL-2.0-or-later",
