@@ -49,6 +49,13 @@ class MESH_OT_johnnygizmo_mesh_bone_magnet_operator(bpy.types.Operator):
         items=get_bone_endpoints
     ) # type: ignore
 
+    move_tail_with_head: bpy.props.BoolProperty(
+        name="Move Tail With Head",
+        description="If true, move the tail along with the head",
+        default=False
+    )
+
+
     _show_names_prev: bool = False
     _show_in_front_prev: bool = False
 
@@ -95,11 +102,23 @@ class MESH_OT_johnnygizmo_mesh_bone_magnet_operator(bpy.types.Operator):
         cursor_world = context.scene.cursor.location
         cursor_local = arm_obj.matrix_world.inverted() @ cursor_world
 
+        # if part == "Head":
+        #     # Keep tail in world space
+        #     world_tail = arm_obj.matrix_world @ bone.tail
+        #     bone.head = cursor_local
+        #     bone.tail = arm_obj.matrix_world.inverted() @ world_tail
         if part == "Head":
-            # Keep tail in world space
-            world_tail = arm_obj.matrix_world @ bone.tail
-            bone.head = cursor_local
-            bone.tail = arm_obj.matrix_world.inverted() @ world_tail
+            if self.move_tail_with_head:
+                # Move both head and tail, preserving bone vector
+                delta = cursor_local - bone.head
+                bone.head = cursor_local
+                bone.tail += delta
+            else:
+                # Move just the head, preserve world-space tail
+                world_tail = arm_obj.matrix_world @ bone.tail
+                bone.head = cursor_local
+                bone.tail = arm_obj.matrix_world.inverted() @ world_tail
+
 
         elif part == "Tail":
             bone.tail = cursor_local

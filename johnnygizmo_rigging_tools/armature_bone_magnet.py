@@ -41,8 +41,17 @@ def get_bone_endpoints(self, context):
         BONE_LOCATIONS[head_label] = head_loc
         BONE_LOCATIONS[tail_label] = tail_loc
 
-        bone_points.append((head_label, head_label, head_loc))
-        bone_points.append((tail_label, tail_label, tail_loc))
+        dist_head = (head_loc - center).length
+        dist_tail = (tail_loc - center).length
+
+
+        if dist_head > 0.0:
+            BONE_LOCATIONS[head_label] = head_loc
+            bone_points.append((head_label, head_label, head_loc))
+
+        if dist_tail > 0.0:
+            BONE_LOCATIONS[tail_label] = tail_loc
+            bone_points.append((tail_label, tail_label, tail_loc))
 
     bone_points.sort(key=lambda x: (x[2] - center).length)
     return [(x[0], x[1], f"Distance: {(x[2] - center).length:.2f}") for x in bone_points]
@@ -57,6 +66,13 @@ class ARMATURE_OT_johnnygizmo_armature_bone_magnet(bpy.types.Operator):
         description="Choose a bone part to snap",
         items=get_bone_endpoints
     ) # type: ignore
+
+
+    move_tail_with_head: bpy.props.BoolProperty(
+        name="Move Tail With Head",
+        description="If true, move the tail when the head is moved",
+        default=False
+    )
 
     _show_names_prev: bool = False
     _show_in_front_prev: bool = False
@@ -105,10 +121,20 @@ class ARMATURE_OT_johnnygizmo_armature_bone_magnet(bpy.types.Operator):
             self.report({'ERROR'}, "Target bone not found.")
             return {'CANCELLED'}
 
+        # if part == "Head":
+        #     world_tail = obj.matrix_world @ target_bone.tail
+        #     target_bone.head = local_target
+        #     target_bone.tail = obj.matrix_world.inverted() @ world_tail
         if part == "Head":
-            world_tail = obj.matrix_world @ target_bone.tail
-            target_bone.head = local_target
-            target_bone.tail = obj.matrix_world.inverted() @ world_tail
+            if self.move_tail_with_head:
+                delta = local_target - target_bone.head
+                target_bone.head = local_target
+                target_bone.tail += delta
+            else:
+                world_tail = obj.matrix_world @ target_bone.tail
+                target_bone.head = local_target
+                target_bone.tail = obj.matrix_world.inverted() @ world_tail        
+        
         elif part == "Tail":
             target_bone.tail = local_target
 
