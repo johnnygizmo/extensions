@@ -43,6 +43,28 @@
     },
     {
       "schema_version": "1.0.0",
+      "id": "johnnygizmo_rigging_tools",
+      "name": "JohnnyGizmo Rigging Tools",
+      "tagline": "Speed up your rigging workflow",
+      "version": "1.0.0",
+      "type": "add-on",
+      "maintainer": "Johnny Matthews",
+      "license": [
+        "SPDX:GPL-2.0-or-later"
+      ],
+      "blender_version_min": "4.4.0",
+      "website": "https://github.com/johnnygizmo/extensions/tree/main/johnnygizmo_rigging_tools",
+      "tags": [
+        "Rigging",
+        "3D View",
+        "Mesh"
+      ],
+      "archive_url": "./johnnygizmo_rigging_tools-1.0.0.zip",
+      "archive_size": 6362,
+      "archive_hash": "sha256:49e611936abe487877a51671bae2b203d4f288e04b14898c47627f30abb6e7a1"
+    },
+    {
+      "schema_version": "1.0.0",
       "id": "johnnygizmo_vertex_bone_picker",
       "name": "Vertex Bone Picker",
       "tagline": "Assign the selected vertices to a bone",
@@ -60,8 +82,8 @@
         "Mesh"
       ],
       "archive_url": "./johnnygizmo_vertex_bone_picker-1.2.0.zip",
-      "archive_size": 2936,
-      "archive_hash": "sha256:9fc40ceec0c5ecb94aef90ef4c3ade4fa2c3ca42ada0d4716ed3b52aa5d4df90"
+      "archive_size": 4244,
+      "archive_hash": "sha256:67b235f7302ad4abae56d7b4d9fa226a1ca5cb37b09a1c9f3cfc9bd4f12750f1"
     }
   ]
 }
