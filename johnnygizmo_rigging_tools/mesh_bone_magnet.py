@@ -91,17 +91,18 @@ class MESH_OT_johnnygizmo_mesh_bone_magnet_operator(bpy.types.Operator):
             self.report({'ERROR'}, "Bone not found.")
             return {'CANCELLED'}
 
-        cursor_loc = context.scene.cursor.location
 
+        cursor_world = context.scene.cursor.location
+        cursor_local = arm_obj.matrix_world.inverted() @ cursor_world
 
         if part == "Head":
-            # Keep world position of the tail
+            # Keep tail in world space
             world_tail = arm_obj.matrix_world @ bone.tail
-            bone.head = cursor_loc
+            bone.head = cursor_local
             bone.tail = arm_obj.matrix_world.inverted() @ world_tail
 
         elif part == "Tail":
-            bone.tail = cursor_loc
+            bone.tail = cursor_local
 
         bpy.ops.object.mode_set(mode='OBJECT')
         context.view_layer.objects.active = mesh_obj
