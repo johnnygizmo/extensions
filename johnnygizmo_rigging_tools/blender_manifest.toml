@@ -1,0 +1,20 @@
+schema_version = "1.0.0"
+
+# Example of manifest file for a Blender extension
+# Change the values according to your extension
+id = "johnnygizmo_rigging_tools"
+version = "1.0.0"
+name = "JohnnyGizmo Rigging Tools"
+tagline = "Speed up your rigging workflow"
+maintainer = "Johnny Matthews"
+type = "add-on"
+
+website = "https://github.com/johnnygizmo/extensions/tree/main/johnnygizmo_rigging_tools"
+
+tags = ["Rigging","3D View","Mesh",]
+
+blender_version_min = "4.4.0"
+
+license = [
+  "SPDX:GPL-2.0-or-later",
+]

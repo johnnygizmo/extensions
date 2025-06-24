@@ -20,7 +20,9 @@ cd ..
 cd vertex_bone_picker
 call build.bat
 cd ..
-
+cd johnnygizmo_rigging_tools
+call build.bat
+cd ..
 
 
 "%MyVar%\blender.exe" --command extension server-generate --repo-dir=./
