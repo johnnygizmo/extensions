@@ -12,9 +12,12 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 from . import operator
+from . import mesh_bone_magnet
 
 def register(): 
     operator.register()
+    mesh_bone_magnet.register()
 
 def unregister():
     operator.unregister()
+    mesh_bone_magnet.unregister()
