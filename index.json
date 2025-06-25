@@ -21,8 +21,8 @@
         "Rigging"
       ],
       "archive_url": "./johnnygizmo_create_empty_vertex_child-1.0.0.zip",
-      "archive_size": 2716,
-      "archive_hash": "sha256:50d3cea4d5724a7754cd54d275b7756e90f35ad8ba9795f1fd04a515249b6092"
+      "archive_size": 2741,
+      "archive_hash": "sha256:6356d196e6be33c400d80ade9532e882d4d77aa0abbddd5f235ce8b6b6f1e278"
     },
     {
       "schema_version": "1.0.0",
@@ -39,14 +39,14 @@
       "website": "https://github.com/johnnygizmo/extensions",
       "archive_url": "./johnnygizmo_quick_cloth_tool-1.0.12.zip",
       "archive_size": 4652980,
-      "archive_hash": "sha256:3f3ca9cb4aa4deba0161c400eb777e4db79a2788a77fa28457e9a45e25343809"
+      "archive_hash": "sha256:88255109a33471cda8c2c07176bc5c7c7274793194f713007fc3aa3e9ffe8617"
     },
     {
       "schema_version": "1.0.0",
       "id": "johnnygizmo_rigging_tools",
       "name": "JohnnyGizmo Rigging Tools",
       "tagline": "Speed up your rigging workflow",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "type": "add-on",
       "maintainer": "Johnny Matthews",
       "license": [
@@ -59,9 +59,9 @@
         "3D View",
         "Mesh"
       ],
-      "archive_url": "./johnnygizmo_rigging_tools-1.0.0.zip",
-      "archive_size": 6362,
-      "archive_hash": "sha256:49e611936abe487877a51671bae2b203d4f288e04b14898c47627f30abb6e7a1"
+      "archive_url": "./johnnygizmo_rigging_tools-1.1.0.zip",
+      "archive_size": 8198,
+      "archive_hash": "sha256:4d8b136496a8a1fede06348f6f990bf011ad704d10b17efee8c08f2c8ea8db88"
     },
     {
       "schema_version": "1.0.0",
@@ -82,8 +82,8 @@
         "Mesh"
       ],
       "archive_url": "./johnnygizmo_vertex_bone_picker-1.2.0.zip",
-      "archive_size": 4244,
-      "archive_hash": "sha256:67b235f7302ad4abae56d7b4d9fa226a1ca5cb37b09a1c9f3cfc9bd4f12750f1"
+      "archive_size": 4239,
+      "archive_hash": "sha256:c7a04a8e2762a6b7d5df2412334a8f336f3e9a18d806188bf706e626f3c3206e"
     }
   ]
 }
