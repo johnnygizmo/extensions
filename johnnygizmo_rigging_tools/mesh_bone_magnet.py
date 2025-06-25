@@ -73,7 +73,7 @@ class MESH_OT_johnnygizmo_mesh_bone_magnet_operator(bpy.types.Operator):
             self.report({'ERROR'}, "No selected vertices.")
             return {'CANCELLED'}
 
-        bpy.ops.view3d.snap_cursor_to_selected()
+        
 
         armature = obj.parent
         self._show_names_prev = armature.data.show_names
@@ -88,7 +88,8 @@ class MESH_OT_johnnygizmo_mesh_bone_magnet_operator(bpy.types.Operator):
         mesh_obj = context.edit_object
         arm_obj = mesh_obj.parent
         bone_name, part = self.target_bone_part.split(" >>> ")
-
+        bpy.ops.view3d.snap_cursor_to_selected()
+        
         bpy.ops.object.mode_set(mode='OBJECT')
         context.view_layer.objects.active = arm_obj
         bpy.ops.object.mode_set(mode='EDIT')
@@ -98,7 +99,7 @@ class MESH_OT_johnnygizmo_mesh_bone_magnet_operator(bpy.types.Operator):
             self.report({'ERROR'}, "Bone not found.")
             return {'CANCELLED'}
 
-
+        
         cursor_world = context.scene.cursor.location
         cursor_local = arm_obj.matrix_world.inverted() @ cursor_world
 
