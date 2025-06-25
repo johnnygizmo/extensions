@@ -14,13 +14,19 @@
 from . import bone_picker
 from . import mesh_bone_magnet
 from . import armature_bone_magnet
+from . import bone_straightener
+from . import panel
 
 def register(): 
     bone_picker.register()
     mesh_bone_magnet.register()
     armature_bone_magnet.register()
+    bone_straightener.register()
+    panel.register()
 
 def unregister():
+    panel.unregister()
     bone_picker.unregister()
     mesh_bone_magnet.unregister()
     armature_bone_magnet.unregister()
+    bone_straightener.unregister()  

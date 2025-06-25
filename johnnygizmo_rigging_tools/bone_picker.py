@@ -16,7 +16,7 @@ def get_bone_items(self, context):
 class MESH_OT_johnnygizmo_vertex_bone_picker(bpy.types.Operator):
     """Assign selected vertices to a bone's vertex group"""
     bl_idname = "mesh.johnnygizmo_vertex_bone_picker"
-    bl_label = "Assign to Bone (Vertex Group)"
+    bl_label = "Vertex Bone Assignment"
     bl_options = {'REGISTER', 'UNDO'}
 
     bone_name: bpy.props.EnumProperty(
