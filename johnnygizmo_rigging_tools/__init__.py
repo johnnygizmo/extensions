@@ -16,16 +16,22 @@ from . import mesh_bone_magnet
 from . import armature_bone_magnet
 from . import bone_straightener
 from . import panel
+from . import add_ik_plus
+from . import mesh_add_bone
 
 def register(): 
     bone_picker.register()
     mesh_bone_magnet.register()
     armature_bone_magnet.register()
     bone_straightener.register()
+    add_ik_plus.register()
+    mesh_add_bone.register()
     panel.register()
 
 def unregister():
     panel.unregister()
+    mesh_add_bone.unregister()
+    add_ik_plus.unregister()
     bone_picker.unregister()
     mesh_bone_magnet.unregister()
     armature_bone_magnet.unregister()
