@@ -79,8 +79,8 @@ class OBJECT_OT_johnnygizmo_add_bone_at_selected(bpy.types.Operator):
         new_bone.use_deform = self.use_deform
 
         bpy.ops.object.mode_set(mode='OBJECT')
-        context.view_layer.update()
-        bpy.ops.object.mode_set(mode='OBJECT')
+        #context.view_layer.update()
+        #bpy.ops.object.mode_set(mode='OBJECT')
         context.view_layer.objects.active = mesh_obj
         bpy.ops.object.mode_set(mode='EDIT')
 
