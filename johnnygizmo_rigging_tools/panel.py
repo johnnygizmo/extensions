@@ -40,11 +40,13 @@ class VIEW3D_PT_johnnygizmo_rigging_tools(bpy.types.Panel):
         if arm_ob:
             box = layout.box()
             box.label(text=arm_disp+": " + arm_ob.name)
+            box.row().prop(arm_ob.data, "pose_position", expand=True)
             box.prop(arm_ob.data, "display_type", text="")
             box.prop(arm_ob.data, "show_axes", text="Show Axes")
             box.prop(arm_ob.data, "axes_position", text="Axes Position")
             box.prop(arm_ob.data, "show_names", text="Show Bone Names")
             box.prop(arm_ob.data, "show_bone_custom_shapes", text="Show Custom Shapes")
+           
 # -*- coding: utf-8 -*-
 def register():
     bpy.utils.register_class(VIEW3D_PT_johnnygizmo_rigging_tools)
