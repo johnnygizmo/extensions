@@ -67,8 +67,8 @@
       "schema_version": "1.0.0",
       "id": "johnnygizmo_vertex_bone_picker",
       "name": "Vertex Bone Picker",
-      "tagline": "Assign the selected vertices to a bone",
-      "version": "1.2.0",
+      "tagline": "Assign the selected verts to a bone (now part of Rigging Tools)",
+      "version": "1.2.1",
       "type": "add-on",
       "maintainer": "Johnny Matthews",
       "license": [
@@ -81,9 +81,9 @@
         "3D View",
         "Mesh"
       ],
-      "archive_url": "./johnnygizmo_vertex_bone_picker-1.2.0.zip",
-      "archive_size": 4244,
-      "archive_hash": "sha256:67b235f7302ad4abae56d7b4d9fa226a1ca5cb37b09a1c9f3cfc9bd4f12750f1"
+      "archive_url": "./johnnygizmo_vertex_bone_picker-1.2.1.zip",
+      "archive_size": 4261,
+      "archive_hash": "sha256:c7dfd828dd3c55c5ebcbae2f7f8f57cc9bfa1dd27325c2a779225b8f9bcf47a2"
     }
   ]
 }
