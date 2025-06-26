@@ -54,12 +54,14 @@ class MESH_OT_johnnygizmo_ik_plus(Operator):
         pose_bones = armature.pose.bones
         selected = context.selected_pose_bones
 
-        target_bone = selected[0]
-        root_bone = selected[1]
+        selected = [b for b in selected if b.name != context.active_pose_bone.name]
 
-        ik_constraint = target_bone.constraints.new('IK')
+        target_bone = selected[0]
+        root_bone = context.active_pose_bone
+
+        ik_constraint = root_bone.constraints.new('IK')
         ik_constraint.target = armature
-        ik_constraint.subtarget = root_bone.name
+        ik_constraint.subtarget = target_bone.name
         ik_constraint.chain_count = self.chain_length
         ik_constraint.iterations = self.iterations
         ik_constraint.use_tail = self.use_tail
@@ -75,7 +77,7 @@ class MESH_OT_johnnygizmo_ik_plus(Operator):
             ik_constraint.pole_subtarget = self.pole_target
             ik_constraint.pole_angle = self.pole_angle
 
-        self.report({'INFO'}, f"IK constraint added to {target_bone.name}")
+        self.report({'INFO'}, f"IK constraint added to {root_bone.name}")
         return {'FINISHED'}
 
 
