@@ -73,10 +73,7 @@ class VIEW3D_PT_johnnygizmo_rigging_tools(bpy.types.Panel):
             if bone_display:
                 bone_display.prop(bone, "use_deform", text="Deform")
                 bone_display.prop(bone, "use_connect", text="Connect")
-                bone_display.prop(bone, "use_inherit_scale", text="Inherit Scale")
                 bone_display.prop(bone, "use_inherit_rotation", text="Inherit Rotation")
-                bone_display.prop(bone, "use_local_location", text="Local Location")
-                bone_display.prop(bone, "use_local_rotation", text="Local Rotation")
                 bone_display.prop(bone.color, "palette", text="Color Palette")
 
         if context.selected_pose_bones and len(context.selected_pose_bones) > 0 and ob.type == 'ARMATURE' and ob.mode == 'POSE':
