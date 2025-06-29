@@ -8,7 +8,13 @@ class OBJECT_OT_johnnygizmo_add_bone_at_selected(bpy.types.Operator):
     bl_description = "Add a bone to the parent armature at the center of selected vertices"
     bl_options = {'REGISTER','UNDO'}
 
-    use_deform: bpy.props.BoolProperty(name="Use Deform", default=True) # type: ignore
+
+    bone_name: bpy.props.StringProperty(
+        name="Bone Name",
+        description="Name for the new bone",
+        default="Bone",
+    ) # type: ignore
+
     tail_direction: bpy.props.EnumProperty(
             name="Tail Direction",
             description="Direction the bone tail should point",
@@ -28,6 +34,9 @@ class OBJECT_OT_johnnygizmo_add_bone_at_selected(bpy.types.Operator):
         default=1.0,
         min=0.0
     ) # type: ignore
+    use_deform: bpy.props.BoolProperty(name="Use Deform", default=True) # type: ignore
+
+
 
     @classmethod
     def poll(cls, context):
@@ -63,7 +72,7 @@ class OBJECT_OT_johnnygizmo_add_bone_at_selected(bpy.types.Operator):
         bpy.ops.object.mode_set(mode='EDIT')
 
         arm = armature_obj.data
-        new_bone = arm.edit_bones.new("Bone")
+        new_bone = arm.edit_bones.new(self.bone_name)
         new_bone.head = center
 
         direction_map = {
