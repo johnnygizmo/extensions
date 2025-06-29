@@ -18,21 +18,36 @@ from . import bone_straightener
 from . import panel
 from . import add_ik_plus
 from . import mesh_add_bone
+from . import properties
+from . import add_dampedtrack_plus
+from . import add_stretchto_plus
+from . import add_lockedtrack_plus
 
 def register(): 
+    properties.register()
+
     bone_picker.register()
     mesh_bone_magnet.register()
     armature_bone_magnet.register()
     bone_straightener.register()
     add_ik_plus.register()
     mesh_add_bone.register()
+    add_dampedtrack_plus.register()
+    add_stretchto_plus.register()
+    add_lockedtrack_plus.register()
     panel.register()
 
 def unregister():
     panel.unregister()
+
+    add_stretchto_plus.unregister()
+    add_lockedtrack_plus.unregister()
+    add_dampedtrack_plus.unregister()
     mesh_add_bone.unregister()
     add_ik_plus.unregister()
     bone_picker.unregister()
     mesh_bone_magnet.unregister()
     armature_bone_magnet.unregister()
     bone_straightener.unregister()  
+
+    properties.unregister()

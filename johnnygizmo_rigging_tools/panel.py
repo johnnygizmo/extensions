@@ -31,16 +31,20 @@ class VIEW3D_PT_johnnygizmo_rigging_tools(bpy.types.Panel):
         elif ob and ob.type == 'ARMATURE' and ob.mode == 'EDIT':
             (tools_head, tools_display) = layout.panel("tools_disp")
             tools_head.label(text="Armature Rigging Tools")
-            if tools_display:
-                
+            if tools_display:                
                 tools_display.operator("armature.johnnygizmo_armature_bone_magnet", text="Armature Bone Magnet", icon='SNAP_ON')
                 tools_display.operator("armature.johnnygizmo_bone_straightener", text="Bone Straightener", icon='CURVE_PATH')
                 tools_display.operator("armature.calculate_roll", text="Recalc Roll", icon='BONE_DATA')
         elif ob and ob.type == 'ARMATURE' and ob.mode == 'POSE':    
             (tools_head, tools_display) = layout.panel("tools_disp")
             tools_head.label(text="Armature Pose Rigging Tools")    
-            if tools_display:   
-                tools_display.operator("armature.johnnygizmo_add_ik_plus", text="Add IK Chain with Settings", icon='CON_KINEMATIC')
+            if tools_display and len(context.selected_pose_bones) == 2 or len(context.selected_pose_bones) == 1:   
+                row = tools_display.row()
+                row.operator("armature.johnnygizmo_add_ik_plus", text="IK", icon='CON_KINEMATIC')
+                row.operator("armature.johnnygizmo_add_damp_track_to_plus", text="Track To", icon='CON_TRACKTO')
+                row = tools_display.row()
+                row.operator("armature.johnnygizmo_add_stretch_to_plus", text="Stretch To", icon='CON_STRETCHTO')
+                row.operator("armature.johnnygizmo_add_lock_track_to_plus", text="Lock Track", icon='CON_LOCKTRACK')
         else:
             layout.label(text="No Tools Available", icon='ERROR')
 
@@ -66,7 +70,7 @@ class VIEW3D_PT_johnnygizmo_rigging_tools(bpy.types.Panel):
                 arm_display.prop(arm_ob.data, "show_bone_custom_shapes", text="Show Custom Shapes")
 
 
-        if  (context.active_bone or context.active_pose_bone) and ob.type == 'ARMATURE':
+        if ob and  (context.active_bone or context.active_pose_bone) and ob.type == 'ARMATURE':
             bone = context.active_bone if context.active_bone else context.active_pose_bone
             (bone_head,bone_display) = layout.panel("bone_disp",default_closed=True    )
             bone_head.label(text="Active Bone: " + context.active_bone.name)
