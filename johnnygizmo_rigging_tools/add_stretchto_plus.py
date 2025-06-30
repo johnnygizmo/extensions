@@ -1,7 +1,7 @@
-import bpy
+import bpy # type: ignore
 
-from bpy.types import Operator
-from bpy.props import (
+from bpy.types import Operator # type: ignore
+from bpy.props import ( # type: ignore
     EnumProperty,
     FloatProperty,
     BoolProperty,

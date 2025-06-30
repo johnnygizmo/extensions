@@ -1,5 +1,5 @@
-import bpy
-from mathutils import Vector
+import bpy # type: ignore # type: ignore
+from mathutils import Vector # type: ignore
 
 BONE_LOCATIONS = {}
 
@@ -72,7 +72,7 @@ class ARMATURE_OT_johnnygizmo_armature_bone_magnet(bpy.types.Operator):
         name="Move Tail With Head",
         description="If true, move the tail when the head is moved",
         default=False
-    )
+    ) # type: ignore
 
     _show_names_prev: bool = False
     _show_in_front_prev: bool = False

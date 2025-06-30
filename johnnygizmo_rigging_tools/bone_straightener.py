@@ -1,5 +1,5 @@
-import bpy
-from mathutils import Vector, Matrix
+import bpy # type: ignore
+from mathutils import Vector, Matrix # type: ignore
 
 class MESH_OT_johnnygizmo_bone_straightener(bpy.types.Operator):
     bl_idname = "armature.johnnygizmo_bone_straightener"

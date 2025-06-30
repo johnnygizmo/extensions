@@ -1,6 +1,6 @@
-import bpy
-import bmesh
-from mathutils import Vector
+import bpy # type: ignore
+import bmesh # type: ignore
+from mathutils import Vector # type: ignore
 
 class OBJECT_OT_parent_meshes_to_nearest_bone(bpy.types.Operator):
     """Parent selected mesh objects to nearest bone of active armature"""

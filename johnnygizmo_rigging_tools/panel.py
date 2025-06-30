@@ -1,4 +1,4 @@
-import bpy
+import bpy # type: ignore
 from . import bone_picker
 from . import mesh_bone_magnet
 from . import armature_bone_magnet

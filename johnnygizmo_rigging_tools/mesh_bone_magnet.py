@@ -1,6 +1,6 @@
-import bpy
-import bmesh
-from mathutils import Vector
+import bpy # type: ignore
+import bmesh # type: ignore
+from mathutils import Vector # type: ignore
 
 BONE_LOCATIONS = {}
 
@@ -53,7 +53,7 @@ class MESH_OT_johnnygizmo_mesh_bone_magnet_operator(bpy.types.Operator):
         name="Move Tail With Head",
         description="If true, move the tail along with the head",
         default=False
-    )
+    ) # type: ignore
 
 
     _show_names_prev: bool = False

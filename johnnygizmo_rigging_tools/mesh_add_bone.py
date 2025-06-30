@@ -1,6 +1,6 @@
-import bpy
-import bmesh
-from mathutils import Vector
+import bpy # type: ignore
+import bmesh # type: ignore
+from mathutils import Vector # type: ignore
 
 class OBJECT_OT_johnnygizmo_add_bone_at_selected(bpy.types.Operator):
     bl_idname = "mesh.johnnygizmo_add_bone_at_selected"
