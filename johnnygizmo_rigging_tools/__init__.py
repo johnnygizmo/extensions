@@ -27,7 +27,6 @@ from . import parent_mesh_to_bone
 
 def register(): 
     properties.register()
-
     bone_picker.register()
     mesh_bone_magnet.register()
     armature_bone_magnet.register()
@@ -54,5 +53,4 @@ def unregister():
     mesh_bone_magnet.unregister()
     armature_bone_magnet.unregister()
     bone_straightener.unregister()  
-
     properties.unregister()
