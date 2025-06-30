@@ -104,6 +104,11 @@ class ARMATURE_OT_johnnygizmo_ik_plus(Operator):
         layout.prop(self, "weight_rotation")
         layout.prop(self, "influence")
 
+    def cancel(self, context):
+        props = context.scene.johnnygizmo_rigging_tools_properties
+        props.clear()
+        return {'CANCELLED'}
+
 
     def execute(self, context):
         armature = context.active_object
@@ -112,10 +117,12 @@ class ARMATURE_OT_johnnygizmo_ik_plus(Operator):
         props = context.scene.johnnygizmo_rigging_tools_properties
 
         if not armature or armature.type != 'ARMATURE':
+            props.clear()
             self.report({'ERROR'}, "Active object is not an armature.")
             return {'CANCELLED'}
 
         if not selected:
+            props.clear()
             self.report({'ERROR'}, "No pose bones selected.")
             return {'CANCELLED'}
 
@@ -143,10 +150,7 @@ class ARMATURE_OT_johnnygizmo_ik_plus(Operator):
                 ik_constraint.pole_subtarget = ""
             ik_constraint.pole_angle = self.pole_angle
 
-        props.selected_object = None
-        props.selected_bone = ""
-        props.selected_object_2 = None
-        props.selected_bone_2 = ""
+        props.clear()
         return {'FINISHED'}
 
 

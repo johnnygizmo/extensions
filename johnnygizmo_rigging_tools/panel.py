@@ -16,9 +16,10 @@ class VIEW3D_PT_johnnygizmo_rigging_tools(bpy.types.Panel):
     def draw(self, context):
         layout = self.layout
         ob = context.active_object
+        meshes = [obj for obj in context.selected_objects if obj.type == 'MESH']
+
         if len(context.selected_objects) == 0:
             ob = None
-
 
         if ob and ob.type == 'MESH' and ob.mode == 'EDIT' and ob.parent and ob.parent.type == 'ARMATURE':
             (tools_head, tools_display) = layout.panel("tools_disp")
@@ -35,6 +36,13 @@ class VIEW3D_PT_johnnygizmo_rigging_tools(bpy.types.Panel):
                 tools_display.operator("armature.johnnygizmo_armature_bone_magnet", text="Armature Bone Magnet", icon='SNAP_ON')
                 tools_display.operator("armature.johnnygizmo_bone_straightener", text="Bone Straightener", icon='CURVE_PATH')
                 tools_display.operator("armature.calculate_roll", text="Recalc Roll", icon='BONE_DATA')
+
+        elif ob and ob.type == 'ARMATURE' and ob.mode == 'OBJECT' and meshes and len(meshes) > 0:
+            (tools_head, tools_display) = layout.panel("tools_disp")
+            tools_head.label(text="Armature Object Rigging Tools")
+            if tools_display:
+                tools_display.operator("object.parent_meshes_to_nearest_bone", text="Parent Meshed to Bones", icon='SNAP_ON')
+
         elif ob and ob.type == 'ARMATURE' and ob.mode == 'POSE':    
             (tools_head, tools_display) = layout.panel("tools_disp")
             tools_head.label(text="Armature Pose Rigging Tools")    
@@ -56,7 +64,23 @@ class VIEW3D_PT_johnnygizmo_rigging_tools(bpy.types.Panel):
         elif ob and ob.parent and ob.parent.type == 'ARMATURE':
             arm_disp = "Parent Armature"
             arm_ob = ob.parent
-    
+
+
+        if ob and ob.type == 'MESH' and not ob.parent:
+            (mesh_head, mesh_display) = layout.panel("arm_disp")
+            mesh_head.label(text="Mesh: "+ob.name)
+            if(mesh_display):
+                mesh_display.operator("object.johnnygizmo_parent_mesh_to_selected_bone", text="Add Parent Bone", icon='BONE_DATA')   
+
+        if ob and ob.type == 'MESH' and ob.parent and ob.parent.type == 'ARMATURE' and ob.parent_type == "BONE":
+            (mesh_head, mesh_display) = layout.panel("arm_disp")
+            mesh_head.label(text="Mesh: "+ob.name)
+            if(mesh_display):
+                mesh_display.label(text= "Parent Bone: "+arm_ob.name+" - "+ob.parent_bone)
+                mesh_display.operator("object.johnnygizmo_parent_mesh_to_selected_bone", text="Change Parent Bone", icon='BONE_DATA')
+               
+
+
         if arm_ob:
             (arm_head, arm_display) = layout.panel("arm_disp")
             arm_head.label(text=arm_disp+": " + arm_ob.name)

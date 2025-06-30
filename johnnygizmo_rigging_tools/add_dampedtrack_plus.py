@@ -57,6 +57,7 @@ class MESH_OT_johnnygizmo_damptrackto_plus(Operator):
             props.selected_bone = ""
         else:
             self.report({'ERROR'}, "Select one or two pose bones to use this operator.")
+            props.clear()
             return {'CANCELLED'}
 
         return context.window_manager.invoke_props_dialog(self)
@@ -88,10 +89,12 @@ class MESH_OT_johnnygizmo_damptrackto_plus(Operator):
 
         if not armature or armature.type != 'ARMATURE':
             self.report({'ERROR'}, "Active object is not an armature.")
+            props.clear()
             return {'CANCELLED'}
 
         if not selected:
             self.report({'ERROR'}, "No pose bones selected.")
+            props.clear()
             return {'CANCELLED'}
 
         root_bone = context.active_pose_bone
@@ -103,12 +106,14 @@ class MESH_OT_johnnygizmo_damptrackto_plus(Operator):
         constraint.influence = self.influence
         constraint.track_axis = self.track_axis
        
-        props.selected_object = None
-        props.selected_bone = ""
-        props.selected_object_2 = None
-        props.selected_bone_2 = ""
+        props.clear()
         return {'FINISHED'}
 
+    def cancel(self, context):
+        # Clear properties if dialog is cancelled
+        props = context.scene.johnnygizmo_rigging_tools_properties
+        props.clear()
+        return {'CANCELLED'}
 
 def menu_func(self, context):
     self.layout.operator(MESH_OT_johnnygizmo_damptrackto_plus.bl_idname)
