@@ -107,11 +107,29 @@ class VIEW3D_PT_johnnygizmo_rigging_tools(bpy.types.Panel):
         if context.selected_pose_bones and len(context.selected_pose_bones) > 0 and ob.type == 'ARMATURE' and ob.mode == 'POSE':
             if(context.active_pose_bone):
                 (pose_head,pose_display) = layout.panel("Active Pose Bone", default_closed=True)
-                
-                pose_head.label(text="Active Pose Bone: " + context.active_pose_bone.name)
+                bone = context.active_pose_bone
+                pose_head.label(text="Active Pose Bone: " + bone.name)
 
                 if pose_display:
+                    ikconstraints = [c for c in bone.constraints if c.type == 'IK']
+                    
+                    
                     pose_display.label(text="IK")
+
+
+                    if ikconstraints and len(ikconstraints) > 0:
+                        ik = ikconstraints[0]
+                        pose_display.prop_search(ik, "target", context.scene, "objects", text="Target")
+                        if ik.target and ik.target.type == 'ARMATURE':
+                            pose_display.prop_search(ik, "subtarget", ik.target.data, "bones", text="-Bone")
+                        pose_display.prop_search(ik, "pole_target", context.scene, "objects", text="Pole")
+                        if ik.pole_target and ik.pole_target.type == 'ARMATURE':
+                            pose_display.prop_search(ik, "pole_subtarget", ik.target.data, "bones", text="-Bone")
+
+
+                        pose_display.prop(ik, "chain_count")
+
+
                     pose_display.row().prop(context.active_pose_bone, "ik_stretch", text="Stretch")
                     row = pose_display.row(align=True)
                     col = row.column(align=False)
