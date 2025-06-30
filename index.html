@@ -77,9 +77,47 @@
       font-weight: bold;
       font-size: 0.9rem;
     }
+    .image-gallery {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin: 2rem 0 1.5rem 0;
+      flex-wrap: wrap;
+      align-items: flex-start; /* allow different heights */
+    }
+    .image-gallery img {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px var(--shadow);
+      max-width: 450px;
+      width: 100%;
+      height: auto;
+      padding: 0.5rem;
+      transition: transform 0.2s;
+      object-fit: contain;
+      display: block;
+    }
+    .image-gallery img:hover {
+      transform: scale(1.04);
+      box-shadow: 0 4px 20px var(--shadow);
+    }
     @media (max-width: 600px) {
       body {
         padding: 1rem;
+      }
+      .image-gallery {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+    @media (max-width: 700px) {
+      .image-gallery {
+        gap: 0.75rem;
+        flex-direction: column;
+        align-items: center;
+      }
+      .image-gallery img {
+        max-width: 100%;
       }
     }
   </style>
@@ -88,8 +126,27 @@
 
   <h1>JohnnyGizmo's Blender Extension Library</h1>
   <h3><a href="https://youtube.com/@johnnymatthews">https://youtube.com/@johnnymatthews</a></h3>
+  <b>If you find these scripts to be helpful and want to support them,<P></P> become a member of the YouTube Channel or a <a href='https://www.patreon.com/johnnymatthews'>Patreon Subscriber.</a></b>
+
+<P></P><P></P>
   Add <b>https://johnnygizmo.github.io/extensions/index.json</b> to your Blender add-on repository list to access these extensions through Blender's add-on manager..
-  <p></p>
+  <p>
+    <div class="image-gallery">
+      <img src="pref.png" alt="Preferences Screenshot 1">
+       </div>Open the Preferences window in Blender, navigate to the Add-ons section
+      
+    <div class="image-gallery">
+      <img src="pref2.png" alt="Preferences Screenshot 2">
+
+      <img src="pref3.png" alt="Preferences Screenshot 3">
+     </div>
+      In the Repositories tab, click the "+" button to add a new repository.<p></p>
+      Enter the URL https://johnnygizmo.github.io/extensions/index.json and click "Create".<p></p>
+     Search for "Rigging"... The extensions will now appear in the Add-ons section, ready to be installed<p></p>
+
+
+
+  </p>
   <div class="grid" id="extensionGrid">
     <!-- Projects will be injected here -->
   </div>
