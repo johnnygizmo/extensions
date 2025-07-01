@@ -5,6 +5,88 @@ from . import armature_bone_magnet
 from . import bone_straightener
 from . import panel
 
+def bone_group_picker(self, context,parent=None):
+    layout = self.layout
+    if parent:
+        layout = parent.column(align=True)
+
+    arm = context.active_object.data
+    active_bcoll = arm.collections.active
+
+    row = layout.row()
+    row.template_bone_collection_tree()
+
+    col = row.column(align=True)
+    col.operator("armature.collection_add", icon='ADD', text="")
+    col.operator("armature.collection_remove", icon='REMOVE', text="")
+
+    col.separator()
+
+    col.menu("ARMATURE_MT_collection_context_menu", icon='DOWNARROW_HLT', text="")
+
+    if active_bcoll:
+        col.separator()
+        col.operator("armature.collection_move", icon='TRIA_UP', text="").direction = 'UP'
+        col.operator("armature.collection_move", icon='TRIA_DOWN', text="").direction = 'DOWN'
+
+    row = layout.row()
+
+    sub = row.row(align=True)
+    sub.operator("armature.collection_assign", text="Assign")
+    sub.operator("armature.collection_unassign", text="Remove")
+
+    sub = row.row(align=True)
+    sub.operator("armature.collection_select", text="Select")
+    sub.operator("armature.collection_deselect", text="Deselect")
+
+
+def vertex_group_picker_menu(self, context,parent=None):
+    ob = context.active_object
+    layout = self.layout
+    if parent:
+        layout = parent.column(align=True)
+    group = ob.vertex_groups.active
+
+    rows = 3
+    if group:
+        rows = 5
+
+    row = layout.row()
+    row.template_list("MESH_UL_vgroups", "", ob, "vertex_groups", ob.vertex_groups, "active_index", rows=rows)
+
+    col = row.column(align=True)
+
+    col.operator("object.vertex_group_add", icon='ADD', text="")
+    props = col.operator("object.vertex_group_remove", icon='REMOVE', text="")
+    props.all_unlocked = props.all = False
+
+    col.separator()
+
+    col.menu("MESH_MT_vertex_group_context_menu", icon='DOWNARROW_HLT', text="")
+
+    if group:
+        col.separator()
+        col.operator("object.vertex_group_move", icon='TRIA_UP', text="").direction = 'UP'
+        col.operator("object.vertex_group_move", icon='TRIA_DOWN', text="").direction = 'DOWN'
+
+    if (
+            ob.vertex_groups and
+            (ob.mode == 'EDIT' or
+            (ob.mode == 'WEIGHT_PAINT' and ob.type == 'MESH' and ob.data.use_paint_mask_vertex))
+    ):
+        row = layout.row()
+
+        sub = row.row(align=True)
+        sub.operator("object.vertex_group_assign", text="Assign")
+        sub.operator("object.vertex_group_remove_from", text="Remove")
+
+        sub = row.row(align=True)
+        sub.operator("object.vertex_group_select", text="Select")
+        sub.operator("object.vertex_group_deselect", text="Deselect")
+
+        layout.prop(context.tool_settings, "vertex_group_weight", text="Weight")
+
+
 
 class VIEW3D_PT_johnnygizmo_rigging_tools(bpy.types.Panel):
     bl_label = "JohnnyGizmo Rigging Tools"
@@ -27,14 +109,15 @@ class VIEW3D_PT_johnnygizmo_rigging_tools(bpy.types.Panel):
             if tools_display:
                 tools_display.operator("mesh.johnnygizmo_create_rig_and_assign", text="Create Parent Armature", icon='OUTLINER_OB_ARMATURE')
               
-        if ob and ob.type == 'MESH' and ob.mode == 'EDIT' and ob.parent and ob.parent.type == 'ARMATURE':
+        elif ob and ob.type == 'MESH' and ob.mode == 'EDIT' and ob.parent and ob.parent.type == 'ARMATURE':
             (tools_head, tools_display) = layout.panel("tools_disp")
             tools_head.label(text="Mesh Rigging Tools")
             if tools_display:
                 tools_display.operator("object.johnnygizmo_mesh_bone_magnet", text="Mesh Bone Magnet", icon='SNAP_ON')
                 tools_display.operator("mesh.johnnygizmo_vertex_bone_picker", text="Vertex Bone Assignment", icon='BONE_DATA')
                 tools_display.operator("mesh.johnnygizmo_add_bone_at_selected", text="Add Bone at Selected", icon='ADD')
-
+                
+        
         elif ob and ob.type == 'ARMATURE' and ob.mode == 'EDIT':
             (tools_head, tools_display) = layout.panel("tools_disp")
             tools_head.label(text="Armature Rigging Tools")
@@ -84,8 +167,6 @@ class VIEW3D_PT_johnnygizmo_rigging_tools(bpy.types.Panel):
                 mesh_display.label(text= "Parent Bone: "+arm_ob.name+" - "+ob.parent_bone)
                 mesh_display.operator("object.johnnygizmo_parent_mesh_to_selected_bone", text="Change Parent Bone", icon='BONE_DATA')
                
-
-
         if arm_ob:
             (arm_head, arm_display) = layout.panel("arm_disp")
             arm_head.label(text=arm_disp+": " + arm_ob.name)
@@ -178,8 +259,18 @@ class VIEW3D_PT_johnnygizmo_rigging_tools(bpy.types.Panel):
                     shape_display.row().prop(context.active_pose_bone, "use_custom_shape_bone_size", text="Scale Bone to Length")
                     shape_display.row().prop(context.active_bone, "show_wire", text="Wire")
                     shape_display.row().prop(context.active_pose_bone, "custom_shape_wire_width", text="Wire Width")
-
-
+        
+        if ob and ob.type == 'MESH' and ( ob.mode == 'EDIT' or ob.mode == 'WEIGHT_PAINT'):
+            (tools_head, tools_display) = layout.panel("vgroup_disp", default_closed=True)
+            tools_head.label(text="Vertex Groups")
+            if tools_display:
+                vertex_group_picker_menu(self, context, tools_display)
+    
+        if ob and ob.type == 'ARMATURE' and (ob.mode == 'EDIT' or ob.mode == 'POSE'):
+            (tools_head, bone_group_display) = layout.panel("bone_group_disp", default_closed=True)
+            tools_head.label(text="Bone Groups")
+            if bone_group_display:
+                bone_group_picker(self, context, tools_display)
 
 def register():
     bpy.utils.register_class(VIEW3D_PT_johnnygizmo_rigging_tools)
