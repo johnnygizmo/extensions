@@ -9,7 +9,7 @@ tagline = "Speed up your rigging workflow"
 maintainer = "Johnny Matthews"
 type = "add-on"
 
-website = "https://github.com/johnnygizmo/extensions/tree/main/johnnygizmo_rigging_tools"
+website = "https://johnnygizmo.github.io/extensions/johnnygizmo_rigging_tools/docs/"
 
 tags = ["Rigging","3D View","Mesh",]
 
