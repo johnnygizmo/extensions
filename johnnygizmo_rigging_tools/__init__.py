@@ -24,6 +24,7 @@ from . import add_stretchto_plus
 from . import add_lockedtrack_plus
 from . import parent_mesh_to_bones
 from . import parent_mesh_to_bone
+from . import add_armature_to_mesh
 
 def register(): 
     properties.register()
@@ -38,10 +39,12 @@ def register():
     add_lockedtrack_plus.register()
     parent_mesh_to_bones.register()
     parent_mesh_to_bone.register()
+    add_armature_to_mesh.register()
     panel.register()
 
 def unregister():
     panel.unregister()
+    add_armature_to_mesh.unregister()
     parent_mesh_to_bone.unregister()
     parent_mesh_to_bones.unregister()
     add_stretchto_plus.unregister()

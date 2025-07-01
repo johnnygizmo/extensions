@@ -21,6 +21,12 @@ class VIEW3D_PT_johnnygizmo_rigging_tools(bpy.types.Panel):
         if len(context.selected_objects) == 0:
             ob = None
 
+        if ob and ob.type == 'MESH' and ob.mode == 'EDIT' and not ob.parent:
+            (tools_head, tools_display) = layout.panel("tools_disp")
+            tools_head.label(text="Mesh Rigging Tools")
+            if tools_display:
+                tools_display.operator("mesh.johnnygizmo_create_rig_and_assign", text="Create Parent Armature", icon='OUTLINER_OB_ARMATURE')
+              
         if ob and ob.type == 'MESH' and ob.mode == 'EDIT' and ob.parent and ob.parent.type == 'ARMATURE':
             (tools_head, tools_display) = layout.panel("tools_disp")
             tools_head.label(text="Mesh Rigging Tools")
@@ -46,7 +52,7 @@ class VIEW3D_PT_johnnygizmo_rigging_tools(bpy.types.Panel):
         elif ob and ob.type == 'ARMATURE' and ob.mode == 'POSE':    
             (tools_head, tools_display) = layout.panel("tools_disp")
             tools_head.label(text="Armature Pose Rigging Tools")    
-            if tools_display and len(context.selected_pose_bones) == 2 or len(context.selected_pose_bones) == 1:   
+            if tools_display and (len(context.selected_pose_bones) == 2 or len(context.selected_pose_bones) == 1):   
                 row = tools_display.row()
                 row.operator("armature.johnnygizmo_add_ik_plus", text="IK", icon='CON_KINEMATIC')
                 row.operator("armature.johnnygizmo_add_damp_track_to_plus", text="Track To", icon='CON_TRACKTO')
