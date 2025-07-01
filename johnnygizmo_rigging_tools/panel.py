@@ -40,14 +40,13 @@ class VIEW3D_PT_johnnygizmo_rigging_tools(bpy.types.Panel):
             tools_head.label(text="Armature Rigging Tools")
             if tools_display:                
                 tools_display.operator("armature.johnnygizmo_armature_bone_magnet", text="Armature Bone Magnet", icon='SNAP_ON')
-                tools_display.operator("armature.johnnygizmo_bone_straightener", text="Bone Straightener", icon='CURVE_PATH')
-                tools_display.operator("armature.calculate_roll", text="Recalc Roll", icon='BONE_DATA')
+                tools_display.operator("armature.johnnygizmo_bone_straightener", text="Bone Straightener", icon='CURVE_PATH')               
 
         elif ob and ob.type == 'ARMATURE' and ob.mode == 'OBJECT' and meshes and len(meshes) > 0:
             (tools_head, tools_display) = layout.panel("tools_disp")
             tools_head.label(text="Armature Object Rigging Tools")
             if tools_display:
-                tools_display.operator("object.parent_meshes_to_nearest_bone", text="Parent Meshed to Bones", icon='SNAP_ON')
+                tools_display.operator("object.parent_meshes_to_nearest_bone", text="Parent Meshes to Bones", icon='SNAP_ON')
 
         elif ob and ob.type == 'ARMATURE' and ob.mode == 'POSE':    
             (tools_head, tools_display) = layout.panel("tools_disp")

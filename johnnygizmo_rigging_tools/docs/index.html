@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>JohnnyGizmo Rigging Tools Documentation</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+
+    header {
+      background-color: #2d2d2d;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    h1, h2, h3 {
+      color: #ffa600;
+    }
+
+    h2 {
+      margin-top: 2.5rem;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 0.3rem;
+    }
+
+    h3 {
+      margin-top: 1.5rem;
+      color: #34495e;
+    }
+
+    p {
+      margin: 0.5rem 0 1.5rem;
+    }
+
+    nav {
+      background: #eee;
+      padding: 1rem;
+      border-bottom: 1px solid #ccc;
+    }
+
+    nav a {
+      margin-right: 1rem;
+      text-decoration: none;
+      color: #2c3e50;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>JohnnyGizmo Rigging Tools Documentation</h1>
+    <p></p>
+  </header>
+
+  <nav>
+    <a href="#mesh-object-mode">Mesh Object Mode</a>
+    <a href="#edit-mode">Mesh Edit Mode</a>
+    <a href="#arm-edit-mode">Armature Edit Mode</a>
+    <a href="#arm-pose-mode">Armature Pose Mode</a>
+  </nav>
+
+  <main>
+
+    <section id="mesh-object-mode">
+      <h2>Mesh Object Mode</h2>
+
+      <h3>Add Parent Bone</h3>
+      <p>
+        In Mesh Object Mode, you can assign a single mesh to a bone using the "Add Parent Bone" tool. 
+        You'll be presented with an object picker to select the armature and bone. 
+        Select a mesh object with no parent to make this tool available.
+      </p>
+
+      <h3>Change Parent Bone</h3>
+      <p>
+        The "Change Parent Bone" tool lets you change the parent bone of a mesh. 
+        Just like the Add Parent tool, you select the armature and new bone. 
+        This tool appears when a mesh with an existing parent is selected.
+      </p>
+      
+    </section>
+
+    <section id="edit-mode">
+      <h2>Mesh Edit Mode</h2>
+
+      <h3>Mesh Bone Magnet</h3>
+      <p>
+        Snap a bone joint to a mesh selection for quick skeleton alignment. 
+        In edit mode of a mesh parented to an armature, select one or more vertices, edges, or faces, 
+        then use the "Mesh Bone Magnet" tool to move the joint to that location.
+      </p>
+
+      <h3>Vertex Bone Assignment</h3>
+      <p>
+        Assign selected vertices to a specific bone. Great for weight painting and mesh deformation control. 
+        The closest bone will be chosen by default, but you can select another one as needed.
+      </p>
+
+      <h3>Add Bone At Selected</h3>
+      <p>
+        Create a new bone at the average position of your selected mesh elements. 
+        This tool lets you customize the name, direction, and length of the bone right after it's created.
+      </p>
+
+      <h3>Create Parent Armature</h3>
+      <p>
+        In Mesh Edit Mode, if the mesh does not have a parent, you can create a parent armature for your mesh.
+        The new armature will be created at the average position of the selected mesh elements and the 
+        mesh will be parented to the new armature.
+      </p>
+    </section>
+
+    <section id="arm-edit-mode">
+      <h2>Armature Edit Mode</h2>
+
+      <h3>Armature Bone Magnet</h3>
+      <p>
+       With one or more bone joints selected, snap another bone joint to the average position of the selected bones.
+      </p>
+      <h3>Bone Straightener</h3>
+      <p>
+        Straighten selected bones by aligning them to a global axis.
+      </p>
+    </section>
+
+    <section id="arm-pose-mode">
+      <h2>Armature Pose Mode</h2>
+
+      <h3>Constraint Tools</h3>
+      <p>
+        In pose mode if one or two bones are selected, you can use the "Constraint Tools" to add constraints
+        IK, Damped Track, Stretch To, and Locked Track. 
+
+        The options for the constraints will appear for faster assigning.
+        If one bone is selected, the constraint will be applied to that bone, and all other options will need to be set.
+        If two bones are selected, the inactive bone will be the target and the active bone will be the owner of the constraint.
+      </p>
+
+    
+  </main>
+
+</body>
+</html>
