@@ -1,0 +1,20 @@
+schema_version = "1.0.0"
+
+# Example of manifest file for a Blender extension
+# Change the values according to your extension
+id = "johnnygizmo_color_harmony"
+version = "1.0.0"
+name = "JohnnyGizmo Color Harmony"
+tagline = "Speed up your color picking workflow"
+maintainer = "Johnny Matthews"
+type = "add-on"
+
+website = "https://johnnygizmo.github.io/extensions/johnnygizmo_color_harmony/docs/"
+
+tags = ["Color", "3D View", "Mesh",]
+
+blender_version_min = "4.4.0"
+
+license = [
+  "SPDX:GPL-2.0-or-later",
+]
