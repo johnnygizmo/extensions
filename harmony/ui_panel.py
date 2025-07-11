@@ -29,7 +29,7 @@ class COLORHARMONY_PT_Panel(bpy.types.Panel):
             )
 
             row.operator("johnnygizmo_colorharmony.get_base_palette_color",text="Get Color")
-
+        # print(mat.node_tree.nodes["Principled Hair BSDF"].parametrization)
         layout.prop(props, "base_color", text="")
         layout.prop(props, "mode", text="Type")
         if props.mode in {'analogous','analogous_c'}:
@@ -66,7 +66,8 @@ class COLORHARMONY_PT_Panel(bpy.types.Panel):
         if mat and mat.use_nodes:                       
             if mat.node_tree and mat.node_tree.nodes.get(props.target_bsdf_node_name):
                 layout.label(text="Apply to: " + props.target_bsdf_node_name)
-                bsdf_node = mat.node_tree.nodes.get(props.target_bsdf_node_name)                
+                bsdf_node = mat.node_tree.nodes.get(props.target_bsdf_node_name)         
+   
                 if bsdf_node.type == "BSDF_PRINCIPLED":
                     row = layout.row(align=True)
                     row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="Diffuse").input = "Base Color"
@@ -135,11 +136,25 @@ class COLORHARMONY_PT_Panel(bpy.types.Panel):
                     row = layout.row(align=True)
                     row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="Color").input = "Color"
                     row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="Viewport").input = "Viewport"
-
-                # else:
-                #     print("----",bsdf_node.type)
-                #     for input in bsdf_node.inputs:
-                #         print("Input:", input.name, "Type:", input.type)
+                elif bsdf_node.type == "BSDF_SHEEN":
+                    row = layout.row(align=True)
+                    row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="Color").input = "Color"
+                    row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="Viewport").input = "Viewport"
+                elif bsdf_node.type == "BSDF_TOON":
+                    row = layout.row(align=True)
+                    row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="Color").input = "Color"
+                    row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="Viewport").input = "Viewport"
+                elif bsdf_node.type == "BSDF_RAY_PORTAL":
+                    row = layout.row(align=True)
+                    row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="Color").input = "Color"
+                    row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="Viewport").input = "Viewport"
+                elif bsdf_node.type == "BSDF_HAIR_PRINCIPLED":
+                    row = layout.row(align=True)
+                    if bsdf_node.parametrization == 'COLOR':
+                        row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="Color").input = "Color"
+                    elif bsdf_node.parametrization == 'MELANIN':
+                        row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="Tint").input = "Tint"
+                    row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="Viewport").input = "Viewport"                
         
 def register():
     bpy.utils.register_class(COLORHARMONY_PT_Panel)

@@ -1,9 +1,9 @@
-from email.mime import base
+from multiprocessing import context
 import bpy # type: ignore
 from . import color_utils
 from bpy.props import FloatVectorProperty, PointerProperty, IntProperty, FloatProperty, EnumProperty # type: ignore
 from math import pi
-
+from . import assign
 
 HARMONY_TYPES = [
     ('complementary', "Complementary", "2 Colors: Base and its direct complementary."),
@@ -27,6 +27,10 @@ def update_harmony_colors(self, context):
     base = props.base_color
     mode = props.mode
     count = props.count    
+
+    obj = context.active_object
+    if obj and obj.active_material and obj.active_material.use_nodes:
+        assign.setNode(obj.active_material, context.scene.johnnygizmo_harmony)
 
     if bpy.data.palettes.get("Harmony Palette"):
         props.palette = bpy.data.palettes["Harmony Palette"]
@@ -110,15 +114,18 @@ type_list = {
             'SUBSURFACE_SCATTERING',
             'BSDF_TRANSPARENT',
             'VOLUME_ABSORPTION',
-            'VOLUME_SCATTER'
+            'VOLUME_SCATTER',
+            'BSDF_SHEEN',
+            'BSDF_TOON',
+            'BSDF_RAY_PORTAL',
+            'BSDF_HAIR_PRINCIPLED'
         }
 
 def nodeSearch(self, context, edit_text):
     obj = context.active_object
     if obj and obj.active_material and obj.active_material.use_nodes:
+        assign.setNode(obj.active_material, context.scene.johnnygizmo_harmony)
         nodes = obj.active_material.node_tree.nodes
-        # for node in nodes:
-        #     print("'",node.type,"',")
         output = [node.name for node in nodes if node.type in type_list and edit_text.lower() in node.name.lower()]
         return output
 

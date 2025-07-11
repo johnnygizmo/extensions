@@ -4,6 +4,20 @@ from math import pow # Ensure pow is imported
 from . import color_utils
 from . import harmony_colors
 
+
+def setNode(mat, props):
+    if mat.node_tree.nodes.get(props.target_bsdf_node_name) is None:
+        props.target_bsdf_node_name = ""
+    elif mat.node_tree.nodes.get(props.target_bsdf_node_name).type not in harmony_colors.type_list:
+        props.target_bsdf_node_name = ""
+
+    if not props.target_bsdf_node_name:            
+        for node in mat.node_tree.nodes:
+            if node.type in harmony_colors.type_list:
+                props.target_bsdf_node_name = node.name
+                break
+
+
 class JOHNNYGIZMO_COLORHARMONY_OT_ApplySelectedPaletteColor(bpy.types.Operator):
     """Assign the active color of the 'Harmony Palette' to the active material's Base Color"""
     bl_idname = "johnnygizmo_colorharmony.apply_selected_palette_color"
@@ -85,7 +99,9 @@ class JOHNNYGIZMO_COLORHARMONY_OT_GetSelectedPaletteColor(bpy.types.Operator):
         if not mat.use_nodes:
             self.report({'WARNING'}, "Material does not use nodes.")
             return {'CANCELLED'}
-       
+               
+        setNode(mat, props)
+
         if mat.node_tree.nodes.get(props.target_bsdf_node_name) is None:
            props.target_bsdf_node_name = ""
         elif mat.node_tree.nodes.get(props.target_bsdf_node_name).type not in harmony_colors.type_list:
