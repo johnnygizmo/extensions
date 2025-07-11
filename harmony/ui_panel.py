@@ -14,8 +14,11 @@ class COLORHARMONY_PT_Panel(bpy.types.Panel):
         scene = context.scene
         colors = scene.johnnygizmo_harmony_colors
 
+        obj  = context.active_object
+       
+
+
         layout.operator("johnnygizmo_colorharmony.get_base_palette_color",text="Get Diffuse")
-        
         layout.prop(scene, "johnnygizmo_harmony_base_color", text="")
         layout.prop(colors, "harmony_mode", text="Type")
         if colors.harmony_mode in {'analogous'}:
@@ -41,6 +44,30 @@ class COLORHARMONY_PT_Panel(bpy.types.Panel):
         else:
             column.label(text="No palette assigned.")
         
+
+
+        obj = context.object
+        mat = obj.active_material if obj else None
+        if mat and mat.use_nodes:
+            # We need to provide a collection (mat.node_tree.nodes)
+            # and a property to search within ('name').
+            # The 'search_data' is the data-block that contains the collection.
+            # The 'search_property' is the name of the collection within search_data.
+            # The 'text' is the label for the property.
+            # The 'icon' can be 'NODE' or 'SHADING_SOLID' or similar.
+            
+            row = layout.row()
+            row.prop_search(
+                scene, 
+                "johnnygizmo_target_bsdf_node_name", 
+                mat.node_tree, 
+                "nodes", 
+                text="Target BSDF", 
+                icon='NODE'
+            )
+        else:
+            layout.label(text="No active material with nodes to select BSDF.")
+
 
         row = layout.row(align=True)
         op = row.operator("colorharmony.apply_selected_palette_color", text="Set Diffuse").destination = 'DIFFUSE'

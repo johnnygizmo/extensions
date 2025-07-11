@@ -129,6 +129,11 @@ def register():
         precision = 2,
         update=update_harmony_colors
     )    
+    bpy.types.Scene.johnnygizmo_target_bsdf_node_name = bpy.props.StringProperty(
+        name="Target BSDF Node",
+        description="Name of the Principled BSDF or Diffuse BSDF node to target",
+        default="Principled BSDF" # Default to Principled BSDF
+    )
 
 def unregister():
     del bpy.types.Scene.johnnygizmo_harmony_base_color
@@ -136,4 +141,5 @@ def unregister():
     del bpy.types.Scene.johnnygizmo_harmony_palette
     del bpy.types.Scene.johnnygizmo_harmony_count
     del bpy.types.Scene.johnnygizmo_tetradic_angle
+    del bpy.types.Scene.johnnygizmo_target_bsdf_node_name
     bpy.utils.unregister_class(HarmonyColors)

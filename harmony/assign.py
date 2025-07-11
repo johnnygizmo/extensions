@@ -40,8 +40,8 @@ class JOHNNYGIZMO_COLORHARMONY_OT_ApplySelectedPaletteColor(bpy.types.Operator):
             if not mat.use_nodes:
                 self.report({'WARNING'}, "Material does not use nodes.")
                 continue
+            bsdf = mat.node_tree.nodes.get(context.scene.johnnygizmo_target_bsdf_node_name)
             
-            bsdf = mat.node_tree.nodes.get("Principled BSDF")
             if not bsdf:
                 self.report({'WARNING'}, "Principled BSDF node not found in material.")
                 continue
@@ -106,8 +106,9 @@ class JOHNNYGIZMO_COLORHARMONY_OT_GetSelectedPaletteColor(bpy.types.Operator):
         if not mat.use_nodes:
             self.report({'WARNING'}, "Material does not use nodes.")
             return {'CANCELLED'}
-        
-        bsdf = mat.node_tree.nodes.get("Principled BSDF")
+        print (context.scene.johnnygizmo_target_bsdf_node_name)
+        bsdf = mat.node_tree.nodes.get(context.scene.johnnygizmo_target_bsdf_node_name)
+
         if not bsdf:
             self.report({'WARNING'}, "Principled BSDF node not found in material.")
             return {'CANCELLED'}
