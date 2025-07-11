@@ -1,32 +1,25 @@
-import bpy
-from bpy.props import FloatVectorProperty, PointerProperty
+import bpy # type: ignore
+from bpy.props import FloatVectorProperty, PointerProperty # type: ignore
 from math import pow # Ensure pow is imported
 from . import color_utils
+from . import harmony_colors
 
 class JOHNNYGIZMO_COLORHARMONY_OT_ApplySelectedPaletteColor(bpy.types.Operator):
     """Assign the active color of the 'Harmony Palette' to the active material's Base Color"""
-    bl_idname = "colorharmony.apply_selected_palette_color"
+    bl_idname = "johnnygizmo_colorharmony.apply_selected_palette_color"
     bl_label = "Apply Selected Palette Color"
-    bl_options = {'REGISTER', 'UNDO'}
+    bl_options = {'REGISTER', 'UNDO', 'INTERNAL'}
 
-    destination: bpy.props.EnumProperty(
-        name="Destination",
-        description="Where to apply the selected palette color",
-        items=[
-            ('DIFFUSE', "Diffuse", "Apply to Diffuse Color"),
-            ('SPECULAR', "Specular", "Apply to Specular Tint"),
-            ('EMISSIVE', "Emissive", "Apply to Emissive Color"),
-            ('COAT', "Coat", "Apply to Coat Tint"),
-            ('SHEEN', "Sheen", "Apply to Sheen Tint"),
-        ],
-        default='DIFFUSE'
-    )
+    
+    input: bpy.props.StringProperty(
+        name="Input",
+        description="Input name to apply the color to",
+        default="Base Color"
+    ) # type: ignore
 
     def execute(self, context):
-        
-        for obj in context.selected_objects:
-            #obj = context.object
-            
+        props = context.scene.johnnygizmo_harmony
+        for obj in context.selected_objects:            
             if not obj:
                 self.report({'WARNING'}, "No active object selected.")
                 continue
@@ -34,45 +27,30 @@ class JOHNNYGIZMO_COLORHARMONY_OT_ApplySelectedPaletteColor(bpy.types.Operator):
             mat = obj.active_material
             
             if not mat:
-                self.report({'WARNING'}, "Active object has no material.")
+                self.report({'WARNING'}, obj.name+ " has no active material.")
                 continue
 
             if not mat.use_nodes:
-                self.report({'WARNING'}, "Material does not use nodes.")
+                self.report({'WARNING'}, "Material on " + obj.name+ " does not use nodes.")
                 continue
-            bsdf = mat.node_tree.nodes.get(context.scene.johnnygizmo_target_bsdf_node_name)
+            bsdf = mat.node_tree.nodes.get(props.target_bsdf_node_name)
             
             if not bsdf:
-                self.report({'WARNING'}, "Principled BSDF node not found in material.")
+                self.report({'WARNING'}, "Node "+props.target_bsdf_node_name+ " not found in material on " + obj.name)
                 continue
 
             palette = bpy.data.palettes.get("Harmony Palette")
             if not palette:
                 self.report({'WARNING'}, "Harmony Palette not found. Please generate colors first.")
                 continue
-
-            # Get the active color from the palette
-            # The 'active_color' is a reference to a bpy.types.PaletteColor object
-            # and its 'color' property is a FloatVector (RGB) in linear space.
             if palette.colors.active:
                 selected_color = palette.colors.active.color
-                # Ensure it's a 4-element vector (RGBa) for the Base Color input
-                # The alpha channel is usually 1.0 for Base Color unless specified otherwise.
                 srgb_color = color_utils.convert_srgb_to_linear_rgb(selected_color[:3])
                 
-                if self.destination == 'DIFFUSE':
-                    bsdf.inputs["Base Color"].default_value = (*srgb_color, 1.0)
+                if(self.input == "Viewport"):
                     mat.diffuse_color = (*srgb_color[:3], 1.0)
-                elif self.destination == 'SPECULAR':
-                    bsdf.inputs["Specular Tint"].default_value = (*srgb_color, 1.0)
-                elif self.destination == 'EMISSIVE':
-                    bsdf.inputs["Emission Color"].default_value = (*srgb_color, 1.0)
-                elif self.destination == 'COAT':
-                    bsdf.inputs["Coat Tint"].default_value = (*srgb_color, 1.0)
-                elif self.destination == 'SHEEN':
-                    bsdf.inputs["Sheen Tint"].default_value = (*srgb_color, 1.0)
-                
-            
+                elif(bsdf.inputs[self.input]):
+                    bsdf.inputs[self.input].default_value = (*srgb_color, 1.0)            
             else:
                 self.report({'WARNING'}, "No active color selected in the Harmony Palette.")
                 return {'CANCELLED'}
@@ -84,13 +62,14 @@ class JOHNNYGIZMO_COLORHARMONY_OT_GetSelectedPaletteColor(bpy.types.Operator):
     """Get the active material's Base Color and set Base Color"""
     bl_idname = "johnnygizmo_colorharmony.get_base_palette_color"
     bl_label = "Get Base Palette Color"
-    bl_options = {'REGISTER', 'UNDO'}
+    bl_options = {'REGISTER', 'UNDO', 'INTERNAL'}
 
     @classmethod
     def poll(cls, context):
         return len(context.selected_objects) > 0
 
     def execute(self, context):
+        props = context.scene.johnnygizmo_harmony
         obj = context.object
         
         if not obj:
@@ -106,32 +85,41 @@ class JOHNNYGIZMO_COLORHARMONY_OT_GetSelectedPaletteColor(bpy.types.Operator):
         if not mat.use_nodes:
             self.report({'WARNING'}, "Material does not use nodes.")
             return {'CANCELLED'}
-        print (context.scene.johnnygizmo_target_bsdf_node_name)
-        bsdf = mat.node_tree.nodes.get(context.scene.johnnygizmo_target_bsdf_node_name)
+       
+        if mat.node_tree.nodes.get(props.target_bsdf_node_name) is None:
+           props.target_bsdf_node_name = ""
+        elif mat.node_tree.nodes.get(props.target_bsdf_node_name).type not in harmony_colors.type_list:
+           props.target_bsdf_node_name = ""
+
+        if not props.target_bsdf_node_name:            
+            for node in mat.node_tree.nodes:
+                if node.type in harmony_colors.type_list:
+                    props.target_bsdf_node_name = node.name
+                    break
+
+        bsdf = mat.node_tree.nodes.get(props.target_bsdf_node_name)
 
         if not bsdf:
-            self.report({'WARNING'}, "Principled BSDF node not found in material.")
+            self.report({'WARNING'}, "Selected node not found in material.")
             return {'CANCELLED'}
 
         palette = bpy.data.palettes.get("Harmony Palette")
         if not palette:
             self.report({'WARNING'}, "Harmony Palette not found. Please generate colors first.")
             return {'CANCELLED'}
-
-        # Get the active color from the palette
-        # The 'active_color' is a reference to a bpy.types.PaletteColor object
-        # and its 'color' property is a FloatVector (RGB) in linear space.
-
-        if bsdf.inputs["Base Color"]:
-            bpy.context.scene.johnnygizmo_harmony_base_color = bsdf.inputs["Base Color"].default_value  
+        
+        if bsdf.inputs.get("Base Color") is not None:
+            props.base_color = bsdf.inputs["Base Color"].default_value
+        elif bsdf.inputs.get("Color") is not None:
+            props.base_color = bsdf.inputs["Color"].default_value
 
         return {'FINISHED'}
 
 
 def register():
-    bpy.utils.register_class(JOHNNYGIZMO_COLORHARMONY_OT_ApplySelectedPaletteColor) # Register the new operator
+    bpy.utils.register_class(JOHNNYGIZMO_COLORHARMONY_OT_ApplySelectedPaletteColor) 
     bpy.utils.register_class(JOHNNYGIZMO_COLORHARMONY_OT_GetSelectedPaletteColor)
 
 def unregister():
-    bpy.utils.unregister_class(JOHNNYGIZMO_COLORHARMONY_OT_ApplySelectedPaletteColor) # Unregister the new operator
+    bpy.utils.unregister_class(JOHNNYGIZMO_COLORHARMONY_OT_ApplySelectedPaletteColor) 
     bpy.utils.unregister_class(JOHNNYGIZMO_COLORHARMONY_OT_GetSelectedPaletteColor)

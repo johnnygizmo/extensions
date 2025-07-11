@@ -8,9 +8,9 @@ bl_info = {
     "category": "Material",
 }
 
-import bpy
+import bpy # type: ignore
 from . import harmony_colors
-from . import ui_panel, color_utils
+from . import ui_panel
 from . import assign
 
 

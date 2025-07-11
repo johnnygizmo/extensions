@@ -1,6 +1,6 @@
-import bpy
+import bpy # type: ignore
 import colorsys
-from bpy.props import FloatVectorProperty, PointerProperty
+from bpy.props import FloatVectorProperty, PointerProperty # type: ignore
 from math import pow, pi
 
 def linear_to_srgb(c):
@@ -23,6 +23,16 @@ def convert_srgb_to_linear_rgb(srgb_rgb):
 
 
 # Color Harmony Math
+def get_single_complementary_color(color):
+    srgb_color = convert_linear_rgb_to_srgb(color[:3])
+    h, s, v = colorsys.rgb_to_hsv(*srgb_color)
+    h = (h + 0.5) % 1.0
+    complementary_srgb = colorsys.hsv_to_rgb(h, s, v)
+    
+    return  (*convert_srgb_to_linear_rgb(complementary_srgb), 1.0)
+
+
+
 def get_complementary_color(color):
     srgb_color = convert_linear_rgb_to_srgb(color[:3])
     h, s, v = colorsys.rgb_to_hsv(*srgb_color)
@@ -33,6 +43,22 @@ def get_complementary_color(color):
         (srgb_color[:3]), 
         (*convert_srgb_to_linear_rgb(complementary_srgb), 1.0)
     ]
+
+def get_near_complementary_colors(color,rad):
+    
+    srgb_color = convert_linear_rgb_to_srgb(color[:3])
+    h, s, v = colorsys.rgb_to_hsv(*srgb_color)
+
+    add = (rad / (2 * pi)) 
+
+    h = (h + 0.5 + add) % 1.0
+    complementary_srgb = colorsys.hsv_to_rgb(h, s, v)
+    
+    return [
+        (srgb_color[:3]), 
+        (*convert_srgb_to_linear_rgb(complementary_srgb), 1.0)
+    ]
+
 
 def get_split_complementary_colors(color):
     srgb_color = convert_linear_rgb_to_srgb(color[:3])
@@ -131,6 +157,21 @@ def get_monochromatic_colors(color, count=1):
         srgb_rgb = colorsys.hsv_to_rgb(h, sat, val)
         results.append((*convert_srgb_to_linear_rgb(srgb_rgb), 1.0))
     return results
+
+
+def get_achromatic_colors(color, count=5):
+    # srgb_color = convert_linear_rgb_to_srgb(color[:3])
+    # h, s, v = colorsys.rgb_to_hsv(*srgb_color)    
+    results = []
+    if count > 0:
+        for i in range(count):
+            val = i / (count - 1) if count > 1 else 0.5
+            
+            achromatic_srgb = colorsys.hsv_to_rgb(0, 0, val)
+            results.append((*convert_srgb_to_linear_rgb(achromatic_srgb), 1.0))
+    results.sort(key=lambda x: x[0])
+    return results
+
 
 def get_or_create_palette(name="Harmony Palette"):
     if name in bpy.data.palettes:
