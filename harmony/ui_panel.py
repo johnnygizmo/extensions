@@ -21,36 +21,28 @@ class COLORHARMONY_PT_Panel(bpy.types.Panel):
             row = layout.row()
             #filter the prop_search to only show BSDF nodes
             
-            row.prop(
-                props, 
-                "target_bsdf_node_name",
-                text="",
-                icon='NODE',     
-            )
-
-            row.operator("johnnygizmo_colorharmony.get_base_palette_color",text="Get Color")
-        # print(mat.node_tree.nodes["Principled Hair BSDF"].parametrization)
-        layout.prop(props, "base_color", text="")
-        layout.prop(props, "mode", text="Type")
-        if props.mode in {'analogous','analogous_c'}:
-            row = layout.row()
-            row.prop(props, "count", text="Colors")
+            row.prop(props, "base_color", text="")
+            
+        
+        row = layout.row()        
+        row.prop(props, "mode", text="")
+        if props.mode in {'analogous','analogous_c'}:            
+            row.prop(props, "count", text="Amt")
             row.prop(props, "analogous_angle", text="Angle")
-            if props.count % 2 == 0:
-                layout.label(text="Count must be odd, adjusting")
+            # if props.count % 2 == 0:
+            #     layout.label(text="Count must be odd, adjusting")
 
         if props.mode in {'near_complementary'}:
-            row = layout.row()
             row.prop(props, "near_complementary_angle", text="Angle")
 
         if props.mode in {'monochromatic'}:
-            layout.prop(props, "count", text="Generated Steps")
+            layout.prop(props, "count", text="Steps")
 
         if props.mode == 'achromatic':
-            layout.prop(props, "count", text="Generated Steps")
+            layout.prop(props, "count", text="Steps")
 
         if props.mode == 'tetradic':
-            layout.prop(props, "tetradic_angle", text="Tetradic Angle")
+            layout.prop(props, "tetradic_angle", text="Angle")
 
         # Display the palette assigned to this scene
         palette = props.palette
@@ -59,103 +51,132 @@ class COLORHARMONY_PT_Panel(bpy.types.Panel):
         row.scale_x = 1.5
         column = row.column(align=True)
         if palette:
-            column.template_palette(props,"palette", color=False)
+            #column.template_ID(props, "palette")
+            column.template_palette(props,"palette", color=False)                     
         else:
             column.label(text="No palette assigned.")
                
         if mat and mat.use_nodes:                       
             if mat.node_tree and mat.node_tree.nodes.get(props.target_bsdf_node_name):
-                layout.label(text="Apply to: " + props.target_bsdf_node_name)
+                #layout.label(text="Apply to: " + props.target_bsdf_node_name)
                 bsdf_node = mat.node_tree.nodes.get(props.target_bsdf_node_name)         
    
                 if bsdf_node.type == "BSDF_PRINCIPLED":
                     row = layout.row(align=True)
-                    row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="Diffuse").input = "Base Color"
-                    row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="Viewport").input = "Viewport"
-                    row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="Specular").input = 'Specular Tint'
-                    row = layout.row(align=True)
-                    row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="Emissive").input = 'Emission Color'
+                    row.label(text="Set:")
+                    row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="Color").input = "Base Color"
+                    row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="View").input = "Viewport"
+                    row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="Spec").input = 'Specular Tint'
+                    #row = layout.row(align=True)
+                    row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="Emit").input = 'Emission Color'
                     row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="Coat").input = 'Coat Tint'
                     row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="Sheen").input = 'Sheen Tint'
                 elif bsdf_node.type == "EMISSION":
                     row = layout.row(align=True)
+                    row.label(text="Set:")
                     row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="Color").input = "Color"
-                    row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="Viewport").input = "Viewport"
+                    row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="View").input = "Viewport"
                 elif bsdf_node.type == "EEVEE_SPECULAR":
                     row = layout.row(align=True)
-                    row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="Base Color").input = "Base Color"
-                    row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="Specular").input = "Specular"
-                    row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="Emissive").input = "Emissive Color"
-                    row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="Viewport").input = "Viewport"
+                    row.label(text="Set:")  
+                    row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="Color").input = "Base Color"
+                    row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="Spec").input = "Specular"
+                    row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="Emit").input = "Emissive Color"
+                    row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="View").input = "Viewport"
                 elif bsdf_node.type == "BSDF_TRANSPARENT":
-                    row = layout.row(align=True)
+                    row = layout.row(align=True)                    
+                    row.label(text="Set:")
                     row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="Color").input = "Color"
-                    row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="Viewport").input = "Viewport"
+                    row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="View").input = "Viewport"
                 elif bsdf_node.type == "BSDF_METALLIC":
                     row = layout.row(align=True)
-                    row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="Base Color").input = "Base Color"
-                    row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="Edge Tint").input = "Edge Tint"
-                    row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="Viewport").input = "Viewport"
+                    row.label(text="Set:")
+                    row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="Color").input = "Base Color"
+                    row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="Edge").input = "Edge Tint"
+                    row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="View").input = "Viewport"
                 elif bsdf_node.type == "BSDF_DIFFUSE":
                     row = layout.row(align=True)
+                    row.label(text="Set:")
                     row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="Color").input = "Color"
-                    row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="Viewport").input = "Viewport"
+                    row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="View").input = "Viewport"
                 elif bsdf_node.type == "BSDF_GLASS":
                     row = layout.row(align=True)
+                    row.label(text="Set:")
                     row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="Color").input = "Color"
-                    row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="Viewport").input = "Viewport"
+                    row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="View").input = "Viewport"
                 elif bsdf_node.type == "BSDF_REFRACTION":
                     row = layout.row(align=True)
+                    row.label(text="Set:")
                     row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="Color").input = "Color"
-                    row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="Viewport").input = "Viewport"
+                    row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="View").input = "Viewport"
                 elif bsdf_node.type == "BSDF_GLOSSY":
                     row = layout.row(align=True)
+                    row.label(text="Set:")
                     row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="Color").input = "Color"
-                    row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="Viewport").input = "Viewport"
+                    row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="View").input = "Viewport"
                 elif bsdf_node.type == "BSDF_TRANSLUCENT":
                     row = layout.row(align=True)
+                    row.label(text="Set:")
                     row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="Color").input = "Color"
-                    row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="Viewport").input = "Viewport"
+                    row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="View").input = "Viewport"
                 elif bsdf_node.type == "VOLUME_ABSORPTION":
                     row = layout.row(align=True)
+                    row.label(text="Set:")
                     row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="Color").input = "Color"
-                    row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="Viewport").input = "Viewport"
+                    row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="View").input = "Viewport"
                 elif bsdf_node.type == "PRINCIPLED_VOLUME":
                     row = layout.row(align=True)
+                    row.label(text="Set:")
                     row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="Color").input = "Color"
                     row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="Absorption").input = "Absorption Color"
                     row = layout.row(align=True)
-                    row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="Emission").input = "Emission Color"
+                    row.label(text="Set:")
+                    row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="Emit").input = "Emission Color"
                     row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="Blackbody").input = "Blackbody Tint"
                     row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="Viewport").input = "Viewport"
                 elif bsdf_node.type == "VOLUME_SCATTER":
                     row = layout.row(align=True)
+                    row.label(text="Set:")
                     row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="Color").input = "Color"
-                    row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="Viewport").input = "Viewport"
+                    row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="View").input = "Viewport"
                 elif bsdf_node.type == "SUBSURFACE_SCATTERING":
                     row = layout.row(align=True)
+                    row.label(text="Set:")
                     row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="Color").input = "Color"
-                    row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="Viewport").input = "Viewport"
+                    row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="View").input = "Viewport"
                 elif bsdf_node.type == "BSDF_SHEEN":
                     row = layout.row(align=True)
+                    row.label(text="Set:")
                     row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="Color").input = "Color"
-                    row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="Viewport").input = "Viewport"
+                    row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="View").input = "Viewport"
                 elif bsdf_node.type == "BSDF_TOON":
                     row = layout.row(align=True)
+                    row.label(text="Set:")
                     row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="Color").input = "Color"
-                    row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="Viewport").input = "Viewport"
+                    row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="View").input = "Viewport"
                 elif bsdf_node.type == "BSDF_RAY_PORTAL":
                     row = layout.row(align=True)
+                    row.label(text="Set:")
                     row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="Color").input = "Color"
-                    row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="Viewport").input = "Viewport"
+                    row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="View").input = "Viewport"
                 elif bsdf_node.type == "BSDF_HAIR_PRINCIPLED":
                     row = layout.row(align=True)
+                    row.label(text="Set:")
                     if bsdf_node.parametrization == 'COLOR':
                         row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="Color").input = "Color"
                     elif bsdf_node.parametrization == 'MELANIN':
                         row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="Tint").input = "Tint"
-                    row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="Viewport").input = "Viewport"                
+                    row.operator("johnnygizmo_colorharmony.apply_selected_palette_color", text="View").input = "Viewport"                
         
+                row = layout.row()
+                row.prop(
+                    props, 
+                    "target_bsdf_node_name",
+                    text="",
+                    icon='NODE',     
+                )
+
+                row.operator("johnnygizmo_colorharmony.get_base_palette_color",text="Get Color")
 def register():
     bpy.utils.register_class(COLORHARMONY_PT_Panel)
     
