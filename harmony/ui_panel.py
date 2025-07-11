@@ -8,14 +8,16 @@ class COLORHARMONY_PT_Panel(bpy.types.Panel):
     bl_region_type = 'WINDOW'
     bl_context = "material"
 
+         
     def draw(self, context):
         layout = self.layout
         scene = context.scene
         colors = scene.johnnygizmo_harmony_colors
 
-        layout.prop(colors, "harmony_mode", text="Type")
-        layout.prop(scene, "johnnygizmo_harmony_base_color", text="")
+        layout.operator("johnnygizmo_colorharmony.get_base_palette_color",text="Get Diffuse")
         
+        layout.prop(scene, "johnnygizmo_harmony_base_color", text="")
+        layout.prop(colors, "harmony_mode", text="Type")
         if colors.harmony_mode in {'analogous'}:
             row = layout.row()
             row.prop(scene, "johnnygizmo_harmony_count", text="Colors")
@@ -39,8 +41,9 @@ class COLORHARMONY_PT_Panel(bpy.types.Panel):
         else:
             column.label(text="No palette assigned.")
         
+
         row = layout.row(align=True)
-        op = row.operator("colorharmony.apply_selected_palette_color", text="Diffuse").destination = 'DIFFUSE'
+        op = row.operator("colorharmony.apply_selected_palette_color", text="Set Diffuse").destination = 'DIFFUSE'
         row.operator("colorharmony.apply_selected_palette_color", text="Specular").destination = 'SPECULAR'
         row = layout.row(align=True)
         row.operator("colorharmony.apply_selected_palette_color", text="Emissive").destination = 'EMISSIVE'

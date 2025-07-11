@@ -119,7 +119,6 @@ def get_square_colors(color):
         
     return results
 
-
 def get_monochromatic_colors(color, count=1):
     srgb_color = convert_linear_rgb_to_srgb(color[:3])
     h, s, v = colorsys.rgb_to_hsv(*srgb_color)
@@ -132,7 +131,6 @@ def get_monochromatic_colors(color, count=1):
         srgb_rgb = colorsys.hsv_to_rgb(h, sat, val)
         results.append((*convert_srgb_to_linear_rgb(srgb_rgb), 1.0))
     return results
-
 
 def get_or_create_palette(name="Harmony Palette"):
     if name in bpy.data.palettes:

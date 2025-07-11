@@ -20,8 +20,8 @@ def check_and_update_harmony_colors(scene):
     base = scene.johnnygizmo_harmony_base_color
     mode = scene.johnnygizmo_harmony_colors.harmony_mode
 
-    # if bpy.data.palettes.get("Harmony Palette"):
-    #     scene.johnnygizmo_harmony_palette = bpy.data.palettes["Harmony Palette"]
+    if bpy.data.palettes.get("Harmony Palette"):
+        scene.johnnygizmo_harmony_palette = bpy.data.palettes["Harmony Palette"]
 
     if not scene.johnnygizmo_harmony_palette:
         scene.johnnygizmo_harmony_palette = color_utils.get_or_create_palette()
@@ -51,12 +51,11 @@ def check_and_update_harmony_colors(scene):
 
     elif mode == 'square':
         raw = color_utils.get_square_colors(base)
-        colors = raw[:count]
+        colors = raw[:4]
 
     elif mode == 'tetradic':
-        
         raw = color_utils.get_tetradic_colors(base, rad)
-        colors = raw[:count]        
+        colors = raw[:4]        
 
     elif mode == 'monochromatic':
         raw = color_utils.get_monochromatic_colors(base, count)
@@ -107,7 +106,7 @@ def register():
         description="How many harmony colors to generate",
         default=3,
         min=3,
-        max=12,
+        max=24,
         update=update_harmony_colors
     )
 
