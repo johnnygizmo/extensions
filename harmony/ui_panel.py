@@ -16,9 +16,15 @@ class COLORHARMONY_PT_Panel(bpy.types.Panel):
         layout.prop(colors, "harmony_mode", text="Type")
         layout.prop(scene, "johnnygizmo_harmony_base_color", text="")
         
-        #only show Number of Outputs if monochromatic or analogous
-        if colors.harmony_mode in {'analogous', 'monochromatic'}:
-            layout.prop(scene, "johnnygizmo_harmony_count", text="Number of Outputs")
+        if colors.harmony_mode in {'analogous'}:
+            row = layout.row()
+            row.prop(scene, "johnnygizmo_harmony_count", text="Colors")
+            row.prop(scene, "johnnygizmo_analogous_angle", text="Angle")
+            if scene.johnnygizmo_harmony_count % 2 == 0:
+                layout.label(text="Count must be odd, adding 1 to make it "+ str(scene.johnnygizmo_harmony_count + 1))
+
+        if colors.harmony_mode in {'monochromatic'}:
+            layout.prop(scene, "johnnygizmo_harmony_count", text="Generated Steps")
 
         if colors.harmony_mode == 'tetradic':
             layout.prop(scene, "johnnygizmo_tetradic_angle", text="Tetradic Angle")
@@ -26,39 +32,25 @@ class COLORHARMONY_PT_Panel(bpy.types.Panel):
         # Display the palette assigned to this scene
         palette = scene.johnnygizmo_harmony_palette
         row = layout.row()
-        row.scale_y = 2
+        row.scale_y = 1
         column = row.column(align=True)
         if palette:
             column.template_palette(scene,"johnnygizmo_harmony_palette", color=False)
         else:
             column.label(text="No palette assigned.")
         
-        row.operator("johnnygizmo_colorharmony.copy_to_global_palette", text="Save New")
-
-        op = row.operator("johnnygizmo_colorharmony.copy_to_global_palette", text="Save")
-        op.overwrite_existing = True
-
-
-class COLORHARMONY_OT_GenerateColors(bpy.types.Operator):
-    bl_idname = "colorharmony.generate_colors"
-    bl_label = "Generate Color Harmonies"
-    bl_description = "Generate harmony colors based on the base color"
-
-    def execute(self, context):
-        scene = context.scene
-        colors = scene.johnnygizmo_harmony_colors
-        base = scene.johnnygizmo_harmony_base_color
-
-        colors.comp = color_utils.get_complementary_color(base)
-        colors.split1, colors.split2 = color_utils.get_split_complementary_colors(base)
-
-        self.report({'INFO'}, "Colors generated.")
-        return {'FINISHED'}
+        row = layout.row(align=True)
+        op = row.operator("colorharmony.apply_selected_palette_color", text="Diffuse").destination = 'DIFFUSE'
+        row.operator("colorharmony.apply_selected_palette_color", text="Specular").destination = 'SPECULAR'
+        row = layout.row(align=True)
+        row.operator("colorharmony.apply_selected_palette_color", text="Emissive").destination = 'EMISSIVE'
+        row.operator("colorharmony.apply_selected_palette_color", text="Coat").destination = 'COAT'
+        row.operator("colorharmony.apply_selected_palette_color", text="Sheen").destination = 'SHEEN'
 
 def register():
     bpy.utils.register_class(COLORHARMONY_PT_Panel)
-    bpy.utils.register_class(COLORHARMONY_OT_GenerateColors)
+    # bpy.utils.register_class(COLORHARMONY_OT_GenerateColors)
     
 def unregister():
     bpy.utils.unregister_class(COLORHARMONY_PT_Panel)
-    bpy.utils.unregister_class(COLORHARMONY_OT_GenerateColors)
+    # bpy.utils.unregister_class(COLORHARMONY_OT_GenerateColors)

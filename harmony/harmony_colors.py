@@ -1,5 +1,4 @@
 import bpy
-import colorsys
 from . import color_utils
 from bpy.props import FloatVectorProperty, PointerProperty, IntProperty, FloatProperty
 from math import pi
@@ -17,20 +16,12 @@ HARMONY_TYPES = [
     ('monochromatic', "Monochromatic", "")
 ]
 
-from math import isclose
-
-def colors_match(c1, c2, tol=1e-4):
-    return all(isclose(a, b, abs_tol=tol) for a, b in zip(c1, c2))
-
 def check_and_update_harmony_colors(scene):
     base = scene.johnnygizmo_harmony_base_color
     mode = scene.johnnygizmo_harmony_colors.harmony_mode
 
-    # Get or create palette, assign to scene if needed
-
-    #if a global palette called Harmony Palette exists set johnnygizmo_harmony_palette to it
-    if bpy.data.palettes.get("Harmony Palette"):
-        scene.johnnygizmo_harmony_palette = bpy.data.palettes["Harmony Palette"]
+    # if bpy.data.palettes.get("Harmony Palette"):
+    #     scene.johnnygizmo_harmony_palette = bpy.data.palettes["Harmony Palette"]
 
     if not scene.johnnygizmo_harmony_palette:
         scene.johnnygizmo_harmony_palette = color_utils.get_or_create_palette()
@@ -39,6 +30,8 @@ def check_and_update_harmony_colors(scene):
     palette.colors.clear()
 
     count = scene.johnnygizmo_harmony_count
+    rad = scene.johnnygizmo_tetradic_angle
+    angle = scene.johnnygizmo_analogous_angle
 
     if mode == 'complementary':
         colors = color_utils.get_complementary_color(base)
@@ -48,8 +41,9 @@ def check_and_update_harmony_colors(scene):
         colors = raw[:count]
 
     elif mode == 'analogous':
-        raw = color_utils.get_analogous_colors(base, count)
-        colors = raw[:count]
+        raw = color_utils.get_analogous_colors(base, count, degrees = angle)
+        countTotal = len(raw)
+        colors = raw[:countTotal]
 
     elif mode == 'triadic':
         raw = color_utils.get_triadic_colors(base)
@@ -60,13 +54,14 @@ def check_and_update_harmony_colors(scene):
         colors = raw[:count]
 
     elif mode == 'tetradic':
-        rad = scene.johnnygizmo_tetradic_angle
+        
         raw = color_utils.get_tetradic_colors(base, rad)
         colors = raw[:count]        
 
     elif mode == 'monochromatic':
         raw = color_utils.get_monochromatic_colors(base, count)
-        colors = raw[:count]
+        countTotal = count*2+1
+        colors = raw[:countTotal]
     else:
         colors = []
 
@@ -86,17 +81,6 @@ class HarmonyColors(bpy.types.PropertyGroup):
         update=lambda self, context: update_harmony_colors(self, context)
     )
 
-
-
-def update_count(self, context):
-    val = self.analogous_count
-    # Clamp to odd number >= 3
-    if val < 3:
-        val = 3
-    if val % 2 == 0:  # if even, make it odd by adding 1
-        val += 1
-    if val != self.analogous_count:
-        self.analogous_count = val
 
 # Blender Add-on Setup
 def register():
@@ -122,7 +106,7 @@ def register():
         name="Number of Outputs",
         description="How many harmony colors to generate",
         default=3,
-        min=1,
+        min=3,
         max=12,
         update=update_harmony_colors
     )
@@ -137,6 +121,15 @@ def register():
         unit='ROTATION',
         update=update_harmony_colors
     )
+
+    bpy.types.Scene.johnnygizmo_analogous_angle = FloatProperty(
+        name="Angle",
+        description="Angle between colors",
+        default=pi/6,
+        subtype='ANGLE',
+        precision = 2,
+        update=update_harmony_colors
+    )    
 
 def unregister():
     del bpy.types.Scene.johnnygizmo_harmony_base_color

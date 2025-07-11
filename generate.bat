@@ -23,6 +23,9 @@ cd ..
 cd johnnygizmo_rigging_tools
 call build.bat
 cd ..
+cd harmony
+call build.bat
+cd ..
 
 
 "%MyVar%\blender.exe" --command extension server-generate --repo-dir=./

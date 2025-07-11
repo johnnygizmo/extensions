@@ -11,17 +11,15 @@ bl_info = {
 import bpy
 from . import harmony_colors
 from . import ui_panel, color_utils
-from . import copy_to_global
+from . import assign
 
 
 def register():
     harmony_colors.register()
-    color_utils.register()
-    copy_to_global.register()
+    assign.register()
     ui_panel.register()
 
 def unregister():
     ui_panel.unregister()
-    color_utils.unregister()
+    assign.unregister()
     harmony_colors.unregister()
-    copy_to_global.unregister()
