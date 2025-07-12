@@ -124,7 +124,6 @@ type_list = {
 def nodeSearch(self, context, edit_text):
     obj = context.active_object
     if obj and obj.active_material and obj.active_material.use_nodes:
-        assign.setNode(obj.active_material, context.scene.johnnygizmo_harmony)
         nodes = obj.active_material.node_tree.nodes
         output = [node.name for node in nodes if node.type in type_list and edit_text.lower() in node.name.lower()]
         return output
