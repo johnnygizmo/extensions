@@ -88,7 +88,7 @@ def get_analogous_colors(color, count=3, degrees= 1/12):
 
     results = [None] * count 
     center_index = count // 2 
-    results[center_index] = (*color[:3], 1.0)
+    results[center_index] = (*srgb_base_color[:3], 1.0)
 
     for i in range(count):
         if i == center_index:
