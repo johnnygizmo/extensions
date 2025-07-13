@@ -237,7 +237,9 @@ class COLORHARMONY_PT_Panel(bpy.types.Panel):
                             "johnnygizmo_colorharmony.apply_selected_palette_color",
                             text="Tint",
                         ).input = "Tint"
-                
+
+
+           
             row = layout.row()
             split = row.split(factor=0.5)
             split.prop(
@@ -253,31 +255,48 @@ class COLORHARMONY_PT_Panel(bpy.types.Panel):
                 "johnnygizmo_colorharmony.get_base_palette_color", text="Get Color"
             )
 
-            layout.separator(type="LINE")
+            (head,body) = layout.panel("Tools",default_closed=True)
+            head.label(text="Harmony Copy Tools")
+            if body:   
+                row = body.row() 
+                row.label(text="Palette")
+                op = row.operator(
+                    "johnnygizmo_colorharmony.save_palette_copy", text="Copy To Palette"
+                )              
+                result = next((item for item in harmony_colors.HARMONY_TYPES if item[0] == props.mode), None)
+                op.new_name = (
+                    result[1]
+                    + " Palette: [ "
+                    + str(round(props.base_color[0],3)) + ", "
+                    + str(round(props.base_color[1],3)) + ", "
+                    + str(round(props.base_color[2],3))
+                    + " ]"
+                )
+                row = body.row() 
+                row.label(text="Color Ramp")
+                op =row.operator(
+                                "johnnygizmo_colorharmony.palette_color_to_rgb_node",
+                                text="Linear",
+                            )
+                op.mode = "CREATECOLORRAMP"
+                op.spacing = False
+                op =row.operator(
+                                "johnnygizmo_colorharmony.palette_color_to_rgb_node",
+                                text="Constant",
+                            )
+                op.mode = "CREATECOLORRAMP"
+                op.spacing = True
 
-            row = layout.row()
-            op = row.operator(
-                "johnnygizmo_colorharmony.save_palette_copy", text="To Palette"
-            )
-            
-            result = next((item for item in harmony_colors.HARMONY_TYPES if item[0] == props.mode), None)
-
-            op.new_name = (
-                result[1]
-                + " Palette: [ "
-                + str(round(props.base_color[0],3)) + ", "
-                + str(round(props.base_color[1],3)) + ", "
-                + str(round(props.base_color[2],3))
-                + " ]"
-            )
-            row.operator(
-                            "johnnygizmo_colorharmony.apply_selected_palette_color",
-                            text="To Node",
-                        ).input = "CREATERGBNODE"
-            row.operator(
-                            "johnnygizmo_colorharmony.apply_selected_palette_color",
-                            text="All To Nodes",
-                        ).input = "CREATERGBNODES"            
+                newrow = body.row()
+                newrow.label(text="RGB Nodes")
+                newrow.operator(
+                                "johnnygizmo_colorharmony.palette_color_to_rgb_node",
+                                text="Selected Color",
+                            ).mode = "CREATERGBNODE" 
+                newrow.operator(
+                                "johnnygizmo_colorharmony.palette_color_to_rgb_node",
+                                text="All Colors",
+                            ).mode = "CREATERGBNODES"            
 
 def register():
     bpy.utils.register_class(COLORHARMONY_PT_Panel)

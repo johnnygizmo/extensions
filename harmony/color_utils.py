@@ -200,3 +200,17 @@ def get_or_create_palette(name="Harmony Palette"):
         return bpy.data.palettes[name]
     return bpy.data.palettes.new(name)
 
+
+def color_to_string(color):
+    return (" [ "
+                + str(round(color[0],3)) + ", "
+                + str(round(color[1],3)) + ", "
+                + str(round(color[2],3))
+                + " ]") 
+def color_to_hex(color):
+    if len(color) == 3:
+        (r, g, b) = [int(c * 255) for c in color]
+        return "#{:02X}{:02X}{:02X}".format(r, g, b)
+    elif len(color) == 4:
+        (r, g, b, a) = [int(c * 255) for c in color]
+        return "#{:02X}{:02X}{:02X}{:02X}".format(r, g, b,a)

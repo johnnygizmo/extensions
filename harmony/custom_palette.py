@@ -19,7 +19,7 @@ def colorControl(parent, palette, idx, scale=1.0):
     subrow.alignment = "CENTER"
     icon = "BLANK1"
     if palette.colors.active == palette.colors[idx]:
-        icon = "PMARKER_ACT"
+        icon = "BRUSH_DATA"
     op = subrow.operator(
         "johnnygizmo_colorharmony.set_active_palette_color",
         text="",
