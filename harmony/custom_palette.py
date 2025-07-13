@@ -1,4 +1,4 @@
-import bpy
+import bpy # type: ignore
 from . import harmony_colors
 
 def colorControl(parent, palette, idx, scale=1.0):

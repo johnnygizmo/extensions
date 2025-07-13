@@ -1,4 +1,4 @@
-import bpy
+import bpy # type: ignore
 
 class JOHNNYGIZMO_COLORHARMONY_OT_SavePaletteCopy(bpy.types.Operator):
     """Save a copy of the Harmony Palette as a new, standalone palette"""
@@ -9,7 +9,7 @@ class JOHNNYGIZMO_COLORHARMONY_OT_SavePaletteCopy(bpy.types.Operator):
         name="Palette Name",
         description="Name of the new palette",
         default="Harmony Palette Copy"
-    )
+    ) # type: ignore
 
     def execute(self, context):
         src_palette = bpy.data.palettes.get("Harmony Palette")

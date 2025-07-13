@@ -95,7 +95,7 @@ class JOHNNYGIZMO_COLORHARMONY_OT_PaletteColorToRGBNodes(bpy.types.Operator):
         name="spacing",
         description="If ColorRamp should be spaced with extra space",
         default=False,
-    )
+    ) # type: ignore
 
     def execute(self, context):
         props = context.scene.johnnygizmo_harmony

@@ -21,7 +21,7 @@ def register():
     ui_panel.register()
     copy_palette.register()
 
-def unregister():
+def unregister(): 
     ui_panel.unregister()
     assign.unregister()
     harmony_colors.unregister()
