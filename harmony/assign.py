@@ -61,10 +61,50 @@ class JOHNNYGIZMO_COLORHARMONY_OT_ApplySelectedPaletteColor(bpy.types.Operator):
                 selected_color = palette.colors.active.color
                 srgb_color = color_utils.convert_srgb_to_linear_rgb(selected_color[:3])
                 
-                if(self.input == "Color" or self.input == "Base Color"):
-                    mat.diffuse_color = (*srgb_color[:3], 1.0)
+                if self.input == "CREATERGBNODE":
+                    nodes = mat.node_tree.nodes
+                    rgb_node = nodes.new(type='ShaderNodeRGB')
+                    new_name = (
+                        props.mode
+                        + " [ "
+                        + str(round(props.base_color[0],3)) + ", "
+                        + str(round(props.base_color[1],3)) + ", "
+                        + str(round(props.base_color[2],3))
+                        + " ]"
+                    )
 
-                bsdf.inputs[self.input].default_value = (*srgb_color, 1.0)            
+                    rgb_node.label = new_name
+                    rgb_node.name = "Harmony"  # This sets the actual ID name
+                    rgb_node.location = (200, 200)
+                    rgb_node.outputs[0].default_value = (*selected_color[:3], 1.0)  # RGBA
+                elif self.input == "CREATERGBNODES":
+                    nodes = mat.node_tree.nodes
+                    
+                    for idx in range(0,len(palette.colors)):
+                        rgb_node = nodes.new(type='ShaderNodeRGB')
+                        
+                        new_name = (
+                            props.mode
+                            + " [ "
+                            + str(round(props.base_color[0],3)) + ", "
+                            + str(round(props.base_color[1],3)) + ", "
+                            + str(round(props.base_color[2],3))
+                            + " ] : " + str(idx)
+                        )
+                        
+                        
+                        
+                        rgb_node.label = new_name
+                        rgb_node.name = "Harmony"  # This sets the actual ID name
+                        rgb_node.location = ( idx*75, -idx*50)
+                        srgb_color = color_utils.convert_srgb_to_linear_rgb(palette.colors[idx].color[:3])
+                        rgb_node.outputs[0].default_value = (*srgb_color[:3], 1.0)                     
+                else:
+
+                    if(self.input == "Color" or self.input == "Base Color"):
+                        mat.diffuse_color = (*srgb_color[:3], 1.0)
+
+                    bsdf.inputs[self.input].default_value = (*srgb_color, 1.0)            
             else:
                 self.report({'WARNING'}, "No active color selected in the Harmony Palette.")
                 return {'CANCELLED'}

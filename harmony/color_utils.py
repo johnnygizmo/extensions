@@ -172,6 +172,28 @@ def get_achromatic_colors(color, count=5):
     results.sort(key=lambda x: x[0])
     return results
 
+def get_tint_shade_group(color, count=5):
+    srgb_color = convert_linear_rgb_to_srgb(color[:3])
+    r, g, b = color[:3]
+    results = []
+
+    # Tints
+    for i in range(1, count+1):
+        factor = i / (count)
+        results.append(((1 - factor) * r + factor, (1 - factor) * g + factor, (1 - factor) * b + factor, 1.0))
+
+    # Original
+    results.append(srgb_color)
+
+    # Shades
+    for i in range(1, count+1):
+        factor = i / (count)
+        results.append(((1 - factor) * r, (1 - factor) * g, (1 - factor) * b, 1.0))
+
+    return results
+
+
+
 
 def get_or_create_palette(name="Harmony Palette"):
     if name in bpy.data.palettes:

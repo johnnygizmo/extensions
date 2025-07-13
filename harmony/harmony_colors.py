@@ -2,7 +2,7 @@ from multiprocessing import context
 import bpy # type: ignore
 from . import color_utils
 from bpy.props import FloatVectorProperty, PointerProperty, IntProperty, FloatProperty, EnumProperty # type: ignore
-from math import pi
+from math import pi,ceil
 from . import assign
 
 HARMONY_TYPES = [
@@ -17,8 +17,44 @@ HARMONY_TYPES = [
     ('square', "Square", "4 Colors: Four colors equally spaced (90 degrees apart) on the color wheel."),
     ('tetradic', "Tetradic", "4 Colors: Two pairs of complementary colors, forming a rectangle on the color wheel."),
     ('monochromatic', "Monochromatic", "Multiple variations (tints, shades, tones) of a single hue."),
+    ('tint_shade',"Tint Shade Group","Multiple Tints (mixing white), the Original, Multiple Shades (mixing black)"),
     ('achromatic', "Achromatic", "Variations of black, white, and gray (absence of hue).")
 ]
+TYPE_PATTERNS = {
+    'complementary': ([1], 1),
+    'near_complementary':([1], 1),
+    'split':([1], 1),
+    'split_c':([1,1,1,0,1], 1),
+    'analogous':([-2,0,1,0,-2], 1),
+    'analogous_c':([-2,0,1,0,-2,0,1], 1),
+    'triadic':([1], 1),
+    'triadic_c':([1,1,1,0,0,1], 1),
+    'square':([1],1),
+    'tetradic':([1], 1),
+    'monochromatic':(["E"], 1),
+    'tint_shade':([-1,2,1,2,-1], 1),
+    'achromatic':(["E"], 1),
+}
+
+def get_pattern(mode,count):
+    original_pattern = TYPE_PATTERNS[mode][0]
+    pattern = []
+
+    if original_pattern[0] == "E":
+        rows = ceil(count/12)
+        odd = count%2
+        pattern.extend([1] * (((count)//rows)+odd))
+        pattern.append(2)
+    else:
+        for item in original_pattern:
+            if item == -1:
+                pattern.extend([1] * count)
+            if item == -2:
+                odd = count % 2
+                pattern.extend([1] * ((count-odd)//2))            
+            elif item >=0:
+                pattern.append(item)
+    return pattern
 
 
 def update_harmony_colors(self, context):
@@ -93,6 +129,13 @@ def update_harmony_colors(self, context):
         raw = color_utils.get_achromatic_colors(base, count)
         countTotal = len(raw)
         colors = raw[:countTotal]
+    
+    elif mode == 'tint_shade':
+        raw = color_utils.get_tint_shade_group(base,count)
+        countTotal = len(raw)
+        colors = raw[:countTotal]        
+    
+    
     else:
         colors = []
 
@@ -198,12 +241,38 @@ class HarmonySettings(bpy.types.PropertyGroup):
         update=update_harmony_colors
     )     # type: ignore
 
+
+class JOHNNYGIZMO_COLORHARMONY_OT_SetActivePaletteColor(bpy.types.Operator):
+    """Set this color as the active color in the Harmony Palette"""
+    bl_idname = "johnnygizmo_colorharmony.set_active_palette_color"
+    bl_label = "Set Active Palette Color"
+    index: bpy.props.IntProperty() # type: ignore
+
+    def execute(self, context):
+        palette = context.scene.johnnygizmo_harmony.palette
+        color_s = color_utils.convert_srgb_to_linear_rgb(palette.colors[self.index].color)
+        color = (
+            "[ "
+            + str(round(color_s[0],5))
+            + ", "
+            + str(round(color_s[1],5))
+            + ", "
+            + str(round(color_s[2],5))
+            + ", 1.00000 ]"
+        )
+        bpy.context.window_manager.clipboard = color
+        self.report({'INFO'}, color + " Copied to Clipboard.")
+        if palette and 0 <= self.index < len(palette.colors):
+            palette.colors.active = palette.colors[self.index]
+        return {'FINISHED'}
 # Blender Add-on Setup
 def register():
     bpy.utils.register_class(HarmonySettings)
+    bpy.utils.register_class(JOHNNYGIZMO_COLORHARMONY_OT_SetActivePaletteColor)
     bpy.types.Scene.johnnygizmo_harmony = PointerProperty(type=HarmonySettings)
-   
+
 
 def unregister():
     del bpy.types.Scene.johnnygizmo_harmony
+    bpy.utils.unregister_class(JOHNNYGIZMO_COLORHARMONY_OT_SetActivePaletteColor)
     bpy.utils.unregister_class(HarmonySettings)
