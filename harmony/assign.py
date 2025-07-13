@@ -118,9 +118,12 @@ class JOHNNYGIZMO_COLORHARMONY_OT_PaletteColorToRGBNodes(bpy.types.Operator):
         )[1]
 
         if self.mode == "CREATERGBNODE":
+            
             selected_color = palette.colors.active.color
             srgb_color = color_utils.convert_srgb_to_linear_rgb(selected_color[:3])
             nodes = mat.node_tree.nodes
+            for node in nodes:
+                node.select = False
             rgb_node = nodes.new(type="ShaderNodeRGB")
 
             rgb_node.label = (
@@ -149,10 +152,11 @@ class JOHNNYGIZMO_COLORHARMONY_OT_PaletteColorToRGBNodes(bpy.types.Operator):
 
             # Parent the RGB node to the frame
             rgb_node.parent = frame
-            frame.select = False
+            frame.select = True
         elif self.mode == "CREATERGBNODES":
             nodes = mat.node_tree.nodes
-
+            for node in nodes:
+                node.select = False
             new_name = (
                 harmony_mode
                 + " : "
@@ -167,7 +171,7 @@ class JOHNNYGIZMO_COLORHARMONY_OT_PaletteColorToRGBNodes(bpy.types.Operator):
             frame.location = (100, 100)
             frame.width = 140  # Optional: default width for visual organization
             frame.height = 100
-            frame.select = False
+            frame.select = True
 
             for idx in range(0, len(palette.colors)):
                 rgb_node = nodes.new(type="ShaderNodeRGB")
@@ -204,6 +208,8 @@ class JOHNNYGIZMO_COLORHARMONY_OT_PaletteColorToRGBNodes(bpy.types.Operator):
         elif self.mode == "CREATECOLORRAMP":
 
             nodes = mat.node_tree.nodes
+            for node in nodes:
+                node.select = False
             new_name = (
                 harmony_mode
                 + " : "
@@ -218,7 +224,7 @@ class JOHNNYGIZMO_COLORHARMONY_OT_PaletteColorToRGBNodes(bpy.types.Operator):
             frame.location = (100, 100)
             frame.width = 140  # Optional: default width for visual organization
             frame.height = 100
-            frame.select = False
+            frame.select = True
 
             # Create ColorRamp node
             ramp_node = nodes.new(type="ShaderNodeValToRGB")
