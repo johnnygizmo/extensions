@@ -4,6 +4,7 @@ IF NOT EXIST "folder.txt" (
     EXIT /B 1
 )
 
+move *.zip old_builds
 del *.zip
 del *.json
 

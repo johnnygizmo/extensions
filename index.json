@@ -7,7 +7,7 @@
       "id": "johnnygizmo_color_harmony",
       "name": "JohnnyGizmo Color Harmony",
       "tagline": "Speed up your color picking workflow",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "type": "add-on",
       "maintainer": "Johnny Matthews",
       "license": [
@@ -18,9 +18,9 @@
       "tags": [
         "Material"
       ],
-      "archive_url": "./johnnygizmo_color_harmony-1.1.2.zip",
-      "archive_size": 7373,
-      "archive_hash": "sha256:4d2708128a082241f90dbddc7ba316700b91c62cd782a795d5c9fe5f5def65cd"
+      "archive_url": "./johnnygizmo_color_harmony-1.2.0.zip",
+      "archive_size": 16882,
+      "archive_hash": "sha256:ac4fa866d6ac81921b8a0f49b2812fd61fbbf2cd5e92e06dacb723f50c1d616f"
     },
     {
       "schema_version": "1.0.0",
