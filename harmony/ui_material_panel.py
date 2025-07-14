@@ -3,7 +3,7 @@ from . import color_utils
 from . import harmony_colors
 from . import custom_palette
 
-class COLORHARMONY_PT_Panel(bpy.types.Panel):
+class COLORHARMONY_PT_material_panel(bpy.types.Panel):
     bl_label = "Color Harmony Tools"
     bl_idname = "COLORHARMONY_PT_material_panel"
     bl_space_type = "PROPERTIES"
@@ -299,8 +299,8 @@ class COLORHARMONY_PT_Panel(bpy.types.Panel):
                             ).mode = "CREATERGBNODES"            
 
 def register():
-    bpy.utils.register_class(COLORHARMONY_PT_Panel)
+    bpy.utils.register_class(COLORHARMONY_PT_material_panel)
 
 
 def unregister():
-    bpy.utils.unregister_class(COLORHARMONY_PT_Panel)
+    bpy.utils.unregister_class(COLORHARMONY_PT_material_panel)

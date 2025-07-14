@@ -166,6 +166,10 @@ type_list = {
 
 def nodeSearch(self, context, edit_text):
     obj = context.active_object
+    if obj.type == 'LIGHT' and obj.data.use_nodes and obj.data.node_tree:
+        nodes = obj.data.node_tree.nodes
+        output = [node.name for node in nodes if node.type in type_list and edit_text.lower() in node.name.lower()]
+        return output
     if obj and obj.active_material and obj.active_material.use_nodes:
         nodes = obj.active_material.node_tree.nodes
         output = [node.name for node in nodes if node.type in type_list and edit_text.lower() in node.name.lower()]

@@ -26,6 +26,11 @@ def checkObMat(self, context, obj):
         self.report({"WARNING"}, "No active object selected.")
         return (False, None, None)
 
+    if obj.type == 'LIGHT' and obj.data.use_nodes and obj.data.node_tree:
+        return (True, obj, obj.data)
+
+
+
     mat = obj.active_material
     if not mat:
         self.report({"WARNING"}, obj.name + " has no active material.")
@@ -49,8 +54,29 @@ class JOHNNYGIZMO_COLORHARMONY_OT_ApplySelectedPaletteColor(bpy.types.Operator):
         default="Base Color",
     )  # type: ignore
 
+    obtype: bpy.props.EnumProperty(
+        name="Type",
+        description="Type of input to apply the color to",
+        items=[("MATERIAL", "Material", "Apply to Material"),
+               ("LIGHT", "Light", "Apply to Light")],
+        default="MATERIAL",
+    ) # type: ignore
+
     def execute(self, context):
         props = context.scene.johnnygizmo_harmony
+        selected_color = props.palette.colors.active.color
+        srgb_color = color_utils.convert_srgb_to_linear_rgb(selected_color[:3])
+        ob = context.active_object
+        
+        if(ob.type == 'LIGHT'):
+            light = ob.data
+            if self.input == "light_color":                
+                light.color = srgb_color
+            elif self.input == "LightEmmissionColor":
+                bsdf = ob.data.node_tree.nodes.get(props.target_bsdf_node_name)        
+                bsdf.inputs["Color"].default_value = (*srgb_color, 1.0)
+            return {"FINISHED"}
+        
         for obj in context.selected_objects:
             (node_material, obj, mat) = checkObMat(self, context, obj)
             if not node_material:
@@ -103,16 +129,13 @@ class JOHNNYGIZMO_COLORHARMONY_OT_PaletteColorToRGBNodes(bpy.types.Operator):
 
         (node_material, obj, mat) = checkObMat(self, context, obj)
         if not node_material:
-            return
-
-        bsdf = mat.node_tree.nodes.get(props.target_bsdf_node_name)
-        if not bsdf:
-            return
+            print("a")
+            return {"CANCELLED"}
 
         palette = props.palette
         if not palette:
-            return
-
+            print("c")
+            return {"CANCELLED"}
         harmony_mode = next(
             item for item in harmony_colors.HARMONY_TYPES if item[0] == props.mode
         )[1]
@@ -349,20 +372,30 @@ class JOHNNYGIZMO_COLORHARMONY_OT_GetSelectedNode(bpy.types.Operator):
         props = context.scene.johnnygizmo_harmony
         obj = context.object
 
+        
+
         if not obj:
             self.report({"WARNING"}, "No active object selected.")
             return {"CANCELLED"}
 
-        mat = obj.active_material
+        if obj.type == 'LIGHT':
+            mat = obj.data
 
-        if not mat:
-            self.report({"WARNING"}, "Active object has no material.")
-            return {"CANCELLED"}
+            if not mat.use_nodes:
+                self.report({"WARNING"}, "Light does not use nodes.")
+                return {"CANCELLED"}
+            setNode(mat, props)
+        else:
+            mat = obj.active_material
 
-        if not mat.use_nodes:
-            self.report({"WARNING"}, "Material does not use nodes.")
-            return {"CANCELLED"}
-        setNode(mat, props)
+            if not mat:
+                self.report({"WARNING"}, "Active object has no material.")
+                return {"CANCELLED"}
+
+            if not mat.use_nodes:
+                self.report({"WARNING"}, "Material does not use nodes.")
+                return {"CANCELLED"}
+            setNode(mat, props)
         return {"FINISHED"}
 
 
