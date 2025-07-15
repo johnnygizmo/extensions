@@ -141,11 +141,4 @@ class COLORHARMONY_PT_Light_Panel(bpy.types.Panel):
                                 text="All Colors",
                             ).mode = "CREATERGBNODES"            
 
-def register():
-    bpy.utils.register_class(COLORHARMONY_PT_Light_Panel)
-
-
-def unregister():
-    bpy.utils.unregister_class(COLORHARMONY_PT_Light_Panel)
-
 

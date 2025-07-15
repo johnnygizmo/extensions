@@ -42,11 +42,3 @@ class JOHNNYGIZMO_COLORHARMONY_OT_GetSelectedNode(bpy.types.Operator):
                 return {"CANCELLED"}
             lib_assign.setNode(mat, props)
         return {"FINISHED"}
-
-
-def register():
-    bpy.utils.register_class(JOHNNYGIZMO_COLORHARMONY_OT_GetSelectedNode)
-
-
-def unregister():
-    bpy.utils.unregister_class(JOHNNYGIZMO_COLORHARMONY_OT_GetSelectedNode)

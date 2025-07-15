@@ -297,10 +297,3 @@ class COLORHARMONY_PT_material_panel(bpy.types.Panel):
                                 "johnnygizmo_colorharmony.palette_color_to_rgb_node",
                                 text="All Colors",
                             ).mode = "CREATERGBNODES"            
-
-def register():
-    bpy.utils.register_class(COLORHARMONY_PT_material_panel)
-
-
-def unregister():
-    bpy.utils.unregister_class(COLORHARMONY_PT_material_panel)

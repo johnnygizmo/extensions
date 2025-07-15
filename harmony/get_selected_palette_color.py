@@ -68,11 +68,3 @@ class JOHNNYGIZMO_COLORHARMONY_OT_GetSelectedPaletteColor(bpy.types.Operator):
             props.base_color = bsdf.inputs["Color"].default_value
 
         return {"FINISHED"}
-
-
-def register():
-    bpy.utils.register_class(JOHNNYGIZMO_COLORHARMONY_OT_GetSelectedPaletteColor)
-
-
-def unregister():
-    bpy.utils.unregister_class(JOHNNYGIZMO_COLORHARMONY_OT_GetSelectedPaletteColor)

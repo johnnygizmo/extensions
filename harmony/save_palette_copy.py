@@ -29,8 +29,3 @@ class JOHNNYGIZMO_COLORHARMONY_OT_SavePaletteCopy(bpy.types.Operator):
 
         self.report({'INFO'}, f"Palette '{self.new_name}' created with {len(new_palette.colors)} colors.")
         return {'FINISHED'}
-
-def register():
-    bpy.utils.register_class(JOHNNYGIZMO_COLORHARMONY_OT_SavePaletteCopy)
-def unregister():
-    bpy.utils.unregister_class(JOHNNYGIZMO_COLORHARMONY_OT_SavePaletteCopy)
