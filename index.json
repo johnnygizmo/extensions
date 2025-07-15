@@ -7,7 +7,7 @@
       "id": "johnnygizmo_color_harmony",
       "name": "JohnnyGizmo Color Harmony",
       "tagline": "Speed up your color picking workflow",
-      "version": "1.2.1",
+      "version": "1.3.0",
       "type": "add-on",
       "maintainer": "Johnny Matthews",
       "license": [
@@ -18,9 +18,9 @@
       "tags": [
         "Material"
       ],
-      "archive_url": "./johnnygizmo_color_harmony-1.2.1.zip",
-      "archive_size": 16893,
-      "archive_hash": "sha256:b2fbdf32724112777923c1c3c9ce512293bfeb5f3e19469daf37aeedc2c2e694"
+      "archive_url": "./johnnygizmo_color_harmony-1.3.0.zip",
+      "archive_size": 21142,
+      "archive_hash": "sha256:edadf0752e6a762e064dd40387ad8cceaad07ca3f74bc7b563ad3766e494a81e"
     },
     {
       "schema_version": "1.0.0",
@@ -41,8 +41,8 @@
         "Rigging"
       ],
       "archive_url": "./johnnygizmo_create_empty_vertex_child-1.0.0.zip",
-      "archive_size": 2741,
-      "archive_hash": "sha256:6356d196e6be33c400d80ade9532e882d4d77aa0abbddd5f235ce8b6b6f1e278"
+      "archive_size": 2716,
+      "archive_hash": "sha256:50d3cea4d5724a7754cd54d275b7756e90f35ad8ba9795f1fd04a515249b6092"
     },
     {
       "schema_version": "1.0.0",
@@ -59,7 +59,7 @@
       "website": "https://github.com/johnnygizmo/extensions",
       "archive_url": "./johnnygizmo_quick_cloth_tool-1.0.12.zip",
       "archive_size": 4652980,
-      "archive_hash": "sha256:88255109a33471cda8c2c07176bc5c7c7274793194f713007fc3aa3e9ffe8617"
+      "archive_hash": "sha256:3f3ca9cb4aa4deba0161c400eb777e4db79a2788a77fa28457e9a45e25343809"
     },
     {
       "schema_version": "1.0.0",
@@ -81,7 +81,7 @@
       ],
       "archive_url": "./johnnygizmo_rigging_tools-1.3.3.zip",
       "archive_size": 26528,
-      "archive_hash": "sha256:db4c69b1e16d780e0c9cb4b23ca9aa242c01566f1a476983b4b2f3d808668e45"
+      "archive_hash": "sha256:2cc9a2a6bca4613e64bb0b55cf7c29a6089f909f4cd06ba7449b05f86429003e"
     },
     {
       "schema_version": "1.0.0",
@@ -102,8 +102,8 @@
         "Mesh"
       ],
       "archive_url": "./johnnygizmo_vertex_bone_picker-1.2.1.zip",
-      "archive_size": 4256,
-      "archive_hash": "sha256:df128e9ae74c71a02989ab132ca0dd414a19ff8a55a29d7d0a7a0b88d66be649"
+      "archive_size": 4261,
+      "archive_hash": "sha256:c7dfd828dd3c55c5ebcbae2f7f8f57cc9bfa1dd27325c2a779225b8f9bcf47a2"
     }
   ]
 }
