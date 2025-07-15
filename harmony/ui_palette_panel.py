@@ -12,7 +12,7 @@ class COLORHARMONY_PT_palette_panel(bpy.types.Panel):
     @classmethod
     def poll(cls, context):
         mode = context.mode
-        return mode in {'SCULPT', 'VERTEX_PAINT', 'TEXTURE_PAINT'}
+        return mode in {'SCULPT', 'PAINT_VERTEX', 'PAINT_TEXTURE'}
 
     def draw(self, context):
         layout = self.layout
