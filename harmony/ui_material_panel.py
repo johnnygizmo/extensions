@@ -61,7 +61,6 @@ class COLORHARMONY_PT_material_panel(bpy.types.Panel):
             if mat.node_tree and mat.node_tree.nodes.get(props.target_bsdf_node_name):
                 # layout.label(text="Apply to: " + props.target_bsdf_node_name)
                 bsdf_node = mat.node_tree.nodes.get(props.target_bsdf_node_name)
-                # print(bsdf_node.type)
                 if bsdf_node.type == "BSDF_PRINCIPLED":
                     row = layout.row(align=True)
                     row.label(text="Set:")

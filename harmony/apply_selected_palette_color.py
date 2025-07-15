@@ -41,8 +41,13 @@ class JOHNNYGIZMO_COLORHARMONY_OT_ApplySelectedPaletteColor(bpy.types.Operator):
                 bsdf = ob.data.node_tree.nodes.get(props.target_bsdf_node_name)
                 bsdf.inputs["Color"].default_value = (*srgb_color, 1.0)
                 light.color = [1,1,1]
-                light.use_temperature = False
-                self.report({'INFO'}, f"Note: Light base color set to white, and Temperature turned off")
+                #check if light has an attribute called use_temperature
+                message = "Note: Light base color set to white"
+                if hasattr(light, 'use_temperature'):
+                    light.use_temperature = False
+                    message += ", and Temperature turned off"
+
+                self.report({'INFO'}, message)
             return {"FINISHED"}
 
         for obj in context.selected_objects:

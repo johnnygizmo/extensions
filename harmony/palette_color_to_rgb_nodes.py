@@ -12,8 +12,7 @@ def node_bounds(nodetree):
     max_x = -inf
     max_y = -inf
 
-    for node in nodetree.nodes:
-        print(node.location, node.name)
+    for node in nodetree.nodes:        
         if node.location[0] - node.width/2 < min_x:
             min_x = node.location[0] - node.width/2
         if node.location[0] + node.width/2 > max_x:
