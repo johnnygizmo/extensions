@@ -1,7 +1,7 @@
 import bpy  # type: ignore
 from . import color_utils
-from . import harmony_colors
-from . import custom_palette
+from . import harmony_settings
+from . import lib_custom_palette
 
 class COLORHARMONY_PT_material_panel(bpy.types.Panel):
     bl_label = "Color Harmony Tools"
@@ -52,7 +52,7 @@ class COLORHARMONY_PT_material_panel(bpy.types.Panel):
         row = layout.row()
         column = row.column(align=True)
         if palette:
-            custom_palette.color_palette(column, palette, props.mode, props.count)
+            lib_custom_palette.color_palette(column, palette, props.mode, props.count)
         else:
             column.label(text="No palette assigned.")
 
@@ -263,7 +263,7 @@ class COLORHARMONY_PT_material_panel(bpy.types.Panel):
                 op = row.operator(
                     "johnnygizmo_colorharmony.save_palette_copy", text="Copy To Palette"
                 )              
-                result = next((item for item in harmony_colors.HARMONY_TYPES if item[0] == props.mode), None)
+                result = next((item for item in harmony_settings.HARMONY_TYPES if item[0] == props.mode), None)
                 op.new_name = (
                     result[1]
                     + " Palette: [ "

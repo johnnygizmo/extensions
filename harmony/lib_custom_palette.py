@@ -1,7 +1,7 @@
 import bpy # type: ignore
-from . import harmony_colors
+from . import harmony_settings
 
-def colorControl(parent, palette, idx, scale=1.0):
+def colorControl(parent, palette, idx, scale=1.0, showPicker=True):
     col = parent.column()
     col.alignment = "CENTER"
     c = palette.colors[idx].color
@@ -15,23 +15,24 @@ def colorControl(parent, palette, idx, scale=1.0):
         subrow.scale_y = 1
     subrow.prop(palette.colors[idx], "color", text="")
     
-    subrow = col.row(align=True)
-    subrow.alignment = "CENTER"
-    icon = "BLANK1"
-    if palette.colors.active == palette.colors[idx]:
-        icon = "BRUSH_DATA"
-    op = subrow.operator(
-        "johnnygizmo_colorharmony.set_active_palette_color",
-        text="",
-        icon=icon,
-        emboss=True,
-    )
-    op.index = idx
+    if showPicker:
+        subrow = col.row(align=True)
+        subrow.alignment = "CENTER"
+        icon = "BLANK1"
+        if palette.colors.active == palette.colors[idx]:
+            icon = "BRUSH_DATA"
+        op = subrow.operator(
+            "johnnygizmo_colorharmony.set_active_palette_color",
+            text="",
+            icon=icon,
+            emboss=True,
+        )
+        op.index = idx
 
 
-def color_palette(layout, palette, mode, steps):
+def color_palette(layout, palette, mode, steps,showPicker = True):
     count = len(palette.colors)
-    pattern = harmony_colors.get_pattern(mode, steps)
+    pattern = harmony_settings.get_pattern(mode, steps)
     placed = 0
     position = 0
     rw = layout.row(align=True)
@@ -41,7 +42,7 @@ def color_palette(layout, palette, mode, steps):
             rw.separator(factor=3, type="SPACE")
             position += 1
         elif action == 1:
-            colorControl(rw, palette, placed, harmony_colors.TYPE_PATTERNS[mode][1])
+            colorControl(rw, palette, placed, harmony_settings.TYPE_PATTERNS[mode][1], showPicker)
             placed += 1
             position += 1
         elif action == 2:

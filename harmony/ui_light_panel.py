@@ -1,7 +1,7 @@
 
 import bpy  # type: ignore
-from . import custom_palette
-from . import harmony_colors
+from . import lib_custom_palette
+from . import harmony_settings
 
 class COLORHARMONY_PT_Light_Panel(bpy.types.Panel):
     bl_label = "Color Harmony Tools"
@@ -58,7 +58,7 @@ class COLORHARMONY_PT_Light_Panel(bpy.types.Panel):
         row = layout.row()
         column = row.column(align=True)
         if palette:
-            custom_palette.color_palette(column, palette, props.mode, props.count)
+            lib_custom_palette.color_palette(column, palette, props.mode, props.count)
         else:
             column.label(text="No palette assigned.")
 
@@ -68,19 +68,20 @@ class COLORHARMONY_PT_Light_Panel(bpy.types.Panel):
            
             row = layout.row(align=True)
             row.label(text="Set:")
-            op = row.operator(
-                "johnnygizmo_colorharmony.apply_selected_palette_color",
-                text="Light Obj",
-            )
-            op.input = "light_color"
-            op.obtype = "LIGHT"
             if obj.data.node_tree and obj.data.node_tree.nodes.get(props.target_bsdf_node_name):
                 bsdf_node = obj.data.node_tree.nodes[props.target_bsdf_node_name]
                 if bsdf_node.type == "EMISSION":                    
                     row.operator(
                         "johnnygizmo_colorharmony.apply_selected_palette_color",
-                        text="Color",
+                        text="Node Color",
                     ).input = "LightEmmissionColor"
+            op = row.operator(
+                "johnnygizmo_colorharmony.apply_selected_palette_color",
+                text="Light Base Color",
+            )
+            op.input = "light_color"
+            op.obtype = "LIGHT"
+            
            
             row = layout.row()
             split = row.split(factor=0.5)
@@ -105,7 +106,7 @@ class COLORHARMONY_PT_Light_Panel(bpy.types.Panel):
                 op = row.operator(
                     "johnnygizmo_colorharmony.save_palette_copy", text="Copy To Palette"
                 )              
-                result = next((item for item in harmony_colors.HARMONY_TYPES if item[0] == props.mode), None)
+                result = next((item for item in harmony_settings.HARMONY_TYPES if item[0] == props.mode), None)
                 op.new_name = (
                     result[1]
                     + " Palette: [ "
