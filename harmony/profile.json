@@ -271,4 +271,17 @@
 {"name":"Shader Compilation","ph":"X","ts":79911652955,"dur":10334,"pid":2,"tid":2},
 {"name":"overlay_uniform_color","ph":"X","ts":79911652955,"dur":10334,"pid":2,"tid":2},
 {"name":"Shader Compilation","ph":"X","ts":79911647639,"dur":19206,"pid":2,"tid":1},
-{"name":"overlay_paint_weight_fake
+{"name":"overlay_paint_weight_fake_shading","ph":"X","ts":79911647639,"dur":19206,"pid":2,"tid":1},
+{"name":"Shader Compilation","ph":"X","ts":79911653506,"dur":28025,"pid":2,"tid":14},
+{"name":"overlay_wireframe_selectable","ph":"X","ts":79911653506,"dur":28025,"pid":2,"tid":14},
+{"name":"Shader Compilation","ph":"X","ts":79911652458,"dur":29080,"pid":2,"tid":12},
+{"name":"overlay_particle_shape_selectable","ph":"X","ts":79911652458,"dur":29080,"pid":2,"tid":12},
+{"name":"Shader Compilation","ph":"X","ts":79911653828,"dur":27936,"pid":2,"tid":13},
+{"name":"overlay_wireframe_points_selectable","ph":"X","ts":79911653828,"dur":27936,"pid":2,"tid":13},
+{"name":"Shader Compilation","ph":"X","ts":79911649049,"dur":32800,"pid":2,"tid":8},
+{"name":"Shader Compilation","ph":"X","ts":79911651246,"dur":30606,"pid":2,"tid":3},
+{"name":"overlay_particle_dot_selectable","ph":"X","ts":79911649049,"dur":32800,"pid":2,"tid":8},
+{"name":"overlay_particle_hair_selectable","ph":"X","ts":79911651246,"dur":30606,"pid":2,"tid":3},
+{"name":"Shader Compilation","ph":"X","ts":79911653321,"dur":28540,"pid":2,"tid":0},
+{"name":"overlay_wireframe_curve_selectable","ph":"X","ts":79911653321,"dur":28540,"pid":2,"tid":0}
+]
