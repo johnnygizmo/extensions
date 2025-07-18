@@ -31,3 +31,6 @@ cd ..
 
 "%MyVar%\blender.exe" --command extension server-generate --repo-dir=./
 REM "%MyVar%\blender.exe" --command extension server-generate --repo-dir=./ --html
+cd old_builds
+call index.bat
+cd ..

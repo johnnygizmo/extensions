@@ -12,8 +12,7 @@ def node_bounds(nodetree):
     max_x = -inf
     max_y = -inf
 
-    for node in nodetree.nodes:
-        print(node.location, node.name)
+    for node in nodetree.nodes:        
         if node.location[0] - node.width/2 < min_x:
             min_x = node.location[0] - node.width/2
         if node.location[0] + node.width/2 > max_x:
@@ -74,7 +73,7 @@ class JOHNNYGIZMO_COLORHARMONY_OT_PaletteColorToRGBNodes(bpy.types.Operator):
             rgb_node.name = "Harmony"  # This sets the actual ID name
             (min,max) = node_bounds(mat.node_tree)
             rgb_node.location = (min[0]-250,max[1]-150)
-            rgb_node.outputs[0].default_value = (*selected_color[:3], 1.0)  # RGBA
+            rgb_node.outputs[0].default_value = (*srgb_color[:3], 1.0)  # RGBA
             rgb_node.select = False
             new_name = (
                 harmony_mode
@@ -195,13 +194,14 @@ class JOHNNYGIZMO_COLORHARMONY_OT_PaletteColorToRGBNodes(bpy.types.Operator):
             # Add the rest of the colors
             count = len(props.palette.colors)
             for i, col in enumerate(props.palette.colors[1:], start=1):
+                srgb_color = color_utils.convert_srgb_to_linear_rgb(col.color[:3])
                 extra = 1
                 if self.spacing == True:
                     extra = 0
 
                 pos = i / (count - extra)
                 el = ramp_node.color_ramp.elements.new(pos)
-                el.color = (*col.color, 1.0)
+                el.color = (*srgb_color, 1.0)
 
             ramp_node.parent = frame
         else:

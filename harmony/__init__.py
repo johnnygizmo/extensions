@@ -15,6 +15,7 @@ from . import set_active_palette_color
 from . import ui_material_panel
 from . import ui_light_panel
 from . import ui_palette_panel
+from . import ui_shader_panel
 from . import get_selected_node
 from . import get_selected_palette_color
 from . import palette_color_to_rgb_nodes
@@ -27,6 +28,7 @@ classes = (
     ui_light_panel.COLORHARMONY_PT_Light_Panel,
     ui_material_panel.COLORHARMONY_PT_material_panel,
     ui_palette_panel.COLORHARMONY_PT_palette_panel,
+    ui_shader_panel.COLORHARMONY_PT_shader_panel,
     get_selected_palette_color.JOHNNYGIZMO_COLORHARMONY_OT_GetSelectedPaletteColor,
     get_selected_node.JOHNNYGIZMO_COLORHARMONY_OT_GetSelectedNode,
     palette_color_to_rgb_nodes.JOHNNYGIZMO_COLORHARMONY_OT_PaletteColorToRGBNodes,
