@@ -3,7 +3,7 @@ schema_version = "1.0.0"
 id = "johnnygizmo_modifier_node_edit_panel"
 version = "0.2.1"
 name = "Special Values Node Edit Panel"
-tagline = "Access: Curves, Ramps, and Fonts, Bake Button from the Modifier Stack"
+tagline = "Curves, Ramps, and Fonts, Bake Button from the Modifier Stack"
 maintainer = "Johnny Matthews"
 type = "add-on"
 
