@@ -28,6 +28,13 @@ cd harmony
 call build.bat
 cd ..
 
+cd modifier_node_edit_panel
+call build.bat
+cd ..
+
+
+
+
 
 "%MyVar%\blender.exe" --command extension server-generate --repo-dir=./
 REM "%MyVar%\blender.exe" --command extension server-generate --repo-dir=./ --html
