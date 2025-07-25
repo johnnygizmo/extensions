@@ -65,6 +65,25 @@
     },
     {
       "schema_version": "1.0.0",
+      "id": "johnnygizmo_node_bake_shapes",
+      "name": "Johnnygizmo_node_bake_shapes",
+      "tagline": "Bake shape keys to Geometry Nodes",
+      "version": "1.0.0",
+      "type": "add-on",
+      "maintainer": "Johnny Matthews",
+      "license": [
+        "SPDX:GPL-2.0-or-later"
+      ],
+      "blender_version_min": "4.5.0",
+      "tags": [
+        "Geometry Nodes"
+      ],
+      "archive_url": "./johnnygizmo_node_bake_shapes-1.0.0.zip",
+      "archive_size": 3498,
+      "archive_hash": "sha256:773a62dca92dcab5f75e938b290ffc03533622a68bc63f4065816c45824ec23f"
+    },
+    {
+      "schema_version": "1.0.0",
       "id": "johnnygizmo_quick_cloth_tool",
       "name": "Quick Cloth Tool",
       "tagline": "Some Tools For Quick Cloth Simulation",
