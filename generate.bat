@@ -32,7 +32,9 @@ cd modifier_node_edit_panel
 call build.bat
 cd ..
 
-
+cd johnnygizmo_node_bake_shape
+call build.bat
+cd ..
 
 
 
