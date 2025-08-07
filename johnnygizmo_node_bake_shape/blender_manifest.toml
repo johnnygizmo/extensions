@@ -4,7 +4,7 @@ schema_version = "1.0.0"
 # Change the values according to your extension
 id = "johnnygizmo_node_bake_shapes"
 version = "1.0.0"
-name = "Johnnygizmo_node_bake_shapes"
+name = "Johnnygizmo Node Bake Shapes"
 tagline = "Bake shape keys to Geometry Nodes"
 maintainer = "Johnny Matthews"
 # Supported types: "add-on", "theme"
