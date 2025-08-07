@@ -17,15 +17,12 @@ class JOHNNYGIZMO_FloorPlanner_OT_copy_assets(Operator):
     bl_label = "Copy Assets to 'User Library'"
     bl_description = "Copies the bundled assets.blend to the User Library Asset Folder"
 
-    @classmethod
-    def poll(self, context):
-        return get_user_library_path() is not None
 
     def execute(self, context):
         user_lib_path = get_user_library_path()
 
         if not user_lib_path:
-            self.report({'ERROR'}, "User Library not found in Asset Libraries.")
+            self.report({'ERROR'}, "Create an Asset Library called 'User Library' in Asset Libraries.")
             return {'CANCELLED'}
 
         addon_dir = os.path.dirname(__file__)

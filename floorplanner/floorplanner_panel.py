@@ -16,6 +16,10 @@ class VIEW3D_PT_johnnygizmo_floorplanner_tools(Panel):
         layout = self.layout
         col = layout.column(align=True)
         
+        if len(context.active_object.modifiers) == 0 or context.active_object.modifiers.active.type != "NODES" or not any(n.name == "Floorplanner3.0"  for n in context.active_object.modifiers.active.node_group.nodes):
+            col.label(text="No Floorplanner Node Group found in active object.")
+            return       
+        
         row = col.row()
         row.scale_y = 1.5
         

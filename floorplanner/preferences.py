@@ -13,7 +13,6 @@ class JOHNNYGIZMO_FloorPlanner_Preferences(AddonPreferences):
     def draw(self, context):
         layout = self.layout
         layout.label(text="My Addon Preferences")
-        #layout.prop(self, "some_setting")
         layout.operator("myaddon.copy_assets_to_user_library", icon="FILE_BLEND")
 
 def register():
