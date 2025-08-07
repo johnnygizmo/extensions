@@ -11,6 +11,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
+from . import preferences
 from . import set_edge
 from . import set_window
 from . import set_baseboard
@@ -19,7 +20,7 @@ from . import set_wall
 from . import floorplanner_panel
 from . import set_edge_length
 from . import properties
-
+from . import copy_assets
 def register(): 
     properties.register()   
     set_edge.register()
@@ -29,6 +30,8 @@ def register():
     set_wall.register()
     floorplanner_panel.register()
     set_edge_length.register()
+    copy_assets.register()
+    preferences.register()
     
 
 def unregister():
@@ -40,3 +43,5 @@ def unregister():
     set_baseboard.unregister()
     set_edge.unregister()
     properties.unregister()
+    copy_assets.unregister()
+    preferences.unregister()
