@@ -6,6 +6,7 @@ from mathutils import Vector
 _last_cache_state = None
 
 
+
 # ------------------------------
 # Data storage
 # ------------------------------
@@ -119,6 +120,11 @@ class JOHNNYGIZMO_VIEW3D_PT_attribute_average(bpy.types.Panel):
     def draw(self, context):
         layout = self.layout
         obj = context.active_object
+
+
+        #vertex_group_picker_menu(self, context,parent=None)
+
+
         layout.label(text="Float, Int, Vector and Bool Only")
         if not obj or obj.type != 'MESH':
             layout.label(text="No mesh object.")
@@ -290,3 +296,7 @@ def unregister():
 
 if __name__ == "__main__":
     register()
+
+
+
+
