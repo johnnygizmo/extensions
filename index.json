@@ -4,6 +4,25 @@
   "data": [
     {
       "schema_version": "1.0.0",
+      "id": "geometrynode_scriptrunner",
+      "name": "Geometrynode Scriptrunner",
+      "tagline": "Package Scripts with your Geonodes and Run them",
+      "version": "1.0.0",
+      "type": "add-on",
+      "maintainer": "Johnny Matthews",
+      "license": [
+        "SPDX:GPL-2.0-or-later"
+      ],
+      "blender_version_min": "4.2.0",
+      "tags": [
+        "Geometry Nodes"
+      ],
+      "archive_url": "./geometrynode_scriptrunner-1.0.0.zip",
+      "archive_size": 2439,
+      "archive_hash": "sha256:4756f8f510b139f03dbc0cd38dba6921acf7443fe2a214d045a7bfcc387e889d"
+    },
+    {
+      "schema_version": "1.0.0",
       "id": "johnnygizmo_attribute_inspector",
       "name": "Attribute Inspector",
       "tagline": "View and Set Float, Int, Vector, Bool, and Color Mesh Attributes",
