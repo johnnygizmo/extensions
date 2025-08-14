@@ -36,7 +36,9 @@ cd johnnygizmo_node_bake_shape
 call build.bat
 cd ..
 
-
+cd attribute_inspector
+call build.bat
+cd ..
 
 "%MyVar%\blender.exe" --command extension server-generate --repo-dir=./
 REM "%MyVar%\blender.exe" --command extension server-generate --repo-dir=./ --html

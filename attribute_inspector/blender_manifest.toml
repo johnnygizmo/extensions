@@ -4,8 +4,8 @@ schema_version = "1.0.0"
 # Change the values according to your extension
 id = "johnnygizmo_attribute_inspector"
 version = "1.0.0"
-name = "Johnnygizmo_attribute_inspector"
-tagline = "This is another extension"
+name = "Attribute Inspector"
+tagline = "View and Set Float, Int, Vector, Bool, and Color Mesh Attributes"
 maintainer = "Johnny Matthews"
 # Supported types: "add-on", "theme"
 type = "add-on"
@@ -17,7 +17,7 @@ type = "add-on"
 # https://docs.blender.org/manual/en/dev/advanced/extensions/tags.html
 tags = ["Animation", "Sequencer"]
 
-blender_version_min = "4.2.0"
+blender_version_min = "4.5.0"
 # # Optional: Blender version that the extension does not support, earlier versions are supported.
 # # This can be omitted and defined later on the extensions platform if an issue is found.
 # blender_version_max = "5.1.0"

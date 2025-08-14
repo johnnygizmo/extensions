@@ -4,6 +4,26 @@
   "data": [
     {
       "schema_version": "1.0.0",
+      "id": "johnnygizmo_attribute_inspector",
+      "name": "Attribute Inspector",
+      "tagline": "View and Set Float, Int, Vector, Bool, and Color Mesh Attributes",
+      "version": "1.0.0",
+      "type": "add-on",
+      "maintainer": "Johnny Matthews",
+      "license": [
+        "SPDX:GPL-2.0-or-later"
+      ],
+      "blender_version_min": "4.5.0",
+      "tags": [
+        "Animation",
+        "Sequencer"
+      ],
+      "archive_url": "./johnnygizmo_attribute_inspector-1.0.0.zip",
+      "archive_size": 4955,
+      "archive_hash": "sha256:63fcd76d5d48cce9033ecbc1879b911acbde8e4e45de581f3d4350f1810deafa"
+    },
+    {
+      "schema_version": "1.0.0",
       "id": "johnnygizmo_color_harmony",
       "name": "JohnnyGizmo Color Harmony",
       "tagline": "Speed up your color picking workflow",
@@ -19,8 +39,8 @@
         "Material"
       ],
       "archive_url": "./johnnygizmo_color_harmony-1.3.1.zip",
-      "archive_size": 28530,
-      "archive_hash": "sha256:a847601716751af7ba479530339527710168aae680f2f148e3f5e3569ef0a1fe"
+      "archive_size": 23133,
+      "archive_hash": "sha256:62dca91e63529485656bb3519d3dc6aa25a637c4a1c38e714f57ac2b676929d5"
     },
     {
       "schema_version": "1.0.0",
@@ -41,8 +61,8 @@
         "Rigging"
       ],
       "archive_url": "./johnnygizmo_create_empty_vertex_child-1.0.0.zip",
-      "archive_size": 2741,
-      "archive_hash": "sha256:6356d196e6be33c400d80ade9532e882d4d77aa0abbddd5f235ce8b6b6f1e278"
+      "archive_size": 2716,
+      "archive_hash": "sha256:50d3cea4d5724a7754cd54d275b7756e90f35ad8ba9795f1fd04a515249b6092"
     },
     {
       "schema_version": "1.0.0",
@@ -60,8 +80,8 @@
         "Geometry Nodes"
       ],
       "archive_url": "./johnnygizmo_modifier_node_edit_panel-0.2.1.zip",
-      "archive_size": 3585,
-      "archive_hash": "sha256:82964888073b930ba5731b24e1ff0843c8eabf7506bd60849f3fcf2c58da5a4e"
+      "archive_size": 3571,
+      "archive_hash": "sha256:e9f33e2596b5aaca5809d260c5bd3d7f2d474fd0f7eb91d2902b1619357ad4fe"
     },
     {
       "schema_version": "1.0.0",
@@ -79,8 +99,8 @@
         "Geometry Nodes"
       ],
       "archive_url": "./johnnygizmo_node_bake_shapes-1.0.0.zip",
-      "archive_size": 3524,
-      "archive_hash": "sha256:c65e03b5d2e265781fbeea2721bdc429db5f4fd11d394cb8a9a3eb0fa3863ba8"
+      "archive_size": 3518,
+      "archive_hash": "sha256:8e7873ef5e6f5044bb97e814e2b07b0aad1cf12c8e4dfc237add862b5bacc878"
     },
     {
       "schema_version": "1.0.0",
@@ -97,7 +117,7 @@
       "website": "https://github.com/johnnygizmo/extensions",
       "archive_url": "./johnnygizmo_quick_cloth_tool-1.0.12.zip",
       "archive_size": 4652980,
-      "archive_hash": "sha256:88255109a33471cda8c2c07176bc5c7c7274793194f713007fc3aa3e9ffe8617"
+      "archive_hash": "sha256:3f3ca9cb4aa4deba0161c400eb777e4db79a2788a77fa28457e9a45e25343809"
     },
     {
       "schema_version": "1.0.0",
@@ -119,7 +139,7 @@
       ],
       "archive_url": "./johnnygizmo_rigging_tools-1.3.3.zip",
       "archive_size": 26528,
-      "archive_hash": "sha256:db4c69b1e16d780e0c9cb4b23ca9aa242c01566f1a476983b4b2f3d808668e45"
+      "archive_hash": "sha256:2cc9a2a6bca4613e64bb0b55cf7c29a6089f909f4cd06ba7449b05f86429003e"
     },
     {
       "schema_version": "1.0.0",
@@ -140,8 +160,8 @@
         "Mesh"
       ],
       "archive_url": "./johnnygizmo_vertex_bone_picker-1.2.1.zip",
-      "archive_size": 4256,
-      "archive_hash": "sha256:df128e9ae74c71a02989ab132ca0dd414a19ff8a55a29d7d0a7a0b88d66be649"
+      "archive_size": 4261,
+      "archive_hash": "sha256:c7dfd828dd3c55c5ebcbae2f7f8f57cc9bfa1dd27325c2a779225b8f9bcf47a2"
     }
   ]
 }
