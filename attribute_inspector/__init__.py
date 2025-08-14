@@ -6,22 +6,26 @@ from mathutils import Vector
 _last_cache_state = None
 
 
-
 # ------------------------------
 # Data storage
 # ------------------------------
 class JohnnyGizmoAttributeValue(bpy.types.PropertyGroup):
     """
     A PropertyGroup to store attribute data, including name, domain,
-    data type, and a value for each possible type (float, int, bool, vec).
+    data type, and a value for each possible type (float, int, bool, vec, color, string).
     """
     name: bpy.props.StringProperty()
     domain: bpy.props.StringProperty()
-    data_type: bpy.props.StringProperty()  # 'FLOAT', 'INT', 'BOOLEAN', 'FLOAT_VECTOR'
+    data_type: bpy.props.StringProperty()  # 'FLOAT', 'INT', 'BOOLEAN', 'FLOAT_VECTOR', 'FLOAT_COLOR', 'STRING'
     float_value: bpy.props.FloatProperty(name="Value")
     int_value: bpy.props.IntProperty(name="Value")
     bool_value: bpy.props.BoolProperty(name="Value")
+    # This property is for 3-component vectors
     vector_value: bpy.props.FloatVectorProperty(name="Value", size=3)
+    # This property is specifically for 4-component colors
+    color_value: bpy.props.FloatVectorProperty(name="Value", size=4, subtype='COLOR')
+    # This new property is for string attributes
+    string_value: bpy.props.StringProperty(name="Value")
 
 
 # ------------------------------
@@ -30,7 +34,7 @@ class JohnnyGizmoAttributeValue(bpy.types.PropertyGroup):
 class JOHNNYGIZMO_MESH_OT_set_attribute_value(bpy.types.Operator):
     """
     Operator to set the value of a selected attribute on the active mesh.
-    It now handles float, integer, boolean, and vector attributes.
+    It now handles float, integer, boolean, vector, color, and string attributes.
     """
     bl_idname = "mesh.johnnygizmo_set_attribute_value"
     bl_label = "Set Attribute Value"
@@ -43,6 +47,8 @@ class JOHNNYGIZMO_MESH_OT_set_attribute_value(bpy.types.Operator):
     value_int: bpy.props.IntProperty()
     value_bool: bpy.props.BoolProperty()
     value_vector: bpy.props.FloatVectorProperty()
+    value_color: bpy.props.FloatVectorProperty(size=4, default=(0.0, 0.0, 0.0, 1.0))
+    value_string: bpy.props.StringProperty()
 
     def execute(self, context):
         obj = context.active_object
@@ -65,6 +71,10 @@ class JOHNNYGIZMO_MESH_OT_set_attribute_value(bpy.types.Operator):
                 return elements.layers.bool.get(attr_name)
             elif data_type == 'FLOAT_VECTOR':
                 return elements.layers.float_vector.get(attr_name)
+            elif data_type == 'FLOAT_COLOR':
+                return elements.layers.float_color.get(attr_name)
+            elif data_type == 'STRING':
+                return elements.layers.string.get(attr_name)
             return None
 
         # Determine the correct bmesh layer and elements
@@ -74,7 +84,7 @@ class JOHNNYGIZMO_MESH_OT_set_attribute_value(bpy.types.Operator):
         elif self.domain == 'EDGE':
             elems = bm.edges
             layer = get_layer(elems, self.data_type, self.attr_name)
-        else: # FACE
+        else:  # FACE
             elems = bm.faces
             layer = get_layer(elems, self.data_type, self.attr_name)
 
@@ -92,11 +102,19 @@ class JOHNNYGIZMO_MESH_OT_set_attribute_value(bpy.types.Operator):
             value_to_set = self.value_bool
         elif self.data_type == 'FLOAT_VECTOR':
             value_to_set = self.value_vector
+        elif self.data_type == 'FLOAT_COLOR':
+            # Use the color value property
+            value_to_set = self.value_color
+        elif self.data_type == 'STRING':
+            value_to_set = self.value_string
 
         # Set the value on all selected elements
         for elem in elems:
             if elem.select:
-                elem[layer] = value_to_set
+                if self.data_type != 'STRING':
+                    elem[layer] = value_to_set
+                else:
+                    elem[layer] = value_to_set.encode('utf-8')
 
         bmesh.update_edit_mesh(obj.data)
         return {'FINISHED'}
@@ -121,11 +139,7 @@ class JOHNNYGIZMO_VIEW3D_PT_attribute_average(bpy.types.Panel):
         layout = self.layout
         obj = context.active_object
 
-
-        #vertex_group_picker_menu(self, context,parent=None)
-
-
-        layout.label(text="Float, Int, Vector and Bool Only")
+        layout.label(text="Float, Int, Vector, Bool, Color Only")
         if not obj or obj.type != 'MESH':
             layout.label(text="No mesh object.")
             return
@@ -136,6 +150,8 @@ class JOHNNYGIZMO_VIEW3D_PT_attribute_average(bpy.types.Panel):
 
         last_domain = None
         for item in context.scene.attribute_values:
+            if item.data_type not in {'FLOAT', 'INT', 'BOOLEAN', 'FLOAT_VECTOR', 'FLOAT_COLOR'}:
+                continue
             # Group by domain with headings
             if item.domain != last_domain:
                 layout.label(text=f"{item.domain.title()} Attributes:")
@@ -144,23 +160,28 @@ class JOHNNYGIZMO_VIEW3D_PT_attribute_average(bpy.types.Panel):
             row = layout.row(align=True)
             
             # Use the correct property for the data type and pass the value to the operator
+            op = row.operator("mesh.johnnygizmo_set_attribute_value", text="", icon="PASTEDOWN")
+
             if item.data_type == 'FLOAT':
                 row.prop(item, "float_value", text=item.name)
-                op = row.operator("mesh.johnnygizmo_set_attribute_value", text="", icon="PASTEDOWN")
                 op.value_float = item.float_value
             elif item.data_type == 'INT':
                 row.prop(item, "int_value", text=item.name)
-                op = row.operator("mesh.johnnygizmo_set_attribute_value", text="", icon="PASTEDOWN")
                 op.value_int = item.int_value
             elif item.data_type == 'BOOLEAN':
                 row.prop(item, "bool_value", text=item.name)
-                op = row.operator("mesh.johnnygizmo_set_attribute_value", text="", icon="PASTEDOWN")
                 op.value_bool = item.bool_value
             elif item.data_type == 'FLOAT_VECTOR':
                 row.prop(item, "vector_value", text=item.name)
-                op = row.operator("mesh.johnnygizmo_set_attribute_value", text="", icon="PASTEDOWN")
                 op.value_vector = item.vector_value
-            
+            elif item.data_type == 'FLOAT_COLOR':
+                row.prop(item, "color_value", text=item.name)
+                # Correctly pass the color value property
+                op.value_color = item.color_value
+            # elif item.data_type == 'STRING':
+            #     row.prop(item, "string_value", text=item.name)
+            #     op.value_string = item.string_value
+                
             # Common properties for the operator call
             op.attr_name = item.name
             op.domain = item.domain
@@ -174,7 +195,7 @@ def update_attribute_cache(scene):
     """
     This handler function is called after a dependency graph update.
     It updates the UI's attribute list based on the current mesh selection
-    and available attributes (float, int, bool, vec).
+    and available attributes (float, int, bool, vec, color, string).
     Now only shows attributes for the currently active selection mode.
     """
     global _last_cache_state
@@ -216,6 +237,13 @@ def update_attribute_cache(scene):
         for layer_name in elements.layers.float_vector.keys():
             sel_indices = [i for i, e in enumerate(elements) if e.select]
             sel_data.append((domain_name, 'FLOAT_VECTOR', layer_name, tuple(sel_indices)))
+        for layer_name in elements.layers.float_color.keys():
+            sel_indices = [i for i, e in enumerate(elements) if e.select]
+            sel_data.append((domain_name, 'FLOAT_COLOR', layer_name, tuple(sel_indices)))
+        for layer_name in elements.layers.string.keys():
+            sel_indices = [i for i, e in enumerate(elements) if e.select]
+            sel_data.append((domain_name, 'STRING', layer_name, tuple(sel_indices)))
+
 
     state_hash = hash(str(sel_data))
 
@@ -228,7 +256,7 @@ def update_attribute_cache(scene):
     for domain_name, elements in domains_to_process.items():
         
         # Helper to process a given layer type
-        def process_layer_type(layer_collection, data_type_str, property_name):
+        def process_layer_type(layer_collection, data_type_str):
             for layer_name in layer_collection.keys():
                 layer = layer_collection.get(layer_name)
                 selected_values = [elem[layer] for elem in elements if elem.select]
@@ -248,6 +276,11 @@ def update_attribute_cache(scene):
                         item.bool_value = False
                     elif data_type_str == 'FLOAT_VECTOR':
                         item.vector_value = (0.0, 0.0, 0.0)
+                    elif data_type_str == 'FLOAT_COLOR':
+                        # Correctly use the color value property
+                        item.color_value = (0.0, 0.0, 0.0, 0.0)
+                    elif data_type_str == 'STRING':
+                        item.string_value = ""
                 else:
                     # Calculate average and set the correct property
                     if data_type_str == 'FLOAT':
@@ -259,11 +292,20 @@ def update_attribute_cache(scene):
                     elif data_type_str == 'FLOAT_VECTOR':
                         avg_vec = sum(selected_values, Vector((0.0, 0.0, 0.0))) / len(selected_values)
                         item.vector_value = avg_vec
-        
-        process_layer_type(elements.layers.float, 'FLOAT', 'float_value')
-        process_layer_type(elements.layers.int, 'INT', 'int_value')
-        process_layer_type(elements.layers.bool, 'BOOLEAN', 'bool_value')
-        process_layer_type(elements.layers.float_vector, 'FLOAT_VECTOR', 'vector_value')
+                    elif data_type_str == 'FLOAT_COLOR':
+                        avg_vec = sum(selected_values, Vector((0.0, 0.0, 0.0, 0.0))) / len(selected_values)
+                        # The fix: assign to the 4-component 'color_value' property
+                        item.color_value = avg_vec
+                    elif data_type_str == 'STRING':
+                        # The fix: decode the bytes to a string
+                        item.string_value = selected_values[0].decode('utf-8')
+
+        process_layer_type(elements.layers.float, 'FLOAT')
+        process_layer_type(elements.layers.int, 'INT')
+        process_layer_type(elements.layers.bool, 'BOOLEAN')
+        process_layer_type(elements.layers.float_vector, 'FLOAT_VECTOR')
+        process_layer_type(elements.layers.float_color, 'FLOAT_COLOR')
+        process_layer_type(elements.layers.string, 'STRING')
 
 
 # ------------------------------
@@ -287,8 +329,13 @@ def register():
 
 def unregister():
     """Unregister all classes and the handler."""
-    bpy.app.handlers.depsgraph_update_post.remove(update_attribute_cache)
-    del bpy.types.Scene.attribute_values
+    # Check if the handler exists before trying to remove it
+    if update_attribute_cache in bpy.app.handlers.depsgraph_update_post:
+        bpy.app.handlers.depsgraph_update_post.remove(update_attribute_cache)
+    
+    # Check if the property exists before trying to delete it
+    if hasattr(bpy.types.Scene, "attribute_values"):
+        del bpy.types.Scene.attribute_values
 
     for cls in reversed(classes):
         bpy.utils.unregister_class(cls)
@@ -296,7 +343,3 @@ def unregister():
 
 if __name__ == "__main__":
     register()
-
-
-
-
