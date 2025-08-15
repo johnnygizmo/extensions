@@ -194,12 +194,6 @@ class JOHNNYGIZMO_VIEW3D_PT_attribute_average(bpy.types.Panel):
 # ------------------------------
 @persistent
 def update_attribute_cache(scene):
-    """
-    This handler function is called after a dependency graph update.
-    It updates the UI's attribute list based on the current mesh selection
-    and available attributes (float, int, bool, vec, color, string).
-    Now only shows attributes for the currently active selection mode.
-    """
     global _last_cache_state
     ctx = bpy.context
     obj = ctx.active_object
@@ -252,12 +246,8 @@ def update_attribute_cache(scene):
     if state_hash == _last_cache_state:
         return
     _last_cache_state = state_hash
-
-    # If changes were detected, rebuild the attribute list
     scene.attribute_values.clear()
-    for domain_name, elements in domains_to_process.items():
-        
-        # Helper to process a given layer type
+    for domain_name, elements in domains_to_process.items():       
         def process_layer_type(layer_collection, data_type_str):
             for layer_name in layer_collection.keys():
                 layer = layer_collection.get(layer_name)
