@@ -34,12 +34,13 @@
       ],
       "blender_version_min": "4.5.0",
       "tags": [
-        "Animation",
-        "Sequencer"
+        "3D View",
+        "Modeling",
+        "Mesh"
       ],
       "archive_url": "./johnnygizmo_attribute_inspector-1.0.0.zip",
-      "archive_size": 4955,
-      "archive_hash": "sha256:63fcd76d5d48cce9033ecbc1879b911acbde8e4e45de581f3d4350f1810deafa"
+      "archive_size": 4979,
+      "archive_hash": "sha256:cb3224ff6ff11b965338c955ef64d1c8f2669bad6457835fc4b47f44b9790c4b"
     },
     {
       "schema_version": "1.0.0",
