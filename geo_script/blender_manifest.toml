@@ -3,8 +3,8 @@ schema_version = "1.0.0"
 # Example of manifest file for a Blender extension
 # Change the values according to your extension
 id = "geometrynode_scriptrunner"
-version = "1.0.0"
-name = "Geometrynode Scriptrunner"
+version = "1.0.1"
+name = "JohnnyGizmo Geometry Node Script Runner"
 tagline = "Package Scripts with your Geonodes and Run them"
 maintainer = "Johnny Matthews"
 # Supported types: "add-on", "theme"

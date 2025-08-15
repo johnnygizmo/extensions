@@ -3,8 +3,8 @@ schema_version = "1.0.0"
 # Example of manifest file for a Blender extension
 # Change the values according to your extension
 id = "johnnygizmo_quick_cloth_tool"
-version = "1.0.12"
-name = "Quick Cloth Tool"
+version = "1.0.13"
+name = "JohnnyGizmo Quick Cloth Tool"
 tagline = "Some Tools For Quick Cloth Simulation"
 maintainer = "Johnny Matthews <johnny.matthews+blender@gmail.com>"
 website = "https://github.com/johnnygizmo/extensions"

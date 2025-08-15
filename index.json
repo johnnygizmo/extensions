@@ -5,9 +5,9 @@
     {
       "schema_version": "1.0.0",
       "id": "geometrynode_scriptrunner",
-      "name": "Geometrynode Scriptrunner",
+      "name": "JohnnyGizmo Geometry Node Script Runner",
       "tagline": "Package Scripts with your Geonodes and Run them",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "type": "add-on",
       "maintainer": "Johnny Matthews",
       "license": [
@@ -17,16 +17,16 @@
       "tags": [
         "Geometry Nodes"
       ],
-      "archive_url": "./geometrynode_scriptrunner-1.0.0.zip",
-      "archive_size": 2462,
-      "archive_hash": "sha256:53403aedb5fd28d70a83a62b1ca8fb398685804ec846459b610241c8f23b761b"
+      "archive_url": "./geometrynode_scriptrunner-1.0.1.zip",
+      "archive_size": 2474,
+      "archive_hash": "sha256:8661114f111c5a8fa7f36a95c561cc0847cfed33d50d38576c33b921be0e9203"
     },
     {
       "schema_version": "1.0.0",
       "id": "johnnygizmo_attribute_inspector",
       "name": "JohnnyGizmo Attribute Inspector",
       "tagline": "View and Set Float, Int, Vector, Bool, and Color Mesh Attributes",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "type": "add-on",
       "maintainer": "Johnny Matthews",
       "license": [
@@ -38,9 +38,9 @@
         "Modeling",
         "Mesh"
       ],
-      "archive_url": "./johnnygizmo_attribute_inspector-1.0.0.zip",
-      "archive_size": 4865,
-      "archive_hash": "sha256:37385d969e1ce2c79f76d03e3f14847abbdd1af3a0376be24645a5d742c3850f"
+      "archive_url": "./johnnygizmo_attribute_inspector-1.0.1.zip",
+      "archive_size": 4866,
+      "archive_hash": "sha256:1a6e662a4c05b0b7c6419af89972cf2ffc939859f075de286bc9365b88af4cee"
     },
     {
       "schema_version": "1.0.0",
@@ -87,9 +87,9 @@
     {
       "schema_version": "1.0.0",
       "id": "johnnygizmo_modifier_node_edit_panel",
-      "name": "Special Values Node Edit Panel",
+      "name": "JohnnyGizmo Special Values Node Edit Panel",
       "tagline": "Curves, Ramps, and Fonts, Bake Button from the Modifier Stack",
-      "version": "0.2.1",
+      "version": "0.2.2",
       "type": "add-on",
       "maintainer": "Johnny Matthews",
       "license": [
@@ -99,9 +99,9 @@
       "tags": [
         "Geometry Nodes"
       ],
-      "archive_url": "./johnnygizmo_modifier_node_edit_panel-0.2.1.zip",
-      "archive_size": 3585,
-      "archive_hash": "sha256:82964888073b930ba5731b24e1ff0843c8eabf7506bd60849f3fcf2c58da5a4e"
+      "archive_url": "./johnnygizmo_modifier_node_edit_panel-0.2.2.zip",
+      "archive_size": 3590,
+      "archive_hash": "sha256:539d2b552a465f4e0e91e0e893e6eeb77db3363acb3104417eefeeeb2620c2f5"
     },
     {
       "schema_version": "1.0.0",
@@ -125,9 +125,9 @@
     {
       "schema_version": "1.0.0",
       "id": "johnnygizmo_quick_cloth_tool",
-      "name": "Quick Cloth Tool",
+      "name": "JohnnyGizmo Quick Cloth Tool",
       "tagline": "Some Tools For Quick Cloth Simulation",
-      "version": "1.0.12",
+      "version": "1.0.13",
       "type": "add-on",
       "maintainer": "Johnny Matthews <johnny.matthews+blender@gmail.com>",
       "license": [
@@ -135,9 +135,9 @@
       ],
       "blender_version_min": "4.4.0",
       "website": "https://github.com/johnnygizmo/extensions",
-      "archive_url": "./johnnygizmo_quick_cloth_tool-1.0.12.zip",
-      "archive_size": 4652980,
-      "archive_hash": "sha256:88255109a33471cda8c2c07176bc5c7c7274793194f713007fc3aa3e9ffe8617"
+      "archive_url": "./johnnygizmo_quick_cloth_tool-1.0.13.zip",
+      "archive_size": 4652984,
+      "archive_hash": "sha256:f87ebb05a5ef56c0bf36ce5c071af0d1368d08406ac3a7798b7ac08b44dd9acc"
     },
     {
       "schema_version": "1.0.0",
@@ -164,9 +164,9 @@
     {
       "schema_version": "1.0.0",
       "id": "johnnygizmo_vertex_bone_picker",
-      "name": "Vertex Bone Picker",
+      "name": "JohnnyGizmo Vertex Bone Picker",
       "tagline": "Assign the selected verts to a bone (now part of Rigging Tools)",
-      "version": "1.2.1",
+      "version": "1.2.2",
       "type": "add-on",
       "maintainer": "Johnny Matthews",
       "license": [
@@ -179,9 +179,9 @@
         "3D View",
         "Mesh"
       ],
-      "archive_url": "./johnnygizmo_vertex_bone_picker-1.2.1.zip",
-      "archive_size": 4256,
-      "archive_hash": "sha256:df128e9ae74c71a02989ab132ca0dd414a19ff8a55a29d7d0a7a0b88d66be649"
+      "archive_url": "./johnnygizmo_vertex_bone_picker-1.2.2.zip",
+      "archive_size": 4259,
+      "archive_hash": "sha256:60bc715533d3d0b9ce77ecde17ae2f550eae22aa3ab43f2c8cf0fc60afd443fd"
     }
   ]
 }
