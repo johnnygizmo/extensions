@@ -1,6 +1,7 @@
 import bpy
 import bmesh
 from mathutils import Vector
+from bpy.app.handlers import persistent
 
 # Stores the last known selection/attribute state so we know when to refresh
 _last_cache_state = None
@@ -191,6 +192,7 @@ class JOHNNYGIZMO_VIEW3D_PT_attribute_average(bpy.types.Panel):
 # ------------------------------
 # Handler: updates the attribute_values cache
 # ------------------------------
+@persistent
 def update_attribute_cache(scene):
     """
     This handler function is called after a dependency graph update.
