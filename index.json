@@ -26,7 +26,7 @@
       "id": "johnnygizmo_attribute_inspector",
       "name": "JohnnyGizmo Attribute Inspector",
       "tagline": "View and Set Float, Int, Vector, Bool, and Color Mesh Attributes",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "type": "add-on",
       "maintainer": "Johnny Matthews",
       "license": [
@@ -38,9 +38,9 @@
         "Modeling",
         "Mesh"
       ],
-      "archive_url": "./johnnygizmo_attribute_inspector-1.0.1.zip",
-      "archive_size": 4866,
-      "archive_hash": "sha256:1a6e662a4c05b0b7c6419af89972cf2ffc939859f075de286bc9365b88af4cee"
+      "archive_url": "./johnnygizmo_attribute_inspector-1.0.2.zip",
+      "archive_size": 4868,
+      "archive_hash": "sha256:90de4c56bb9e6681bd425aa0c7afada208ce65b217a9d381bf10f6fcadc664ce"
     },
     {
       "schema_version": "1.0.0",
