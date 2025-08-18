@@ -56,7 +56,7 @@ class MESH_OT_johnnygizmo_floorplanner_set_baseboard(Operator):
                 attr_value=self.cap
             )      
 
-        bpy.ops.mesh.set_edge_float_attribute(
+        bpy.ops.mesh.johnnygizmo_floorplanner_set_edge_float_attribute(
             'EXEC_DEFAULT',
             attr_name="baseboard_extend",
             attr_value=self.extend,

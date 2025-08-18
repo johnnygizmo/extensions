@@ -5,7 +5,7 @@ from bpy.types import Operator# type: ignore
 
 class MESH_OT_johnnygizmo_floorplanner_set_wall(Operator):
     """Set Wall Attribute"""
-    bl_idname = "mesh.set_wall"
+    bl_idname = "mesh.johnnygizmo_floorplanner_set_wall"
     bl_label = "Set Wall Attribute"
     bl_options = {'REGISTER', 'UNDO'}
     action: IntProperty(
@@ -64,39 +64,39 @@ class MESH_OT_johnnygizmo_floorplanner_set_wall(Operator):
             )
 
             if self.hide == 0:
-                bpy.ops.mesh.set_edge_float_attribute(
+                bpy.ops.mesh.johnnygizmo_floorplanner_set_edge_float_attribute(
                     'EXEC_DEFAULT',
                     attr_name="door_height",
                     attr_value=0,
                 )
 
-                bpy.ops.mesh.set_edge_float_attribute(
+                bpy.ops.mesh.johnnygizmo_floorplanner_set_edge_float_attribute(
                     'EXEC_DEFAULT',
                     attr_name="window_height",
                     attr_value=0,
                 )
 
         else:
-            bpy.ops.mesh.set_edge_float_attribute(
+            bpy.ops.mesh.johnnygizmo_floorplanner_set_edge_float_attribute(
                 'EXEC_DEFAULT',
                 attr_name="wall_width",
                 attr_value=self.width,
                 
             )
 
-            bpy.ops.mesh.set_edge_float_attribute(
+            bpy.ops.mesh.johnnygizmo_floorplanner_set_edge_float_attribute(
                 'EXEC_DEFAULT',
                 attr_name="wall_extend1",
                 attr_value=self.extend1,
             )
 
-            bpy.ops.mesh.set_edge_float_attribute(
+            bpy.ops.mesh.johnnygizmo_floorplanner_set_edge_float_attribute(
                 'EXEC_DEFAULT',
                 attr_name="wall_extend2",
                 attr_value=self.extend2,
             )
 
-            bpy.ops.mesh.set_edge_float_attribute(
+            bpy.ops.mesh.johnnygizmo_floorplanner_set_edge_float_attribute(
                 'EXEC_DEFAULT',
                 attr_name="wall_center",
                 attr_value=self.centering,
@@ -106,7 +106,7 @@ class MESH_OT_johnnygizmo_floorplanner_set_wall(Operator):
 
 class MESH_OT_johnnygizmo_floorplanner_set_wall_ext(Operator):
     """Set Wall Attribute"""
-    bl_idname = "mesh.set_wall_ext"
+    bl_idname = "mesh.johnnygizmo_floorplanner_set_wall_ext"
     bl_label = "Set Wall Attribute"
     bl_options = {'REGISTER', 'UNDO'}
     
@@ -208,10 +208,10 @@ class MESH_OT_johnnygizmo_floorplanner_load_edge_averages(Operator):
             self.report({'WARNING'}, "No selected edges.")
             return {'CANCELLED'}
 
-        context.scene.JMFLOORPLANNER_wallWidth = total_width / count
-        context.scene.JMFLOORPLANNER_wallExt1 = total_extend1 / count
-        context.scene.JMFLOORPLANNER_wallExt2 = total_extend2 / count
-        context.scene.JMFLOORPLANNER_wallCenter = total_center / count
+        context.scene.johnnygizmo_floorplanner_tool_settings.wall_width = total_width / count
+        context.scene.johnnygizmo_floorplanner_tool_settings.wall_ext1 = total_extend1 / count
+        context.scene.johnnygizmo_floorplanner_tool_settings.wall_ext2 = total_extend2 / count
+        context.scene.johnnygizmo_floorplanner_tool_settings.wall_center = total_center / count
 
         return {'FINISHED'}
 

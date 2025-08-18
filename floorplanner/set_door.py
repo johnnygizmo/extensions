@@ -35,7 +35,7 @@ class MESH_OT_johnnygizmo_floorplanner_set_door(Operator):
                 context.mode == 'EDIT_MESH')
     
     def execute(self, context):
-        bpy.ops.mesh.set_edge_float_attribute(
+        bpy.ops.mesh.johnnygizmo_floorplanner_set_edge_float_attribute(
             'EXEC_DEFAULT',
             attr_name="door_height",
             attr_value=self.height,
@@ -59,7 +59,7 @@ class MESH_OT_johnnygizmo_floorplanner_set_door(Operator):
                 attr_value=1,
             )
             
-            bpy.ops.mesh.set_edge_float_attribute(
+            bpy.ops.mesh.johnnygizmo_floorplanner_set_edge_float_attribute(
                 'EXEC_DEFAULT',
                 attr_name="window_height",
                 attr_value=0,
@@ -75,7 +75,7 @@ class MESH_OT_johnnygizmo_floorplanner_set_door(Operator):
 def door_preset(width,height,prefix,layout):
     h = round(height * 39.3701, 1)
     w = round(width * 39.3701, 1)
-    text = f"{prefix} {w:.2g}\"x{h:.2g}\" ({width:.2f}mx{height:.2f}m)"
+    text = f"{prefix} {w:.2g}\"x{h:.2g}\" ({width:.2f}m x {height:.2f}m)"
     op = layout.operator("mesh.johnnygizmo_floorplanner_set_door_preset", text=text)
     op.width  = width
     op.height = height  

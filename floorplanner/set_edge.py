@@ -5,7 +5,7 @@ from bpy.types import Operator # type: ignore
 
 class MESH_OT_johnnygizmo_floorplanner_set_edge_float_attribute(Operator):
     """Set or create edge attribute with specified value for selected edges"""
-    bl_idname = "mesh.set_edge_float_attribute"
+    bl_idname = "mesh.johnnygizmo_floorplanner_set_edge_float_attribute"
     bl_label = "Set Edge Attribute"
     bl_options = {'REGISTER', 'UNDO'}
     

@@ -48,19 +48,26 @@ class MESH_OT_johnnygizmo_floorplanner_set_window(Operator):
                 context.mode == 'EDIT_MESH')
     
     def execute(self, context):
-        bpy.ops.mesh.set_edge_float_attribute(
+        bpy.ops.jm_floorplanner.set_edge_length(
+            'EXEC_DEFAULT',
+            length=self.width,
+        )
+
+
+        bpy.ops.mesh.johnnygizmo_floorplanner_set_edge_float_attribute(
             'EXEC_DEFAULT',
             attr_name="window_height",
             attr_value=self.height,
         )
 
 
-        bpy.ops.mesh.set_edge_float_attribute(
+
+        bpy.ops.mesh.johnnygizmo_floorplanner_set_edge_float_attribute(
             'EXEC_DEFAULT',
             attr_name="window_width",
             attr_value=self.width,
         )
-        bpy.ops.mesh.set_edge_float_attribute(
+        bpy.ops.mesh.johnnygizmo_floorplanner_set_edge_float_attribute(
             'EXEC_DEFAULT',
             attr_name="window_base",
             attr_value=self.base,
@@ -78,7 +85,7 @@ class MESH_OT_johnnygizmo_floorplanner_set_window(Operator):
                 attr_value=1,
             )
             
-            bpy.ops.mesh.set_edge_float_attribute(
+            bpy.ops.mesh.johnnygizmo_floorplanner_set_edge_float_attribute(
                 'EXEC_DEFAULT',
                 attr_name="door_height",
                 attr_value=0,
@@ -93,33 +100,13 @@ class MESH_OT_johnnygizmo_floorplanner_set_window(Operator):
         
         return {'FINISHED'}
     
-    # def invoke(self, context, event):
-    #     # Show dialog for user input
-    #     return context.window_manager.invoke_props_dialog(self)
-
-def register():
-    bpy.utils.register_class(MESH_OT_johnnygizmo_floorplanner_set_window)
-
-def unregister():
-    bpy.utils.unregister_class(MESH_OT_johnnygizmo_floorplanner_set_window)
-
-
-
-
-
-
-
-
-
-
-
 
 
 def window_preset(width,height,prefix,layout):
     h = round(height * 39.3701, 1)
     w = round(width * 39.3701, 1)
-    text = f"{prefix} {w:.2g}\"x{h:.2g}\" ({width:.2f}mx{height:.2f}m)"
-    op = layout.operator("mesh.johnnygizmo_floorplanner_set_door_preset", text=text)
+    text = f"{prefix} {w:.2g}\"x{h:.2g}\" ({width:.2f}m x {height:.2f}m)"
+    op = layout.operator("mesh.johnnygizmo_floorplanner_set_window_preset", text=text)
     op.width  = width
     op.height = height  
     return op
@@ -133,12 +120,31 @@ class JOHNNYGIZMO_FLOORPLANNER_MT_window_presets(bpy.types.Menu):
         self.draw_preset(context)
         layout.separator()
 
-        window_preset(0.9144, 2.032, "Standard", layout)
-        windoow_preset(0.6096, 2.032, "Standard", layout)
-        windoow_preset(0.7112, 2.032, "Standard", layout)
-        windoow_preset(0.762, 2.032, "Standard", layout)
-        windoow_preset(0.8128, 2.032, "Standard", layout)
-        windoow_preset(1.524, 2.032, "Sliding", layout)
+        window_preset(0.9144, 0.6096, "Picture (3020)", layout)
+        window_preset(1.524, 0.9144, "Picture (5030)", layout)
+        window_preset(1.8288, 1.2192, "Picture (6040)", layout)
+        window_preset(1.2192, 1.524, "Picture (4050)", layout)
+
+
+        window_preset(0.6096, 0.9144, "Single/Double Hung (2030)", layout)
+        window_preset(0.6096, 1.3208, "Single/Double Hung (2044)", layout)
+        window_preset(0.8128, 1.2192, "Single/Double Hung (2840)", layout)
+        window_preset(0.8128, 0.6096, "Single/Double Hung (2852)", layout)
+
+        window_preset(0.7112, 1.0668, "Casement (2436)", layout)
+        window_preset(0.762, 1.2192, "Casement (2640)", layout)
+        window_preset(0.8128, 1.524, "Casement (2850)", layout)
+        window_preset( 0.9144, 1.8288, "Casement (3060)", layout)
+
+        window_preset( 0.9144, 0.6096, "Awning (3020)", layout)
+        window_preset( 1.2192, 0.7112, "Awning (4024)", layout)
+        window_preset( 1.524, 0.9144, "Awning (5030)", layout)
+
+        window_preset( 0.9144, 0.6096, "Sliding (3020)", layout)
+        window_preset( 0.9144, 0.9144, "Sliding (3030)", layout)
+        window_preset( 1.524,  0.9144, "Sliding (5030)", layout)
+        window_preset( 1.8288, 1.2192, "Sliding (6040)", layout)
+
 
 class MESH_OT_johnnygizmo_floorplanner_set_window_preset(bpy.types.Operator):
     """Set or create edge attribute with specified value for selected edges"""
@@ -173,7 +179,7 @@ class AddWindowPresetJohnnyGizmoFloorplanner(AddPresetBase, bpy.types.Operator):
 
     # Properties to store in each preset
     preset_values = [
-        "mytool.winow_width",
+        "mytool.window_width",
         "mytool.window_height"
     ]
 
@@ -186,7 +192,6 @@ classes = (
     MESH_OT_johnnygizmo_floorplanner_set_window_preset,
     AddWindowPresetJohnnyGizmoFloorplanner
 )
-
 
 def register():
     for cls in classes:

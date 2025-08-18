@@ -25,8 +25,8 @@ class VIEW3D_PT_johnnygizmo_floorplanner_tools(Panel):
         
         op = row.operator("jm_floorplanner.set_edge_length",
                           text="Set Edge Length")
-        op.length = context.scene.JMFLOORPLANNER_edgeLength
-        row.prop(context.scene, "JMFLOORPLANNER_edgeLength", text='')
+        op.length = context.scene.johnnygizmo_floorplanner_tool_settings.edge_length
+        row.prop(context.scene.johnnygizmo_floorplanner_tool_settings, "edge_length", text='')
 
 
         row = col.row(align=True)
@@ -34,11 +34,11 @@ class VIEW3D_PT_johnnygizmo_floorplanner_tools(Panel):
         row = col.row(align=True)
         row.scale_y = 1.5  # Make button taller
 
-        op16 = row.operator("mesh.set_wall", text="Show Wall")
+        op16 = row.operator("mesh.johnnygizmo_floorplanner_set_wall", text="Show Wall")
         op16.action = 1
         op16.hide = 0
 
-        op17 = row.operator("mesh.set_wall", text="", icon='TRASH')
+        op17 = row.operator("mesh.johnnygizmo_floorplanner_set_wall", text="", icon='TRASH')
         op17.action = 1
         op17.hide = 1
         
@@ -46,33 +46,33 @@ class VIEW3D_PT_johnnygizmo_floorplanner_tools(Panel):
         row = col.row(align=True)
 
         row.scale_y = 1.5  # Make button taller
-        op16a = row.operator("mesh.set_wall", text="Set Wall Options")
+        op16a = row.operator("mesh.johnnygizmo_floorplanner_set_wall", text="Set Wall Options")
         op16a.action = 0
-        op16a.extend1 = context.scene.JMFLOORPLANNER_wallExt1
-        op16a.extend2 = context.scene.JMFLOORPLANNER_wallExt2
-        op16a.width = context.scene.JMFLOORPLANNER_wallWidth
-        op16a.centering = context.scene.JMFLOORPLANNER_wallCenter
+        op16a.extend1 = context.scene.johnnygizmo_floorplanner_tool_settings.wall_ext1
+        op16a.extend2 = context.scene.johnnygizmo_floorplanner_tool_settings.wall_ext2
+        op16a.width = context.scene.johnnygizmo_floorplanner_tool_settings.wall_width
+        op16a.centering = context.scene.johnnygizmo_floorplanner_tool_settings.wall_center
 
 
         row = col.row(align=True)
-        row.prop(context.scene, "JMFLOORPLANNER_wallWidth", text="Width")
+        row.prop(context.scene.johnnygizmo_floorplanner_tool_settings, "wall_width", text="Width")
         row = col.row(align=True)
-        row.prop(context.scene, "JMFLOORPLANNER_wallCenter", text="Centering")
+        row.prop(context.scene.johnnygizmo_floorplanner_tool_settings, "wall_center", text="Centering")
         row = col.row(align=True)
-        row.prop(context.scene, "JMFLOORPLANNER_wallExt1", text="Extend 1")
-        op30 = row.operator("mesh.set_wall_ext", text="", icon='TRACKING_FORWARDS_SINGLE')
+        row.prop(context.scene.johnnygizmo_floorplanner_tool_settings, "wall_ext1", text="Extend 1")
+        op30 = row.operator("mesh.johnnygizmo_floorplanner_set_wall_ext", text="", icon='TRACKING_FORWARDS_SINGLE')
         op30.value = True
         op30.end = 1
-        op31 = row.operator("mesh.set_wall_ext", text="", icon='TRACKING_CLEAR_FORWARDS')
+        op31 = row.operator("mesh.johnnygizmo_floorplanner_set_wall_ext", text="", icon='TRACKING_CLEAR_FORWARDS')
         op31.value = False
         op31.end = 1     
 
         row = col.row(align=True)
-        row.prop(context.scene, "JMFLOORPLANNER_wallExt2", text="Extend 2")
-        op32 = row.operator("mesh.set_wall_ext", text="", icon='TRACKING_FORWARDS_SINGLE')
+        row.prop(context.scene.johnnygizmo_floorplanner_tool_settings, "wall_ext2", text="Extend 2")
+        op32 = row.operator("mesh.johnnygizmo_floorplanner_set_wall_ext", text="", icon='TRACKING_FORWARDS_SINGLE')
         op32.value = True
         op32.end = 2
-        op33 = row.operator("mesh.set_wall_ext", text="", icon='TRACKING_CLEAR_FORWARDS')
+        op33 = row.operator("mesh.johnnygizmo_floorplanner_set_wall_ext", text="", icon='TRACKING_CLEAR_FORWARDS')
         op33.value = False
         op33.end = 2
 
@@ -101,35 +101,43 @@ class VIEW3D_PT_johnnygizmo_floorplanner_tools(Panel):
         op5 = row.operator("mesh.johnnygizmo_floorplanner_set_door", text="", icon='TRASH')
         op5.height = 0.0
         row = col.row(align=True) 
-        row.scale_y = 1.5
-        row.prop(context.scene.johnnygizmo_floorplanner_tool_settings, "door_height", text="Height") 
-        row = col.row(align=True)   
         row.scale_y = 1.5  
         row.prop(context.scene.johnnygizmo_floorplanner_tool_settings, "door_width", text="Width")
+        row = col.row(align=True)  
+        row.scale_y = 1.5
+        row.prop(context.scene.johnnygizmo_floorplanner_tool_settings, "door_height", text="Height") 
+         
+
         col.separator()
 
         row3 = col.row(align=True)
         row3.label(text="Windows:")
+        row = col.row(align=True)
+        row.menu("JOHNNYGIZMO_FLOORPLANNER_MT_window_presets", text="Presets")
+        row.operator("johnnygizmo_floorplanner.add_window_preset", text="", icon="ADD")
+        row.operator("johnnygizmo_floorplanner.add_window_preset", text="", icon="REMOVE").remove_active = True
         row3 = col.row(align=True)
         row3.scale_y = 1.5  # Make button taller
-        op2 = row3.operator("mesh.set_window", text="Set Window" )
+        op2 = row3.operator("mesh.johnnygizmo_floorplanner_set_window", text="Set Window" )
         op2.base = context.scene.johnnygizmo_floorplanner_tool_settings.window_base 
         op2.width = context.scene.johnnygizmo_floorplanner_tool_settings.window_width 
         op2.height = context.scene.johnnygizmo_floorplanner_tool_settings.window_height 
         
-        op3 = row3.operator("mesh.set_window", text="", icon='TRASH')
+        op3 = row3.operator("mesh.johnnygizmo_floorplanner_set_window", text="", icon='TRASH')
         op3.base = 0.0
         op3.height = 0.0
         op3.width = 0.0
         row = col.row(align=True)
         row.scale_y = 1.5
-        row.prop(context.johnnygizmo_floorplanner_tool_settings, "window_width", text="Width")
+        row.prop(context.scene.johnnygizmo_floorplanner_tool_settings, "window_width", text="Width")
         row = col.row(align=True)
         row.scale_y = 1.5
-        row.prop(context.johnnygizmo_floorplanner_tool_settings, "window_height", text="Height")
+        row.prop(context.scene.johnnygizmo_floorplanner_tool_settings, "window_height", text="Height")
+        row = col.row(align=True)
+        row.separator()
         row = col.row(align=True)
         row.scale_y = 1.5
-        row.prop(context.johnnygizmo_floorplanner_tool_settings, "window_base", text="Base")
+        row.prop(context.scene.johnnygizmo_floorplanner_tool_settings, "window_base", text="Base Height")
 
 
 
