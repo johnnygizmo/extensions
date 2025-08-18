@@ -114,17 +114,22 @@ class VIEW3D_PT_johnnygizmo_floorplanner_tools(Panel):
         row3.scale_y = 1.5  # Make button taller
         op2 = row3.operator("mesh.set_window", text="Set Window" )
         op2.base = context.scene.johnnygizmo_floorplanner_tool_settings.window_base 
-        op2.height = context.scene.JMFLOORPLANNER_windowHeight
+        op2.width = context.scene.johnnygizmo_floorplanner_tool_settings.window_width 
+        op2.height = context.scene.johnnygizmo_floorplanner_tool_settings.window_height 
+        
         op3 = row3.operator("mesh.set_window", text="", icon='TRASH')
         op3.base = 0.0
         op3.height = 0.0
         op3.width = 0.0
         row = col.row(align=True)
         row.scale_y = 1.5
-        row.prop(context.scene, "JMFLOORPLANNER_windowHeight", text="Height")
+        row.prop(context.johnnygizmo_floorplanner_tool_settings, "window_width", text="Width")
         row = col.row(align=True)
         row.scale_y = 1.5
-        row.prop(context.scene, "JMFLOORPLANNER_windowBase", text="Base")
+        row.prop(context.johnnygizmo_floorplanner_tool_settings, "window_height", text="Height")
+        row = col.row(align=True)
+        row.scale_y = 1.5
+        row.prop(context.johnnygizmo_floorplanner_tool_settings, "window_base", text="Base")
 
 
 

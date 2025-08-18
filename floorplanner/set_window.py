@@ -2,10 +2,6 @@ import bpy# type: ignore
 import bmesh# type: ignore
 from bpy.props import IntProperty, FloatProperty# type: ignore
 from bpy.types import Operator# type: ignore
-import bpy# type: ignore
-import bmesh# type: ignore
-from bpy.props import StringProperty, FloatProperty# type: ignore
-from bpy.types import Operator# type: ignore
 from bl_operators.presets import AddPresetBase
 from os import path
 from . import preferences
