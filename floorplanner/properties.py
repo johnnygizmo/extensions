@@ -2,10 +2,6 @@ import bpy # type: ignore
 
 props = [
        
-    ('JMFLOORPLANNER_windowHeight', bpy.props.FloatProperty(
-        name='windowHeight', default=1.6256, subtype='DISTANCE')),
-    ('JMFLOORPLANNER_windowBase', bpy.props.FloatProperty(
-        name='windowBase', default=.700, subtype='DISTANCE')),
     ('JMFLOORPLANNER_edgeLength', bpy.props.FloatProperty(
         name='edgeLength', default=1, subtype='DISTANCE')),
     ('JMFLOORPLANNER_wallWidth', bpy.props.FloatProperty(
@@ -22,6 +18,9 @@ props = [
 class MyToolSettings(bpy.types.PropertyGroup):
     door_height: bpy.props.FloatProperty(name="Float", default=1.0,subtype='DISTANCE') # type: ignore
     door_width:  bpy.props.FloatProperty(name="Float", default=1.0,subtype='DISTANCE')     # type: ignore
+    window_height: bpy.props.FloatProperty(name="Float", default=1.6256,subtype='DISTANCE') # type: ignore
+    window_width:  bpy.props.FloatProperty(name="Float", default=.700,subtype='DISTANCE')     # type: ignore
+    window_base:   bpy.props.FloatProperty(name="Float", default=1.0,subtype='DISTANCE')     # type: ignore
 
 def register():
     bpy.utils.register_class(MyToolSettings)

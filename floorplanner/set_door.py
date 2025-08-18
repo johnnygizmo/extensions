@@ -9,7 +9,7 @@ from . import preferences
 
 class MESH_OT_johnnygizmo_floorplanner_set_door(Operator):
     """Set or create edge attribute with specified value for selected edges"""
-    bl_idname = "mesh.set_door"
+    bl_idname = "mesh.johnnygizmo_floorplanner_set_door"
     bl_label = "Set Door Attribute"
     bl_options = {'REGISTER', 'UNDO'}
     
@@ -72,6 +72,14 @@ class MESH_OT_johnnygizmo_floorplanner_set_door(Operator):
     # def invoke(self, context, event):
     #     return context.door_manager.invoke_props_dialog(self)
 
+def door_preset(width,height,prefix,layout):
+    h = round(height * 39.3701, 1)
+    w = round(width * 39.3701, 1)
+    text = f"{prefix} {w:.2g}\"x{h:.2g}\" ({width:.2f}mx{height:.2f}m)"
+    op = layout.operator("mesh.johnnygizmo_floorplanner_set_door_preset", text=text)
+    op.width  = width
+    op.height = height  
+    return op
 
 class JOHNNYGIZMO_FLOORPLANNER_MT_door_presets(bpy.types.Menu):
     bl_label = "Door Presets"
@@ -82,29 +90,12 @@ class JOHNNYGIZMO_FLOORPLANNER_MT_door_presets(bpy.types.Menu):
         self.draw_preset(context)
         layout.separator()
 
-        op = layout.operator("mesh.johnnygizmo_floorplanner_set_door_preset", text="Standard 80x36")
-        op.width = 0.9144
-        op.height=2.032
-
-        op = layout.operator("mesh.johnnygizmo_floorplanner_set_door_preset", text="Standard 80x24")
-        op.width = 0.6096
-        op.height=2.032
-
-        op = layout.operator("mesh.johnnygizmo_floorplanner_set_door_preset", text="Standard 80x28")
-        op.width = 0.7112
-        op.height=2.032
-
-        op = layout.operator("mesh.johnnygizmo_floorplanner_set_door_preset", text="Standard 80x30")
-        op.width = 0.762
-        op.height=2.032
-
-        op = layout.operator("mesh.johnnygizmo_floorplanner_set_door_preset", text="Standard 80x32")
-        op.width = 0.8128
-        op.height= 2.032
-
-        op = layout.operator("mesh.johnnygizmo_floorplanner_set_door_preset", text="Sliding Door 80x60")
-        op.width = 1.524
-        op.height= 2.032
+        door_preset(0.9144, 2.032, "Standard", layout)
+        door_preset(0.6096, 2.032, "Standard", layout)
+        door_preset(0.7112, 2.032, "Standard", layout)
+        door_preset(0.762, 2.032, "Standard", layout)
+        door_preset(0.8128, 2.032, "Standard", layout)
+        door_preset(1.524, 2.032, "Sliding", layout)
 
 class MESH_OT_johnnygizmo_floorplanner_set_door_preset(bpy.types.Operator):
     """Set or create edge attribute with specified value for selected edges"""

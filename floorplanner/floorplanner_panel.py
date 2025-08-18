@@ -67,8 +67,6 @@ class VIEW3D_PT_johnnygizmo_floorplanner_tools(Panel):
         op31.value = False
         op31.end = 1     
 
-
-
         row = col.row(align=True)
         row.prop(context.scene, "JMFLOORPLANNER_wallExt2", text="Extend 2")
         op32 = row.operator("mesh.set_wall_ext", text="", icon='TRACKING_FORWARDS_SINGLE')
@@ -86,7 +84,7 @@ class VIEW3D_PT_johnnygizmo_floorplanner_tools(Panel):
 
         # Button to set door attribute
         row = col.row(align=True)
-        row.scale_y = 1.5  # Make button taller
+        row.scale_y = 1.5 
         row.label(text="Doors:")
 
         row = col.row(align=True)
@@ -96,11 +94,11 @@ class VIEW3D_PT_johnnygizmo_floorplanner_tools(Panel):
         
         row = col.row(align=True)
         row.scale_y = 1.5
-        op4 = row.operator("mesh.set_door", text="Set", )
+        op4 = row.operator("mesh.johnnygizmo_floorplanner_set_door", text="Set", )
         op4.height = context.scene.johnnygizmo_floorplanner_tool_settings.door_height
         op4.width = context.scene.johnnygizmo_floorplanner_tool_settings.door_width
 
-        op5 = row.operator("mesh.set_door", text="", icon='TRASH')
+        op5 = row.operator("mesh.johnnygizmo_floorplanner_set_door", text="", icon='TRASH')
         op5.height = 0.0
         row = col.row(align=True) 
         row.scale_y = 1.5
@@ -115,7 +113,7 @@ class VIEW3D_PT_johnnygizmo_floorplanner_tools(Panel):
         row3 = col.row(align=True)
         row3.scale_y = 1.5  # Make button taller
         op2 = row3.operator("mesh.set_window", text="Set Window" )
-        op2.base = context.scene.JMFLOORPLANNER_windowBase 
+        op2.base = context.scene.johnnygizmo_floorplanner_tool_settings.window_base 
         op2.height = context.scene.JMFLOORPLANNER_windowHeight
         op3 = row3.operator("mesh.set_window", text="", icon='TRASH')
         op3.base = 0.0
