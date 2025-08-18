@@ -88,19 +88,26 @@ class VIEW3D_PT_johnnygizmo_floorplanner_tools(Panel):
         row = col.row(align=True)
         row.scale_y = 1.5  # Make button taller
         row.label(text="Doors:")
+
+        row = col.row(align=True)
+        row.menu("JOHNNYGIZMO_FLOORPLANNER_MT_door_presets", text="Presets")
+        row.operator("johnnygizmo_floorplanner.add_door_preset", text="", icon="ADD")
+        row.operator("johnnygizmo_floorplanner.add_door_preset", text="", icon="REMOVE").remove_active = True        
+        
         row = col.row(align=True)
         row.scale_y = 1.5
         op4 = row.operator("mesh.set_door", text="Set", )
-        op4.height = context.scene.JMFLOORPLANNER_doorHeight   
-        
+        op4.height = context.scene.johnnygizmo_floorplanner_tool_settings.door_height
+        op4.width = context.scene.johnnygizmo_floorplanner_tool_settings.door_width
+
         op5 = row.operator("mesh.set_door", text="", icon='TRASH')
         op5.height = 0.0
         row = col.row(align=True) 
         row.scale_y = 1.5
-        row.prop(context.scene, "JMFLOORPLANNER_doorHeight", text="Height") 
-        row = col.row(align=True)     
-
-        
+        row.prop(context.scene.johnnygizmo_floorplanner_tool_settings, "door_height", text="Height") 
+        row = col.row(align=True)   
+        row.scale_y = 1.5  
+        row.prop(context.scene.johnnygizmo_floorplanner_tool_settings, "door_width", text="Width")
         col.separator()
 
         row3 = col.row(align=True)

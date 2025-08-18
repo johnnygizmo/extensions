@@ -10,7 +10,7 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
-
+import bpy
 from . import preferences
 from . import set_edge
 from . import set_window
@@ -21,22 +21,31 @@ from . import floorplanner_panel
 from . import set_edge_length
 from . import properties
 from . import copy_assets
+from . import presets
+
+
+
+
+
 def register(): 
-    properties.register()   
+    properties.register()       
     set_edge.register()
     set_window.register()
     set_baseboard.register()
     set_door.register()
     set_wall.register()
-    floorplanner_panel.register()
     set_edge_length.register()
     copy_assets.register()
     preferences.register()
-    
+
+    floorplanner_panel.register()
+
+
 
 def unregister():
-    set_edge_length.unregister()
     floorplanner_panel.unregister()
+    
+    set_edge_length.unregister()
     set_wall.unregister()
     set_door.unregister()
     set_window.unregister()
