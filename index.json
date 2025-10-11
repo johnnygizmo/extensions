@@ -4,6 +4,26 @@
   "data": [
     {
       "schema_version": "1.0.0",
+      "id": "acg_material",
+      "name": "ACG Material Importer",
+      "tagline": "Import materials from AmbientCG.com Zip File",
+      "version": "1.0.0",
+      "type": "add-on",
+      "maintainer": "Johnny Matthews",
+      "license": [
+        "SPDX:GPL-2.0-or-later"
+      ],
+      "blender_version_min": "4.5.0",
+      "tags": [
+        "Material",
+        "Import-Export"
+      ],
+      "archive_url": "./acg_material-1.0.0.zip",
+      "archive_size": 4159,
+      "archive_hash": "sha256:0c60904e043454cb2337fd838c3b0c5ce432338cc0fab61f8ee8df0da5ffae67"
+    },
+    {
+      "schema_version": "1.0.0",
       "id": "geometrynode_scriptrunner",
       "name": "JohnnyGizmo Geometry Node Script Runner",
       "tagline": "Package Scripts with your Geonodes and Run them",
@@ -136,8 +156,8 @@
       "blender_version_min": "4.4.0",
       "website": "https://github.com/johnnygizmo/extensions",
       "archive_url": "./johnnygizmo_quick_cloth_tool-1.0.13.zip",
-      "archive_size": 4652984,
-      "archive_hash": "sha256:f87ebb05a5ef56c0bf36ce5c071af0d1368d08406ac3a7798b7ac08b44dd9acc"
+      "archive_size": 4378309,
+      "archive_hash": "sha256:0c4718ec6e7280a77a476257f038db5c83ea7e9b2300eb9eb2d912049551c226"
     },
     {
       "schema_version": "1.0.0",

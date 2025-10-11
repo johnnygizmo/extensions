@@ -119,11 +119,9 @@ class IMPORT_OT_usdz_material(bpy.types.Operator, ImportHelper):
             tex_node.location.x = grid_start_x + (col * node_spacing_x)
             tex_node.location.y = grid_start_y - (row * node_spacing_y)
         
-        print(f"Imported new material: {new_mat.name}")
-        print(f"Imported material: {new_mat.name if new_mat else 'None'}")
         # 5. Create an object and assign the material
         if new_mat:
-
+            new_mat.displacement_method = 'BOTH'
             
             bpy.ops.mesh.primitive_uv_sphere_add(segments=24, ring_count=24)
             obj = context.active_object
