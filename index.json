@@ -145,8 +145,8 @@
     {
       "schema_version": "1.0.0",
       "id": "johnnygizmo_phyicallybasedmaterials",
-      "name": "Phyicallybasedmaterials",
-      "tagline": "This is another extension",
+      "name": "Phyically Based Materials",
+      "tagline": "Download material data from physicallybased.info",
       "version": "1.0.0",
       "type": "add-on",
       "maintainer": "Johnny Matthews",
@@ -162,8 +162,8 @@
         "Sequencer"
       ],
       "archive_url": "./johnnygizmo_phyicallybasedmaterials-1.0.0.zip",
-      "archive_size": 4659,
-      "archive_hash": "sha256:98872caaf3069cf595fe3dffa6819f9d7f188316589466ee6fb3f4f4cae96231"
+      "archive_size": 4655,
+      "archive_hash": "sha256:9ca5c4c606a0d1ed749d51341803cffe596c27cae5990f1888699a28f307668a"
     },
     {
       "schema_version": "1.0.0",
