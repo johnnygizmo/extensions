@@ -44,6 +44,11 @@ cd geo_script
 call build.bat
 cd ..
 
+cd physicallybased
+call build.bat
+cd ..
+
+
 "%MyVar%\blender.exe" --command extension server-generate --repo-dir=./
 REM "%MyVar%\blender.exe" --command extension server-generate --repo-dir=./ --html
 cd old_builds
