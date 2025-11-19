@@ -28,6 +28,7 @@ cd harmony
 call build.bat
 cd ..
 
+
 cd modifier_node_edit_panel
 call build.bat
 cd ..
@@ -45,6 +46,10 @@ call build.bat
 cd ..
 
 cd physicallybased
+call build.bat
+cd ..
+
+cd usdc_material
 call build.bat
 cd ..
 
