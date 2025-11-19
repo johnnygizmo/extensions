@@ -3,7 +3,7 @@ schema_version = "1.0.0"
 # Example of manifest file for a Blender extension
 # Change the values according to your extension
 id = "johnnygizmo_phyicallybasedmaterials"
-version = "1.0.0"
+version = "1.0.1"
 name = "Phyically Based Materials"
 tagline = "Download material data from physicallybased.info"
 maintainer = "Johnny Matthews"

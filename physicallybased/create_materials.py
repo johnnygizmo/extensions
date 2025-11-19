@@ -1,3 +1,4 @@
+import time
 import bpy # type: ignore
 import json
 import urllib.request
@@ -50,6 +51,7 @@ class PHYSICALLYBASED_OT_create_materials(bpy.types.Operator):
         for i, material_data in enumerate(materials_data):
             material_name = material_data.get("name", f"Material_{i}")
             
+            
             # Create sphere mesh
             bpy.ops.mesh.primitive_uv_sphere_add(
                 radius=1.0,
@@ -78,6 +80,23 @@ class PHYSICALLYBASED_OT_create_materials(bpy.types.Operator):
             
             # TODO: Configure material nodes based on material_data properties
             create_material(mat, material_data)
+           
+            
+            
+            # Generate asset preview from the sphere object
+            mat.asset_data.author = "physicallybased.info"
+            mat.asset_data.license = "Creative Commons CC0 1.0 Universal License"
+            
+            categories = material_data.get("category")
+            for category in categories:
+                mat.asset_data.tags.new(category)            
+            
+            
+            taglist = material_data.get("tags", [])
+            for tag in taglist:
+                mat.asset_data.tags.new(tag)            
+            
+            
             
             created_count += 1
         
