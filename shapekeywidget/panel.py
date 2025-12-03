@@ -77,12 +77,19 @@ class SHAPEKEY_PT_widget_panel(bpy.types.Panel):
         
         layout.separator()
         layout.label(text="Range Mapping:")
+        col = layout.column(align=True)
+        col.label(text="Bone Transform Range:")
         if settings.control_transform == 'ROTATION':
-            layout.prop(settings, "range_start_rot")
-            layout.prop(settings, "range_end_rot")
+            col.prop(settings, "range_start_rot")
+            col.prop(settings, "range_end_rot")
         else:
-            layout.prop(settings, "range_start")
-            layout.prop(settings, "range_end")
+            col.prop(settings, "range_start")
+            col.prop(settings, "range_end")
+        
+        col.separator()
+        col.label(text="Shape Key Value Range:")
+        col.prop(settings, "shapekey_value_min")
+        col.prop(settings, "shapekey_value_max")
         
         layout.separator()
         layout.label(text="Constraints:")

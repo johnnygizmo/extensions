@@ -120,6 +120,24 @@ class SHAPEKEY_PG_widget_settings(bpy.types.PropertyGroup):
         description="Name of the bone collection/group to assign the bone to",
         default="CTL"
     ) # type: ignore
+    
+    # Shape key value range start
+    shapekey_value_min: FloatProperty(
+        name="Shape Key Min",
+        description="Minimum shape key value to map to",
+        default=0.0,
+        soft_min=-1.0,
+        soft_max=1.0
+    ) # type: ignore
+    
+    # Shape key value range end
+    shapekey_value_max: FloatProperty(
+        name="Shape Key Max",
+        description="Maximum shape key value to map to",
+        default=1.0,
+        soft_min=-1.0,
+        soft_max=1.0
+    ) # type: ignore
 
 
 class SHAPEKEY_OT_create_widget_driver(bpy.types.Operator):
@@ -167,6 +185,15 @@ class SHAPEKEY_OT_create_widget_driver(bpy.types.Operator):
         if not shape_key_block:
             self.report({'ERROR'}, f"Shape key '{settings.shape_key}' not found")
             return {'CANCELLED'}
+        
+        # Update shape key slider range if necessary
+        # Expand slider_min if our minimum is lower
+        if settings.shapekey_value_min < shape_key_block.slider_min:
+            shape_key_block.slider_min = settings.shapekey_value_min
+        
+        # Expand slider_max if our maximum is higher
+        if settings.shapekey_value_max > shape_key_block.slider_max:
+            shape_key_block.slider_max = settings.shapekey_value_max
         
         # Rename the bone
         new_bone_name = f"{target_obj.name}.{settings.shape_key}_CTL"
@@ -252,9 +279,8 @@ class SHAPEKEY_OT_create_widget_driver(bpy.types.Operator):
         target.transform_type = f'{transform_prefix}_{settings.control_axis}'
         target.transform_space = 'LOCAL_SPACE'
         
-        # Create the driver expression to map range to 0-1
-        # Formula: (value - start) / (end - start)
-        # Clamped between 0 and 1
+        # Create the driver expression to map bone transform range to shape key value range
+        # Formula: ((value - bone_start) / (bone_end - bone_start)) * (sk_max - sk_min) + sk_min
         # Use appropriate range properties based on transform type
         if settings.control_transform == 'ROTATION':
             range_start = settings.range_start_rot
@@ -268,7 +294,17 @@ class SHAPEKEY_OT_create_widget_driver(bpy.types.Operator):
             self.report({'ERROR'}, "Range start and end cannot be the same")
             return {'CANCELLED'}
         
-        driver.expression = f"max(0, min(1, (bone_transform - ({range_start})) / ({range_size})))"
+        # Get shape key value range
+        sk_min = settings.shapekey_value_min
+        sk_max = settings.shapekey_value_max
+        sk_range = sk_max - sk_min
+        
+        # Build expression: normalized value (0-1) mapped to shape key range
+        normalized = f"(bone_transform - ({range_start})) / ({range_size})"
+        clamped = f"max(0, min(1, {normalized}))"
+        mapped = f"{clamped} * ({sk_range}) + ({sk_min})"
+        
+        driver.expression = mapped
         
         # Apply constraints if requested
         if settings.lock_to_axis:
