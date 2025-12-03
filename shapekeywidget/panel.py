@@ -75,6 +75,16 @@ class SHAPEKEY_PT_widget_panel(bpy.types.Panel):
         layout.prop(settings, "target_mesh", icon='MESH_DATA')
         layout.prop(settings, "shape_key")
         
+        
+        # Display the current mix max of the selected shape key
+        target_obj = settings.target_mesh 
+                
+        if target_obj and target_obj.type == 'MESH' and settings.shape_key in target_obj.data.shape_keys.key_blocks:                              
+            
+            shape_key_block = target_obj.data.shape_keys.key_blocks[settings.shape_key]                                  
+            layout.label(text=f"Key Range: {shape_key_block.slider_min:.3f} to {shape_key_block.slider_max:.3f}")
+        
+        
         layout.separator()
         layout.label(text="Range Mapping:")
         col = layout.column(align=True)
