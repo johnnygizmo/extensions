@@ -147,7 +147,7 @@
       "id": "johnnygizmo_phyicallybasedmaterials",
       "name": "Phyically Based Materials",
       "tagline": "Download material data from physicallybased.info",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "type": "add-on",
       "maintainer": "Johnny Matthews",
       "license": [
@@ -161,9 +161,9 @@
         "Animation",
         "Sequencer"
       ],
-      "archive_url": "./johnnygizmo_phyicallybasedmaterials-1.0.0.zip",
-      "archive_size": 4655,
-      "archive_hash": "sha256:9ca5c4c606a0d1ed749d51341803cffe596c27cae5990f1888699a28f307668a"
+      "archive_url": "./johnnygizmo_phyicallybasedmaterials-1.0.1.zip",
+      "archive_size": 4806,
+      "archive_hash": "sha256:9acc2a3d5d7548f34e2efd7ae4ac6e84a3f2e5e817c1083784d2797c78dc5cef"
     },
     {
       "schema_version": "1.0.0",
@@ -203,6 +203,26 @@
       "archive_url": "./johnnygizmo_rigging_tools-1.3.3.zip",
       "archive_size": 26528,
       "archive_hash": "sha256:2cc9a2a6bca4613e64bb0b55cf7c29a6089f909f4cd06ba7449b05f86429003e"
+    },
+    {
+      "schema_version": "1.0.0",
+      "id": "johnnygizmo_shapekeywidget",
+      "name": "Shapekey Widget",
+      "tagline": "Turn a bone into a shape key slider/knob",
+      "version": "1.0.0",
+      "type": "add-on",
+      "maintainer": "Johnny Matthews",
+      "license": [
+        "SPDX:GPL-3.0-or-later"
+      ],
+      "blender_version_min": "5.0.0",
+      "tags": [
+        "Animation",
+        "Rigging"
+      ],
+      "archive_url": "./johnnygizmo_shapekeywidget-1.0.0.zip",
+      "archive_size": 6740,
+      "archive_hash": "sha256:7e5d48853dc4c50aed474499eb61c4b45d38e17271d4f9f4a18b11013e5af4ea"
     },
     {
       "schema_version": "1.0.0",
