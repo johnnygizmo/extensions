@@ -209,7 +209,7 @@
       "id": "johnnygizmo_shapekeywidget",
       "name": "Shapekey Widget",
       "tagline": "Turn a bone into a shape key slider/knob",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "type": "add-on",
       "maintainer": "Johnny Matthews",
       "license": [
@@ -220,9 +220,9 @@
         "Animation",
         "Rigging"
       ],
-      "archive_url": "./johnnygizmo_shapekeywidget-1.0.1.zip",
-      "archive_size": 7083,
-      "archive_hash": "sha256:2f4ecef1a34b937f30b9e0ed5e20b07cad0c66b659c0eb22fbcb1597e21d2642"
+      "archive_url": "./johnnygizmo_shapekeywidget-1.0.2.zip",
+      "archive_size": 7233,
+      "archive_hash": "sha256:9a2b1f3ef978725063530c7f4e6f96f3d1d02a163ed667fa3ac73a0a66804141"
     },
     {
       "schema_version": "1.0.0",
