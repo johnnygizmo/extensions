@@ -59,6 +59,14 @@ call build.bat
 cd ..
 
 
+cd align_tools
+call build.bat
+cd ..
+
+
+cd hinge_extrude
+call build.bat
+cd ..
 
 "%MyVar%\blender.exe" --command extension server-generate --repo-dir=./
 REM "%MyVar%\blender.exe" --command extension server-generate --repo-dir=./ --html

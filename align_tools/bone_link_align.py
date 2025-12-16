@@ -16,6 +16,12 @@ class ARMATURE_OT_align_connected_children(bpy.types.Operator):
         default=False,
     )
 
+    copy_length: bpy.props.BoolProperty(
+        name="Copy Length",
+        description="Copy the selected bone's length to all aligned children",
+        default=False,
+    )
+
     def execute(self, context):
         obj = context.active_object
         if not obj or obj.type != 'ARMATURE':
@@ -42,6 +48,7 @@ class ARMATURE_OT_align_connected_children(bpy.types.Operator):
         # Pre-collect original lengths for all connected descendants so modifications
         # don't affect length readings for deeper bones.
         orig_lengths = {}
+        root_length = root.length
 
         def collect_lengths(parent):
             for child in parent.children:
@@ -58,14 +65,18 @@ class ARMATURE_OT_align_connected_children(bpy.types.Operator):
                 if not child.use_connect:
                     continue
 
-                # get preserved original length from pre-collected values
-                orig_len = orig_lengths.get(child.name, child.length)
+                # determine which length to use
+                if self.copy_length:
+                    target_len = root_length
+                else:
+                    # get preserved original length from pre-collected values
+                    target_len = orig_lengths.get(child.name, child.length)
 
                 # ensure head sits at parent.tail
                 child.head = parent.tail.copy()
 
-                # set tail along direction using preserved length
-                child.tail = child.head + direction * orig_len
+                # set tail along direction using target length
+                child.tail = child.head + direction * target_len
 
                 if self.copy_roll:
                     child.roll = root.roll

@@ -40,6 +40,12 @@ class ARMATURE_OT_align_bone_to_face(bpy.types.Operator):
         soft_max=10.0,
     )
 
+    copy_bone_length: bpy.props.BoolProperty(
+        name="Copy Bone Length",
+        description="Copy the length from a selected bone (requires exactly one other bone to be selected)",
+        default=False,
+    )
+
     flip_direction: bpy.props.BoolProperty(
         name="Flip Direction",
         description="Point the bone in the opposite direction of the face normal",
@@ -111,7 +117,7 @@ class ARMATURE_OT_align_bone_to_face(bpy.types.Operator):
             total_area += area
 
         if total_area == 0.0:
-            bpy.ops.object.mode_set(mode='OBJECT')
+            bpy.ops.object.mode_set(mode='OBJECT') 
             ctx.view_layer.objects.active = prev_active
             return None
 
@@ -205,6 +211,16 @@ class ARMATURE_OT_align_bone_to_face(bpy.types.Operator):
         if self.preserve_length:
             current_length = (active_bone.tail - active_bone.head).length
             desired_length = current_length
+        elif self.copy_bone_length:
+            # Find a selected bone (other than the active bone) to copy from
+            selected_bones = [b for b in edit_bones if b.select and b != active_bone]
+            if len(selected_bones) != 1:
+                bpy.ops.object.mode_set(mode='OBJECT')
+                context.view_layer.objects.active = prev_active
+                self.report({'ERROR'}, "Copy Bone Length requires exactly one other bone to be selected.")
+                return {'CANCELLED'}
+            source_bone = selected_bones[0]
+            desired_length = (source_bone.tail - source_bone.head).length
         else:
             desired_length = self.bone_length
         
