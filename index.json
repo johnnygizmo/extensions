@@ -126,6 +126,26 @@
     },
     {
       "schema_version": "1.0.0",
+      "id": "johnnygizmo_hinge_extrude",
+      "name": "Hinge Extrude",
+      "tagline": "This is another extension",
+      "version": "1.0.1",
+      "type": "add-on",
+      "maintainer": "Johnny Matthews",
+      "license": [
+        "SPDX:GPL-3.0-or-later"
+      ],
+      "blender_version_min": "4.2.0",
+      "tags": [
+        "Animation",
+        "Sequencer"
+      ],
+      "archive_url": "./johnnygizmo_hinge_extrude-1.0.1.zip",
+      "archive_size": 3920,
+      "archive_hash": "sha256:daf70b4fd34329ee1bfa9bfdb76e12c23c1dc8fca7b54198cb702781b12a223c"
+    },
+    {
+      "schema_version": "1.0.0",
       "id": "johnnygizmo_modifier_node_edit_panel",
       "name": "JohnnyGizmo Special Values Node Edit Panel",
       "tagline": "Curves, Ramps, and Fonts, Bake Button from the Modifier Stack",
