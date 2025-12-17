@@ -1,0 +1,37 @@
+Align Face to Second Active Face
+
+    - Select 2 mesh object and go into edit mode
+    - Select an active face or set of faces from each
+    - Run Operator
+        - Move Active chooses which of the 2 objects Move
+        - Flip normal chooses the direction the moved object lines up with the 2nd face
+        - Twist around face normal
+        - Offset from face
+        - Match edge direction will align an active edge off a mixed selection (faces plus an edge on each mesh)
+
+Set Origin to Bounding Box Position
+
+    - Select a mesh
+    - Run the Operator
+    - Choose an option for Vertical,Horizontal and Depth
+    - The Origin will be placed at the extreme point on the bounding box for the selection
+
+Align Active Bone to Face normal
+
+    - Select a face on a mesh
+    - Shift select the armature
+    - Choose a Bone
+    - run the Operator
+    - The bone will optionally be placed on the face aligned with its normal
+    - The bone length is preserved by default
+    - If there was also a mixed face/edge selection
+        - Align to active edge will align the X or Z axis perpendicular to the edge
+        - Flip Roll will rotate on the Y by 180 degrees
+
+Align Connected Bone Children
+    - Choose a bone with connected Children
+    - run the Operator
+    - The children will align with the Y axis of the bone
+        - Copy roll will make all the children's Y roll the same
+        - Copy length will make all the children the same length as the selected
+

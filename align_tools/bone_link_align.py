@@ -88,8 +88,14 @@ class ARMATURE_OT_align_connected_children(bpy.types.Operator):
         return {'FINISHED'}
 
 
+def draw(self, context):
+    self.layout.separator()
+    self.layout.operator(ARMATURE_OT_align_connected_children.bl_idname)
+
+
 def register():
     bpy.utils.register_class(ARMATURE_OT_align_connected_children)
+    
 
 
 def unregister():
