@@ -44,9 +44,9 @@
     {
       "schema_version": "1.0.0",
       "id": "johnnygizmo_align",
-      "name": "Johnnygizmo_align",
+      "name": "JohnnyGizmo Align Tools",
       "tagline": "This is another extension",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "type": "add-on",
       "maintainer": "Johnny Matthews",
       "license": [
@@ -57,9 +57,9 @@
         "Animation",
         "Sequencer"
       ],
-      "archive_url": "./johnnygizmo_align-1.0.0.zip",
-      "archive_size": 10488,
-      "archive_hash": "sha256:50eae6f653c7b3798758558b74ec8103e2806330e69027caaaaaf21369df16e1"
+      "archive_url": "./johnnygizmo_align-1.0.1.zip",
+      "archive_size": 10501,
+      "archive_hash": "sha256:3380fee7a68744837f18a02abbc90115baf9fb04a63a17c1b1e9c02d756044e4"
     },
     {
       "schema_version": "1.0.0",
@@ -127,9 +127,9 @@
     {
       "schema_version": "1.0.0",
       "id": "johnnygizmo_hinge_extrude",
-      "name": "Hinge Extrude",
+      "name": "JohnnyGizmo Hinge Extrude",
       "tagline": "This is another extension",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "type": "add-on",
       "maintainer": "Johnny Matthews",
       "license": [
@@ -140,9 +140,9 @@
         "Animation",
         "Sequencer"
       ],
-      "archive_url": "./johnnygizmo_hinge_extrude-1.0.1.zip",
-      "archive_size": 3920,
-      "archive_hash": "sha256:daf70b4fd34329ee1bfa9bfdb76e12c23c1dc8fca7b54198cb702781b12a223c"
+      "archive_url": "./johnnygizmo_hinge_extrude-1.0.2.zip",
+      "archive_size": 3924,
+      "archive_hash": "sha256:68ed9fda66bce82f0205e6d3bb150eb33923f801cfe8c7969b3f5aae653af389"
     },
     {
       "schema_version": "1.0.0",
