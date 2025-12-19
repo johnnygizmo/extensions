@@ -162,6 +162,7 @@ def register():
     bpy.types.VIEW3D_MT_object.append(draw)
     bpy.types.VIEW3D_MT_object_context_menu.append(draw)
 
+
 def unregister():
     bpy.types.VIEW3D_MT_object_context_menu.remove(draw)
     bpy.types.VIEW3D_MT_object.remove(draw)

@@ -25,6 +25,9 @@ from . import add_lockedtrack_plus
 from . import parent_mesh_to_bones
 from . import parent_mesh_to_bone
 from . import add_armature_to_mesh
+from . import bone_chain_rename
+from . import bone_align
+from . import bone_link_align
 
 def register(): 
     properties.register()
@@ -40,10 +43,16 @@ def register():
     parent_mesh_to_bones.register()
     parent_mesh_to_bone.register()
     add_armature_to_mesh.register()
+    bone_chain_rename.register()
+    bone_align.register()
+    bone_link_align.register()
     panel.register()
 
 def unregister():
     panel.unregister()
+    bone_link_align.unregister()
+    bone_align.unregister()
+    bone_chain_rename.unregister()
     add_armature_to_mesh.unregister()
     parent_mesh_to_bone.unregister()
     parent_mesh_to_bones.unregister()

@@ -5,6 +5,7 @@ from . import armature_bone_magnet
 from . import bone_straightener
 from . import panel
 
+
 def bone_group_picker(self, context,parent=None):
     layout = self.layout
     if parent:
@@ -116,15 +117,18 @@ class VIEW3D_PT_johnnygizmo_rigging_tools(bpy.types.Panel):
                 tools_display.operator("object.johnnygizmo_mesh_bone_magnet", text="Mesh Bone Magnet", icon='SNAP_ON')
                 tools_display.operator("mesh.johnnygizmo_vertex_bone_picker", text="Vertex Bone Assignment", icon='BONE_DATA')
                 tools_display.operator("mesh.johnnygizmo_add_bone_at_selected", text="Add Bone at Selected", icon='ADD')
-                
+
         
         elif ob and ob.type == 'ARMATURE' and ob.mode == 'EDIT':
             (tools_head, tools_display) = layout.panel("tools_disp")
             tools_head.label(text="Armature Rigging Tools")
             if tools_display:                
                 tools_display.operator("armature.johnnygizmo_armature_bone_magnet", text="Armature Bone Magnet", icon='SNAP_ON')
-                tools_display.operator("armature.johnnygizmo_bone_straightener", text="Bone Straightener", icon='CURVE_PATH')               
-
+                tools_display.operator("armature.johnnygizmo_bone_straightener", text="Bone Straightener", icon='CURVE_PATH')
+                tools_display.operator("jg.bone_chain_rename", text="Chain Rename", icon='FONT_DATA')
+                tools_display.operator("armature.align_bone_to_face", text="Bone Align to Face", icon='SNAP_ON')
+                tools_display.operator("armature.align_connected_children", text="Bone Chain Align", icon='SNAP_ON')
+    
         elif ob and ob.type == 'ARMATURE' and ob.mode == 'OBJECT' and meshes and len(meshes) > 0:
             (tools_head, tools_display) = layout.panel("tools_disp")
             tools_head.label(text="Armature Object Rigging Tools")
@@ -141,6 +145,8 @@ class VIEW3D_PT_johnnygizmo_rigging_tools(bpy.types.Panel):
                 row = tools_display.row()
                 row.operator("armature.johnnygizmo_add_stretch_to_plus", text="Stretch To", icon='CON_STRETCHTO')
                 row.operator("armature.johnnygizmo_add_lock_track_to_plus", text="Lock Track", icon='CON_LOCKTRACK')
+                
+                tools_display.operator("jg.bone_chain_rename", text="Chain Rename", icon='FONT_DATA')
         else:
             layout.label(text="No Tools Available", icon='ERROR')
 

@@ -282,6 +282,7 @@ def register():
     try:
         bpy.types.VIEW3D_MT_edit_mesh_transform.append(menu_func)
     except Exception:
+        print("Failed to append menu_func to VIEW3D_MT_edit_mesh_transform")
         # If the menu isn't available (older/newer Blender), ignore silently
         pass
 
