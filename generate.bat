@@ -18,9 +18,9 @@ cd ..
 cd quick_cloth_tool
 call build.bat
 cd ..
-cd vertex_bone_picker
-call build.bat
-cd ..
+@REM cd vertex_bone_picker
+@REM call build.bat
+@REM cd ..
 cd johnnygizmo_rigging_tools
 call build.bat
 cd ..
@@ -54,9 +54,9 @@ call build.bat
 cd ..
 
 
-cd shapekeywidget
-call build.bat
-cd ..
+@REM cd shapekeywidget
+@REM call build.bat
+@REM cd ..
 
 
 cd align_tools
