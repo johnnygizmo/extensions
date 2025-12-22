@@ -23,7 +23,7 @@ class JG_OT_bone_chain_rename(Operator):
             ('Bot', 'Bottom (.Bot)', 'Bottom'),
             ('Fr', 'Front (.Fr)', 'Front'),
             ('Bk', 'Back (.Bk)', 'Back'),
-            ('', 'None', 'No Side'),
+            ('NONE', 'None', 'No Side'),
         ],
         default='L'
     )
@@ -34,8 +34,7 @@ class JG_OT_bone_chain_rename(Operator):
             ('DEF', 'Deform (DEF)', 'Deformation Bone'),
             ('CTRL', 'Control (CTRL)', 'Control Bone'),
             ('MCH', 'Mechanism (MCH)', 'Mechanism Bone'),
-            ('ORG', 'Original (ORG)', 'Original Bone'),
-            ('', 'None', 'No Type'),
+            ('NONE', 'None', 'No Type'),
         ],
         default='DEF'
     )
@@ -109,7 +108,7 @@ class JG_OT_bone_chain_rename(Operator):
             # {Type}_{Name}_{Number}.{Side}
             
             parts = []
-            if self.bone_type:
+            if self.bone_type != 'NONE':
                 parts.append(self.bone_type)
             parts.append(self.base_name)
             parts.append(number)
@@ -117,7 +116,7 @@ class JG_OT_bone_chain_rename(Operator):
             new_name_base = "_".join(parts)
             
             suffix = ""
-            if self.side:
+            if self.side != 'NONE':
                 suffix = f".{self.side}"
                 
             new_name = f"{new_name_base}{suffix}"
@@ -169,8 +168,13 @@ class JG_OT_bone_chain_rename(Operator):
                                                 # Renaming PoseBone.name renames the underlying Bone.
                                                 
                                                 if real_target_bone:
-                                                    ik_ctrl_name = f"CTRL_{self.base_name}_IK"
-                                                    if self.side:
+
+                                                    prefix = ""
+                                                    if self.bone_type != 'NONE':
+                                                        prefix = f"CTRL_"
+
+                                                    ik_ctrl_name = f"{prefix}{self.base_name}_IK"
+                                                    if self.side != 'NONE':
                                                         ik_ctrl_name += f".{self.side}"
                                                     
                                                     real_target_bone.name = ik_ctrl_name
@@ -187,8 +191,12 @@ class JG_OT_bone_chain_rename(Operator):
                                         real_pole_bone = pole_ob.pose.bones.get(pole_subtarget_name)
                                         
                                         if real_pole_bone:
-                                            pole_name = f"CTRL_{self.base_name}_IKPOLE"
-                                            if self.side:
+                                            prefix = ""
+                                            if self.bone_type != 'NONE':
+                                                prefix = f"CTRL_"
+                                            
+                                            pole_name = f"{prefix}{self.base_name}_IKPOLE"
+                                            if self.side != 'NONE':
                                                 pole_name += f".{self.side}"
                                             
                                             real_pole_bone.name = pole_name
