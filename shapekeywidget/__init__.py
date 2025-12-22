@@ -11,7 +11,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-from . import panel
+from . import widget_driver_panel
 from . import create_widget_driver
 
 bl_info = {
@@ -29,9 +29,9 @@ bl_info = {
 
 
 def register():
-    panel.register()
+    widget_driver_panel.register()
     create_widget_driver.register()
 
 def unregister():
-    panel.unregister()
+    widget_driver_panel.unregister()
     create_widget_driver.unregister()
