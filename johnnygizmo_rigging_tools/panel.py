@@ -1,9 +1,5 @@
 import bpy # type: ignore
-from . import bone_picker
-from . import mesh_bone_magnet
-from . import armature_bone_magnet
-from . import bone_straightener
-from . import panel
+
 
 
 def bone_group_picker(self, context,parent=None):
@@ -124,6 +120,7 @@ class VIEW3D_PT_johnnygizmo_rigging_tools(bpy.types.Panel):
             tools_head.label(text="Armature Rigging Tools")
             if tools_display:                
                 tools_display.operator("armature.johnnygizmo_armature_bone_magnet", text="Armature Bone Magnet", icon='SNAP_ON')
+                tools_display.operator("armature.bone_doctor", text="Bone Doctor", icon='SHADING_BBOX')
                 tools_display.operator("armature.johnnygizmo_bone_straightener", text="Bone Straightener", icon='CURVE_PATH')
                 tools_display.operator("jg.bone_chain_rename", text="Chain Rename", icon='FONT_DATA')
                 tools_display.operator("armature.align_bone_to_face", text="Bone Align to Face", icon='SNAP_ON')
@@ -138,14 +135,17 @@ class VIEW3D_PT_johnnygizmo_rigging_tools(bpy.types.Panel):
         elif ob and ob.type == 'ARMATURE' and ob.mode == 'POSE':    
             (tools_head, tools_display) = layout.panel("tools_disp")
             tools_head.label(text="Armature Pose Rigging Tools")    
+            row = tools_display.row()
+            tools_display.operator("armature.bone_doctor", text="Bone Doctor", icon='SHADING_BBOX')
             if tools_display and (len(context.selected_pose_bones) == 2 or len(context.selected_pose_bones) == 1):   
-                row = tools_display.row()
-                row.operator("armature.johnnygizmo_add_ik_plus", text="IK", icon='CON_KINEMATIC')
-                row.operator("armature.johnnygizmo_add_damp_track_to_plus", text="Track To", icon='CON_TRACKTO')
-                row = tools_display.row()
-                row.operator("armature.johnnygizmo_add_stretch_to_plus", text="Stretch To", icon='CON_STRETCHTO')
-                row.operator("armature.johnnygizmo_add_lock_track_to_plus", text="Lock Track", icon='CON_LOCKTRACK')
                 
+                row = tools_display.row()
+                row.operator("armature.johnnygizmo_add_ik_plus", text="IK+", icon='CON_KINEMATIC')
+                row.operator("armature.johnnygizmo_add_damp_track_to_plus", text="Track To+", icon='CON_TRACKTO')
+                row = tools_display.row()
+                row.operator("armature.johnnygizmo_add_stretch_to_plus", text="Stretch To+", icon='CON_STRETCHTO')
+                row.operator("armature.johnnygizmo_add_lock_track_to_plus", text="Lock Track+", icon='CON_LOCKTRACK')
+                tools_display.operator("pose.constraint_add_with_targets", text="Add Constraint", icon='CON_LOCKTRACK')
                 tools_display.operator("jg.bone_chain_rename", text="Chain Rename", icon='FONT_DATA')
         else:
             layout.label(text="No Tools Available", icon='ERROR')

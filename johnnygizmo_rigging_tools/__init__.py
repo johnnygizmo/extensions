@@ -30,6 +30,7 @@ from . import bone_align
 from . import bone_link_align
 from . import widget_driver_panel
 from . import create_widget_driver
+from . import bone_doctor
 
 def register(): 
     properties.register()
@@ -50,12 +51,14 @@ def register():
     bone_link_align.register()
     widget_driver_panel.register()
     create_widget_driver.register()
+    bone_doctor.register()
 
     panel.register()
 
 def unregister():
     panel.unregister()
     create_widget_driver.unregister()
+    bone_doctor.unregister()
     widget_driver_panel.unregister()    
     bone_link_align.unregister()
     bone_align.unregister()
