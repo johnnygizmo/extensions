@@ -426,6 +426,10 @@ class ARMATURE_OT_bone_doctor(bpy.types.Operator):
             
             text_block.write("\n".join(report_lines))
 
+            # `output an INFO  message to the user with the name of the report with self.report
+            self.report({'INFO'}, f"Report saved to text block: {report_name}")
+            
+            
         return {'FINISHED'}
 
 def register():

@@ -49,17 +49,17 @@ def register():
     bone_chain_rename.register()
     bone_align.register()
     bone_link_align.register()
-    widget_driver_panel.register()
-    create_widget_driver.register()
+    #widget_driver_panel.register()
+    #create_widget_driver.register()
     bone_doctor.register()
 
     panel.register()
 
 def unregister():
     panel.unregister()
-    create_widget_driver.unregister()
+    #create_widget_driver.unregister()
     bone_doctor.unregister()
-    widget_driver_panel.unregister()    
+    #widget_driver_panel.unregister()    
     bone_link_align.unregister()
     bone_align.unregister()
     bone_chain_rename.unregister()

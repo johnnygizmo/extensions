@@ -110,8 +110,8 @@ class JG_OT_bone_chain_rename(Operator):
             parts = []
             if self.bone_type != 'NONE':
                 parts.append(self.bone_type)
-            parts.append(self.base_name)
-            parts.append(number)
+            parts.append(self.base_name + number)
+            # parts.append(number)
             
             new_name_base = "_".join(parts)
             
