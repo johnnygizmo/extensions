@@ -22,23 +22,10 @@ class ARMATURE_OT_align_bone_to_face(bpy.types.Operator):
     bl_label = "Align Active Bone to Face Normal"
     bl_description = (
         "Align the active bone's direction with a selected mesh face normal. "
-        "Requires one armature and one mesh object selected, with the mesh in edit mode."
+        "Requires one armature and one mesh object selected, with the mesh in edit mode. "
+        "If multiple bones are selected, all will move relative to the active bone's movement."
     )
     bl_options = {"REGISTER", "UNDO"}
-
-    preserve_length: bpy.props.BoolProperty(
-        name="Preserve Bone Length",
-        description="Maintain the current bone length after alignment",
-        default=True,
-    )
-
-    bone_length: bpy.props.FloatProperty(
-        name="Bone Length",
-        description="Desired bone length (only used when Preserve Bone Length is disabled)",
-        default=1.0,
-        min=0.001,
-        soft_max=10.0,
-    )
 
     flip_direction: bpy.props.BoolProperty(
         name="Flip Direction",
@@ -72,6 +59,12 @@ class ARMATURE_OT_align_bone_to_face(bpy.types.Operator):
         name="Flip Roll 180°",
         description="Add 180 degrees to the bone roll (only when Align to Active Edge is enabled)",
         default=False,
+    )
+
+    move_selected_bones: bpy.props.BoolProperty(
+        name="Move Selected Bones",
+        description="Move all selected bones relative to the active bone's movement",
+        default=True,
     )
 
 
@@ -180,16 +173,19 @@ class ARMATURE_OT_align_bone_to_face(bpy.types.Operator):
             return False
             
         # 3. Check Bone Selection (Edit Mode)
-        # We need exactly one selected bone
+        # We need at least one selected bone and an active bone
         # Accessing edit_bones is safe because we verified mode is EDIT
-        selected_bones_count = 0
+        has_selected = False
         for b in arm_obj.data.edit_bones:
             if b.select:
-                selected_bones_count += 1
-                if selected_bones_count > 1:
-                    return False
+                has_selected = True
+                break
         
-        if selected_bones_count != 1:
+        if not has_selected:
+            return False
+        
+        # Check for active bone
+        if not arm_obj.data.edit_bones.active:
             return False
             
         # 4. Check Face Selection (Object Mode)
@@ -243,14 +239,29 @@ class ARMATURE_OT_align_bone_to_face(bpy.types.Operator):
             return {'CANCELLED'}
         
         active_bone = edit_bones.active
-
         
-        # Calculate the desired bone length
-        if self.preserve_length:
-            current_length = (active_bone.tail - active_bone.head).length
-            desired_length = current_length
-        else:
-            desired_length = self.bone_length
+        # Store initial state of all selected bones (if move_selected_bones is enabled)
+        bone_offsets = {}
+        if self.move_selected_bones:
+            # Store the initial head and tail positions of the active bone
+            active_head_initial = active_bone.head.copy()
+            active_tail_initial = active_bone.tail.copy()
+            active_vector_initial = active_tail_initial - active_head_initial
+            active_x_axis_initial = active_bone.x_axis.copy()  # Store active bone's initial X-axis
+            
+            # Store offsets for all selected bones (except the active one)
+            for bone in edit_bones:
+                if bone.select and bone != active_bone:
+                    # Store position offsets
+                    bone_offsets[bone.name] = {
+                        'head_offset': bone.head - active_head_initial,
+                        'tail_offset': bone.tail - active_head_initial,
+                        'z_axis': bone.z_axis.copy(),  # Store the bone's Z-axis (roll orientation)
+                        'vector': (bone.tail - bone.head).copy(),  # Store the bone's direction vector
+                    }
+        
+        # Always preserve the bone length
+        desired_length = (active_bone.tail - active_bone.head).length
         
         # Determine bone head position (in world space)
         armature_matrix_inv = armature_obj.matrix_world.inverted()
@@ -339,6 +350,85 @@ class ARMATURE_OT_align_bone_to_face(bpy.types.Operator):
                     print("DEBUG: Edge projected length too small, skipping")
             else:
                 print("DEBUG: No edge vector found")
+        
+        # Apply the transformation to all other selected bones
+        if self.move_selected_bones and bone_offsets:
+            # Calculate the transformation that was applied to the active bone
+            active_head_final = active_bone.head.copy()
+            active_tail_final = active_bone.tail.copy()
+            active_vector_final = active_tail_final - active_head_final
+            active_x_axis_final = active_bone.x_axis.copy()  # Get active bone's final X-axis
+            
+            from mathutils import Matrix
+            
+            # Build the initial and final orientation matrices for the active bone
+            # These matrices represent the bone's full 3D orientation (direction + roll)
+            
+            # Initial orientation matrix
+            active_y_initial = active_vector_initial.normalized()
+            active_x_initial = active_x_axis_initial.normalized()
+            # Z-axis is perpendicular to both X and Y
+            active_z_initial = active_x_initial.cross(active_y_initial).normalized()
+            
+            initial_orientation = Matrix((
+                active_x_initial,
+                active_y_initial,
+                active_z_initial
+            )).transposed()
+            
+            # Final orientation matrix
+            active_y_final = active_vector_final.normalized()
+            active_x_final = active_x_axis_final.normalized()
+            # Z-axis is perpendicular to both X and Y
+            active_z_final = active_x_final.cross(active_y_final).normalized()
+            
+            final_orientation = Matrix((
+                active_x_final,
+                active_y_final,
+                active_z_final
+            )).transposed()
+            
+            # Calculate the rotation matrix that transforms from initial to final orientation
+            # This includes BOTH the directional rotation AND the roll rotation
+            rotation_matrix_3x3 = final_orientation @ initial_orientation.inverted()
+            rotation_matrix = rotation_matrix_3x3.to_4x4()
+            
+            # Calculate translation
+            translation = active_head_final - active_head_initial
+            
+            # Apply transformation to all other selected bones
+            for bone_name, offsets in bone_offsets.items():
+                bone = edit_bones.get(bone_name)
+                if bone:
+                    # Apply rotation to the offsets
+                    head_offset_rotated = rotation_matrix @ offsets['head_offset']
+                    tail_offset_rotated = rotation_matrix @ offsets['tail_offset']
+                    
+                    # Apply translation and set new positions FIRST
+                    bone.head = active_head_final + head_offset_rotated
+                    bone.tail = active_head_final + tail_offset_rotated
+                    
+                    # Calculate the bone's new direction
+                    bone_vector_new = (bone.tail - bone.head).normalized()
+                    
+                    # Rotate the bone's original Z-axis by the transformation
+                    rotated_z_axis = rotation_matrix_3x3 @ offsets['z_axis']
+                    
+                    # Project the rotated Z-axis onto the plane perpendicular to the new bone direction
+                    # This ensures the Z-axis is orthogonal to the bone's Y-axis (direction)
+                    z_projected = rotated_z_axis - bone_vector_new * rotated_z_axis.dot(bone_vector_new)
+                    
+                    if z_projected.length > 1e-6:
+                        z_projected.normalize()
+                        
+                        print(f"DEBUG: Bone {bone_name} - Rotated Z-axis: {rotated_z_axis}")
+                        print(f"DEBUG: Bone {bone_name} - Projected Z-axis: {z_projected}")
+                        print(f"DEBUG: Bone {bone_name} - Roll before: {bone.roll}")
+                        
+                        # Use align_roll to set the bone's roll based on the projected Z-axis
+                        bone.align_roll(z_projected)
+                        
+                        print(f"DEBUG: Bone {bone_name} - Roll after: {bone.roll}")
 
         # Restore Edit Mode on the Armature to preserve Redo panel context
         if context.mode != 'OBJECT':
