@@ -119,10 +119,12 @@ class VIEW3D_PT_johnnygizmo_rigging_tools(bpy.types.Panel):
             (tools_head, tools_display) = layout.panel("tools_disp")
             tools_head.label(text="Armature Rigging Tools")
             if tools_display:                
-                tools_display.operator("armature.johnnygizmo_armature_bone_magnet", text="Armature Bone Magnet", icon='SNAP_ON')
                 tools_display.operator("armature.bone_doctor", text="Bone Doctor Report", icon='SHADING_BBOX')
-                tools_display.operator("armature.johnnygizmo_bone_straightener", text="Bone Straightener", icon='CURVE_PATH')
                 tools_display.operator("jg.bone_chain_rename", text="Chain Rename", icon='FONT_DATA')
+                tools_display.separator()
+                tools_display.operator("armature.johnnygizmo_armature_bone_magnet", text="Armature Bone Magnet", icon='SNAP_ON')
+                tools_display.operator("armature.johnnygizmo_bone_straightener", text="Bone Straightener", icon='CURVE_PATH')
+                
                 tools_display.operator("armature.align_bone_to_face", text="Bone Align to Face", icon='SNAP_ON')
                 tools_display.operator("armature.align_connected_children", text="Bone Chain Align", icon='SNAP_ON')
     
@@ -135,11 +137,14 @@ class VIEW3D_PT_johnnygizmo_rigging_tools(bpy.types.Panel):
         elif ob and ob.type == 'ARMATURE' and ob.mode == 'POSE':    
             (tools_head, tools_display) = layout.panel("tools_disp")
             tools_head.label(text="Armature Pose Rigging Tools")    
-            row = tools_display.row()
-            tools_display.operator("armature.bone_doctor", text="Bone Doctor Report ", icon='SHADING_BBOX')
-            tools_display.operator("jg.bone_chain_rename", text="Chain Rename", icon='FONT_DATA')
-            if tools_display and (len(context.selected_pose_bones) == 2 or len(context.selected_pose_bones) == 1):   
-                
+
+            if tools_display and (len(context.selected_pose_bones) == 2 or len(context.selected_pose_bones) == 1):  
+                row = tools_display.row()
+                row.operator("armature.bone_doctor", text="Bone Doctor Report ", icon='SHADING_BBOX')
+                row = tools_display.row()
+                row.operator("jg.bone_chain_rename", text="Chain Rename", icon='FONT_DATA')                 
+                row = tools_display.row()
+                row.label(text="Constraints")
                 row = tools_display.row()
                 row.operator("armature.johnnygizmo_add_ik_plus", text="IK+", icon='CON_KINEMATIC')
                 row.operator("armature.johnnygizmo_add_damp_track_to_plus", text="Track To+", icon='CON_TRACKTO')
@@ -180,11 +185,16 @@ class VIEW3D_PT_johnnygizmo_rigging_tools(bpy.types.Panel):
             if(arm_display):
                 arm_display.row().prop(arm_ob.data, "pose_position", expand=True)
                 arm_display.prop(arm_ob.data, "display_type", text="")
-                arm_display.prop(arm_ob.data, "show_axes", text="Show Axes")
-                arm_display.prop(arm_ob.data, "axes_position", text="Axes Position")
-                arm_display.prop(arm_ob.data, "show_names", text="Show Bone Names")
-                arm_display.prop(arm_ob, "show_in_front", text="Show In Front")
-                arm_display.prop(arm_ob.data, "show_bone_custom_shapes", text="Show Custom Shapes")
+                r = arm_display.row()
+                r.prop(arm_ob.data, "show_axes", text="Axes")
+                r.prop(arm_ob.data, "axes_position", text="Position")
+                arm_display.prop(arm_ob.data, "show_names", text="Bone Names")
+                arm_display.prop(arm_ob, "show_in_front", text="In Front")
+                arm_display.prop(arm_ob.data, "show_bone_custom_shapes", text="Custom Shapes")
+                r = arm_display.row()
+                r.label(text="Relations")
+                r.prop_enum(arm_ob.data, "relation_line_position", "TAIL")
+                r.prop_enum(arm_ob.data, "relation_line_position", "HEAD")
 
 
         if ob and  (context.active_bone or context.active_pose_bone) and ob.type == 'ARMATURE':
