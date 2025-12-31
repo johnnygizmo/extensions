@@ -227,7 +227,7 @@
       "id": "johnnygizmo_rigging_tools",
       "name": "JohnnyGizmo Rigging Tools",
       "tagline": "Speed up your rigging workflow",
-      "version": "1.5.0",
+      "version": "1.5.1",
       "type": "add-on",
       "maintainer": "Johnny Matthews",
       "license": [
@@ -240,9 +240,9 @@
         "3D View",
         "Mesh"
       ],
-      "archive_url": "./johnnygizmo_rigging_tools-1.5.0.zip",
-      "archive_size": 45213,
-      "archive_hash": "sha256:8835f56e74a0de91156a21db3f46cd4591aacb4d0a26d4f65050a239b4f4469d"
+      "archive_url": "./johnnygizmo_rigging_tools-1.5.1.zip",
+      "archive_size": 46351,
+      "archive_hash": "sha256:9543780dd562d6925d2d89116102146b69b7da393bec12eee2aea768acca7acb"
     }
   ]
 }
