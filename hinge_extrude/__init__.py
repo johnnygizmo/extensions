@@ -37,7 +37,7 @@ class MESH_OT_hinge_extrude(Operator):
     angle: FloatProperty(
         name="Rotation Angle",
         description="Angle to rotate the extrusion around the active edge",
-        default=0.785398,  # 45 degrees in radians
+        default=0.523599,  # 30 degrees in radians
         min=-6.28319,  # -360 degrees
         max=6.28319,   # 360 degrees
         subtype='ANGLE'
@@ -94,6 +94,17 @@ class MESH_OT_hinge_extrude(Operator):
             self.report({'ERROR'}, "No faces selected.")
             return {'CANCELLED'}
         
+        # Calculate average normal of selected faces
+        from mathutils import Vector
+        avg_normal = Vector((0, 0, 0))
+        for face in selected_faces:
+            avg_normal += face.normal
+        avg_normal.normalize()
+        
+        # Get the edge direction vector
+        edge_vec = active_edge.verts[1].co - active_edge.verts[0].co
+        edge_vec.normalize()
+        
         # Update mesh to apply bmesh changes
         bmesh.update_edit_mesh(mesh)
         
@@ -122,8 +133,50 @@ class MESH_OT_hinge_extrude(Operator):
         bmesh.update_edit_mesh(mesh)
         
         # Perform extrusion with rotation steps
-        angle_step = self.angle / self.steps
+        # Determine rotation direction
+        # Goal: Positive rotation should move faces in the direction of their normals
         
+        # 1. Define a consistent edge vector (already calculated above as edge_vec)
+        edge_center = (active_edge.verts[0].co + active_edge.verts[1].co) / 2
+        
+        # 2. Calculate face center to get radial vector
+        face_center_sum = Vector((0, 0, 0))
+        for f in selected_faces:
+            face_center_sum += f.calc_center_median()
+        avg_face_center = face_center_sum / len(selected_faces)
+        
+        # Radial vector from edge to face center
+        radial_vec = avg_face_center - edge_center
+        
+        # 3. Calculate "natural" rotation tangent around edge_vec (Right Hand Rule)
+        # If we rotate + around edge_vec, the face moves in this direction
+        tangent = edge_vec.cross(radial_vec)
+        
+        # 4. Check if this tangent aligns with normal
+        # If tangent aligns with normal, then +Rotation around edge_vec is what we want.
+        # If tangent opposes normal, then we want -Rotation around edge_vec.
+        base_sign = 1.0 if tangent.dot(avg_normal) < 0 else -1.0
+        
+        angle_step = self.angle / self.steps
+        angle_step *= base_sign
+        
+        # 5. Correct for Blender's Custom Orientation Axis
+        # Blender's 'Edge' orientation axis might be aligned or opposed to our edge_vec.
+        try:
+            orient_slot = context.scene.transform_orientation_slots[0]
+            custom_orient = orient_slot.custom_orientation
+            if custom_orient:
+                orient_matrix = custom_orient.matrix
+                # Edge orientation puts the edge along the Y axis
+                orient_y = orient_matrix.col[1].to_3d()
+                
+                # If orientation Y is opposite to our edge_vec, we need to flip the rotation
+                # because rotating + around (-Axis) is like rotating - around (+Axis)
+                if orient_y.dot(edge_vec) < 0:
+                    angle_step = -angle_step
+        except Exception as e:
+            print(f"Error checking orientation: {e}")
+            pass
         # Track newly created vertices if more than one step
         use_tracking = self.steps > 1
         vg = None
@@ -210,9 +263,11 @@ def register():
     bpy.utils.register_class(MESH_OT_hinge_extrude)
     bpy.types.VIEW3D_MT_edit_mesh_extrude.append(menu_func)
     bpy.types.VIEW3D_MT_edit_mesh_faces.append(menu_func)
+    bpy.types.VIEW3D_MT_edit_mesh_context_menu.append(menu_func)
 
 
 def unregister():
+    bpy.types.VIEW3D_MT_edit_mesh_context_menu.remove(menu_func)
     bpy.types.VIEW3D_MT_edit_mesh_faces.remove(menu_func)
     bpy.types.VIEW3D_MT_edit_mesh_extrude.remove(menu_func)
     bpy.utils.unregister_class(MESH_OT_hinge_extrude)
