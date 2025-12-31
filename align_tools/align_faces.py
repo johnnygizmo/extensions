@@ -198,50 +198,51 @@ class OBJECT_OT_align_face_to_face(bpy.types.Operator):
 
         # Determine twist angle either from active edges or from the twist_angle property
         twist_rad = 0.0
+        edge_rotation_success = False
+
         if self.match_edge_rotation:
 
             edge_active_world = read_active_edge_world(active)
             edge_other_world = read_active_edge_world(other)
             
-            if edge_active_world is None:
-                self.report({'ERROR'}, f"No active edge found on active object '{active.name}'.")
-                return {'CANCELLED'}
-            if edge_other_world is None:
-                self.report({'ERROR'}, f"No active edge found on other object '{other.name}'.")
-                return {'CANCELLED'}
+            if edge_active_world is not None and edge_other_world is not None:
+                if self.move_active:
+                    mover_edge = edge_active_world
+                    fixed_edge = edge_other_world
+                else:
+                    mover_edge = edge_other_world
+                    fixed_edge = edge_active_world
 
-            if self.move_active:
-                mover_edge = edge_active_world
-                fixed_edge = edge_other_world
+                # Apply the alignment rotation to the mover edge to compare post-align directions
+                mover_edge_rot = R_align.to_3x3() @ mover_edge
+
+                axis = target.normalized()
+
+                def project_plane(v, n):
+                    return (v - n * v.dot(n))
+
+                a = project_plane(mover_edge_rot, axis)
+                b = project_plane(fixed_edge, axis)
+                if a.length < 1e-6 or b.length < 1e-6:
+                    self.report({'WARNING'}, "Selected edge direction too small to compute rotation.")
+                else:
+                    a.normalize()
+                    b.normalize()
+
+                    cross = a.cross(b)
+                    dot = max(-1.0, min(1.0, a.dot(b)))
+                    signed = atan2(axis.dot(cross), dot)
+                    twist_rad = signed
+                    
+                    # Add π if flip_edge_direction is enabled
+                    if self.flip_edge_direction:
+                        twist_rad += 3.141592653589793  # π
+                    
+                    edge_rotation_success = True
             else:
-                mover_edge = edge_other_world
-                fixed_edge = edge_active_world
+                self.report({'WARNING'}, "Active edge missing on one or both objects, skipping edge rotation.")
 
-            # Apply the alignment rotation to the mover edge to compare post-align directions
-            mover_edge_rot = R_align.to_3x3() @ mover_edge
-
-            axis = target.normalized()
-
-            def project_plane(v, n):
-                return (v - n * v.dot(n))
-
-            a = project_plane(mover_edge_rot, axis)
-            b = project_plane(fixed_edge, axis)
-            if a.length < 1e-6 or b.length < 1e-6:
-                self.report({'ERROR'}, "Selected edge direction too small to compute rotation.")
-                return {'CANCELLED'}
-            a.normalize()
-            b.normalize()
-
-            cross = a.cross(b)
-            dot = max(-1.0, min(1.0, a.dot(b)))
-            signed = atan2(axis.dot(cross), dot)
-            twist_rad = signed
-            
-            # Add π if flip_edge_direction is enabled
-            if self.flip_edge_direction:
-                twist_rad += 3.141592653589793  # π
-        else:
+        if not edge_rotation_success:
             twist_rad = radians(self.twist_angle) if abs(self.twist_angle) > 1e-6 else 0.0
 
         # Build total rotation: align rotation plus twist about target normal
@@ -276,13 +277,27 @@ class OBJECT_OT_align_face_to_face(bpy.types.Operator):
 classes = (OBJECT_OT_align_face_to_face,)
 
 
+def menu_func(self, context):
+    self.layout.operator(OBJECT_OT_align_face_to_face.bl_idname, text="Align Face To Face")
+
+
+def menu_func_faces(self, context):
+    self.layout.operator(OBJECT_OT_align_face_to_face.bl_idname, text="Align Face To Face")
+
+
+def menu_func_context(self, context):
+    self.layout.operator(OBJECT_OT_align_face_to_face.bl_idname, text="Align Face To Face")
+
+
 def register():
     for c in classes:
         bpy.utils.register_class(c)
     try:
         bpy.types.VIEW3D_MT_edit_mesh_transform.append(menu_func)
+        bpy.types.VIEW3D_MT_edit_mesh_faces.append(menu_func_faces)
+        bpy.types.VIEW3D_MT_edit_mesh_context_menu.append(menu_func_context)
     except Exception:
-        print("Failed to append menu_func to VIEW3D_MT_edit_mesh_transform")
+        print("Failed to append menu functions")
         # If the menu isn't available (older/newer Blender), ignore silently
         pass
 
@@ -292,10 +307,8 @@ def unregister():
         bpy.utils.unregister_class(c)
     try:
         bpy.types.VIEW3D_MT_edit_mesh_transform.remove(menu_func)
+        bpy.types.VIEW3D_MT_edit_mesh_faces.remove(menu_func_faces)
+        bpy.types.VIEW3D_MT_edit_mesh_context_menu.remove(menu_func_context)
     except Exception:
         pass
-
-
-def menu_func(self, context):
-    self.layout.operator(OBJECT_OT_align_face_to_face.bl_idname, text="Align Face To Face")
 
