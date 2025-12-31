@@ -45,8 +45,8 @@
       "schema_version": "1.0.0",
       "id": "johnnygizmo_align",
       "name": "JohnnyGizmo Align Tools",
-      "tagline": "This is another extension",
-      "version": "1.0.1",
+      "tagline": "A Collection of Alignment Tools by JohnnyGizmo",
+      "version": "1.0.2",
       "type": "add-on",
       "maintainer": "Johnny Matthews",
       "license": [
@@ -57,9 +57,9 @@
         "Animation",
         "Sequencer"
       ],
-      "archive_url": "./johnnygizmo_align-1.0.1.zip",
-      "archive_size": 13399,
-      "archive_hash": "sha256:479e50fc3da7b62b88412404a7122cdea70cd6887aebbd95bebdc5c076dace85"
+      "archive_url": "./johnnygizmo_align-1.0.2.zip",
+      "archive_size": 8457,
+      "archive_hash": "sha256:a568da168c3fe7acdaa4c75140cd8e512c68b5ac122bf3b2cf480ae242037348"
     },
     {
       "schema_version": "1.0.0",
