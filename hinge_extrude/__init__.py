@@ -53,9 +53,19 @@ class MESH_OT_hinge_extrude(Operator):
 
     @classmethod
     def poll(cls, context):
-        return (context.object is not None and
-                context.object.type == 'MESH' and
-                context.object.mode == 'EDIT')
+        obj = context.object
+        if obj is None or obj.type != 'MESH' or obj.mode != 'EDIT':
+            return False
+
+        # Only available if face and edge mode are enabled
+        tool_settings = context.tool_settings
+        if not (tool_settings.mesh_select_mode[1] and tool_settings.mesh_select_mode[2]):
+            return False
+
+        # Check for at least one face selected and one active edge
+        # Note: We use total_edge_sel as a proxy for active edge in poll for performance
+        mesh = obj.data
+        return mesh.total_face_sel > 0 and mesh.total_edge_sel > 0
 
     def execute(self, context):
         obj = context.object
@@ -113,6 +123,14 @@ class MESH_OT_hinge_extrude(Operator):
         
         # Perform extrusion with rotation steps
         angle_step = self.angle / self.steps
+        
+        # Track newly created vertices if more than one step
+        use_tracking = self.steps > 1
+        vg = None
+        if use_tracking:
+            vg = obj.vertex_groups.new(name="Hinge_Extrude_Temp")
+            obj.vertex_groups.active_index = vg.index
+
         for i in range(self.steps):
             # Step 7: Extrude with zero translation
             bpy.ops.mesh.extrude_region_move(
@@ -142,6 +160,12 @@ class MESH_OT_hinge_extrude(Operator):
                 use_proportional_edit=False,
                 snap=False
             )
+            
+            if use_tracking:
+                bpy.ops.object.vertex_group_assign()
+        
+        if use_tracking:
+            bpy.ops.object.vertex_group_select()
         
         # Step 9: Select more
         bpy.ops.mesh.select_more()
@@ -157,6 +181,9 @@ class MESH_OT_hinge_extrude(Operator):
             bpy.ops.transform.delete_orientation()
         except:
             pass
+            
+        if use_tracking and vg:
+            obj.vertex_groups.remove(vg)
         
         # Restore all settings
         context.scene.tool_settings.transform_pivot_point = saved_pivot
@@ -182,8 +209,10 @@ def menu_func(self, context):
 def register():
     bpy.utils.register_class(MESH_OT_hinge_extrude)
     bpy.types.VIEW3D_MT_edit_mesh_extrude.append(menu_func)
+    bpy.types.VIEW3D_MT_edit_mesh_faces.append(menu_func)
 
 
 def unregister():
+    bpy.types.VIEW3D_MT_edit_mesh_faces.remove(menu_func)
     bpy.types.VIEW3D_MT_edit_mesh_extrude.remove(menu_func)
     bpy.utils.unregister_class(MESH_OT_hinge_extrude)
