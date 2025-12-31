@@ -23,19 +23,13 @@ bl_info = {
 } 
 
 from . import align_faces
-from . import bone_align
-from . import bone_link_align
 from . import align_origin
 
 def register():
     align_faces.register()
-    bone_align.register()
-    bone_link_align.register()
     align_origin.register()
 
 
 def unregister():
     align_faces.unregister()
-    bone_align.unregister()
-    bone_link_align.unregister()
     align_origin.unregister()
