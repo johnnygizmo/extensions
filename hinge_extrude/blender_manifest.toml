@@ -3,7 +3,7 @@ schema_version = "1.0.0"
 # Example of manifest file for a Blender extension
 # Change the values according to your extension
 id = "johnnygizmo_hinge_extrude"
-version = "1.0.2"
+version = "1.0.3"
 name = "JohnnyGizmo Hinge Extrude"
 tagline = "This is another extension"
 maintainer = "Johnny Matthews"

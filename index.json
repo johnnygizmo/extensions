@@ -129,7 +129,7 @@
       "id": "johnnygizmo_hinge_extrude",
       "name": "JohnnyGizmo Hinge Extrude",
       "tagline": "This is another extension",
-      "version": "1.0.2",
+      "version": "1.0.3",
       "type": "add-on",
       "maintainer": "Johnny Matthews",
       "license": [
@@ -140,9 +140,9 @@
         "Animation",
         "Sequencer"
       ],
-      "archive_url": "./johnnygizmo_hinge_extrude-1.0.2.zip",
-      "archive_size": 3924,
-      "archive_hash": "sha256:68ed9fda66bce82f0205e6d3bb150eb33923f801cfe8c7969b3f5aae653af389"
+      "archive_url": "./johnnygizmo_hinge_extrude-1.0.3.zip",
+      "archive_size": 4219,
+      "archive_hash": "sha256:230ee12fbc85d61bad25f6e528ea94c9c0d236b02972fb0b3984778401be9b55"
     },
     {
       "schema_version": "1.0.0",
