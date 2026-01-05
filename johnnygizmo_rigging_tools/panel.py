@@ -123,7 +123,7 @@ class VIEW3D_PT_johnnygizmo_rigging_tools(bpy.types.Panel):
                 tools_display.operator("jg.bone_chain_rename", text="Chain Rename", icon='FONT_DATA')
                 tools_display.separator()
                 tools_display.operator("armature.johnnygizmo_armature_bone_magnet", text="Armature Bone Magnet", icon='SNAP_ON')
-                tools_display.operator("armature.johnnygizmo_bone_straightener", text="Bone Straightener", icon='CURVE_PATH')
+                #tools_display.operator("armature.johnnygizmo_bone_straightener", text="Bone Straightener", icon='CURVE_PATH')
                 
                 tools_display.operator("armature.align_bone_to_face", text="Bone Align to Face", icon='SNAP_ON')
                 tools_display.operator("armature.align_connected_children", text="Bone Chain Align", icon='SNAP_ON')
