@@ -119,7 +119,7 @@ class VIEW3D_PT_johnnygizmo_rigging_tools(bpy.types.Panel):
             (tools_head, tools_display) = layout.panel("tools_disp")
             tools_head.label(text="Armature Rigging Tools")
             if tools_display:                
-                tools_display.operator("armature.bone_doctor", text="Bone Doctor Report", icon='SHADING_BBOX')
+                #tools_display.operator("armature.bone_doctor", text="Bone Doctor Report", icon='SHADING_BBOX')
                 tools_display.operator("jg.bone_chain_rename", text="Chain Rename", icon='FONT_DATA')
                 tools_display.separator()
                 tools_display.operator("armature.johnnygizmo_armature_bone_magnet", text="Armature Bone Magnet", icon='SNAP_ON')
@@ -137,10 +137,10 @@ class VIEW3D_PT_johnnygizmo_rigging_tools(bpy.types.Panel):
         elif ob and ob.type == 'ARMATURE' and ob.mode == 'POSE':    
             (tools_head, tools_display) = layout.panel("tools_disp")
             tools_head.label(text="Armature Pose Rigging Tools")    
-
+            row = tools_display.row()
+            row.operator("armature.bone_doctor", text="Bone Doctor", icon='SHADING_BBOX')
             if tools_display and (len(context.selected_pose_bones) == 2 or len(context.selected_pose_bones) == 1):  
-                row = tools_display.row()
-                row.operator("armature.bone_doctor", text="Bone Doctor Report ", icon='SHADING_BBOX')
+                
                 row = tools_display.row()
                 row.operator("jg.bone_chain_rename", text="Chain Rename", icon='FONT_DATA')                 
                 row = tools_display.row()
