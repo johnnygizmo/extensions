@@ -135,27 +135,27 @@ class VIEW3D_PT_johnnygizmo_rigging_tools(bpy.types.Panel):
                 tools_display.operator("object.parent_meshes_to_nearest_bone", text="Parent Meshes to Bones", icon='SNAP_ON')
 
         elif ob and ob.type == 'ARMATURE' and ob.mode == 'POSE':    
-            (tools_head, tools_display) = layout.panel("tools_disp")
+            (tools_head, tools_display1) = layout.panel("tools_disp")
             tools_head.label(text="Armature Pose Rigging Tools")    
-            row = tools_display.row()
-            row.operator("armature.bone_doctor", text="Bone Doctor", icon='SHADING_BBOX')
-            if tools_display and (len(context.selected_pose_bones) == 2 or len(context.selected_pose_bones) == 1):  
-                
-                row = tools_display.row()
-                row.operator("jg.bone_chain_rename", text="Chain Rename", icon='FONT_DATA')                 
-                row = tools_display.row()
-                row.label(text="Constraints")
-                row = tools_display.row()
-                row.operator("armature.johnnygizmo_add_ik_plus", text="IK+", icon='CON_KINEMATIC')
-                row.operator("armature.johnnygizmo_add_damp_track_to_plus", text="Track To+", icon='CON_TRACKTO')
-                row = tools_display.row()
-                row.operator("armature.johnnygizmo_add_stretch_to_plus", text="Stretch To+", icon='CON_STRETCHTO')
-                row.operator("armature.johnnygizmo_add_lock_track_to_plus", text="Lock Track+", icon='CON_LOCKTRACK')
-                tools_display.operator("pose.constraint_add_with_targets", text="Add Constraint", icon='CON_LOCKTRACK')
+            
+            if tools_display1:
+                row = tools_display1.row()
+                row.operator("armature.bone_doctor", text="Bone Doctor", icon='SHADING_BBOX')
+                if (len(context.selected_pose_bones) == 2 or len(context.selected_pose_bones) == 1):       
+                    row = tools_display1.row()
+                    row.operator("jg.bone_chain_rename", text="Chain Rename", icon='FONT_DATA')                 
+                    row = tools_display1.row()
+                    row.label(text="Constraints")
+                    row = tools_display1.row()
+                    row.operator("armature.johnnygizmo_add_ik_plus", text="IK+", icon='CON_KINEMATIC')
+                    row.operator("armature.johnnygizmo_add_damp_track_to_plus", text="Track To+", icon='CON_TRACKTO')
+                    row = tools_display1.row()
+                    row.operator("armature.johnnygizmo_add_stretch_to_plus", text="Stretch To+", icon='CON_STRETCHTO')
+                    row.operator("armature.johnnygizmo_add_lock_track_to_plus", text="Lock Track+", icon='CON_LOCKTRACK')
+                    tools_display1.operator("pose.constraint_add_with_targets", text="Add Constraint", icon='CON_LOCKTRACK')
                 
         else:
             layout.label(text="No Tools Available", icon='ERROR')
-
 
         arm_ob = None
         arm_disp = "Active Armature"
@@ -170,7 +170,7 @@ class VIEW3D_PT_johnnygizmo_rigging_tools(bpy.types.Panel):
             (mesh_head, mesh_display) = layout.panel("arm_disp")
             mesh_head.label(text="Mesh: "+ob.name)
             if(mesh_display):
-                mesh_display.operator("object.johnnygizmo_parent_mesh_to_selected_bone", text="Add Parent Bone", icon='BONE_DATA')   
+                mesh_display.operator("mesh.johnnygizmo_create_rig_and_assign", text="Create Parent Bone", icon='BONE_DATA')   
 
         if ob and ob.type == 'MESH' and ob.parent and ob.parent.type == 'ARMATURE' and ob.parent_type == "BONE":
             (mesh_head, mesh_display) = layout.panel("arm_disp")
@@ -262,7 +262,6 @@ class VIEW3D_PT_johnnygizmo_rigging_tools(bpy.types.Panel):
                     col.prop(context.active_pose_bone, "use_ik_limit_z", text="")
                     col.prop(context.active_pose_bone, "ik_min_z", text="")
                     col.prop(context.active_pose_bone, "ik_max_z", text="")
-
 
             (shape_head,shape_display) = layout.panel("Custom Bone Shape", default_closed=True)
             shape_head.label(text="Custom Bone Shape")

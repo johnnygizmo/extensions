@@ -27,6 +27,12 @@ class MESH_OT_johnnygizmo_create_rig_and_assign(bpy.types.Operator):
     )  # type: ignore
 
     def execute(self, context):
+
+        if context.mode != 'EDIT_MESH':
+            #Toggle edit mode
+            bpy.ops.object.mode_set(mode='EDIT')
+            #select all vertices
+            bpy.ops.mesh.select_all(action='SELECT')
         mesh_obj = context.edit_object
         if mesh_obj.type != 'MESH':
             self.report({'WARNING'}, "Active object must be a mesh.")
