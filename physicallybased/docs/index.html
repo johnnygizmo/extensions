@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Physically Based Materials Documentation</title>
+  <link rel="stylesheet" href="../../style.css" />
+</head>
+
+<body>
+
+  <header>
+    <h1>Physically Based Materials Documentation</h1>
+  </header>
+
+  <nav>
+    <a href="#introduction">Introduction</a>
+    <a href="#installation">Installation</a>
+    <a href="#usage">Usage</a>
+    <a href="#features">Features</a>
+    <a href="#api-reference">API Reference</a>
+    <a href="#technical-details">Technical Details</a>
+  </nav>
+
+  <main>
+    <section id="introduction">
+      <h2>Introduction</h2>
+      <p>
+        The Physically Based Materials add-on for Blender provides instant access to a comprehensive library of
+        scientifically accurate material properties from <a href="https://physicallybased.info"
+          target="_blank">physicallybased.info</a>.
+        This extension automatically downloads material data and creates ready-to-use materials with correct physical
+        properties,
+        complete with preview spheres and asset library integration.
+      </p>
+      <p>
+        Source code is available <a
+          href="https://github.com/johnnygizmo/extensions/tree/main/physicallybased">here</a>.
+      </p>
+
+      <h3>Key Features</h3>
+      <ul>
+        <li>Direct access to physically accurate material database</li>
+        <li>Automatic material creation with proper node setup</li>
+        <li>Support for both dielectric and metallic materials</li>
+        <li>Asset library integration with automatic tagging</li>
+        <li>Preview sphere generation for each material</li>
+        <li>Support for complex IOR values for metals</li>
+        <li>Subsurface scattering, thin film interference, and transmission properties</li>
+      </ul>
+    </section>
+
+    <section id="installation">
+      <h2>Installation</h2>
+      <h3>Requirements</h3>
+      <ul>
+        <li>Blender 4.2.0 or higher</li>
+        <li>Internet connection (for downloading material data)</li>
+      </ul>
+
+      <h3>Installation Steps</h3>
+      <ol>
+        <li>Download the extension from Blender Extensions platform</li>
+        <li>In Blender, go to <strong>Edit &gt; Preferences &gt; Add-ons</strong></li>
+        <li>Click <strong>Install</strong> and select the downloaded extension file</li>
+        <li>Enable the "Physically Based Materials" add-on by checking its checkbox</li>
+      </ol>
+
+      <h3>Accessing the Add-on</h3>
+      <p>
+        Once installed, you'll find the Physically Based Materials panel in the 3D Viewport sidebar:
+      </p>
+      <ol>
+        <li>Open the 3D Viewport</li>
+        <li>Press <kbd>N</kbd> to open the sidebar</li>
+        <li>Navigate to the <strong>Physically Based</strong> tab</li>
+      </ol>
+    </section>
+
+    <section id="usage">
+      <h2>Usage</h2>
+
+      <h3>Creating Materials</h3>
+      <p>
+        To download and create physically based materials in your scene:
+      </p>
+      <ol>
+        <li>Open the 3D Viewport and press <kbd>N</kbd> to show the sidebar</li>
+        <li>Navigate to the <strong>Physically Based</strong> tab</li>
+        <li>Click the <strong>Download & Create Materials</strong> button</li>
+        <li>Wait while the add-on downloads material data from the API</li>
+        <li>Materials will be created automatically with preview spheres</li>
+      </ol>
+
+      <h3>What Happens During Creation</h3>
+      <p>When you run the material creation process:</p>
+      <ul>
+        <li><strong>Data Download:</strong> Material data is fetched from the physicallybased.info API</li>
+        <li><strong>Sphere Creation:</strong> A UV sphere is created for each material, positioned in a grid layout
+          (2.5 units apart)</li>
+        <li><strong>Material Setup:</strong> Each material is configured with appropriate shader nodes based on its
+          properties</li>
+        <li><strong>Asset Marking:</strong> Materials are automatically marked as assets with proper metadata</li>
+        <li><strong>Tagging:</strong> Materials are tagged with their categories and tags from the database</li>
+      </ul>
+
+      <h3>Using the Created Materials</h3>
+      <p>
+        Once materials are created, you can:
+      </p>
+      <ul>
+        <li>Access them from the Asset Browser</li>
+        <li>Drag and drop them onto any object in your scene</li>
+        <li>Delete the preview spheres if you only want the materials in your asset library</li>
+        <li>Search materials by category or tag in the Asset Browser</li>
+      </ul>
+
+      <h3>Example Workflow</h3>
+      <ol>
+        <li>Start with an empty scene</li>
+        <li>Run <strong>Download & Create Materials</strong></li>
+        <li>Review the preview spheres to see material appearance</li>
+        <li>Open the Asset Browser</li>
+        <li>Drag materials onto your models</li>
+        <li>Adjust rendering settings for best results (using Cycles with sufficient samples)</li>
+      </ol>
+    </section>
+
+    <section id="features">
+      <h2>Features</h2>
+
+      <h3>Material Types</h3>
+
+      <h4>Dielectric Materials</h4>
+      <p>
+        Standard non-metallic materials using the Principled BSDF shader. Supports:
+      </p>
+      <ul>
+        <li><strong>Base Color:</strong> RGB color values</li>
+        <li><strong>Roughness:</strong> Surface roughness (0 = mirror, 1 = diffuse)</li>
+        <li><strong>Metallic:</strong> Metallic property</li>
+        <li><strong>IOR:</strong> Index of refraction for transparent/translucent materials</li>
+        <li><strong>Transmission:</strong> Transparency amount for glass-like materials</li>
+        <li><strong>Subsurface Scattering:</strong> For materials like wax, skin, or jade</li>
+        <li><strong>Thin Film Interference:</strong> For soap bubbles, oil slicks, etc.</li>
+        <li><strong>Specular Color:</strong> Tinted reflections</li>
+      </ul>
+
+      <h4>Metallic Materials</h4>
+      <p>
+        Metals with complex IOR values use the Metallic BSDF shader with Physical Conductor mode:
+      </p>
+      <ul>
+        <li><strong>Complex IOR:</strong> Real and imaginary components for accurate metal reflections</li>
+        <li><strong>Extinction Coefficient:</strong> Controls light absorption in metals</li>
+        <li><strong>Roughness:</strong> Surface finish (polished to brushed)</li>
+      </ul>
+
+      <h3>Asset Library Integration</h3>
+      <p>
+        All created materials are automatically:
+      </p>
+      <ul>
+        <li>Marked as assets for easy access</li>
+        <li>Attributed to "physicallybased.info" as the author</li>
+        <li>Licensed under Creative Commons CC0 1.0 Universal License</li>
+        <li>Tagged with categories (e.g., "metal", "plastic", "glass")</li>
+        <li>Tagged with additional descriptive tags from the database</li>
+      </ul>
+
+      <h3>Automatic Node Configuration</h3>
+      <p>
+        Materials are intelligently configured based on their properties:
+      </p>
+      <ul>
+        <li>Dielectric materials use Principled BSDF with appropriate settings</li>
+        <li>Metallic materials use Metallic BSDF with Physical Conductor mode</li>
+        <li>All relevant material properties are automatically assigned to shader inputs</li>
+        <li>Preview colors are set for easy identification in the viewport</li>
+      </ul>
+    </section>
+
+    <section id="api-reference">
+      <h2>API Reference</h2>
+
+      <h3>Operators</h3>
+
+      <h4>PHYSICALLYBASED_OT_create_materials</h4>
+      <p>
+        Downloads materials from the Physically Based API and creates sphere objects with materials.
+      </p>
+      <ul>
+        <li><strong>bl_idname:</strong> <code>physicallybased.create_materials</code></li>
+        <li><strong>bl_label:</strong> Create Physically Based Materials</li>
+        <li><strong>bl_options:</strong> {'REGISTER', 'UNDO'}</li>
+      </ul>
+
+      <h5>Properties</h5>
+      <ul>
+        <li>
+          <strong>api_url (StringProperty):</strong> The API URL to fetch materials from
+          <ul>
+            <li>Default: <code>"https://api.physicallybased.info/materials"</code></li>
+          </ul>
+        </li>
+      </ul>
+
+      <h5>Returns</h5>
+      <ul>
+        <li><code>{'FINISHED'}</code> - Operation completed successfully</li>
+        <li><code>{'CANCELLED'}</code> - Operation failed (network error, parse error, or invalid data)</li>
+      </ul>
+
+      <h5>Example Usage</h5>
+      <pre><code>import bpy
+bpy.ops.physicallybased.create_materials()</code></pre>
+
+      <h3>Panels</h3>
+
+      <h4>PHYSICALLYBASED_PT_main_panel</h4>
+      <p>
+        Main panel for Physically Based Materials extension in the 3D Viewport sidebar.
+      </p>
+      <ul>
+        <li><strong>bl_label:</strong> Physically Based Materials</li>
+        <li><strong>bl_space_type:</strong> VIEW_3D</li>
+        <li><strong>bl_region_type:</strong> UI</li>
+        <li><strong>bl_category:</strong> Physically Based</li>
+      </ul>
+
+      <h3>Material Setup Functions</h3>
+
+      <h4>create_material(mat, material_data)</h4>
+      <p>
+        Main dispatcher function that creates appropriate material setup based on material type.
+      </p>
+      <ul>
+        <li><strong>Parameters:</strong>
+          <ul>
+            <li><code>mat</code> - Blender material object</li>
+            <li><code>material_data</code> - Dictionary containing material properties from API</li>
+          </ul>
+        </li>
+      </ul>
+
+      <h4>base_material_setup(mat, material_data)</h4>
+      <p>
+        Sets up a dielectric material using Principled BSDF shader.
+      </p>
+      <ul>
+        <li><strong>Supported Properties:</strong>
+          <ul>
+            <li>color - Base color (RGB or RGBA)</li>
+            <li>specularColor - Specular tint color</li>
+            <li>roughness - Surface roughness value</li>
+            <li>metallic - Metallic property value</li>
+            <li>ior - Index of refraction</li>
+            <li>transmission - Transmission weight</li>
+            <li>subsurfaceRadius - Subsurface scattering radius</li>
+            <li>transmissionDepth - Transmission depth (subsurface scale)</li>
+            <li>thinFilmThickness - Thin film thickness</li>
+            <li>thinFilmIor - Thin film IOR</li>
+          </ul>
+        </li>
+      </ul>
+
+      <h4>create_metallic_material(mat, material_data)</h4>
+      <p>
+        Sets up a metallic material using Metallic BSDF shader with Physical Conductor mode.
+      </p>
+      <ul>
+        <li><strong>Supported Properties:</strong>
+          <ul>
+            <li>complexIor - Array of 6 values [n_r, k_r, n_g, k_g, n_b, k_b]</li>
+            <li>roughness - Surface roughness value</li>
+            <li>color - Diffuse color (for viewport display)</li>
+            <li>metalness - Metallic property (for viewport display)</li>
+          </ul>
+        </li>
+      </ul>
+
+      <h4>common_setup(mat, material_data)</h4>
+      <p>
+        Applies common viewport display settings to materials.
+      </p>
+      <ul>
+        <li>Sets diffuse_color for viewport preview</li>
+        <li>Sets metallic property for viewport</li>
+        <li>Sets roughness for viewport</li>
+      </ul>
+    </section>
+
+    <section id="technical-details">
+      <h2>Technical Details</h2>
+
+      <h3>Data Source</h3>
+      <p>
+        Material data is sourced from <a href="https://api.physicallybased.info/materials"
+          target="_blank">https://api.physicallybased.info/materials</a>.
+        This API provides scientifically measured material properties compiled from various research sources.
+      </p>
+
+      <h3>Material Data Structure</h3>
+      <p>
+        Each material from the API includes:
+      </p>
+      <pre><code>{
+  "name": "Material Name",
+  "category": ["category1", "category2"],
+  "tags": ["tag1", "tag2"],
+  "color": [R, G, B],
+  "roughness": 0.0-1.0,
+  "metallic": 0.0-1.0,
+  "ior": 1.0-3.0,
+  "complexIor": [n_r, k_r, n_g, k_g, n_b, k_b],  // Metals only
+  // ... additional properties
+}</code></pre>
+
+      <h3>Shader Node Setup</h3>
+
+      <h4>Dielectric Materials</h4>
+      <p>
+        Uses the standard Principled BSDF node with appropriate inputs connected:
+      </p>
+      <ul>
+        <li>Base Color input receives RGB color</li>
+        <li>Roughness controls surface finish</li>
+        <li>IOR affects refraction and Fresnel reflections</li>
+        <li>Transmission Weight controls transparency</li>
+        <li>Subsurface properties for translucent materials</li>
+      </ul>
+
+      <h4>Metallic Materials</h4>
+      <p>
+        Uses Metallic BSDF node with Physical Conductor fresnel type:
+      </p>
+      <ul>
+        <li>IOR input receives [n_r, n_g, n_b] values</li>
+        <li>Extinction input receives [k_r, k_g, k_b] values</li>
+        <li>Roughness controls surface finish</li>
+        <li>Connected to Material Output Surface</li>
+      </ul>
+
+      <h3>Error Handling</h3>
+      <p>
+        The add-on includes comprehensive error handling for:
+      </p>
+      <ul>
+        <li><strong>Network Errors:</strong> Reports failure if API is unreachable</li>
+        <li><strong>Parse Errors:</strong> Handles invalid JSON responses</li>
+        <li><strong>Data Validation:</strong> Verifies API returns expected array format</li>
+        <li><strong>Missing Properties:</strong> Gracefully handles optional material properties</li>
+      </ul>
+
+      <h3>Performance Considerations</h3>
+      <ul>
+        <li>Materials are created sequentially (no parallelization)</li>
+        <li>Each material creation includes sphere mesh generation</li>
+        <li>Large material libraries (100+ materials) may take time to process</li>
+        <li>Consider creating materials in batches if needed</li>
+        <li>Preview spheres can be deleted after materials are added to asset library</li>
+      </ul>
+
+      <h3>License Information</h3>
+      <p>
+        <strong>Add-on License:</strong> GNU General Public License v2.0 or later
+      </p>
+      <p>
+        <strong>Material Data License:</strong> Creative Commons CC0 1.0 Universal License
+        (materials from physicallybased.info)
+      </p>
+    </section>
+  </main>
+
+</body>
+
+</html>
