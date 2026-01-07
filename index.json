@@ -14,13 +14,14 @@
         "SPDX:GPL-2.0-or-later"
       ],
       "blender_version_min": "4.5.0",
+      "website": "https://johnnygizmo.github.io/extensions/usdc_material/docs/",
       "tags": [
         "Material",
         "Import-Export"
       ],
       "archive_url": "./acg_material-1.1.0.zip",
-      "archive_size": 4083,
-      "archive_hash": "sha256:f698a8a5faff967bbbb50cc2627041a1f989dd3761601dc6a687858cc20f6856"
+      "archive_size": 6807,
+      "archive_hash": "sha256:44a367b256821383d20b182078e62149eb6d69e791bf134b6e5c3032c9bd1215"
     },
     {
       "schema_version": "1.0.0",
@@ -53,13 +54,14 @@
         "SPDX:GPL-3.0-or-later"
       ],
       "blender_version_min": "4.2.0",
+      "website": "https://johnnygizmo.github.io/extensions/align_tools/docs/",
       "tags": [
         "Animation",
         "Sequencer"
       ],
       "archive_url": "./johnnygizmo_align-1.0.2.zip",
-      "archive_size": 8569,
-      "archive_hash": "sha256:d22824f3be5ff5e722a607f651c7bb5900edf5c43128af41e6a56f6cdbe41dcf"
+      "archive_size": 11399,
+      "archive_hash": "sha256:d7f418e63ed57c6857533327af6586971a9d177174fdfb85b7ed42fc26fecc21"
     },
     {
       "schema_version": "1.0.0",
@@ -136,13 +138,14 @@
         "SPDX:GPL-3.0-or-later"
       ],
       "blender_version_min": "4.2.0",
+      "website": "https://johnnygizmo.github.io/extensions/hinge_extrude/docs/",
       "tags": [
-        "Animation",
-        "Sequencer"
+        "Mesh",
+        "Modeling"
       ],
       "archive_url": "./johnnygizmo_hinge_extrude-1.0.5.zip",
-      "archive_size": 4993,
-      "archive_hash": "sha256:c659db5423a1c0c9636f119148cf39f03f7bc2b1fb05ac54d4942e58aaf5fbe0"
+      "archive_size": 7249,
+      "archive_hash": "sha256:1eef3459025ed5e11d162fa9e6fa5ea9b5f0f773b254576d0e875962805f01e6"
     },
     {
       "schema_version": "1.0.0",
@@ -241,8 +244,8 @@
         "Mesh"
       ],
       "archive_url": "./johnnygizmo_rigging_tools-1.5.2.zip",
-      "archive_size": 46410,
-      "archive_hash": "sha256:ab29ec4f6205f50b868aa27a9212414597e88de1007d4b3eea0a335ddea61724"
+      "archive_size": 45746,
+      "archive_hash": "sha256:93eeaecab16f88eb0c914313a593a1c40423c59a9a6c0fa4247b4707321f151f"
     }
   ]
 }
