@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JohnnyGizmo Align Tools Documentation</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+
+    header {
+      background-color: #2d2d2d;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    h1,
+    h2,
+    h3 {
+      color: #ffa600;
+    }
+
+    h2 {
+      margin-top: 2.5rem;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 0.3rem;
+    }
+
+    h3 {
+      margin-top: 1.5rem;
+      color: #34495e;
+    }
+
+    p {
+      margin: 0.5rem 0 1.5rem;
+    }
+
+    ul {
+      margin: 0.5rem 0 1.5rem;
+      padding-left: 2rem;
+    }
+
+    li {
+      margin: 0.5rem 0;
+    }
+
+    nav {
+      background: #eee;
+      padding: 1rem;
+      border-bottom: 1px solid #ccc;
+    }
+
+    nav a {
+      margin-right: 1rem;
+      text-decoration: none;
+      color: #2c3e50;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    code {
+      background-color: #f4f4f4;
+      padding: 0.2rem 0.4rem;
+      border-radius: 3px;
+      font-family: 'Courier New', monospace;
+    }
+
+    .note {
+      background-color: #e8f4f8;
+      border-left: 4px solid #2196F3;
+      padding: 1rem;
+      margin: 1rem 0;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>JohnnyGizmo Align Tools Documentation</h1>
+  </header>
+
+  <nav>
+    <a href="#introduction">Introduction</a>
+    <a href="#mesh-edit-mode">Mesh Edit Mode</a>
+    <a href="#object-mode">Object Mode</a>
+  </nav>
+
+  <main>
+    <section id="introduction">
+      <h2>Introduction</h2>
+      <p>
+        The JohnnyGizmo Align Tools add-on provides a collection of precision alignment utilities for Blender.
+        These tools help streamline the process of aligning faces, positioning origins, and working with mesh geometry
+        and armatures. The tools are designed to save time and improve accuracy when building and rigging 3D models.
+      </p>
+      <p>Source code is available <a
+          href="https://github.com/johnnygizmo/extensions/tree/main/align_tools">here</a>.</p>
+    </section>
+
+    <section id="mesh-edit-mode">
+      <h2>Mesh Edit Mode</h2>
+
+      <h3>Align Face to Second Active Face</h3>
+      <p>
+        Move and rotate one mesh object so its selected face(s) align perfectly to another mesh object's selected
+        face(s).
+        This tool is ideal for precisely connecting mesh parts or aligning surfaces.
+      </p>
+
+      <div class="note">
+        <strong>Usage:</strong>
+        <ol>
+          <li>Select two mesh objects and enter Edit Mode (Tab)</li>
+          <li>Select an active face or set of faces on each mesh</li>
+          <li>Run the operator from the Mesh menu or right-click context menu</li>
+        </ol>
+      </div>
+
+      <p><strong>Options:</strong></p>
+      <ul>
+        <li><strong>Move Active:</strong> Choose which of the two objects to move. When enabled, moves the active
+          object; when disabled, moves the inactive object.</li>
+        <li><strong>Flip Normal Direction:</strong> Controls whether the normals point in the same direction or
+          opposite directions. When disabled (default), normals become opposite for face-to-face alignment.</li>
+        <li><strong>Twist Angle:</strong> Rotate the moved object around the face normal (in degrees). Use this to fine-tune
+          rotational alignment.</li>
+        <li><strong>Offset Distance:</strong> Translate the moved object along the target normal after alignment. Positive
+          values move away from the target face, negative values move into it.</li>
+        <li><strong>Match Edge Rotation:</strong> When enabled, aligns the active edges from both meshes to match edge
+          directions. This requires selecting both faces and an edge on each mesh (mixed face/edge selection).</li>
+        <li><strong>Flip Edge Direction:</strong> Adds 180 degrees to the edge rotation (only works when Match Edge
+          Rotation is enabled).</li>
+      </ul>
+
+      <div class="note">
+        <strong>Edge Alignment Tip:</strong> For precise edge-to-edge alignment, select faces plus one active edge on
+        each mesh, then enable "Match Edge Rotation". The tool will align the edges perpendicular to the face normal.
+      </div>
+    </section>
+
+    <section id="object-mode">
+      <h2>Object Mode</h2>
+
+      <h3>Set Origin to Bounding Box Position</h3>
+      <p>
+        Position the object's origin at any corner, edge, or face of its bounding box. This tool is perfect for setting
+        pivot points at specific locations like the bottom center for characters, or corners for architectural elements.
+      </p>
+
+      <div class="note">
+        <strong>Usage:</strong>
+        <ol>
+          <li>Select a mesh object in Object Mode</li>
+          <li>Run the operator from the Object menu or right-click context menu</li>
+          <li>Choose options for Vertical, Horizontal, and Depth positioning</li>
+        </ol>
+      </div>
+
+      <p><strong>Options:</strong></p>
+      <ul>
+        <li><strong>Vertical:</strong> Set the vertical (Z-axis) position
+          <ul>
+            <li><code>Top</code> - Top of bounding box</li>
+            <li><code>Center</code> - Center of bounding box (vertical)</li>
+            <li><code>Bottom</code> - Bottom of bounding box (default)</li>
+          </ul>
+        </li>
+        <li><strong>Horizontal:</strong> Set the horizontal (X-axis) position
+          <ul>
+            <li><code>Left</code> - Left side of bounding box</li>
+            <li><code>Center</code> - Center of bounding box (horizontal, default)</li>
+            <li><code>Right</code> - Right side of bounding box</li>
+          </ul>
+        </li>
+        <li><strong>Depth:</strong> Set the depth (Y-axis) position
+          <ul>
+            <li><code>Front</code> - Front of bounding box</li>
+            <li><code>Center</code> - Center of bounding box (depth, default)</li>
+            <li><code>Back</code> - Back of bounding box</li>
+          </ul>
+        </li>
+      </ul>
+
+      <div class="note">
+        <strong>Common Use Cases:</strong>
+        <ul>
+          <li><strong>Character Origin:</strong> Set to Bottom-Center-Center for proper pivot point at the feet</li>
+          <li><strong>Wheel Origin:</strong> Set to Center-Center-Center for rotation around the wheel's center</li>
+          <li><strong>Wall Origin:</strong> Set to Bottom-Left-Back for corner-based placement</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="tips">
+      <h2>Tips and Tricks</h2>
+      
+      <h3>Face Alignment Workflow</h3>
+      <p>
+        For best results when aligning faces:
+      </p>
+      <ul>
+        <li>Use area-weighted face selection (multiple faces) for more stable alignment</li>
+        <li>Start with basic alignment, then fine-tune with Twist Angle and Offset Distance</li>
+        <li>Use Match Edge Rotation for mechanical parts that need precise angular alignment</li>
+        <li>Remember that "Flip Normal Direction" controls whether surfaces face each other or the same direction</li>
+      </ul>
+
+      <h3>Origin Positioning Workflow</h3>
+      <p>
+        The bounding box origin tool is most useful when:
+      </p>
+      <ul>
+        <li>Setting up character rigs (Bottom-Center for feet placement)</li>
+        <li>Preparing objects for array modifiers (corner origins for building blocks)</li>
+        <li>Creating mechanical assemblies (center origins for rotating parts)</li>
+        <li>Organizing architectural elements (corner origins for walls and floors)</li>
+      </ul>
+    </section>
+
+    <section id="menu-locations">
+      <h2>Menu Locations</h2>
+      
+      <h3>Align Face to Face</h3>
+      <ul>
+        <li>Edit Mode → Mesh → Transform → Align Face To Face</li>
+        <li>Edit Mode → Face → Align Face To Face</li>
+        <li>Edit Mode → Right-click context menu → Align Face To Face</li>
+      </ul>
+
+      <h3>Set Origin to Bounding Box Position</h3>
+      <ul>
+        <li>Object Mode → Object → Set Origin to Bounding Box Position</li>
+        <li>Object Mode → Right-click context menu → Set Origin to Bounding Box Position</li>
+      </ul>
+    </section>
+
+  </main>
+
+</body>
+
+</html>
