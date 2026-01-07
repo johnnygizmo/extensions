@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JohnnyGizmo Color Harmony Tools Documentation</title>
+  <link rel="stylesheet" href="../../style.css" />
+</head>
+
+<body>
+
+  <header>
+    <h1>JohnnyGizmo Color Harmony Tools Documentation</h1>
+  </header>
+
+  <nav>
+    <a href="#introduction">Introduction</a>
+    <a href="#installation">Installation</a>
+    <a href="#harmony-types">Harmony Types</a>
+    <a href="#material-panel">Material Panel</a>
+    <a href="#shader-editor">Shader Editor</a>
+    <a href="#light-panel">Light Panel</a>
+    <a href="#palette-panel">Palette Panel</a>
+    <a href="#api-reference">API Reference</a>
+  </nav>
+
+  <main>
+    <section id="introduction">
+      <h2>Introduction</h2>
+      <p>
+        The JohnnyGizmo Color Harmony Tools add-on is designed to speed up your color picking workflow in Blender.
+        It generates professional color harmonies based on color theory principles, making it easy to create 
+        visually appealing color schemes for materials, lights, and painting workflows.
+      </p>
+      <p>
+        This tool automatically generates complementary, analogous, triadic, and other color harmony schemes,
+        allowing you to quickly apply these colors to shader nodes, lights, and painting palettes.
+      </p>
+      <p>Source code is available <a
+          href="https://github.com/johnnygizmo/extensions/tree/main/harmony">here</a>.</p>
+    </section>
+
+    <section id="installation">
+      <h2>Installation</h2>
+      <h3>Requirements</h3>
+      <ul>
+        <li>Blender 4.4.0 or later</li>
+      </ul>
+      
+      <h3>Installation Steps</h3>
+      <ol>
+        <li>Download the extension from the Blender Extensions platform or GitHub</li>
+        <li>Open Blender and go to Edit → Preferences → Extensions</li>
+        <li>Click the Install button and select the downloaded extension file</li>
+        <li>Enable the "JohnnyGizmo Color Harmony" extension</li>
+        <li>The panels will appear in the Properties panel (Material, Light contexts), Shader Editor sidebar, and 3D View sidebar (when in sculpt/paint modes)</li>
+      </ol>
+    </section>
+
+    <section id="harmony-types">
+      <h2>Color Harmony Types</h2>
+      <p>The add-on supports multiple color harmony modes based on color theory:</p>
+
+      <h3>Complementary</h3>
+      <p>
+        <strong>2 Colors:</strong> Base color and its direct opposite on the color wheel (180° apart).
+        Creates maximum contrast and visual impact.
+      </p>
+
+      <h3>Near Complementary</h3>
+      <p>
+        <strong>2 Colors:</strong> Base color and a color slightly off its direct complementary.
+        Provides high contrast with a bit more subtlety than pure complementary.
+      </p>
+      <ul>
+        <li><strong>Angle:</strong> Adjust the offset angle from the true complementary color</li>
+      </ul>
+
+      <h3>Split Complementary</h3>
+      <p>
+        <strong>3 Colors:</strong> Base color and the two colors adjacent to its direct complementary.
+        Offers high contrast while being more harmonious than pure complementary.
+      </p>
+
+      <h3>Extended Split Complementary</h3>
+      <p>
+        <strong>4 Colors:</strong> Base color, its two split complementaries, and the exact complementary.
+        Provides a richer palette with both harmony and contrast.
+      </p>
+
+      <h3>Analogous</h3>
+      <p>
+        <strong>Multiple Colors:</strong> Base color and adjacent colors on the color wheel.
+        Creates harmonious, unified color schemes often found in nature.
+      </p>
+      <ul>
+        <li><strong>Amount:</strong> Number of colors in the scheme (must be odd)</li>
+        <li><strong>Angle:</strong> Spacing between adjacent colors</li>
+      </ul>
+
+      <h3>Accented Analogous</h3>
+      <p>
+        <strong>Multiple Colors:</strong> An analogous scheme with an added complementary accent color.
+        Combines harmony with a pop of contrast.
+      </p>
+      <ul>
+        <li><strong>Amount:</strong> Number of analogous colors</li>
+        <li><strong>Angle:</strong> Spacing between adjacent colors</li>
+      </ul>
+
+      <h3>Triadic</h3>
+      <p>
+        <strong>3 Colors:</strong> Three colors equally spaced around the color wheel (120° apart).
+        Creates vibrant, balanced schemes with strong visual interest.
+      </p>
+
+      <h3>Extended Triadic</h3>
+      <p>
+        <strong>4 Colors:</strong> A triadic scheme with the addition of a complementary accent.
+        Adds complexity while maintaining balance.
+      </p>
+
+      <h3>Square</h3>
+      <p>
+        <strong>4 Colors:</strong> Four colors equally spaced around the color wheel (90° apart).
+        Provides rich, balanced palettes with lots of contrast.
+      </p>
+
+      <h3>Tetradic (Rectangle)</h3>
+      <p>
+        <strong>4 Colors:</strong> Two pairs of complementary colors forming a rectangle on the color wheel.
+        Offers the richest possible color combinations.
+      </p>
+      <ul>
+        <li><strong>Angle:</strong> Adjust the spacing between color pairs (0° to 180°)</li>
+      </ul>
+
+      <h3>Monochromatic</h3>
+      <p>
+        <strong>Multiple Colors:</strong> Variations (tints, shades, and tones) of a single hue.
+        Creates cohesive, elegant designs with subtle variation.
+      </p>
+      <ul>
+        <li><strong>Steps:</strong> Number of variations to generate</li>
+      </ul>
+
+      <h3>Tint Shade Group</h3>
+      <p>
+        <strong>Multiple Colors:</strong> Multiple tints (mixed with white), the original color, and multiple shades (mixed with black).
+        Useful for creating value scales and exploring lightness variations.
+      </p>
+      <ul>
+        <li><strong>Steps:</strong> Number of tints and shades on each side</li>
+      </ul>
+
+      <h3>Achromatic</h3>
+      <p>
+        <strong>Multiple Colors:</strong> Variations of black, white, and gray (no hue).
+        Perfect for neutral palettes and establishing value relationships.
+      </p>
+      <ul>
+        <li><strong>Steps:</strong> Number of gray values to generate</li>
+      </ul>
+    </section>
+
+    <section id="material-panel">
+      <h2>Material Properties Panel</h2>
+      <p>
+        Access the Color Harmony Tools panel in the Material Properties tab when a material is selected.
+      </p>
+
+      <h3>Base Color Picker</h3>
+      <p>
+        Select your base color using the color picker. The harmony palette will automatically update
+        based on the selected harmony type and parameters.
+      </p>
+
+      <h3>Harmony Mode Selector</h3>
+      <p>
+        Choose from the available harmony types using the dropdown menu. Additional parameters
+        (like angle or amount) will appear based on the selected mode.
+      </p>
+
+      <h3>Generated Palette Display</h3>
+      <p>
+        View the generated color harmony as a visual palette. Click on any color to select it
+        for application to shader nodes.
+      </p>
+
+      <h3>Apply to Shader Inputs</h3>
+      <p>
+        For materials using Principled BSDF, Emission, or EEVEE Specular shaders, quick-apply buttons
+        allow you to set the selected palette color to various shader inputs:
+      </p>
+      
+      <h4>Principled BSDF</h4>
+      <ul>
+        <li><strong>Color:</strong> Apply to Base Color input</li>
+        <li><strong>Spec:</strong> Apply to Specular Tint input</li>
+        <li><strong>Emit:</strong> Apply to Emission Color input</li>
+        <li><strong>Coat:</strong> Apply to Coat Tint input</li>
+        <li><strong>Sheen:</strong> Apply to Sheen Tint input</li>
+      </ul>
+
+      <h4>Emission Shader</h4>
+      <ul>
+        <li><strong>Color:</strong> Apply to Emission Color input</li>
+      </ul>
+
+      <h4>EEVEE Specular Shader</h4>
+      <ul>
+        <li><strong>Color:</strong> Apply to Base Color input</li>
+        <li><strong>Emit:</strong> Apply to Emission Color input</li>
+      </ul>
+
+      <h3>Copy to Palette</h3>
+      <p>
+        Save the current harmony scheme as a permanent Blender palette for later use or
+        for painting workflows.
+      </p>
+    </section>
+
+    <section id="shader-editor">
+      <h2>Shader Editor Panel</h2>
+      <p>
+        A dedicated panel in the Shader Editor sidebar (N-panel → Color Harmony tab) provides
+        the same functionality as the Material Properties panel, but accessible while working
+        directly in the node editor.
+      </p>
+
+      <h3>Node Targeting</h3>
+      <p>
+        The panel automatically detects compatible shader nodes (BSDF, Emission, etc.) and allows
+        you to target specific nodes by name. Use the "Get Node" button to automatically select
+        the active node in the shader editor.
+      </p>
+
+      <h3>Direct Application</h3>
+      <p>
+        Apply harmony colors directly to node inputs without leaving the Shader Editor workspace,
+        streamlining your material creation workflow.
+      </p>
+    </section>
+
+    <section id="light-panel">
+      <h2>Light Data Properties Panel</h2>
+      <p>
+        When a light object is selected, the Color Harmony Tools panel appears in the Light Properties tab.
+      </p>
+
+      <h3>Light Color Application</h3>
+      <p>
+        Apply harmony colors directly to light objects:
+      </p>
+      <ul>
+        <li><strong>Light Base Color:</strong> Apply to the light's base color property</li>
+        <li><strong>Node Color:</strong> For lights using shader nodes with Emission nodes, apply to the emission color</li>
+      </ul>
+
+      <h3>Get Color from Light</h3>
+      <p>
+        Use the "Get Color" button to sample the current light color and use it as the base
+        for generating a new harmony scheme.
+      </p>
+
+      <h3>Node Selection</h3>
+      <p>
+        Target specific emission nodes in the light's node tree using the node selector and
+        "Get Node" button.
+      </p>
+    </section>
+
+    <section id="palette-panel">
+      <h2>Palette Panel (Paint/Sculpt Modes)</h2>
+      <p>
+        When in Sculpt, Vertex Paint, or Texture Paint mode, the Harmony Palette panel appears
+        in the 3D View sidebar (N-panel → Harmony Palette tab).
+      </p>
+
+      <h3>Paint Workflow Integration</h3>
+      <p>
+        Generate color harmonies and save them to Blender's paint palettes for use with
+        painting and sculpting tools.
+      </p>
+
+      <h3>Copy to Palette</h3>
+      <p>
+        The "Copy To Palette" button creates a new permanent palette with the current harmony
+        colors, automatically naming it with the harmony type and base color values.
+      </p>
+
+      <h3>Existing Palettes</h3>
+      <p>
+        Access and manage existing paint palettes directly from the panel. Create new palettes
+        or switch between saved harmony schemes.
+      </p>
+
+      <h3>Direct Color Selection</h3>
+      <p>
+        Click any color in the harmony palette to select it as the active paint color,
+        allowing you to quickly switch between harmonious colors while painting.
+      </p>
+    </section>
+
+    <section id="api-reference">
+      <h2>API Reference</h2>
+      <p>
+        For developers and advanced users who want to extend or integrate the Color Harmony Tools,
+        here's an overview of the key modules and functions.
+      </p>
+
+      <h3>Core Modules</h3>
+
+      <h4>color_utils.py</h4>
+      <p>
+        Contains all color theory calculations and conversion utilities.
+      </p>
+      <pre><code># Color space conversions
+linear_to_srgb(c)              # Convert linear RGB value to sRGB
+srgb_to_linear(c)              # Convert sRGB value to linear RGB
+convert_linear_rgb_to_srgb(linear_rgb)
+convert_srgb_to_linear_rgb(srgb_rgb)
+
+# Harmony generators (return linear RGB colors)
+get_complementary_color(color)           # Returns [base, complementary]
+get_near_complementary_colors(color, rad)
+get_split_complementary_colors(color)    # Returns [split1, base, split2]
+get_analogous_colors(color, count, degrees)
+get_triadic_colors(color)
+get_square_colors(color)
+get_tetradic_colors(color, angle)
+get_monochromatic_colors(color, count)
+get_achromatic_colors(color, count)
+get_tint_shade_group(color, count)
+
+# Utility
+get_or_create_palette()        # Get or create "Harmony Palette"</code></pre>
+
+      <h4>harmony_settings.py</h4>
+      <p>
+        Defines the property group and harmony type enumerations.
+      </p>
+      <pre><code>HARMONY_TYPES = [
+    ('complementary', "Complementary", "..."),
+    ('near_complementary', "Near Complementary", "..."),
+    # ... (see full list in Harmony Types section)
+]
+
+class HarmonySettings(bpy.types.PropertyGroup):
+    mode: EnumProperty(...)           # Selected harmony type
+    base_color: FloatVectorProperty(...)  # Base color (RGBA)
+    palette: PointerProperty(...)     # Generated palette
+    count: IntProperty(...)           # Number of colors
+    tetradic_angle: FloatProperty(...)
+    analogous_angle: FloatProperty(...)
+    near_complementary_angle: FloatProperty(...)
+    target_bsdf_node_name: StringProperty(...)
+
+# Access in code:
+scene.johnnygizmo_harmony.mode
+scene.johnnygizmo_harmony.base_color</code></pre>
+
+      <h4>Operators</h4>
+      <pre><code># Apply selected palette color to shader input
+JOHNNYGIZMO_COLORHARMONY_OT_ApplySelectedPaletteColor
+    .input = "Base Color" | "Emission Color" | etc.
+    .obtype = "MESH" | "LIGHT"
+
+# Save current harmony as permanent palette
+JOHNNYGIZMO_COLORHARMONY_OT_SavePaletteCopy
+    .new_name = "Custom Palette Name"
+
+# Set active palette color
+JOHNNYGIZMO_COLORHARMONY_OT_SetActivePaletteColor
+    .index = 0  # Color index in palette
+
+# Get selected node
+JOHNNYGIZMO_COLORHARMONY_OT_GetSelectedNode
+
+# Get selected palette color
+JOHNNYGIZMO_COLORHARMONY_OT_GetSelectedPaletteColor
+
+# Convert palette colors to RGB nodes
+JOHNNYGIZMO_COLORHARMONY_OT_PaletteColorToRGBNodes</code></pre>
+
+      <h3>Usage Examples</h3>
+
+      <h4>Generate Triadic Harmony Programmatically</h4>
+      <pre><code>import bpy
+from harmony import color_utils
+
+# Define base color (linear RGB)
+base = (0.8, 0.2, 0.1, 1.0)
+
+# Generate triadic colors
+triadic_colors = color_utils.get_triadic_colors(base)
+
+# Apply to material
+mat = bpy.context.active_object.active_material
+if mat and mat.use_nodes:
+    bsdf = mat.node_tree.nodes.get("Principled BSDF")
+    if bsdf:
+        bsdf.inputs["Base Color"].default_value = triadic_colors[0]</code></pre>
+
+      <h4>Set Base Color and Mode</h4>
+      <pre><code>import bpy
+
+# Access harmony settings
+props = bpy.context.scene.johnnygizmo_harmony
+
+# Set base color (linear RGB)
+props.base_color = (0.5, 0.3, 0.8, 1.0)
+
+# Set harmony mode
+props.mode = 'analogous'
+
+# Adjust parameters
+props.count = 5
+props.analogous_angle = 0.523599  # 30 degrees in radians
+
+# Palette automatically updates via callback</code></pre>
+
+      <h4>Access Generated Palette</h4>
+      <pre><code>import bpy
+
+props = bpy.context.scene.johnnygizmo_harmony
+palette = props.palette
+
+if palette:
+    for i, color in enumerate(palette.colors):
+        print(f"Color {i}: RGB({color.color[0]:.3f}, {color.color[1]:.3f}, {color.color[2]:.3f})")</code></pre>
+
+      <h3>Panel Classes</h3>
+      <ul>
+        <li><code>COLORHARMONY_PT_material_panel</code> - Material Properties panel</li>
+        <li><code>COLORHARMONY_PT_shader_panel</code> - Shader Editor sidebar panel</li>
+        <li><code>COLORHARMONY_PT_Light_Panel</code> - Light Properties panel</li>
+        <li><code>COLORHARMONY_PT_palette_panel</code> - 3D View sidebar panel (paint modes)</li>
+      </ul>
+
+      <h3>Library Modules</h3>
+      <ul>
+        <li><code>lib_custom_palette.py</code> - Custom palette rendering and management</li>
+        <li><code>lib_assign.py</code> - Node assignment and color application utilities</li>
+      </ul>
+    </section>
+
+    <section id="tips">
+      <h2>Tips and Best Practices</h2>
+      <ul>
+        <li><strong>Start Simple:</strong> Begin with complementary or analogous schemes for quick, effective results</li>
+        <li><strong>Adjust Parameters:</strong> Fine-tune angles and counts to find the perfect harmony for your scene</li>
+        <li><strong>Save Favorites:</strong> Use "Copy to Palette" to save harmonies you like for reuse across projects</li>
+        <li><strong>Light Harmony:</strong> Apply matching harmonies to multiple lights for cohesive scene lighting</li>
+        <li><strong>Material Consistency:</strong> Use the same base color across multiple materials with different harmony modes for visual unity</li>
+        <li><strong>Paint Workflow:</strong> Generate harmonies in material mode, copy to palette, then switch to paint mode</li>
+        <li><strong>Node Integration:</strong> Use "Get Node" in the Shader Editor to quickly target custom shader setups</li>
+      </ul>
+    </section>
+
+    <section id="troubleshooting">
+      <h2>Troubleshooting</h2>
+      
+      <h3>Panel Not Visible</h3>
+      <ul>
+        <li>Ensure the extension is enabled in Edit → Preferences → Extensions</li>
+        <li>For Material/Light panels: Select an object with a material or light</li>
+        <li>For Palette panel: Switch to Sculpt, Vertex Paint, or Texture Paint mode</li>
+        <li>For Shader Editor panel: Open the sidebar (press N) and look for "Color Harmony" tab</li>
+      </ul>
+
+      <h3>Colors Not Applying</h3>
+      <ul>
+        <li>Ensure the material is using nodes (Material Properties → Use Nodes)</li>
+        <li>Check that the target node name matches an existing shader node</li>
+        <li>Use "Get Node" to automatically select the active shader node</li>
+      </ul>
+
+      <h3>Palette Display Issues</h3>
+      <ul>
+        <li>Try changing the harmony mode and changing back to refresh the palette</li>
+        <li>Adjust the base color slightly to trigger a palette update</li>
+      </ul>
+    </section>
+
+    <section id="changelog">
+      <h2>Version History</h2>
+      
+      <h3>Version 1.3.1</h3>
+      <ul>
+        <li>Current stable release</li>
+        <li>Support for Blender 4.4.0+</li>
+        <li>Full integration with Material, Light, and Paint workflows</li>
+        <li>13 different harmony modes</li>
+        <li>Shader Editor panel integration</li>
+      </ul>
+    </section>
+
+    <section id="support">
+      <h2>Support and Contribution</h2>
+      <p>
+        For bug reports, feature requests, or contributions, please visit the
+        <a href="https://github.com/johnnygizmo/extensions/tree/main/harmony">GitHub repository</a>.
+      </p>
+      <p>
+        Created by Johnny Matthews<br>
+        License: GPL 2.0 or later
+      </p>
+    </section>
+  </main>
+
+</body>
+
+</html>
