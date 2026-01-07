@@ -96,13 +96,13 @@
         "SPDX:GPL-2.0-or-later"
       ],
       "blender_version_min": "4.4.0",
-      "website": "https://johnnygizmo.github.io/extensions/harmony/",
+      "website": "https://johnnygizmo.github.io/extensions/harmony/docs/",
       "tags": [
         "Material"
       ],
       "archive_url": "./johnnygizmo_color_harmony-1.3.1.zip",
-      "archive_size": 23133,
-      "archive_hash": "sha256:62dca91e63529485656bb3519d3dc6aa25a637c4a1c38e714f57ac2b676929d5"
+      "archive_size": 28623,
+      "archive_hash": "sha256:e24a622b7e609279370c1d71f864edea3af89cd76f9d028707c3cfcad516966e"
     },
     {
       "schema_version": "1.0.0",
@@ -197,6 +197,7 @@
         "SPDX:GPL-2.0-or-later"
       ],
       "blender_version_min": "4.2.0",
+      "website": "https://johnnygizmo.github.io/extensions/physicallybased/docs/",
       "permissions": {
         "network": "Download material data from physicallybased.info API"
       },
@@ -205,8 +206,8 @@
         "Sequencer"
       ],
       "archive_url": "./johnnygizmo_phyicallybasedmaterials-1.0.1.zip",
-      "archive_size": 4806,
-      "archive_hash": "sha256:9acc2a3d5d7548f34e2efd7ae4ac6e84a3f2e5e817c1083784d2797c78dc5cef"
+      "archive_size": 8940,
+      "archive_hash": "sha256:e089bb65c532704ac614ed2c945a064a31adb4eb43b13002c9c9208f8dc84a17"
     },
     {
       "schema_version": "1.0.0",
