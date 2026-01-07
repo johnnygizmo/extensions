@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ACG Material Importer Documentation</title>
+<link rel="stylesheet" href="../../style.css" />
+</head>
+
+<body>
+
+  <header>
+    <h1>ACG Material Importer Documentation</h1>
+  </header>
+
+  <nav>
+    <a href="#introduction">Introduction</a>
+    <a href="#installation">Installation</a>
+    <a href="#usage">Usage</a>
+    <a href="#features">Features</a>
+    <a href="#tips">Tips & Troubleshooting</a>
+  </nav>
+
+  <main>
+    <section id="introduction">
+      <h2>Introduction</h2>
+      <p>
+        The <strong>ACG Material Importer</strong> extension provides a streamlined workflow for importing materials 
+        from AmbientCG.com directly into Blender. It automatically extracts USDZ material archives, imports the USD 
+        materials, creates preview spheres, and organizes all texture maps in your shader editor.
+      </p>
+      <p>
+        <strong>Author:</strong> Johnny Matthews<br>
+        <strong>Version:</strong> 1.1.0<br>
+        <strong>Blender Version:</strong> 4.5.0 or later<br>
+        <strong>Category:</strong> Material, Import-Export
+      </p>
+    </section>
+
+    <section id="installation">
+      <h2>Installation</h2>
+      <p>
+        This extension can be installed directly from Blender's Extensions repository:
+      </p>
+      <ol>
+        <li>Open Blender 4.5 or later</li>
+        <li>Go to <strong>Edit → Preferences → Get Extensions</strong></li>
+        <li>Search for "ACG Material Importer" or "AmbientCG"</li>
+        <li>Click <strong>Install</strong></li>
+      </ol>
+    </section>
+
+    <section id="usage">
+      <h2>Usage</h2>
+      
+      <h3>Prerequisites</h3>
+      <p>Before using the ACG Material Importer:</p>
+      <ul>
+        <li>Download material ZIP files from <strong>AmbientCG.com</strong> (specifically the USDZ format)</li>
+        <li>Know the location of your downloaded ZIP files</li>
+        <li>Ensure you have a valid Blender 4.5+ installation with USD support</li>
+      </ul>
+
+      <h3>Accessing the Importer</h3>
+      <p>The importer can be accessed from:</p>
+      <ul>
+        <li><code>File → Import → AmbientCG USD Materials (.zip)</code></li>
+      </ul>
+
+      <h3>Basic Workflow</h3>
+      <ol>
+        <li>Go to <strong>File → Import → AmbientCG USD Materials (.zip)</strong></li>
+        <li>Navigate to your downloaded AmbientCG ZIP file(s)</li>
+        <li>Select one or multiple ZIP files</li>
+        <li>Click <strong>Import</strong></li>
+        <li>The extension will automatically:
+          <ul>
+            <li>Extract the ZIP archive</li>
+            <li>Import the USDC material file</li>
+            <li>Add all texture image nodes to the shader</li>
+            <li>Create a preview sphere with the material applied</li>
+            <li>Mark the material as an asset with proper metadata</li>
+          </ul>
+        </li>
+      </ol>
+
+      <div class="note">
+        <strong>Note:</strong> You can select multiple ZIP files at once to batch import several materials in a single operation.
+      </div>
+    </section>
+
+    <section id="features">
+      <h2>Features</h2>
+
+      <h3>Automatic Material Import</h3>
+      <p>
+        The extension extracts and imports USDC material files from AmbientCG ZIP archives, preserving all 
+        material properties and shader connections.
+      </p>
+
+      <h3>Texture Node Organization</h3>
+      <p>
+        All texture images found in the ZIP archive are automatically:
+      </p>
+      <ul>
+        <li>Loaded into Blender's image library</li>
+        <li>Added as Image Texture nodes in the material's shader editor</li>
+        <li>Arranged in a clean grid layout for easy access</li>
+        <li>Positioned to the right of the Material Output node</li>
+        <li>Checked for duplicates to avoid redundancy</li>
+      </ul>
+
+      <h3>Preview Sphere Creation</h3>
+      <p>
+        Each imported material automatically gets a preview sphere:
+      </p>
+      <ul>
+        <li>UV Sphere with 24 segments and rings for smooth appearance</li>
+        <li>Auto-smooth shading applied</li>
+        <li>Material assigned and ready for preview</li>
+        <li>Named after the imported material for easy identification</li>
+      </ul>
+
+      <h3>Asset Management</h3>
+      <p>
+        Materials are automatically tagged as assets with proper metadata:
+      </p>
+      <ul>
+        <li>Material names cleaned (removes "aCG_" prefix)</li>
+        <li>Author set to "AmbientCG.com"</li>
+        <li>License set to "Creative Commons CC0 1.0 Universal License"</li>
+        <li>Preview thumbnails automatically generated</li>
+        <li>Ready to use in Blender's Asset Browser</li>
+      </ul>
+
+      <h3>Displacement Support</h3>
+      <p>
+        Materials are configured with displacement method set to 'BOTH' (Displacement + Bump) for optimal rendering.
+      </p>
+
+      <h3>Batch Import</h3>
+      <p>
+        Select and import multiple ZIP files at once to quickly build your material library.
+      </p>
+    </section>
+
+    <section id="tips">
+      <h2>Tips & Troubleshooting</h2>
+
+      <h3>Finding Materials After Import</h3>
+      <p>
+        After importing, you can find your materials in several places:
+      </p>
+      <ul>
+        <li><strong>Scene:</strong> Look for the preview sphere in your viewport</li>
+        <li><strong>Shader Editor:</strong> The material will be active on the selected sphere</li>
+        <li><strong>Asset Browser:</strong> All imported materials are marked as assets</li>
+        <li><strong>Material List:</strong> Check the material dropdown in the properties panel</li>
+      </ul>
+
+      <h3>Downloading from AmbientCG</h3>
+      <p>
+        When downloading materials from AmbientCG.com:
+      </p>
+      <ul>
+        <li>Make sure to select the <strong>USDZ</strong> format option</li>
+        <li>Download the ZIP file (not individual textures)</li>
+        <li>No need to extract the ZIP manually - the extension handles this</li>
+      </ul>
+
+      <h3>Working with Texture Nodes</h3>
+      <p>
+        After import, texture nodes are arranged in a grid but not connected to the shader:
+      </p>
+      <ul>
+        <li>The imported USD material already has the necessary textures connected</li>
+        <li>Additional texture nodes are provided for easy access to maps like AO, Roughness, etc.</li>
+        <li>Connect these nodes to shader sockets as needed for your workflow</li>
+      </ul>
+
+      <h3>UV Mapping</h3>
+      <p>
+        The extension ensures all UV Map nodes use the default "UVMap" name for consistency with standard Blender objects.
+      </p>
+
+      <h3>Common Issues</h3>
+      
+      <p><strong>"No .usdc file found in ZIP"</strong></p>
+      <ul>
+        <li>Verify you downloaded the USDZ format from AmbientCG</li>
+        <li>Some material formats may not be supported</li>
+        <li>Try re-downloading the file from AmbientCG.com</li>
+      </ul>
+
+      <p><strong>"No new materials imported"</strong></p>
+      <ul>
+        <li>Check if the material already exists in your file</li>
+        <li>Look in the Shader Editor or Material Properties</li>
+        <li>Try importing to a fresh Blender file to test</li>
+      </ul>
+
+      <p><strong>Textures not showing</strong></p>
+      <ul>
+        <li>Ensure you're in Material Preview or Rendered viewport shading</li>
+        <li>Check that texture nodes have images loaded (visible in the node)</li>
+        <li>Verify the preview sphere has the material assigned</li>
+      </ul>
+
+      <h3>Performance Tips</h3>
+      <ul>
+        <li>Importing many materials at once may take time - be patient</li>
+        <li>Use <code>File → Pack All</code> to embed textures if moving the .blend file</li>
+        <li>Delete preview spheres after import if you don't need them</li>
+        <li>Materials remain in your library even if spheres are deleted</li>
+      </ul>
+    </section>
+
+  </main>
+
+</body>
+
+</html>
