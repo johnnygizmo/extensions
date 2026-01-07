@@ -1,0 +1,196 @@
+---
+agent: agent
+---
+
+
+
+- update the blender_manifest.toml file  entry for 'website' with the URL to the documentation page, which is structured as follows:
+
+website = https://johnnygizmo.github.io/extensions/CURRENTFOLDERNAME/docs/
+
+- replace CURRENTFOLDERNAME with the name of the currently open folder
+- ensure that the documentation file includes sections for installation instructions, usage examples, and API references based on the code present in the currently open folder's codebase
+- create a folder called docs if it does not already exist
+- Using the currently open folder's codebase create a documentation file for the code called index.html in the docs folder. If it already exists, update it with any new information based on the code present in the currently open folder's codebase
+- ensure that the documentation is well-structured with a clear table of contents, headings, subheadings, and code snippets where applicable
+
+Use the following example structure for the index.html file:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JohnnyGizmo Rigging Tools Documentation</title>
+  <link rel="stylesheet" href="../../style.css" />
+</head>
+
+<body>
+
+  <header>
+    <h1>JohnnyGizmo Rigging Tools Documentation</h1>
+
+  </header>
+
+  <nav>
+    <a href="#introduction">Introduction</a>
+    <a href="#mesh-object-mode">Mesh Object Mode</a>
+    <a href="#edit-mode">Mesh Edit Mode</a>
+    <a href="#arm-edit-mode">Armature Edit Mode</a>
+    <a href="#arm-pose-mode">Armature Pose Mode</a>
+  </nav>
+
+  <main>
+    <section id="introduction">
+      <h2>Introduction</h2>
+      <p>
+        The JohnnyGizmo Rigging Tools add-on provides a set of tools to streamline the rigging process in Blender.
+        It includes features for both mesh and armature objects, allowing for efficient parenting, bone manipulation,
+        and constraint application.
+
+
+      </p>
+      <p>Source code is available <a
+          href="https://github.com/johnnygizmo/extensions/tree/main/johnnygizmo_rigging_tools">here</a>.</p>
+      <section id="mesh-object-mode">
+        <h2>Mesh Object Mode</h2>
+
+        <h3>Add Parent Bone</h3>
+        <p>
+          Assign a mesh to a specific bone. Select a mesh with no parent, run the tool, and choose the target armature
+          and bone from the popup.
+        </p>
+
+        <h3>Change Parent Bone</h3>
+        <p>
+          Reassign a mesh to a different bone. Select a mesh that is already parented to a bone, run the tool, and
+          choose the new target bone.
+        </p>
+
+
+
+        <h3>Parent Meshes to Nearest Bone</h3>
+        <p>
+          Automatically parent selected mesh objects to the nearest bone of the active armature.
+          Useful for quickly attaching many loose parts to a skeleton.
+        </p>
+        <ul>
+          <li><strong>Bone Point</strong>: Choose which part of the bone to measure distance from (Head, Tail, or
+            Center).</li>
+          <li><strong>Use Deform</strong>: Only consider bones with the 'Deform' property enabled.</li>
+          <li><strong>Replace Parent</strong>: Force reparenting even if the object already has a parent.</li>
+        </ul>
+
+      </section>
+
+      <section id="edit-mode">
+        <h2>Mesh Edit Mode</h2>
+
+        <h3>Mesh Bone Magnet</h3>
+        <p>
+          Snap a bone joint to the center of the current mesh selection.
+          In Mesh Edit Mode (with the mesh parented to an armature), select vertices, edges, or faces,
+          then use this tool to move a specific bone joint (Head or Tail) to that location.
+        </p>
+
+        <h3>Vertex Bone Assignment</h3>
+        <p>
+          Assign selected vertices to a specific bone. Great for weight painting and mesh deformation control.
+          The closest bone will be chosen by default, but you can select another one as needed.
+        </p>
+
+        <h3>Create Parent Armature</h3>
+        <p>
+          Generate a new armature rooted at the center of the current mesh selection.
+          The mesh will be automatically parented to this new armature. Useful for starting a rig from scratch.
+        </p>
+      </section>
+
+      <section id="arm-edit-mode">
+        <h2>Armature Edit Mode</h2>
+
+        <h3>Armature Bone Magnet</h3>
+        <p>
+          Snap a specific bone joint to the average position of currently selected bone joints.
+          Useful for aligning bones within the armature.
+        </p>
+
+        <h3>Align Bone to Face Normal</h3>
+        <p>
+          Align the active bone to the normal of a selected face on a mesh object.
+          Requires one armature and one mesh selected.
+        </p>
+        <ul>
+          <li><strong>Preserve Bone Length</strong>: Maintain the original length of the bone.</li>
+          <li><strong>Align to Active Edge</strong>: Align the bone's secondary axis (roll) to the active edge on the
+            mesh.</li>
+          <li><strong>Edge Align Axis</strong>: Choose which axis (X or Z) to align to the edge.</li>
+          <li><strong>Flip Roll 180°</strong>: Flip the bone roll by 180 degrees.</li>
+        </ul>
+
+        <h3>Align Connected Bone Children</h3>
+        <p>
+          Align all connected child bones to the direction of the selected parent bone.
+        </p>
+        <ul>
+          <li><strong>Copy Roll</strong>: Apply the parent's roll to all aligned children.</li>
+          <li><strong>Copy Length</strong>: Set all aligned children to the same length as the parent.</li>
+        </ul>
+
+        <h3>Bone Chain Rename</h3>
+        <p>
+          Batch rename a chain of bones with standard naming conventions (Side, Type, Numbering).
+          Works in both Edit and Pose modes.
+        </p>
+      </section>
+
+      <section id="arm-pose-mode">
+        <h2>Armature Pose Mode</h2>
+
+        <h3>Bone Doctor</h3>
+        <p>
+          Perform a health check and automated cleanup on your armature.
+        </p>
+        <ul>
+          <li><strong>Disable Deform on IK Targets</strong>: Unchecks 'use_deform' for bones used as IK targets.</li>
+          <li><strong>Disable/Enable Deform on DEF/Non-DEF</strong>: Enforces deformation settings based on naming
+            conventions (DEF_*).</li>
+          <li><strong>Move to Collections</strong>: Automatically organizes bones into DEF, MCH, and CTRL collections
+            based on their names.</li>
+          <li><strong>Clean Symmetry Naming</strong>: Standardizes suffixes (e.g., converts _L to .L) for Blender
+            symmetry to work correctly.</li>
+          <li><strong>Apply Armature Transforms</strong>: Applies object-level scale and rotation to the armature data.
+          </li>
+          <li><strong>Generate Report</strong>: Creates a text block detailing potential issues like missing targets,
+            zero-length chains, or unassigned bones.</li>
+        </ul>
+
+        <h3>Advanced IK (IK+)</h3>
+        <p>
+          quickly add an IK constraint with a predefined setup.
+        </p>
+        <ul>
+          <li><strong>Chain Length</strong>: Set the number of bones in the IK chain.</li>
+          <li><strong>Pole Target</strong>: Automatically assign a Pole Target object and bone.</li>
+          <li><strong>Weights</strong>: Fine-tune Position and Rotation weights immediately.</li>
+        </ul>
+
+        <h3>Standard Constraint Tools</h3>
+        <p>
+          Quickly apply standard constraints: Damped Track, Stretch To, and Locked Track.
+        </p>
+        <ul>
+          <li><strong>One Bone Selected</strong>: Adds the constraint to the selected bone (requires setting target
+            manually if not prompted).</li>
+          <li><strong>Two Bones Selected</strong>: The active bone becomes the owner, and the inactive bone becomes the
+            target.</li>
+        </ul>
+
+
+  </main>
+
+</body>
+
+</html>
