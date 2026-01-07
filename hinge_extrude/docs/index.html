@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hinge Extrude Documentation</title>
+<link rel="stylesheet" href="../../style.css" />
+</head>
+
+<body>
+
+  <header>
+    <h1>Hinge Extrude Documentation</h1>
+  </header>
+
+  <nav>
+    <a href="#introduction">Introduction</a>
+    <a href="#installation">Installation</a>
+    <a href="#usage">Usage</a>
+    <a href="#parameters">Parameters</a>
+    <a href="#tips">Tips & Examples</a>
+  </nav>
+
+  <main>
+    <section id="introduction">
+      <h2>Introduction</h2>
+      <p>
+        The <strong>Hinge Extrude</strong> add-on provides a powerful mesh editing tool that allows you to extrude
+        selected faces while rotating them around an active edge. This is particularly useful for creating hinged
+        geometry, circular extrusions, and complex mechanical parts.
+      </p>
+      <p>
+        <strong>Author:</strong> Johnny Matthews<br>
+        <strong>Version:</strong> 1.0.5<br>
+        <strong>Blender Version:</strong> 4.2.0 or later<br>
+        <strong>Category:</strong> Mesh
+      </p>
+    </section>
+
+    <section id="installation">
+      <h2>Installation</h2>
+      <p>
+        This extension can be installed directly from Blender's Extensions repository:
+      </p>
+      <ol>
+        <li>Open Blender 4.2 or later</li>
+        <li>Go to <strong>Edit → Preferences → Get Extensions</strong></li>
+        <li>Search for "JohnnyGizmo Hinge Extrude"</li>
+        <li>Click <strong>Install</strong></li>
+      </ol>
+    </section>
+
+    <section id="usage">
+      <h2>Usage</h2>
+      
+      <h3>Prerequisites</h3>
+      <p>To use the Hinge Extrude tool, you must:</p>
+      <ul>
+        <li>Be in <strong>Edit Mode</strong> on a mesh object</li>
+        <li>Have both <strong>Edge</strong> and <strong>Face</strong> select modes enabled</li>
+        <li>Have at least one face selected</li>
+        <li>Have an active edge selected (the edge around which faces will rotate)</li>
+      </ul>
+
+      <h3>Accessing the Tool</h3>
+      <p>The Hinge Extrude tool can be accessed from multiple locations:</p>
+      <ul>
+        <li><code>View3D → Mesh → Extrude → Hinge Extrude</code></li>
+        <li><code>View3D → Mesh → Faces → Hinge Extrude</code></li>
+        <li>Right-click context menu in Edit Mode</li>
+      </ul>
+
+      <h3>Basic Workflow</h3>
+      <ol>
+        <li>Select the faces you want to extrude</li>
+        <li>Select an edge and make it active (last selected edge becomes active)</li>
+        <li>Enable both Edge and Face select modes</li>
+        <li>Run the Hinge Extrude operator</li>
+        <li>Adjust the Rotation Angle and Steps parameters as needed</li>
+      </ol>
+
+      <div class="note">
+        <strong>Note:</strong> The active edge acts as the rotation axis. To make an edge active, select it last
+        while holding Shift to keep your face selection.
+      </div>
+    </section>
+
+    <section id="parameters">
+      <h2>Parameters</h2>
+
+      <h3>Rotation Angle</h3>
+      <p>
+        <strong>Type:</strong> Float (Angle)<br>
+        <strong>Default:</strong> 30° (0.523599 radians)<br>
+        <strong>Range:</strong> -360° to 360°
+      </p>
+      <p>
+        Controls the total angle of rotation for the extrusion. Positive values rotate in one direction,
+        negative values rotate in the opposite direction. The rotation direction is automatically calculated
+        based on the face normals to ensure intuitive behavior.
+      </p>
+
+      <h3>Steps</h3>
+      <p>
+        <strong>Type:</strong> Integer<br>
+        <strong>Default:</strong> 1<br>
+        <strong>Range:</strong> 1 to 100
+      </p>
+      <p>
+        Determines how many extrusion steps to perform. The total rotation angle is divided equally among
+        all steps. Higher values create smoother curves but result in more geometry.
+      </p>
+      <ul>
+        <li><strong>Steps = 1:</strong> Single extrusion at the full rotation angle</li>
+        <li><strong>Steps = 4:</strong> Four extrusions, each rotated by 1/4 of the total angle</li>
+        <li><strong>Steps = 12:</strong> Creates smooth circular geometry (useful for 90° or 180° rotations)</li>
+      </ul>
+    </section>
+
+    <section id="tips">
+      <h2>Tips & Examples</h2>
+
+      <h3>Creating Circular Extrusions</h3>
+      <p>
+        To create a complete circular extrusion (360°):
+      </p>
+      <ul>
+        <li>Set Rotation Angle to 360°</li>
+        <li>Set Steps to 12 or higher for smooth results</li>
+        <li>The tool will automatically merge overlapping vertices</li>
+      </ul>
+
+      <h3>Creating Hinged Geometry</h3>
+      <p>
+        For door hinges, lids, or mechanical parts:
+      </p>
+      <ul>
+        <li>Use smaller rotation angles (30° - 90°)</li>
+        <li>Use fewer steps (1-4) for hard-edged mechanical parts</li>
+        <li>The edge should be positioned where the hinge pivot would be</li>
+      </ul>
+
+      <h3>Understanding Rotation Direction</h3>
+      <p>
+        The tool automatically determines the rotation direction based on your face normals:
+      </p>
+      <ul>
+        <li>Positive angles rotate faces in the direction of their normals</li>
+        <li>If the rotation seems backwards, try negating the angle</li>
+        <li>Face orientation can be checked with <code>Overlays → Face Orientation</code></li>
+      </ul>
+
+      <h3>Performance Considerations</h3>
+      <ul>
+        <li>Higher step counts create more geometry and may slow down viewport performance</li>
+        <li>The tool automatically removes duplicate vertices after extrusion</li>
+        <li>Complex selections with many faces will take longer to process</li>
+      </ul>
+
+      <h3>Common Issues</h3>
+      <p><strong>"No active edge selected"</strong></p>
+      <ul>
+        <li>Make sure an edge is the last element you selected</li>
+        <li>Try selecting faces first, then Shift+click an edge to make it active</li>
+      </ul>
+
+      <p><strong>"No faces selected"</strong></p>
+      <ul>
+        <li>Ensure you have at least one face selected</li>
+        <li>Both Edge and Face select modes must be enabled</li>
+      </ul>
+    </section>
+
+  </main>
+
+</body>
+
+</html>
