@@ -141,9 +141,10 @@ class VIEW3D_PT_johnnygizmo_rigging_tools(bpy.types.Panel):
             if tools_display1:
                 row = tools_display1.row()
                 row.operator("armature.bone_doctor", text="Bone Doctor", icon='SHADING_BBOX')
-                if (len(context.selected_pose_bones) == 2 or len(context.selected_pose_bones) == 1):       
+                if (len(context.selected_pose_bones) >=1 ):       
                     row = tools_display1.row()
                     row.operator("jg.bone_chain_rename", text="Chain Rename", icon='FONT_DATA')                 
+                if (len(context.selected_pose_bones) == 2 or len(context.selected_pose_bones) == 1):       
                     row = tools_display1.row()
                     row.label(text="Constraints")
                     row = tools_display1.row()
