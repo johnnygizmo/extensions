@@ -21,7 +21,7 @@
       ],
       "archive_url": "./acg_material-1.1.0.zip",
       "archive_size": 6807,
-      "archive_hash": "sha256:44a367b256821383d20b182078e62149eb6d69e791bf134b6e5c3032c9bd1215"
+      "archive_hash": "sha256:4e3f0f379c78f0c45a263d43608fe371e1bc89a6f0044a1772cf56363dc7c872"
     },
     {
       "schema_version": "1.0.0",
@@ -39,8 +39,8 @@
         "Geometry Nodes"
       ],
       "archive_url": "./geometrynode_scriptrunner-1.0.1.zip",
-      "archive_size": 2465,
-      "archive_hash": "sha256:24bd8c4b4eb3561ef991fc3b4cff2314d341515ecd609a9a3d4d36136c7c2a5a"
+      "archive_size": 2474,
+      "archive_hash": "sha256:8661114f111c5a8fa7f36a95c561cc0847cfed33d50d38576c33b921be0e9203"
     },
     {
       "schema_version": "1.0.0",
@@ -61,7 +61,7 @@
       ],
       "archive_url": "./johnnygizmo_align-1.0.2.zip",
       "archive_size": 11399,
-      "archive_hash": "sha256:d7f418e63ed57c6857533327af6586971a9d177174fdfb85b7ed42fc26fecc21"
+      "archive_hash": "sha256:5da10765e19f0b6128749a17ae727e75a558a1ec562bc83ae14f16da6552e373"
     },
     {
       "schema_version": "1.0.0",
@@ -82,7 +82,7 @@
       ],
       "archive_url": "./johnnygizmo_attribute_inspector-1.0.2.zip",
       "archive_size": 4868,
-      "archive_hash": "sha256:0d1281b7f28c9b54f08db9faded0a9cbe2c04b8be4665cf26b4f4322405f1053"
+      "archive_hash": "sha256:90de4c56bb9e6681bd425aa0c7afada208ce65b217a9d381bf10f6fcadc664ce"
     },
     {
       "schema_version": "1.0.0",
@@ -101,8 +101,8 @@
         "Material"
       ],
       "archive_url": "./johnnygizmo_color_harmony-1.3.1.zip",
-      "archive_size": 28623,
-      "archive_hash": "sha256:e24a622b7e609279370c1d71f864edea3af89cd76f9d028707c3cfcad516966e"
+      "archive_size": 34020,
+      "archive_hash": "sha256:5e14c6621e8f5619efe4e564ed7708ee745377aaa171780a6ebe708d191bbf7e"
     },
     {
       "schema_version": "1.0.0",
@@ -123,8 +123,8 @@
         "Rigging"
       ],
       "archive_url": "./johnnygizmo_create_empty_vertex_child-1.0.0.zip",
-      "archive_size": 2716,
-      "archive_hash": "sha256:50d3cea4d5724a7754cd54d275b7756e90f35ad8ba9795f1fd04a515249b6092"
+      "archive_size": 2741,
+      "archive_hash": "sha256:6356d196e6be33c400d80ade9532e882d4d77aa0abbddd5f235ce8b6b6f1e278"
     },
     {
       "schema_version": "1.0.0",
@@ -145,7 +145,7 @@
       ],
       "archive_url": "./johnnygizmo_hinge_extrude-1.0.5.zip",
       "archive_size": 7249,
-      "archive_hash": "sha256:1eef3459025ed5e11d162fa9e6fa5ea9b5f0f773b254576d0e875962805f01e6"
+      "archive_hash": "sha256:8dc9e9b033df98a40feec94a698f774e8ab212f1b11489d6d91a8be0f8654b5c"
     },
     {
       "schema_version": "1.0.0",
@@ -163,8 +163,8 @@
         "Geometry Nodes"
       ],
       "archive_url": "./johnnygizmo_modifier_node_edit_panel-0.2.2.zip",
-      "archive_size": 3583,
-      "archive_hash": "sha256:a524f118a4961197b6f1e3577fc2330ddddafad48734a3272b086e5cd1eb404b"
+      "archive_size": 3590,
+      "archive_hash": "sha256:539d2b552a465f4e0e91e0e893e6eeb77db3363acb3104417eefeeeb2620c2f5"
     },
     {
       "schema_version": "1.0.0",
@@ -182,8 +182,8 @@
         "Geometry Nodes"
       ],
       "archive_url": "./johnnygizmo_node_bake_shapes-1.0.0.zip",
-      "archive_size": 3520,
-      "archive_hash": "sha256:a8b2fc42982dcc4713badcae1b05d2601831b6d45f59b86e336fa1e9f1a0f181"
+      "archive_size": 3526,
+      "archive_hash": "sha256:8fa47983542b2f977b4e7c3cb35e7f6bf00bd4c53c1f628b705bd15a3c201a4a"
     },
     {
       "schema_version": "1.0.0",
@@ -206,8 +206,8 @@
         "Sequencer"
       ],
       "archive_url": "./johnnygizmo_phyicallybasedmaterials-1.0.1.zip",
-      "archive_size": 8940,
-      "archive_hash": "sha256:e089bb65c532704ac614ed2c945a064a31adb4eb43b13002c9c9208f8dc84a17"
+      "archive_size": 8966,
+      "archive_hash": "sha256:8761de4b866268487b17b5a3694c2c3df4427bc27d7b6f4ddef6e36f92ce4879"
     },
     {
       "schema_version": "1.0.0",
@@ -224,14 +224,14 @@
       "website": "https://github.com/johnnygizmo/extensions",
       "archive_url": "./johnnygizmo_quick_cloth_tool-1.0.13.zip",
       "archive_size": 4378309,
-      "archive_hash": "sha256:9a3b4521b23a133fc117ab5457b66f3ddb9a3eeff706c53f5bcd9ef00e636660"
+      "archive_hash": "sha256:0c4718ec6e7280a77a476257f038db5c83ea7e9b2300eb9eb2d912049551c226"
     },
     {
       "schema_version": "1.0.0",
       "id": "johnnygizmo_rigging_tools",
       "name": "JohnnyGizmo Rigging Tools",
       "tagline": "Speed up your rigging workflow",
-      "version": "1.5.2",
+      "version": "1.5.3",
       "type": "add-on",
       "maintainer": "Johnny Matthews",
       "license": [
@@ -244,9 +244,9 @@
         "3D View",
         "Mesh"
       ],
-      "archive_url": "./johnnygizmo_rigging_tools-1.5.2.zip",
-      "archive_size": 45746,
-      "archive_hash": "sha256:93eeaecab16f88eb0c914313a593a1c40423c59a9a6c0fa4247b4707321f151f"
+      "archive_url": "./johnnygizmo_rigging_tools-1.5.3.zip",
+      "archive_size": 45752,
+      "archive_hash": "sha256:d2d14da5777a8b058d54d3c72219ba3f15bbc5c41a656b74e9e366e303421223"
     }
   ]
 }
