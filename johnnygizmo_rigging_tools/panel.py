@@ -229,7 +229,8 @@ class VIEW3D_PT_johnnygizmo_rigging_tools(bpy.types.Panel):
                         pose_display.prop_search(ik, "pole_target", context.scene, "objects", text="Pole")
                         if ik.pole_target and ik.pole_target.type == 'ARMATURE':
                             pose_display.prop_search(ik, "pole_subtarget", ik.target.data, "bones", text="-Bone")
-
+                            if ik.pole_subtarget:
+                                pose_display.prop(ik, "pole_angle")
 
                         pose_display.prop(ik, "chain_count")
 
