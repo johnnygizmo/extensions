@@ -245,8 +245,27 @@
         "Mesh"
       ],
       "archive_url": "./johnnygizmo_rigging_tools-1.5.3.zip",
-      "archive_size": 45752,
-      "archive_hash": "sha256:d2d14da5777a8b058d54d3c72219ba3f15bbc5c41a656b74e9e366e303421223"
+      "archive_size": 45764,
+      "archive_hash": "sha256:cec065b689e8048c9d2c05e793b6c32bb45a2b79d5263fd7841023138b01b3cc"
+    },
+    {
+      "schema_version": "1.0.0",
+      "id": "send_to_library",
+      "name": "Send to Library",
+      "tagline": "Send datablocks to an external asset library blend file",
+      "version": "1.0.0",
+      "type": "add-on",
+      "maintainer": "Johnny Matthews",
+      "license": [
+        "SPDX:GPL-3.0-or-later"
+      ],
+      "blender_version_min": "4.2.0",
+      "permissions": {
+        "files": "All Control"
+      },
+      "archive_url": "./send_to_library-1.0.0.zip",
+      "archive_size": 6245,
+      "archive_hash": "sha256:205ffba2aa7805f74f118ae91349deffa3ac6838cd8e5ad804e9337a94813bb9"
     }
   ]
 }

@@ -29,6 +29,24 @@ call build.bat
 cd ..
 
 
+@REM Broken Out
+cd ..
+cd sendtolibrary
+call build.bat
+cd ..
+cd extensions
+
+cd ..
+cd hinge_extrude
+call build.bat
+cd ..
+cd extensions
+
+@REM Need to Break out
+
+
+
+
 cd modifier_node_edit_panel
 call build.bat
 cd ..
@@ -64,9 +82,7 @@ call build.bat
 cd ..
 
 
-cd hinge_extrude
-call build.bat
-cd ..
+
 
 "%MyVar%\blender.exe" --command extension server-generate --repo-dir=./
 REM "%MyVar%\blender.exe" --command extension server-generate --repo-dir=./ --html
