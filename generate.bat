@@ -11,77 +11,21 @@ del *.json
 
 SET /P MyVar=<folder.txt
 
+@REM -------------------------------------------------------
 
-cd create_empty_vertex_child
-call build.bat
-cd ..
-cd quick_cloth_tool
-call build.bat
-cd ..
-@REM cd vertex_bone_picker
-@REM call build.bat
-@REM cd ..
-cd johnnygizmo_rigging_tools
-call build.bat
-cd ..
-cd harmony
-call build.bat
-cd ..
+@REM Loop through extensions list
+IF NOT EXIST "extensions_list.txt" (
+    ECHO Error: extensions_list.txt not found.
+    EXIT /B 1
+)
 
-
-@REM Broken Out
-cd ..
-cd sendtolibrary
-call build.bat
-cd ..
-cd extensions
-
-cd ..
-cd hinge_extrude
-call build.bat
-cd ..
-cd extensions
-
-@REM Need to Break out
-
-
-
-
-cd modifier_node_edit_panel
-call build.bat
-cd ..
-
-cd johnnygizmo_node_bake_shape
-call build.bat
-cd ..
-
-cd attribute_inspector
-call build.bat
-cd ..
-
-cd geo_script
-call build.bat
-cd ..
-
-cd physicallybased
-call build.bat
-cd ..
-
-cd usdc_material
-call build.bat
-cd ..
-
-
-@REM cd shapekeywidget
-@REM call build.bat
-@REM cd ..
-
-
-cd align_tools
-call build.bat
-cd ..
-
-
+FOR /F "tokens=*" %%E IN (extensions_list.txt) DO (
+    cd ..
+    cd %%E
+    call ..\extensions\build.bat
+    cd ..
+    cd extensions
+)
 
 
 "%MyVar%\blender.exe" --command extension server-generate --repo-dir=./

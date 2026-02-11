@@ -1,0 +1,13 @@
+sendtolibrary
+hinge_extrude
+johnnygizmo_rigging_tools
+harmony
+create_empty_vertex_child
+align_tools
+quick_cloth_tool
+modifier_node_edit_panel
+attribute_inspector
+johnnygizmo_node_bake_shape
+geo_script
+physicallybased
+usdc_material
