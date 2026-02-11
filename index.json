@@ -255,7 +255,6 @@
       "tagline": "Send datablocks to an external asset library blend file",
       "version": "1.0.0",
       "type": "add-on",
-      "website": "https://johnnygizmo.github.io/sendtolibrary/",
       "maintainer": "Johnny Matthews",
       "license": [
         "SPDX:GPL-3.0-or-later"
@@ -265,8 +264,8 @@
         "files": "All Control"
       },
       "archive_url": "./send_to_library-1.0.0.zip",
-      "archive_size": 6245,
-      "archive_hash": "sha256:205ffba2aa7805f74f118ae91349deffa3ac6838cd8e5ad804e9337a94813bb9"
+      "archive_size": 6794,
+      "archive_hash": "sha256:9f52f860e36cb9ea4cdf5974cf64a530f8d9ede2076dc391827106013f33b2c5"
     }
   ]
 }
