@@ -14,14 +14,14 @@
         "SPDX:GPL-2.0-or-later"
       ],
       "blender_version_min": "4.5.0",
-      "website": "https://johnnygizmo.github.io/extensions/usdc_material/docs/",
+      "website": "https://johnnygizmo.github.io/usdc_material/docs/",
       "tags": [
         "Material",
         "Import-Export"
       ],
       "archive_url": "./acg_material-1.1.0.zip",
-      "archive_size": 6807,
-      "archive_hash": "sha256:4e3f0f379c78f0c45a263d43608fe371e1bc89a6f0044a1772cf56363dc7c872"
+      "archive_size": 6619,
+      "archive_hash": "sha256:07b93f8d8f931b701ec11b60339a4819ea0468db588dc06d4a310c7af8e389d2"
     },
     {
       "schema_version": "1.0.0",
@@ -54,14 +54,14 @@
         "SPDX:GPL-3.0-or-later"
       ],
       "blender_version_min": "4.2.0",
-      "website": "https://johnnygizmo.github.io/extensions/align_tools/docs/",
+      "website": "https://johnnygizmo.github.io/align_tools/docs/",
       "tags": [
         "Animation",
         "Sequencer"
       ],
       "archive_url": "./johnnygizmo_align-1.0.2.zip",
-      "archive_size": 11399,
-      "archive_hash": "sha256:5da10765e19f0b6128749a17ae727e75a558a1ec562bc83ae14f16da6552e373"
+      "archive_size": 11212,
+      "archive_hash": "sha256:f8b665dcad33ef25d32db069be15ad350fcbf78eb32bf6679ee683e6a6136c83"
     },
     {
       "schema_version": "1.0.0",
@@ -81,8 +81,8 @@
         "Mesh"
       ],
       "archive_url": "./johnnygizmo_attribute_inspector-1.0.2.zip",
-      "archive_size": 4868,
-      "archive_hash": "sha256:90de4c56bb9e6681bd425aa0c7afada208ce65b217a9d381bf10f6fcadc664ce"
+      "archive_size": 4682,
+      "archive_hash": "sha256:34fdea1532dd7ad65c218228dea3583abd0074f05a1da3e32e8a78ea1cbb37fc"
     },
     {
       "schema_version": "1.0.0",
@@ -96,13 +96,13 @@
         "SPDX:GPL-2.0-or-later"
       ],
       "blender_version_min": "4.4.0",
-      "website": "https://johnnygizmo.github.io/extensions/harmony/docs/",
+      "website": "https://johnnygizmo.github.io/harmony/docs/",
       "tags": [
         "Material"
       ],
       "archive_url": "./johnnygizmo_color_harmony-1.3.1.zip",
-      "archive_size": 34020,
-      "archive_hash": "sha256:5e14c6621e8f5619efe4e564ed7708ee745377aaa171780a6ebe708d191bbf7e"
+      "archive_size": 33829,
+      "archive_hash": "sha256:c1745bc1c3eb18f77ce65ec95154cb74d63d5ff3ea2940a09137f0f0d83669db"
     },
     {
       "schema_version": "1.0.0",
@@ -123,8 +123,8 @@
         "Rigging"
       ],
       "archive_url": "./johnnygizmo_create_empty_vertex_child-1.0.0.zip",
-      "archive_size": 2741,
-      "archive_hash": "sha256:6356d196e6be33c400d80ade9532e882d4d77aa0abbddd5f235ce8b6b6f1e278"
+      "archive_size": 2555,
+      "archive_hash": "sha256:ff842c2bca82634b7b057d7f493233ccccd92320c5f9e431306fa9afc526df7f"
     },
     {
       "schema_version": "1.0.0",
@@ -138,14 +138,14 @@
         "SPDX:GPL-3.0-or-later"
       ],
       "blender_version_min": "4.2.0",
-      "website": "https://johnnygizmo.github.io/extensions/hinge_extrude/docs/",
+      "website": "https://johnnygizmo.github.io/hinge_extrude/docs/",
       "tags": [
         "Mesh",
         "Modeling"
       ],
       "archive_url": "./johnnygizmo_hinge_extrude-1.0.5.zip",
-      "archive_size": 7253,
-      "archive_hash": "sha256:01fd42f9c1efcf8f6f596bc059d906d6742e3ccf2459829c3d9732d795257123"
+      "archive_size": 7252,
+      "archive_hash": "sha256:e6025520e1156251f863b88af1001f952ae04feda55fcc4d0751378ba950ae63"
     },
     {
       "schema_version": "1.0.0",
@@ -163,8 +163,8 @@
         "Geometry Nodes"
       ],
       "archive_url": "./johnnygizmo_modifier_node_edit_panel-0.2.2.zip",
-      "archive_size": 3590,
-      "archive_hash": "sha256:539d2b552a465f4e0e91e0e893e6eeb77db3363acb3104417eefeeeb2620c2f5"
+      "archive_size": 3404,
+      "archive_hash": "sha256:33f3046322bc93a6d1c302ecea19fb76e90ff3a28cb5d129fc8d6a9aeefd85d3"
     },
     {
       "schema_version": "1.0.0",
@@ -182,8 +182,8 @@
         "Geometry Nodes"
       ],
       "archive_url": "./johnnygizmo_node_bake_shapes-1.0.0.zip",
-      "archive_size": 3526,
-      "archive_hash": "sha256:8fa47983542b2f977b4e7c3cb35e7f6bf00bd4c53c1f628b705bd15a3c201a4a"
+      "archive_size": 3340,
+      "archive_hash": "sha256:e925b592b4cd148cc684ca6834e2f6aaf3df16c059bfb0191238d89a07305007"
     },
     {
       "schema_version": "1.0.0",
@@ -197,7 +197,7 @@
         "SPDX:GPL-2.0-or-later"
       ],
       "blender_version_min": "4.2.0",
-      "website": "https://johnnygizmo.github.io/extensions/physicallybased/docs/",
+      "website": "https://johnnygizmo.github.io/physicallybased/docs/",
       "permissions": {
         "network": "Download material data from physicallybased.info API"
       },
@@ -206,8 +206,8 @@
         "Sequencer"
       ],
       "archive_url": "./johnnygizmo_phyicallybasedmaterials-1.0.1.zip",
-      "archive_size": 8966,
-      "archive_hash": "sha256:8761de4b866268487b17b5a3694c2c3df4427bc27d7b6f4ddef6e36f92ce4879"
+      "archive_size": 8777,
+      "archive_hash": "sha256:bfdc2a5c8c1d339f1d8ea1c5e9638b95090d482b49f09c04a97763f99a00b2e7"
     },
     {
       "schema_version": "1.0.0",
@@ -223,8 +223,8 @@
       "blender_version_min": "4.4.0",
       "website": "https://github.com/johnnygizmo/extensions",
       "archive_url": "./johnnygizmo_quick_cloth_tool-1.0.13.zip",
-      "archive_size": 4378309,
-      "archive_hash": "sha256:0c4718ec6e7280a77a476257f038db5c83ea7e9b2300eb9eb2d912049551c226"
+      "archive_size": 4378123,
+      "archive_hash": "sha256:6ad131d1f4d00a51e53de371903744770c77bd28139c09073ff76f168abf8e7f"
     },
     {
       "schema_version": "1.0.0",
@@ -238,15 +238,15 @@
         "SPDX:GPL-2.0-or-later"
       ],
       "blender_version_min": "4.4.0",
-      "website": "https://johnnygizmo.github.io/extensions/johnnygizmo_rigging_tools/docs/",
+      "website": "https://johnnygizmo.github.io/johnnygizmo_rigging_tools/docs/",
       "tags": [
         "Rigging",
         "3D View",
         "Mesh"
       ],
       "archive_url": "./johnnygizmo_rigging_tools-1.5.3.zip",
-      "archive_size": 45768,
-      "archive_hash": "sha256:edf559d85023c746c5579a57a96b3af146b5f2e1b3f200c2336fd21091a3e3d6"
+      "archive_size": 45765,
+      "archive_hash": "sha256:3c50d9831639808c5c7c66ac84e02ae3ad73c7badbfecc7454079367a80de4f0"
     },
     {
       "schema_version": "1.0.0",
