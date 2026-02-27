@@ -253,7 +253,7 @@
       "id": "send_to_library",
       "name": "Send to Library",
       "tagline": "Send datablocks to an external asset library blend file",
-      "version": "1.0.1",
+      "version": "1.0.3",
       "type": "add-on",
       "maintainer": "Johnny Matthews",
       "license": [
@@ -263,9 +263,9 @@
       "permissions": {
         "files": "All Control"
       },
-      "archive_url": "./send_to_library-1.0.1.zip",
-      "archive_size": 7817,
-      "archive_hash": "sha256:cff9908d3c8f63fbda67439e01b579356b260f16edfaf1857008a13dfe1ba6d3"
+      "archive_url": "./send_to_library-1.0.3.zip",
+      "archive_size": 8815,
+      "archive_hash": "sha256:ead941037eb5129e4963aced8f6890ad14a888fee33c4fe4df17f638f7a123a2"
     }
   ]
 }
