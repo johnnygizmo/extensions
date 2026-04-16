@@ -211,6 +211,25 @@
     },
     {
       "schema_version": "1.0.0",
+      "id": "johnnygizmo_popout",
+      "name": "Popout Window Plus",
+      "tagline": "Duplicate the active area into a new window with options",
+      "version": "1.0.3",
+      "type": "add-on",
+      "maintainer": "Johnny Matthews",
+      "license": [
+        "SPDX:GPL-3.0-or-later"
+      ],
+      "blender_version_min": "5.1.0",
+      "tags": [
+        "User Interface"
+      ],
+      "archive_url": "./johnnygizmo_popout-1.0.3.zip",
+      "archive_size": 4163,
+      "archive_hash": "sha256:2937f030490a62a48d9308cb9bf6b76afc5510f55cb6348c57f5c4d9d96df129"
+    },
+    {
+      "schema_version": "1.0.0",
       "id": "johnnygizmo_quick_cloth_tool",
       "name": "JohnnyGizmo Quick Cloth Tool",
       "tagline": "Some Tools For Quick Cloth Simulation",
@@ -245,8 +264,8 @@
         "Mesh"
       ],
       "archive_url": "./johnnygizmo_rigging_tools-1.5.3.zip",
-      "archive_size": 45765,
-      "archive_hash": "sha256:3c50d9831639808c5c7c66ac84e02ae3ad73c7badbfecc7454079367a80de4f0"
+      "archive_size": 48020,
+      "archive_hash": "sha256:c545f0174099a32c2e0c9411536e1e426fa04f32d72fc33c1af8204321c29bcb"
     },
     {
       "schema_version": "1.0.0",
