@@ -25,6 +25,23 @@
     },
     {
       "schema_version": "1.0.0",
+      "id": "dupliply",
+      "name": "Dupliply",
+      "tagline": "Duplicate a modifier and apply the original",
+      "version": "1.0.0",
+      "type": "add-on",
+      "maintainer": "jmatthews",
+      "license": [
+        "GPL-3.0-or-later"
+      ],
+      "blender_version_min": "4.2.0",
+      "permissions": {},
+      "archive_url": "./dupliply-1.0.0.zip",
+      "archive_size": 2221,
+      "archive_hash": "sha256:55c30d7d4d35f6cc739045ce3a08d9c21dc92ad271d80807f4812cfee5164421"
+    },
+    {
+      "schema_version": "1.0.0",
       "id": "geometrynode_scriptrunner",
       "name": "JohnnyGizmo Geometry Node Script Runner",
       "tagline": "Package Scripts with your Geonodes and Run them",
