@@ -61,6 +61,26 @@
     },
     {
       "schema_version": "1.0.0",
+      "id": "johnnygizmobooleanhelpers",
+      "name": "JohnnyGizmo Boolean Helpers",
+      "tagline": "Some simple helpers for boolean operations",
+      "version": "1.0.1",
+      "type": "add-on",
+      "maintainer": "Johnny Matthews",
+      "license": [
+        "SPDX:GPL-3.0-or-later"
+      ],
+      "blender_version_min": "5.0.0",
+      "tags": [
+        "Modeling",
+        "Mesh"
+      ],
+      "archive_url": "./johnnygizmobooleanhelpers-1.0.1.zip",
+      "archive_size": 4732,
+      "archive_hash": "sha256:d9c9362716d0ce6b9ffbce33f534613b293694518751a16bf102503cf2bf729b"
+    },
+    {
+      "schema_version": "1.0.0",
       "id": "johnnygizmo_align",
       "name": "JohnnyGizmo Align Tools",
       "tagline": "A Collection of Alignment Tools by JohnnyGizmo",

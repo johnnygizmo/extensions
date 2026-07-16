@@ -13,3 +13,4 @@ physicallybased
 usdc_material
 popout
 dupliply
+JohnnyGizmoBooleanHelpers
