@@ -81,6 +81,25 @@
     },
     {
       "schema_version": "1.0.0",
+      "id": "johnnygizmo_action_packer",
+      "name": "Linked Armature Actions",
+      "tagline": "Link actions to your Armature for easy assets",
+      "version": "1.0.0",
+      "type": "add-on",
+      "maintainer": "Johnny Matthews",
+      "license": [
+        "SPDX:GPL-3.0-or-later"
+      ],
+      "blender_version_min": "5.2.0",
+      "tags": [
+        "Animation"
+      ],
+      "archive_url": "./johnnygizmo_action_packer-1.0.0.zip",
+      "archive_size": 3089,
+      "archive_hash": "sha256:1a66523b8d95cf69a6732907610a9934310b04dd715e72e2f0c851fbbc018405"
+    },
+    {
+      "schema_version": "1.0.0",
       "id": "johnnygizmo_align",
       "name": "JohnnyGizmo Align Tools",
       "tagline": "A Collection of Alignment Tools by JohnnyGizmo",
