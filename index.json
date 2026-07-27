@@ -84,7 +84,7 @@
       "id": "johnnygizmo_action_packer",
       "name": "Linked Armature Actions",
       "tagline": "Link actions to your Armature for easy assets",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "type": "add-on",
       "maintainer": "Johnny Matthews",
       "license": [
@@ -94,9 +94,9 @@
       "tags": [
         "Animation"
       ],
-      "archive_url": "./johnnygizmo_action_packer-1.0.0.zip",
-      "archive_size": 3265,
-      "archive_hash": "sha256:625d57f05dd5a68a4363a06adb73e019dfe95cdf6bdeff4b2eba4b893f4ecd1c"
+      "archive_url": "./johnnygizmo_action_packer-1.0.1.zip",
+      "archive_size": 3954,
+      "archive_hash": "sha256:ecf251921ed1700ccc482b57599186e72a59ce4a0ed47f353dc0655f8fd5d166"
     },
     {
       "schema_version": "1.0.0",
